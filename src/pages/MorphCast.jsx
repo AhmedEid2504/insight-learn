@@ -48,7 +48,7 @@ function MorphCast() {
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         // save every 3 seconds
-        if (!isTyping && userData.userName.trim() !== "") {
+        if (!isTyping && userData.userName !== "") {
             const intervalId = setInterval(saveToFirebase, 3000);
             
             return () => clearInterval(intervalId); //cleanup on unmount
