@@ -47,20 +47,20 @@ const Navbar =() => {
             </div>
             {windowWidth > 800 ? (
                 <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
+                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
                     <div className="flex justify-center items-center text-center content-center gap-3"> 
-                        <button className="hover:text-primary transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
+                        <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                             <img src="images/user.png" alt="user settings icon" />
                         </button>
                     </div>
                     {showUserMenu && (
                         <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-2 items-center bg-third p-7 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                 <>
-                                    <li><Link className="hover:text-primary transition-all ease-in duration-200"to="/signup">Sign Up</Link></li>
-                                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/login">Login</Link></li>
+                                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200"to="/signup">Sign Up</Link></li>
+                                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                 </> 
                                 <>
-                                    <li><button className="hover:text-primary transition-all ease-in duration-200" >Sign Out</button></li>
+                                    <li><button className="hover:text-c_1 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </>
                         </ul>
                     )}
@@ -68,18 +68,18 @@ const Navbar =() => {
             ) : (
                 <div className="mobile-nav">
                     <div className="flex justify-center items-center text-center content-center gap-2">
-                        <button className="hover:text-primary transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
+                        <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                             <img src="images/user.png" alt="user settings icon" />
                         </button>
                     </div>
                     {showUserMenu && (
                         <ul className={showUserMenu ? "absolute flex flex-col justify-center gap-2 items-center bg-third p-10 top-0 right-0 translate-y-20 h-auto w-[100vw]" : ""} ref={ulRef}>
                                 <>
-                                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
-                                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/login">Login</Link></li>
+                                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
+                                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                 </> 
                                 <>
-                                    <li><button className="hover:text-primary transition-all ease-in duration-200" >Sign Out</button></li>
+                                    <li><button className="hover:text-c_1 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </>
                         </ul>
                     )}

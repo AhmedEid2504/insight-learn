@@ -33,28 +33,19 @@ function MorphCast() {
     }, [aiSdkState, mphToolsState]);
 
     return (
-        <div className="App-header">
-            <div style={{display:"flex", flexDirection: "column", alignItems:"center"}}>
-            <div style={{width:"640px", height: "480px", position:"relative"}}>
-                <video id="videoEl"></video>
+        <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-c_white">
+            <div className="relative hidden">
+                <video className="hidden" id="videoEl"></video>
                 <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
             </div>
             <GenderComponent></GenderComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <DominantEmotionComponent></DominantEmotionComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <AgeComponent></AgeComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <FeatureComponent></FeatureComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <EngagementComponent></EngagementComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <MoodComponent></MoodComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             <EmotionBarsComponent></EmotionBarsComponent>
-            <hr className="solid" style={{width:"100%"}}></hr>
             </div>
-        </div>
     );
 }
 
