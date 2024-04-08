@@ -47,7 +47,7 @@ const Navbar =() => {
             </div>
             {windowWidth > 800 ? (
                 <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/">Home</Link></li>
+                    <li><Link className="hover:text-primary transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
                     <div className="flex justify-center items-center text-center content-center gap-3"> 
                         <button className="hover:text-primary transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                             <img src="images/user.png" alt="user settings icon" />
