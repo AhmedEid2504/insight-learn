@@ -37,6 +37,7 @@ function MorphCast() {
             userName: userName
         }));
     }, [userName]);
+
     // Function to save data to Firebase Realtime Database
     async function saveToFirebase() {
         // Check if the user has finished typing their name and it is not empty
@@ -56,12 +57,12 @@ function MorphCast() {
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         // save every 3 seconds
-        if (!isTyping && userName !== "") {
+        if (!isTyping && userName.trim() !== "") {
             const intervalId = setInterval(saveToFirebase, 3000);
             
             return () => clearInterval(intervalId); //cleanup on unmount
         }
-    }, [userName, userData, isTyping]);
+    }, [userData, isTyping]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
