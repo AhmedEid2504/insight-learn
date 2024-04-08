@@ -101,7 +101,21 @@ const MoodComponent = () => {
 
   return (
     <>
-        
+        <p style={{fontSize:"20px"}}>Mood Component:</p>
+        <div style={{position:"relative", height:"550px", width:"600px"}}>
+            <div className="wrapper" id="grid">
+                {(gridN === 38) && <img alt="" src="baseGraph.png" style={{width: "100%", height: "100%"}} />}
+                {(gridN === 98) && <img alt="" src="advancedGraph.png" style={{width: "100%", height: "100%"}} />}
+                <div  className="pin_wrap">
+                    <div className="pin"></div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button onClick={()=>{setGridN(38)}} disabled={gridN === 38}>38 Affects</button>
+            <button onClick={()=>{setGridN(98)}} disabled={gridN === 98}>98 Affects</button>
+        </div>
     </>
   );
 };
