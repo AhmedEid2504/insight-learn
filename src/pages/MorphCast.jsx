@@ -35,7 +35,7 @@ function MorphCast() {
     return (
         <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-c_white">
             <div className="relative hidden">
-                <video className="hidden" id="videoEl"></video>
+                <video id="videoEl"></video>
                 <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
             </div>
             <GenderComponent></GenderComponent>
