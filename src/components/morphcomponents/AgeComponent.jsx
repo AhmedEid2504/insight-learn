@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./componentCSS/ageComponent.css";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push, serverTimestamp, set } from "firebase/database";
-import firebaseConfig from "/src/config";
+import firebaseConfig from "/src/firebase";
 
 const AgeComponent = () => {
   const [ageValue, setAgeValue] = useState(0);
