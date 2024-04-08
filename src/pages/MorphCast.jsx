@@ -22,6 +22,7 @@ function MorphCast() {
         age:'',
         gender: '',
         emotion: [],
+        dominantEmotion: '',
         engagement: 0,
         features: [],
         time:serverTimestamp()
@@ -93,17 +94,41 @@ function MorphCast() {
             placeholder="Enter your name"
         />
         </div>
-            <GenderComponent></GenderComponent>
-            <DominantEmotionComponent></DominantEmotionComponent>
+            <GenderComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></GenderComponent>
+            <DominantEmotionComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></DominantEmotionComponent>
             <AgeComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
             ></AgeComponent>
-            <FeatureComponent></FeatureComponent>
-            <EngagementComponent></EngagementComponent>
-            <MoodComponent></MoodComponent>
-            <EmotionBarsComponent></EmotionBarsComponent>
+            <FeatureComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></FeatureComponent>
+            <EngagementComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></EngagementComponent>
+            <MoodComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></MoodComponent>
+            <EmotionBarsComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></EmotionBarsComponent>
         </div>
     );
 }
