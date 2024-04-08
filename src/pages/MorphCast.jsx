@@ -54,7 +54,7 @@ function MorphCast() {
         return () => {
         clearInterval(intervalId);
         };
-    }, [userData, isTyping]);
+    }, []);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
