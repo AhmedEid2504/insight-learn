@@ -16,7 +16,7 @@ const AgeComponent = (props) => {
         setAgeValue(0);
         setAgeMin(0);
         setAgeMax(0);
-      }, 5000);
+      }, 3000);
 
       timeout.current = to;
     }
@@ -26,7 +26,7 @@ const AgeComponent = (props) => {
     }
 
     function handleAgeEvent(evt) {
-      if (!props.userName || props.isTyping ) {
+      if (!props.userData.userName || props.isTyping) {
         // If userName is empty, user is typing, or data has been sent recently, return without saving data
         console.error("Please enter your name or wait until data can be sent again");
         return;
@@ -35,10 +35,9 @@ const AgeComponent = (props) => {
       resetTimeout();
       let age = Math.floor(evt.detail.output.numericAge) || 0;
       setAgeValue(age);
-      props.setUserData ({ ...props.userData, [props.age]: age });
+      props.setUserData({ ...props.userData, age: age });
       setAgeMin(Math.floor(age / 10) * 10);
       setAgeMax((Math.floor(age / 10) + 1) * 10);
-
     }
 
     bindEvent();
@@ -47,7 +46,7 @@ const AgeComponent = (props) => {
     return () => {
       window.removeEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
     };
-  }, [props.setUserData]); // Include isTyping and dataSentRecently in the dependency array
+  }, [props.userData.userName, props.isTyping, props.setUserData]);
 
   return (
     <div>

@@ -28,27 +28,32 @@ function MorphCast() {
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     
-    // upload userData to firebase realtime storage
-    async function saveToFirebase(){
-        // Save data to Firebase Realtime Database
-        if (!isTyping || userData.userName ) {
-            const dataRef = ref(database, "data/" + userData.userName);
-            const newDataRef = push(dataRef);
-    
-            set(newDataRef, userData)
+    // Function to save data to Firebase Realtime Database
+    async function saveToFirebase() {
+        // Check if the user has finished typing their name and it is not empty
+        if (!isTyping && userData.userName.trim() !== "") {
+        const dataRef = ref(database, "data/" + userData.userName);
+        const newDataRef = push(dataRef);
+
+        set(newDataRef, userData)
             .then(() => {
-                console.log("data saved to firebase");
+            console.log("Data saved to Firebase");
             })
-            .catch((error) => console.error("error saving:" , error))
+            .catch((error) => {
+            console.error("Error saving:", error);
+            });
         }
     }
+    // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
-        if (!isTyping || userData.userName ) {
-            console.log(userData);
-            
-            saveToFirebase()
-        }
-    },[userData.age])
+        const intervalId = setInterval(() => {
+        saveToFirebase();
+        }, 3000); // 3000 milliseconds = 3 seconds
+
+        return () => {
+        clearInterval(intervalId);
+        };
+    }, [userData, isTyping]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
@@ -88,9 +93,13 @@ function MorphCast() {
             placeholder="Enter your name"
         />
         </div>
-            <GenderComponent userData={userData} setUserData={setUserData} ></GenderComponent>
+            <GenderComponent></GenderComponent>
             <DominantEmotionComponent></DominantEmotionComponent>
-            <AgeComponent></AgeComponent>
+            <AgeComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></AgeComponent>
             <FeatureComponent></FeatureComponent>
             <EngagementComponent></EngagementComponent>
             <MoodComponent></MoodComponent>
