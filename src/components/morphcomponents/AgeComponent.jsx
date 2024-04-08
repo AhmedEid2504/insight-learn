@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./componentCSS/ageComponent.css";
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, serverTimestamp, set } from "firebase/database";
-import firebaseConfig from "/src/firebase";
+import { ref, push, serverTimestamp, set } from "firebase/database";
+import {database} from "/src/firebase";
 
 const AgeComponent = () => {
   const [ageValue, setAgeValue] = useState(0);
@@ -44,10 +43,6 @@ const AgeComponent = () => {
       setAgeValue(age);
       setAgeMin(Math.floor(age / 10) * 10);
       setAgeMax((Math.floor(age / 10) + 1) * 10);
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
 
       // Save data to Firebase Realtime Database
       const ageRef = ref(database, "ageComponent");
