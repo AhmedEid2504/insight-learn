@@ -17,8 +17,9 @@ function MorphCast() {
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
+    const [userName, setUserName] = useState(''); // Separate state for the userName
     const [userData, setUserData] = useState({
-        userName:'',
+        userName: userName,
         age:'',
         gender: '',
         emotion: [],
@@ -29,31 +30,38 @@ function MorphCast() {
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     
+    // Update userData whenever userName changes
+    useEffect(() => {
+        setUserData(prevUserData => ({
+            ...prevUserData,
+            userName: userName
+        }));
+    }, [userName]);
     // Function to save data to Firebase Realtime Database
     async function saveToFirebase() {
         // Check if the user has finished typing their name and it is not empty
-        if (!isTyping && userData.userName.trim() !== "") {
-        const dataRef = ref(database, "data/" + userData.userName);
-        const newDataRef = push(dataRef);
+        if (!isTyping && userName.trim() !== "") {
+            const dataRef = ref(database, "data/" + userName);
+            const newDataRef = push(dataRef);
 
-        set(newDataRef, userData)
-            .then(() => {
-            console.log("Data saved to Firebase");
-            })
-            .catch((error) => {
-            console.error("Error saving:", error);
-            });
+            set(newDataRef, userData)
+                .then(() => {
+                    console.log("Data saved to Firebase");
+                })
+                .catch((error) => {
+                    console.error("Error saving:", error);
+                });
         }
     }
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         // save every 3 seconds
-        if (!isTyping && userData.userName !== "") {
+        if (!isTyping && userName !== "") {
             const intervalId = setInterval(saveToFirebase, 3000);
             
             return () => clearInterval(intervalId); //cleanup on unmount
         }
-      }, [userData, isTyping]);
+    }, [userName, userData, isTyping]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
@@ -84,13 +92,14 @@ function MorphCast() {
             id="userName"
             className="p-2 indent-2 rounded-sm text-c_4"
             type="text"
-            value={userData.userName}
+            value={userName}
+            maxLength={15}
             onChange={(e) => {
-                setUserData({ ...userData, userName : e.target.value })
+                setUserName(e.target.value);
                 setIsTyping(true); // Set isTyping to true while the user is typing
             }}
             onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
-            placeholder="Enter your name"
+            placeholder="Enter your name here..."
         />
         </div>
             <GenderComponent

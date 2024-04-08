@@ -26,12 +26,6 @@ const AgeComponent = (props) => {
     }
 
     function handleAgeEvent(evt) {
-      if (!props.userData.userName || props.isTyping) {
-        // If userName is empty, user is typing, or data has been sent recently, return without saving data
-        console.error("Please enter your name or wait until data can be sent again");
-        return;
-      }
-
       resetTimeout();
       let age = Math.floor(evt.detail.output.numericAge) || 0;
       setAgeValue(age);
@@ -46,7 +40,7 @@ const AgeComponent = (props) => {
     return () => {
       window.removeEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
     };
-  }, [props.userData.userName, props.isTyping, props.setUserData]);
+  }, [props.isTyping, props.setUserData]);
 
   return (
     <div>
