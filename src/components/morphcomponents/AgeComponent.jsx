@@ -4,7 +4,9 @@ import { ref, push, serverTimestamp, set } from "firebase/database";
 import {database} from "/src/firebase";
 
 const AgeComponent = () => {
-  // const [ageValue, setAgeValue] = useState(0);
+  const [ageValue, setAgeValue] = useState(0);
+  const [ageMin, setAgeMin] = useState(0);
+  const [ageMax, setAgeMax] = useState(10);
   const [userName, setUserName] = useState(""); // State variable for the user's name
   const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
   const [dataSentRecently, setDataSentRecently] = useState(false); // State variable to track whether data has been sent recently
@@ -15,7 +17,9 @@ const AgeComponent = () => {
       let to = timeout.current;
       clearTimeout(to);
       to = setTimeout(() => {
-        // setAgeValue(0);
+        setAgeValue(0);
+        setAgeMin(0);
+        setAgeMax(0);
         setIsTyping(false); // Reset the isTyping state variable after 10 seconds
         setDataSentRecently(false); // Reset the dataSentRecently state variable after 10 seconds
       }, 30000); // Change the timeout duration to 10 seconds
@@ -67,7 +71,9 @@ const AgeComponent = () => {
   }, [userName, isTyping, dataSentRecently]); // Include isTyping and dataSentRecently in the dependency array
 
   return (
-    <div className="p-2 flex flex-col ">
+    <div>
+      <p style={{ fontSize: "20px" }}>Age Component:</p>
+      <div>
         {/* Input field for the user's name */}
         <label htmlFor="userName">Your Name</label>
         <input
@@ -82,6 +88,24 @@ const AgeComponent = () => {
           onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
           placeholder="Enter your name"
         />
+      </div>
+      <div>
+        <span className="age" id="ageMin">
+          {ageMin}
+        </span>
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value={ageValue || 0}
+          onChange={() => {}}
+          className="slider"
+        />
+        <span className="age" id="ageMax">
+          {ageMax}
+        </span>
+      </div>
+      <span id="title">Likely Age</span>
     </div>
   );
 };
