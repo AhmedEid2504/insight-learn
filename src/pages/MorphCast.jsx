@@ -47,14 +47,13 @@ function MorphCast() {
     }
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
-        const intervalId = setInterval(() => {
-        saveToFirebase();
-        }, 3000); // 3000 milliseconds = 3 seconds
-
-        return () => {
-        clearInterval(intervalId);
-        };
-    }, []);
+        // save every 3 seconds
+        if (!isTyping && userData.userName.trim() !== "") {
+            const intervalId = setInterval(saveToFirebase, 3000);
+            
+            return () => clearInterval(intervalId); //cleanup on unmount
+        }
+      }, [userData, isTyping]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
