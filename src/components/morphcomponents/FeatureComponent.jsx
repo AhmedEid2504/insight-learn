@@ -1,23 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "./componentCSS/featureComponent.css"
 
 
 const FeatureComponent = (props) => {
-  const [feat, setFeat] = useState(["","","","",""])
-  const timeout = useRef(undefined);
 
   useEffect(() => {
-    function resetTimeout() {
-      let to = timeout.current;
-      clearTimeout(to);
-      to =setTimeout(() => {
-        setFeat(["", "", "", "", ""]) ;
-      }, 3000)
-
-      timeout.current= to;
-    }
-
 
     function extract(obj, n) {
         let sortable = [];
@@ -36,9 +24,7 @@ const FeatureComponent = (props) => {
     }
     
     function handleFeatureEvent (evt) {
-      resetTimeout();
       let features = extract(evt.detail.output.features, 5);
-      setFeat(features.map(([feature]) => feature));
       // set userData from props to save features array
       props.setUserData(prevUserData => ({
         ...prevUserData,
