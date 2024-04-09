@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
-import "./componentCSS/engagementComponent.css"
 
 
 const EngagementComponent = (props) => {

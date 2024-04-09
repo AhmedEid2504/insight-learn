@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
-import "./componentCSS/ageComponent.css";
 
 const AgeComponent = (props) => {
 

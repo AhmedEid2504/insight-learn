@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from "react";
-import "./componentCSS/faceTrackerComponent.css";
 
 const FaceTrackerComponent = (props) => {
   const timeout = useRef(undefined);
