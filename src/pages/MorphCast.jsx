@@ -36,10 +36,27 @@ function MorphCast() {
     setFaceIsShowing(isShowing);
     };
 
+    
+    useEffect(() => {
+        videoEl.current = document.getElementById("videoEl");
+        async function getAiSdk (){
+        if(aiSdkState === "ready" && mphToolsState === "ready"){
+            const { source, start } = await getAiSdkControls();
+            await source.useCamera({
+            toVideoElement: document.getElementById("videoEl"),
+        });
+            await start();
+            
+        }
+        
+        }
+        getAiSdk();
+    }, [aiSdkState, mphToolsState]);
+    
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         const intervalId = setInterval(() => {
-            if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
+            if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
         
@@ -51,32 +68,17 @@ function MorphCast() {
                     console.error("Error saving:", error);
                     });
                 } else {
-                    console.log("Not saving data - please enter a valid username or wait for facial recognition.");
-                    console.log(faceIsShowing)
+                    {faceIsShowing ? 
+                        console.error("Not saving data - please enter a valid username.") :
+                        console.error("Not saving data - No Faces Detected.");
+                    }
                 }
         }, 3000); // 3000 milliseconds = 3 seconds
 
         return () => {
         clearInterval(intervalId);
         };
-    }, [userData, isTyping, faceIsShowing]);
-
-    useEffect(() => {
-        videoEl.current = document.getElementById("videoEl");
-        async function getAiSdk (){
-        if(aiSdkState === "ready" && mphToolsState === "ready"){
-            const { source, start } = await getAiSdkControls();
-        await source.useCamera({
-            toVideoElement: document.getElementById("videoEl"),
-        });
-            await start();
-            
-        }
-        
-        }
-        getAiSdk();
-    }, [aiSdkState, mphToolsState]);
-
+    }, [userData, faceIsShowing]);
     return (
         <div className="flex flex-col justify-center items-center p-2 bg-c_2">
             <div className="relative">
