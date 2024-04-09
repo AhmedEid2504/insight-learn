@@ -31,10 +31,7 @@ function MorphCast() {
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [faceIsShowing, setFaceIsShowing] = useState(false);
 
-    // Function to update faceIsShowing state
-    const handleFaceDetection = (isShowing) => {
-    setFaceIsShowing(isShowing);
-    };
+    
 
     
     useEffect(() => {
@@ -56,7 +53,7 @@ function MorphCast() {
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         const intervalId = setInterval(() => {
-            if (!isTyping && userData.userName.trim() !== "") {
+            if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
         
@@ -73,13 +70,14 @@ function MorphCast() {
         return () => {
         clearInterval(intervalId);
         };
-    }, [userData, isTyping]);
+    }, [userData, isTyping, faceIsShowing]);
     return (
         <div className="flex flex-col justify-center items-center p-2 bg-c_2">
             <div className="relative">
                 <video id="videoEl"></video>
-                <FaceTrackerComponent  videoEl={videoEl}
-                    handleFaceDetection={handleFaceDetection}
+                <FaceTrackerComponent  
+                    videoEl={videoEl}
+                    setFaceIsShowing={setFaceIsShowing}
                 ></FaceTrackerComponent>
             </div>
             <div>
