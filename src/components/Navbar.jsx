@@ -74,7 +74,7 @@ const Navbar =() => {
                         </button>
                     </div>
                     {showUserMenu && (
-                        <ul className={showUserMenu ? "absolute flex flex-col justify-center gap-2 items-center bg-third p-10 top-0 right-0 translate-y-20 h-auto w-[100vw]" : ""} ref={ulRef}>
+                        <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-2 items-center bg-third p-7 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                 <>
                                     <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
                                     <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/login">Login</Link></li>
