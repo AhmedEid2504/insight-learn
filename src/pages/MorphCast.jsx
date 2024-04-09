@@ -56,7 +56,7 @@ function MorphCast() {
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         const intervalId = setInterval(() => {
-            if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
+            if (!isTyping && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
         
@@ -67,11 +67,6 @@ function MorphCast() {
                     .catch((error) => {
                     console.error("Error saving:", error);
                     });
-                } else {
-                    {faceIsShowing ? 
-                        console.error("Not saving data - please enter a valid username.") :
-                        console.error("Not saving data - No Faces Detected.");
-                    }
                 }
         }, 3000); // 3000 milliseconds = 3 seconds
 
