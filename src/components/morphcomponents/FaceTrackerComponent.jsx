@@ -13,9 +13,6 @@ const FaceTrackerComponent = (props) => {
     faceTracker.current = document.querySelector("#faceTracker");
     if(props?.videoEl?.current && faceTracker?.current){
         bindEvent();
-        props.setFaceIsShowing(true); // Notify parent component that face is detected
-    }  else {
-        props.setFaceIsShowing(false); // Notify parent component that face is not detected
     }
     function bindEvent(){
         

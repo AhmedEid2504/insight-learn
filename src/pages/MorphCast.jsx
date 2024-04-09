@@ -17,7 +17,6 @@ function MorphCast() {
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
-    const [faceIsShowing, setFaceIsShowing] = useState(false)
     const [userData, setUserData] = useState({
         userName:'',
         age:'',
@@ -34,7 +33,7 @@ function MorphCast() {
     // Function to save data to Firebase Realtime Database
     async function saveToFirebase() {
         // Check if the user has finished typing their name and it is not empty
-        if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
+        if (!isTyping && userData.userName.trim() !== "") {
         const dataRef = ref(database, "data/" + userData.userName);
         const newDataRef = push(dataRef);
 
@@ -78,7 +77,7 @@ function MorphCast() {
         <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-white">
             <div className="relative">
                 <video id="videoEl"></video>
-                <FaceTrackerComponent videoEl={videoEl} setFaceIsShowing={setFaceIsShowing}></FaceTrackerComponent>
+                <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
             </div>
             <div>
         {/* Input field for the user's name */}
