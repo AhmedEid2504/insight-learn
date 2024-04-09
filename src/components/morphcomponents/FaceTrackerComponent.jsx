@@ -13,6 +13,9 @@ const FaceTrackerComponent = (props) => {
     faceTracker.current = document.querySelector("#faceTracker");
     if(props?.videoEl?.current && faceTracker?.current){
         bindEvent();
+        props.setFaceIsShowing(true); // Notify parent component that face is detected
+    }  else {
+        props.setFaceIsShowing(false); // Notify parent component that face is not detected
     }
     function bindEvent(){
         
@@ -25,7 +28,6 @@ const FaceTrackerComponent = (props) => {
 
     function handleFaceEvents (evt)  {
         if (evt.detail && evt.detail.rects && evt.detail.rects.length > 0) {
-        props.setFaceIsShowing(true); // Notify parent component that face is detected
         const $vid = props.videoEl.current;
 
         const scale_w = $vid.offsetWidth / sdk_w.current;
@@ -51,8 +53,6 @@ const FaceTrackerComponent = (props) => {
 
         faceTracker.current.style.display = "block";
         resetTimeout();
-        } else {
-            props.setFaceIsShowing(false); // Notify parent component that face is not detected
         }
         
     }
