@@ -19,7 +19,7 @@ function MorphCast() {
     const videoEl = useRef(undefined)
     const [userName, setUserName] = useState(''); // Separate state for the userName
     const [userData, setUserData] = useState({
-        userName: userName,
+        userName: '',
         age:'',
         gender: '',
         emotion: [],
