@@ -17,6 +17,7 @@ function MorphCast() {
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
+    const [faceIsShowing, setFaceIsShowing] = useState(false)
     const [userData, setUserData] = useState({
         userName:'',
         age:'',
@@ -30,26 +31,29 @@ function MorphCast() {
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     
-    // Function to save data to Firebase Realtime Database
-    async function saveToFirebase() {
-        // Check if the user has finished typing their name and it is not empty
-        if (!isTyping && userData.userName.trim() !== "") {
-        const dataRef = ref(database, "data/" + userData.userName);
-        const newDataRef = push(dataRef);
-
-        set(newDataRef, userData)
-            .then(() => {
-            console.log("Data saved to Firebase");
-            })
-            .catch((error) => {
-            console.error("Error saving:", error);
-            });
-        }
-    }
-    // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
-        saveToFirebase();
-    }, [userData, isTyping]);
+        const intervalId = setInterval(() => {
+            if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
+                const dataRef = ref(database, "data/" + userData.userName);
+                const newDataRef = push(dataRef);
+
+                set(newDataRef, userData)
+                    .then(() => {
+                    console.log("Data saved to Firebase");
+                    })
+                    .catch((error) => {
+                    console.error("Error saving:", error);
+                    });
+                } else {
+                    console.log("Not saving data - please enter a valid username or wait for facial recognition.");
+                    
+                }
+        }, 1000); // 3000 milliseconds = 1 seconds
+
+        return () => {
+        clearInterval(intervalId);
+        };
+    }, [userData, isTyping, faceIsShowing]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
@@ -71,7 +75,9 @@ function MorphCast() {
         <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-white">
             <div className="relative">
                 <video id="videoEl"></video>
-                <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
+                <FaceTrackerComponent videoEl={videoEl}
+                    setFaceIsShowing={setFaceIsShowing}
+                ></FaceTrackerComponent>
             </div>
             <div>
         {/* Input field for the user's name */}
