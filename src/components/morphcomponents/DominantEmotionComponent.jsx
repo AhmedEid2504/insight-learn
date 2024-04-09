@@ -16,7 +16,7 @@ const GenderComponent = (props) => {
       props.setUserData(prevUserData => ({
         ...prevUserData,
         dominantEmotion: evt.detail.output.dominantEmotion
-    }));
+      }));
     });
   }
   return (

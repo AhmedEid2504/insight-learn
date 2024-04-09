@@ -22,8 +22,9 @@ function MorphCast() {
         age:'',
         gender: '',
         dominantEmotion: '',
-        emotion: [],
-        engagement: 0,
+        arousal: '',
+        valence: '',
+        attention:'',
         features: [],
         time:serverTimestamp()
     })

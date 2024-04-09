@@ -29,7 +29,11 @@ const AgeComponent = (props) => {
       resetTimeout();
       let age = Math.floor(evt.detail.output.numericAge) || 0;
       setAgeValue(age);
-      props.setUserData({ ...props.userData, age: age });
+      // set userData from props to save dominantEmotion 
+      props.setUserData(prevUserData => ({
+        ...prevUserData,
+        age: evt.detail.output.numericAge
+      }));
       setAgeMin(Math.floor(age / 10) * 10);
       setAgeMax((Math.floor(age / 10) + 1) * 10);
     }
