@@ -21,6 +21,7 @@ function MorphCast() {
         userName:'',
         age:'',
         gender: '',
+        dominantEmotion: '',
         emotion: [],
         engagement: 0,
         features: [],
@@ -94,7 +95,11 @@ function MorphCast() {
         />
         </div>
             <GenderComponent></GenderComponent>
-            <DominantEmotionComponent></DominantEmotionComponent>
+            <DominantEmotionComponent
+                userData={userData}
+                setUserData={setUserData}
+                isTyping={isTyping}
+            ></DominantEmotionComponent>
             <AgeComponent
                 userData={userData}
                 setUserData={setUserData}
