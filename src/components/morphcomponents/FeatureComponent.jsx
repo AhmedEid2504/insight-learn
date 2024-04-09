@@ -52,19 +52,6 @@ const FeatureComponent = (props) => {
 
   return (
     <>
-    <p style={{fontSize:"20px"}}>Features Component:</p>
-    <div
-    className="wrap"
-  >
-    {(feat[0]) && <span className="feature"> { feat[0] }</span>}
-    {(feat[1]) && <span className="feature"> { feat[1] }</span>}
-    {(feat[2]) && <span className="feature"> { feat[2] }</span>}
-    {(feat[3]) && <span className="feature"> { feat[3] }</span>}
-    {(feat[4]) && <span className="feature"> { feat[4] }</span>}
-    {(feat[5]) && <span className="feature"> { feat[5] }</span>}
-    {(feat[6]) && <span className="feature"> { feat[6] }</span>}
-    {(feat[7]) && <span className="feature"> { feat[7] }</span>}
-  </div>
     </>
     
   );

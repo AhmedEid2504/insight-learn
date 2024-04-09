@@ -21,8 +21,6 @@ const GenderComponent = (props) => {
   }
   return (
     <div >
-    <p style={{fontSize:"20px"}}>DominantEmotion Component:</p>
-     <p>{dominantEmotion}</p>
     </div>
   );
 };

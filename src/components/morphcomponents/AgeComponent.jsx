@@ -48,24 +48,6 @@ const AgeComponent = (props) => {
 
   return (
     <div>
-      <p style={{ fontSize: "20px" }}>Age Component:</p>
-      <div>
-        <span className="age" id="ageMin">
-          {ageMin}
-        </span>
-        <input
-          type="range"
-          min="1"
-          max="100"
-          value={ageValue || 0}
-          onChange={() => {}}
-          className="slider"
-        />
-        <span className="age" id="ageMax">
-          {ageMax}
-        </span>
-      </div>
-      <span id="title">Likely Age</span>
     </div>
   );
 };

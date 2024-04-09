@@ -21,12 +21,7 @@ const GenderComponent = (props) => {
   }
   return (
     <>
-    <p>Gender Component:</p>
-    <div>
-    <p>{gender}</p>
-    {(gender.toLocaleLowerCase() === 'male') && <img alt="" src="image/male.png"/>}
-    {(gender.toLocaleLowerCase() === 'female') && <img alt="" src="images/female.png"/>}
-    </div>
+
     </>
     
   );
