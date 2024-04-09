@@ -32,7 +32,6 @@ function MorphCast() {
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     
     useEffect(() => {
-        const intervalId = setInterval(() => {
             if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
@@ -48,11 +47,7 @@ function MorphCast() {
                     console.log("Not saving data - please enter a valid username or wait for facial recognition.");
                     
                 }
-        }, 1000); // 3000 milliseconds = 1 seconds
 
-        return () => {
-        clearInterval(intervalId);
-        };
     }, [userData, isTyping, faceIsShowing]);
 
     useEffect(() => {
