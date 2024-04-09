@@ -102,7 +102,7 @@ const MoodComponent = () => {
   return (
     <>
         <p style={{fontSize:"20px"}}>Mood Component:</p>
-        <div style={{position:"relative", height:"550px", width:"600px"}}>
+        <div>
             <div className="wrapper" id="grid">
                 {(gridN === 38) && <img alt="" src="baseGraph.png" style={{width: "100%", height: "100%"}} />}
                 {(gridN === 98) && <img alt="" src="advancedGraph.png" style={{width: "100%", height: "100%"}} />}

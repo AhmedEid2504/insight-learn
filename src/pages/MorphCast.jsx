@@ -60,7 +60,6 @@ function MorphCast() {
     // Use useEffect to trigger saveToFirebase when userData changes
     useEffect(() => {
         saveToFirebase();
-        console.log(userDataChanged)
     }, [userData, userDataChanged]);
 
     useEffect(() => {
