@@ -44,7 +44,7 @@ const AgeComponent = (props) => {
     return () => {
       window.removeEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
     };
-  }, [props.isTyping, props.setUserData]);
+  }, []);
 
   return (
     <div>
