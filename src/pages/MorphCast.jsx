@@ -49,6 +49,9 @@ function MorphCast() {
             .catch((error) => {
             console.error("Error saving:", error);
             });
+        } else {
+            console.warn("Not saving data - please enter a valid username or wait for facial recognition.");
+            console.log(faceIsShowing)
         }
     }
     // useEffect hook to run saveToFirebase every 3 seconds
