@@ -31,7 +31,9 @@ function MorphCast() {
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     
+    // sending data to firebase
     useEffect(() => {
+        setTimeout(async ()=>{
             if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
@@ -48,7 +50,9 @@ function MorphCast() {
                     
                 }
 
-    }, [userData, isTyping, faceIsShowing]);
+        }, 3000);
+
+    }, [userData, isTyping]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
