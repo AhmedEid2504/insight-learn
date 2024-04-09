@@ -35,12 +35,14 @@ const EngagementComponent = (props) => {
           ...prevUserData,
           valence: evt.detail.output.valence * 100
         }));
+        props.setUserDataChanged(true)
         setArousal(Math.abs(evt.detail.output.arousal * 100) || 0);
         // set userData from props to save dominantEmotion 
         props.setUserData(prevUserData => ({
           ...prevUserData,
           arousal: evt.detail.output.arousal * 100
         }));
+        props.setUserDataChanged(true)
         resetTimeout();
     }
     function handleAttentionEvents (evt) {

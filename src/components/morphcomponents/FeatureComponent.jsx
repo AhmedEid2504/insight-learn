@@ -44,6 +44,7 @@ const FeatureComponent = (props) => {
         ...prevUserData,
         features: features.map(([feature]) => feature)
       }));
+      props.setUserDataChanged(true)
     }
     bindEvent();
   }, []);

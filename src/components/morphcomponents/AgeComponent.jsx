@@ -33,6 +33,7 @@ const AgeComponent = (props) => {
         ...prevUserData,
         age: ageValue
       }));
+      props.setUserDataChanged(true)
       setAgeMin(Math.floor(age / 10) * 10);
       setAgeMax((Math.floor(age / 10) + 1) * 10);
     }

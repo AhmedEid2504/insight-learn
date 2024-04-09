@@ -17,7 +17,6 @@ function MorphCast() {
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
-    const [faceIsShowing, setFaceIsShowing] = useState(false)
     const [userData, setUserData] = useState({
         userName:'',
         age:'',
@@ -30,35 +29,39 @@ function MorphCast() {
         time:serverTimestamp()
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
+    const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
+    const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
+
     
+    async function saveToFirebase() {
+        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+            const dataRef = ref(database, "data/" + userData.userName);
+            const newDataRef = push(dataRef);
+    
+            set(newDataRef, userData)
+                .then(() => {
+                    console.log("Data saved to Firebase");
+                    setUserDataChanged(false); // Reset userDataChanged after data is saved
+                })
+                .catch((error) => {
+                    console.error("Error saving:", error);
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        setIsSendingData(false); // Reset isSendingData after the delay
+                    }, 3000); // 3-second delay
+                });
+        } else {
+            console.log("Not saving data - please enter a valid username or wait for facial recognition.");
+        }
+    }
+
+    // Use useEffect to trigger saveToFirebase when userData changes
     useEffect(() => {
-        const sendData = async () => {
-            if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
-                const dataRef = ref(database, "data/" + userData.userName);
-                const newDataRef = push(dataRef);
-    
-                set(newDataRef, userData)
-                    .then(() => {
-                        console.log("Data saved to Firebase");
-                    })
-                    .catch((error) => {
-                        console.error("Error saving:", error);
-                    });
-            } else {
-                console.log("Not saving data - please enter a valid username or wait for facial recognition.");
-            }
-        };
-    
-        // Call sendData immediately when userData changes
-        sendData();
-    
-        // Set up an interval to call sendData every 3 seconds
-        const intervalId = setInterval(sendData, 3000);
-    
-        // Cleanup function to clear the interval when the component unmounts or when userData changes
-        return () => clearInterval(intervalId);
-    }, [userData]); // Include userData as a dependency
-    
+        saveToFirebase();
+        console.log(userDataChanged)
+    }, [userData, userDataChanged]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
@@ -81,7 +84,6 @@ function MorphCast() {
             <div className="relative">
                 <video id="videoEl"></video>
                 <FaceTrackerComponent videoEl={videoEl}
-                    setFaceIsShowing={setFaceIsShowing}
                 ></FaceTrackerComponent>
             </div>
             <div>
@@ -95,6 +97,7 @@ function MorphCast() {
             onChange={(e) => {
                 setUserData({ ...userData, userName : e.target.value })
                 setIsTyping(true); // Set isTyping to true while the user is typing
+                setUserDataChanged(true)
             }}
             onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
             placeholder="Enter your name"
@@ -104,26 +107,34 @@ function MorphCast() {
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
+                setUserDataChanged={setUserDataChanged}
             ></GenderComponent>
             <DominantEmotionComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
+                setUserDataChanged={setUserDataChanged}
+
             ></DominantEmotionComponent>
             <AgeComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
+                setUserDataChanged={setUserDataChanged}
+
             ></AgeComponent>
             <FeatureComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
+                setUserDataChanged={setUserDataChanged}
+
             ></FeatureComponent>
             <EngagementComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
+                setUserDataChanged={setUserDataChanged}
             ></EngagementComponent>
             <MoodComponent
             ></MoodComponent>
