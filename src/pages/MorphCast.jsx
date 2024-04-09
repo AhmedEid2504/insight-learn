@@ -41,10 +41,10 @@ function MorphCast() {
     // Function to save data to Firebase Realtime Database
     async function saveToFirebase() {
         // Check if the user has finished typing their name and it is not empty
-        if (!isTyping && userName.trim() !== "") {
-            const dataRef = ref(database, "data/" + userName);
+        if (!isTyping && userData.userName.trim() !== "") {
+            const dataRef = ref(database, "data/" + userData.userName);
             const newDataRef = push(dataRef);
-
+    
             set(newDataRef, userData)
                 .then(() => {
                     console.log("Data saved to Firebase");
