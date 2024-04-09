@@ -31,7 +31,7 @@ const AgeComponent = (props) => {
       // set userData from props to save dominantEmotion 
       props.setUserData(prevUserData => ({
         ...prevUserData,
-        age: ageValue
+        age: ageValue || 0
       }));
       props.setUserDataChanged(true)
       setAgeMin(Math.floor(age / 10) * 10);

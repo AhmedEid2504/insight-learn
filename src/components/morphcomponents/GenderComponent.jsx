@@ -15,7 +15,7 @@ const GenderComponent = (props) => {
       // set userData from props to save dominantEmotion 
       props.setUserData(prevUserData => ({
         ...prevUserData,
-        gender: evt.detail.output.mostConfident
+        gender: evt.detail.output.mostConfident || ""
       }));
     });
   }

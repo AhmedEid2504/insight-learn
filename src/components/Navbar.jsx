@@ -42,7 +42,7 @@ const Navbar =() => {
         <nav className="bg-c_3 text-white shadow-sm shadow-black relative h-20 flex justify-between items-center px-5 font-sans transition-all ease-in duration-200">
             <div className="flex justify-center items-center p-4 gap-2">
                     <Link className="hover:text-c_1 text-md md:text-xl transition-all ease-in duration-200"                             
-                        to="/">MorphCast
+                        to="/">Home
                     </Link>
             </div>
             {windowWidth > 800 ? (
@@ -66,7 +66,8 @@ const Navbar =() => {
                     )}
                 </ul>
             ) : (
-                <div className="mobile-nav">
+                <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
+                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
                     <div className="flex justify-center items-center text-center content-center gap-2">
                         <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                             <img src="images/user.png" alt="user settings icon" />
@@ -83,7 +84,8 @@ const Navbar =() => {
                                 </>
                         </ul>
                     )}
-                </div>
+                </ul>
+                
             )}
         </nav>
     )
