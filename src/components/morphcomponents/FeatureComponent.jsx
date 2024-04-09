@@ -24,8 +24,7 @@ const FeatureComponent = (props) => {
     }
     
     function handleFeatureEvent (evt) {
-      let features = extract(evt.detail.output.features, 5);
-      // set userData from props to save features array
+      let features = extract(evt.detail.output.features, 5);      // set userData from props to save features array
       props.setUserData(prevUserData => ({
         ...prevUserData,
         features: features.map(([feature]) => feature)

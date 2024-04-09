@@ -7,8 +7,6 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
-import MoodComponent from "../components/morphcomponents/MoodComponent";
-import EmotionBarsComponent from "../components/morphcomponents/EmotionBarsComponent";
 import { ref, push, serverTimestamp, set } from "firebase/database";
 import {database} from "/src/firebase";
 function MorphCast() {
@@ -112,21 +110,18 @@ function MorphCast() {
                 setUserData={setUserData}
                 isTyping={isTyping}
                 setUserDataChanged={setUserDataChanged}
-
             ></DominantEmotionComponent>
             <AgeComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
                 setUserDataChanged={setUserDataChanged}
-
             ></AgeComponent>
             <FeatureComponent
                 userData={userData}
                 setUserData={setUserData}
                 isTyping={isTyping}
                 setUserDataChanged={setUserDataChanged}
-
             ></FeatureComponent>
             <EngagementComponent
                 userData={userData}
@@ -134,10 +129,6 @@ function MorphCast() {
                 isTyping={isTyping}
                 setUserDataChanged={setUserDataChanged}
             ></EngagementComponent>
-            <MoodComponent
-            ></MoodComponent>
-            <EmotionBarsComponent
-            ></EmotionBarsComponent>
         </div>
     );
 }

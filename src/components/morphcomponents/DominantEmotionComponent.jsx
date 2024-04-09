@@ -1,17 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 
-const GenderComponent = (props) => {
-  const [dominantEmotion, setDominantEmotion] = useState("");
-  
+const GenderComponent = (props) => {  
   useEffect(() => {
     bindEvents();
   }, []);
 
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      setDominantEmotion(evt.detail.output.dominantEmotion || "") ;
       // set userData from props to save dominantEmotion 
       props.setUserData(prevUserData => ({
         ...prevUserData,
