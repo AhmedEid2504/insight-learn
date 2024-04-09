@@ -12,7 +12,11 @@ const GenderComponent = (props) => {
   function bindEvents(){
     window.addEventListener("CY_FACE_GENDER_RESULT", (evt) => {
       setGender(evt.detail.output.mostConfident || "") ;
-      props.setUserData({ ...props.userData, gender: gender });
+      // set userData from props to save dominantEmotion 
+      props.setUserData(prevUserData => ({
+        ...prevUserData,
+        dominantEmotion: evt.detail.output.mostConfident
+      }));
     });
   }
   return (
