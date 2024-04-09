@@ -56,7 +56,7 @@ function MorphCast() {
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         const intervalId = setInterval(() => {
-            if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
+            if (!isTyping && userData.userName.trim() !== "") {
                 const dataRef = ref(database, "data/" + userData.userName);
                 const newDataRef = push(dataRef);
         
