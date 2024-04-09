@@ -25,7 +25,7 @@ function MorphCast() {
         arousal: '',
         valence: '',
         attention:'',
-        features: [],
+        features: ["","","","",""],
         time:serverTimestamp()
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing

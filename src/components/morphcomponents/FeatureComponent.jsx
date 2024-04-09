@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import "./componentCSS/featureComponent.css"
 
 
-const FeatureComponent = () => {
+const FeatureComponent = (props) => {
   const [feat, setFeat] = useState(["","","","",""])
   const timeout = useRef(undefined);
 
@@ -38,6 +39,11 @@ const FeatureComponent = () => {
       resetTimeout();
       let features = extract(evt.detail.output.features, 5);
       setFeat(features.map(([feature]) => feature));
+      // set userData from props to save features array
+      props.setUserData(prevUserData => ({
+        ...prevUserData,
+        features: features.map(([feature]) => feature)
+      }));
     }
     bindEvent();
   }, []);
