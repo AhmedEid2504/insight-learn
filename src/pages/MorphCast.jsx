@@ -48,13 +48,7 @@ function MorphCast() {
     }
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
-        const intervalId = setInterval(() => {
         saveToFirebase();
-        }, 3000); // 3000 milliseconds = 3 seconds
-
-        return () => {
-        clearInterval(intervalId);
-        };
     }, [userData, isTyping]);
 
     useEffect(() => {
