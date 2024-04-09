@@ -39,23 +39,26 @@ function MorphCast() {
     
                 set(newDataRef, userData)
                     .then(() => {
-                    console.log("Data saved to Firebase");
+                        console.log("Data saved to Firebase");
                     })
                     .catch((error) => {
-                    console.error("Error saving:", error);
+                        console.error("Error saving:", error);
                     });
-                } else {
-                    console.log("Not saving data - please enter a valid username or wait for facial recognition.");
-                    
-                }
-        }
-        if (!isTyping) {
-            sendData();       
-        }
-        const intervalId =  setInterval(sendData, 3000)
-        
-        return ()=> clearInterval(intervalId);
-    }, [userData]);
+            } else {
+                console.log("Not saving data - please enter a valid username or wait for facial recognition.");
+            }
+        };
+    
+        // Call sendData immediately when userData changes
+        sendData();
+    
+        // Set up an interval to call sendData every 3 seconds
+        const intervalId = setInterval(sendData, 3000);
+    
+        // Cleanup function to clear the interval when the component unmounts or when userData changes
+        return () => clearInterval(intervalId);
+    }, [userData]); // Include userData as a dependency
+    
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
