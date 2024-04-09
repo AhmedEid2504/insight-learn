@@ -115,14 +115,8 @@ function MorphCast() {
                 isTyping={isTyping}
             ></EngagementComponent>
             <MoodComponent
-                userData={userData}
-                setUserData={setUserData}
-                isTyping={isTyping}
             ></MoodComponent>
             <EmotionBarsComponent
-                userData={userData}
-                setUserData={setUserData}
-                isTyping={isTyping}
             ></EmotionBarsComponent>
         </div>
     );
