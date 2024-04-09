@@ -81,27 +81,26 @@ function MorphCast() {
     return (
         <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-white">
             <div className="relative">
-                
                 <FaceTrackerComponent videoEl={videoEl}
                 ></FaceTrackerComponent>
             </div>
             <div>
-        {/* Input field for the user's name */}
-        <label htmlFor="userName">Your Name</label>
-        <input
-            id="userName"
-            className="p-2 indent-2 rounded-sm text-c_4"
-            type="text"
-            value={userData.userName}
-            onChange={(e) => {
-                setUserData({ ...userData, userName : e.target.value })
-                setIsTyping(true); // Set isTyping to true while the user is typing
-                setUserDataChanged(true)
-            }}
-            onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
-            placeholder="Enter your name"
-        />
-        </div>
+                {/* Input field for the user's name */}
+                <label htmlFor="userName">Your Name</label>
+                <input
+                    id="userName"
+                    className="p-2 indent-2 rounded-sm text-c_4 m-5"
+                    type="text"
+                    value={userData.userName}
+                    onChange={(e) => {
+                        setUserData({ ...userData, userName : e.target.value })
+                        setIsTyping(true); // Set isTyping to true while the user is typing
+                        setUserDataChanged(true)
+                    }}
+                    onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
+                    placeholder="Enter your name"
+                />
+            </div>
             <GenderComponent
                 userData={userData}
                 setUserData={setUserData}
