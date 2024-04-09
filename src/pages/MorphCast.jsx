@@ -29,17 +29,40 @@ function MorphCast() {
         time:serverTimestamp()
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
-    const [faceIsShowing, setFaceIsShowing] = useState(false);
-
     
+    // Function to save data to Firebase Realtime Database
+    async function saveToFirebase() {
+        // Check if the user has finished typing their name and it is not empty
+        if (!isTyping && userData.userName.trim() !== "") {
+        const dataRef = ref(database, "data/" + userData.userName);
+        const newDataRef = push(dataRef);
 
-    
+        set(newDataRef, userData)
+            .then(() => {
+            console.log("Data saved to Firebase");
+            })
+            .catch((error) => {
+            console.error("Error saving:", error);
+            });
+        }
+    }
+    // useEffect hook to run saveToFirebase every 3 seconds
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+        saveToFirebase();
+        }, 3000); // 3000 milliseconds = 3 seconds
+
+        return () => {
+        clearInterval(intervalId);
+        };
+    }, [userData, isTyping]);
+
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
         async function getAiSdk (){
         if(aiSdkState === "ready" && mphToolsState === "ready"){
             const { source, start } = await getAiSdkControls();
-            await source.useCamera({
+        await source.useCamera({
             toVideoElement: document.getElementById("videoEl"),
         });
             await start();
@@ -49,36 +72,12 @@ function MorphCast() {
         }
         getAiSdk();
     }, [aiSdkState, mphToolsState]);
-    
-    // useEffect hook to run saveToFirebase every 3 seconds
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (faceIsShowing && !isTyping && userData.userName.trim() !== "") {
-                const dataRef = ref(database, "data/" + userData.userName);
-                const newDataRef = push(dataRef);
-        
-                set(newDataRef, userData)
-                    .then(() => {
-                    console.log("Data saved to Firebase");
-                    })
-                    .catch((error) => {
-                    console.error("Error saving:", error);
-                    });
-                }
-        }, 3000); // 3000 milliseconds = 3 seconds
 
-        return () => {
-        clearInterval(intervalId);
-        };
-    }, [userData, isTyping, faceIsShowing]);
     return (
-        <div className="flex flex-col justify-center items-center p-2 bg-c_2">
+        <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-white">
             <div className="relative">
                 <video id="videoEl"></video>
-                <FaceTrackerComponent  
-                    videoEl={videoEl}
-                    setFaceIsShowing={setFaceIsShowing}
-                ></FaceTrackerComponent>
+                <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
             </div>
             <div>
         {/* Input field for the user's name */}
