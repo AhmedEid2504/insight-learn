@@ -35,35 +35,31 @@ function MorphCast() {
     const handleFaceDetection = (isShowing) => {
     setFaceIsShowing(isShowing);
     };
-    // Function to save data to Firebase Realtime Database
-    async function saveToFirebase() {
-        // Check if the user has finished typing their name and it is not empty
-        if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
-        const dataRef = ref(database, "data/" + userData.userName);
-        const newDataRef = push(dataRef);
 
-        set(newDataRef, userData)
-            .then(() => {
-            console.log("Data saved to Firebase");
-            })
-            .catch((error) => {
-            console.error("Error saving:", error);
-            });
-        } else {
-            console.warn("Not saving data - please enter a valid username or wait for facial recognition.");
-            console.log(faceIsShowing)
-        }
-    }
     // useEffect hook to run saveToFirebase every 3 seconds
     useEffect(() => {
         const intervalId = setInterval(() => {
-        saveToFirebase();
+            if (!isTyping && faceIsShowing && userData.userName.trim() !== "") {
+                const dataRef = ref(database, "data/" + userData.userName);
+                const newDataRef = push(dataRef);
+        
+                set(newDataRef, userData)
+                    .then(() => {
+                    console.log("Data saved to Firebase");
+                    })
+                    .catch((error) => {
+                    console.error("Error saving:", error);
+                    });
+                } else {
+                    console.log("Not saving data - please enter a valid username or wait for facial recognition.");
+                    console.log(faceIsShowing)
+                }
         }, 3000); // 3000 milliseconds = 3 seconds
 
         return () => {
         clearInterval(intervalId);
         };
-    }, [userData, isTyping]);
+    }, [userData, isTyping, faceIsShowing]);
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
