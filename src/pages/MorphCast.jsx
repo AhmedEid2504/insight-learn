@@ -87,7 +87,7 @@ function MorphCast() {
                 <label htmlFor="userName">Your Name</label>
                 <input
                     id="userName"
-                    className="p-2 indent-2 rounded-sm text-c_4 m-5"
+                    className='w-[100%] h-10 bg-c_3 rounded-sm p-2 border-none'
                     type="text"
                     value={userData.userName}
                     onChange={(e) => {
