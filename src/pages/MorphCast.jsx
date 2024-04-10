@@ -77,11 +77,13 @@ function MorphCast() {
     }, [aiSdkState, mphToolsState]);
 
     return (
-        <div className="flex flex-col justify-center items-center p-2 bg-c_2 text-white">
+        <div className="flex flex-col justify-center items-center p-5 bg-c_2 text-white">
             <div className="relative">
                 <FaceTrackerComponent videoEl={videoEl}
                 ></FaceTrackerComponent>
             </div>
+
+            
             <div>
                 {/* Input field for the user's name */}
                 <label htmlFor="userName">Your Name</label>
@@ -98,6 +100,16 @@ function MorphCast() {
                     onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
                     placeholder="Enter your name"
                 />
+            </div>
+            <div className="flex flex-col justify-center items-center p-3">
+                <p  className="text-lg">
+                Welcome to our interactive reading session! Today, we will be exploring the fascinating world of artificial intelligence and its impact on our daily lives
+
+Artificial intelligence, or AI, is a rapidly evolving field that encompasses a wide range of technologies aimed at simulating human intelligence. From virtual assistants like Siri and Alexa to advanced machine learning algorithms powering recommendation systems and autonomous vehicles, AI is transforming the way we live, work, and interact with the world around us.
+Imagine a future where AI-powered robots assist doctors in performing complex surgeries, where self-driving cars navigate city streets seamlessly, and where personalized learning experiences help students reach their full potential. These are just a few examples of the incredible possibilities that AI holds for our future.
+However, with great power comes great responsibility. As AI becomes more integrated into our daily lives, its essential to consider the ethical implications and ensure that these technologies are used for the greater good. Issues such as privacy, bias, and job displacement require careful consideration and regulation to ensure that AI benefits everyone in society
+                </p>
+                
             </div>
             <GenderComponent
                 userData={userData}
