@@ -47,7 +47,6 @@ const Navbar =() => {
             </div>
             {windowWidth > 800 ? (
                 <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
                     <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
                     <div className="flex justify-center items-center text-center content-center gap-3"> 
                         <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
@@ -68,7 +67,6 @@ const Navbar =() => {
                 </ul>
             ) : (
                 <ul className="flex justify-between items-center h-20 list-none p-2 text-center gap-5">
-                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/morphcast">MorphCast</Link></li>
                     <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
                     <div className="flex justify-center items-center text-center content-center gap-2">
                         <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
