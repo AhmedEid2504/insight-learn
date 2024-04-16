@@ -25,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path='/morphcast' element={<MorphCast />}></Route>
+          <Route path="/quiz" element={<iframe className='h-[100vh]' src="/quiz.html" title="HTML Quiz Page"></iframe>} />
         </Routes>
       </Router>
     </div>

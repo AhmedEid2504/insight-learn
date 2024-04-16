@@ -101,10 +101,10 @@ function MorphCast() {
                     placeholder="Enter your name"
                 />
             </div>
-            <div className="flex flex-col justify-center items-center p-3 h-auto w-full">
+            <div className="h-[60vh] top-[25vh] flex flex-col justify-center items-center mt-7  w-full">
                 {/* Embedding the quiz HTML page using an iframe */}
                 <iframe
-                    className="h-[80%] h-[400px] mt-10 text-white bg-c_3 rounded-md border-none"
+                    className="w-[100%] h-full text-white bg-c_3 rounded-md border-none"
                     src="/quiz.html" // Adjust the path as needed
                     title="HTML Quiz Page"
                 ></iframe>
