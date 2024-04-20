@@ -39,7 +39,7 @@ const Navbar =() => {
     };
 
     return (
-        <nav className="bg-transparent h-[10vh] absolute top-0 left-0 text-white shadow-sm shadow-black w-screen flex justify-between items-center px-5 font-sans transition-all ease-in duration-200">
+        <nav className="bg-transparent z-50 h-[10vh] absolute top-0 left-0 text-white shadow-sm shadow-black w-screen flex justify-between items-center px-5 font-sans transition-all ease-in duration-200">
             <div className="flex justify-center items-center p-4 gap-2">
                     <Link className="hover:text-c_1 text-md md:text-xl transition-all ease-in duration-200"                             
                         to="/">
