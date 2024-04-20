@@ -39,15 +39,24 @@ const Navbar =() => {
     };
 
     return (
-        <nav className="bg-c_3 text-white shadow-sm shadow-black relative h-20 flex justify-between items-center px-5 font-sans transition-all ease-in duration-200">
+        <nav className="bg-transparent h-[10vh] absolute top-0 left-0 text-white shadow-sm shadow-black w-screen flex justify-between items-center px-5 font-sans transition-all ease-in duration-200">
             <div className="flex justify-center items-center p-4 gap-2">
                     <Link className="hover:text-c_1 text-md md:text-xl transition-all ease-in duration-200"                             
-                        to="/">Home
+                        to="/">
+                            <div className='w-[20vw] h-[10vh] bg-white absolute top-0 left-0'>
+                                {/* <img className=' absolute -top-[85px]' src="images/logo.svg" alt="logo image" /> */}
+                            </div>
                     </Link>
             </div>
+            <div className="bg-c_3 text-center items-center justify-center mt-10 p-5 flex h-[10vh]">
             {windowWidth > 800 ? (
+                
                 <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
+                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Home</Link></li>
+                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">About Us</Link></li>
+                    <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Contact</Link></li>
                     <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
+
                     <div className="flex justify-center items-center text-center content-center gap-3"> 
                         <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                             <img src="images/user.png" alt="user settings icon" />
@@ -87,6 +96,8 @@ const Navbar =() => {
                 </ul>
                 
             )}
+            </div>
+            
         </nav>
     )
 }

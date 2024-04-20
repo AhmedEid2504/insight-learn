@@ -22,7 +22,7 @@ async function initAiSdk() {
 
   aiSdkInstance = await globalThis.CY.loader()
     // TODO INSERT YOUR LICENSE KEY HERE
-    .licenseKey("sk733e7e2a70f0167da7256dddbb46d7fa29731043d007") // <--- ##############
+    .licenseKey(import.meta.env.VITE_LICENSE_KEY) // <--- ##############
     .source(source)
     .addModule(globalThis.CY.modules().FACE_DETECTOR.name)
     .addModule(globalThis.CY.modules().FACE_EMOTION.name, {

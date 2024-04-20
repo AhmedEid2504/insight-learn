@@ -6,10 +6,10 @@ export default {
   ],
   theme: {
     colors: {
-      c_1: "#14FFEC",
-      c_2:  "#0D7377",
-      c_3:  "#323232",
-      c_4: "#212121",
+      c_1: "#060B7D",
+      c_2:  "#1E3C85",
+      c_3:  "#070D57",
+      c_4: "#366D9A",
       white: "#ffffff"
     },
     extend: {},
