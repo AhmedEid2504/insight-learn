@@ -18,6 +18,7 @@ import EngagementComponent from "./components/morphcomponents/EngagementComponen
 import FaceTrackerComponent from "./components/morphcomponents/FaceTrackerComponent";
 import { ref, push, serverTimestamp, set } from "firebase/database";
 import {database} from "/src/firebase";
+import Dashboard from './pages/Dashboard';
 
 function App() {
 
@@ -180,8 +181,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/dashboard" element={<Dashboard />}/>
                     <Route path="/quiz" element={<iframe className='h-screen w-full' src="/quiz.html" title="Quiz"></iframe>} />
-                </Routes>
+                    <Route path="/moodle" element={<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>} />
+                    <Route path="/spotify" element={<iframe src="https://open.spotify.com/embed/track/1Cj2vqUwlJVG27gJrun92y" width="800" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>} /></Routes>
                 <Footer />
         </Router>
     </div>
