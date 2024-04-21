@@ -61,6 +61,8 @@ const Navbar =() => {
                             <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">About Us</Link></li>
                             <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Contact</Link></li>
                             <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
+                            <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
+                            <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/spotify">Spotify</Link></li>
 
                             <div className="flex justify-center items-center text-center content-center gap-3"> 
                                 <button className="hover:text-c_1 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
@@ -87,13 +89,15 @@ const Navbar =() => {
                             </button>
                         </div>
                         {showUserMenu && (
-                            <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-2 items-center bg-third p-7 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
+                            <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-16 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                     <>
                                         <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                         <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Home</Link></li>
                                         <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">About Us</Link></li>
                                         <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Contact</Link></li>
                                         <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
+                                        <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
+                                        <li><Link className="hover:text-c_1 transition-all ease-in duration-200" to="/spotify">Spotify</Link></li>
 
                                     </> 
                                     {/* <>
