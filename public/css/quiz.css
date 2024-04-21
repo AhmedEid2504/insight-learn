@@ -1,4 +1,6 @@
-
+body {
+  height: auto;
+}
 
   .quiz-container {
     padding: 20px;

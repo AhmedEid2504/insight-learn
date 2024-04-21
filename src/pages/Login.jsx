@@ -1,7 +1,43 @@
-
+import { useState } from 'react';
 
 const Login = () => {
-    
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChange = (event) => {
+        if(event.target.name === 'username') {
+            setUsername(event.target.value);
+        } else {
+            setPassword(event.target.value);
+        }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch('https://auth-elk1.onrender.com/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Handle successful login here
+            console.log(data);
+        } else {
+            // Handle error here
+            console.error(data);
+        }
+    }
+
+
 
     return (
         <div className="flex flex-col self-center items-center">
@@ -13,12 +49,12 @@ const Login = () => {
                         <img className="w-[50px]" src="images/user-icon.jpeg" alt="" />
                         <input
                             className='w-[80%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
-                            type="email"
-                            id="email"
-                            name="email"
-                            // value={formData.email}
-                            // onChange={handleChange}
-                            placeholder="Email address"
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={username}
+                            onChange={handleChange}
+                            placeholder="User Name"
                             required
                         />
                     </div>
@@ -30,8 +66,8 @@ const Login = () => {
                             id="password"
                             name="password"
                             placeholder="Password"
-                            // value={formData.password}
-                            // onChange={handleChange}
+                            value={password}
+                            onChange={handleChange}
                             required
                         />
                         <img className="w-[50px]" src="images/lock-icon.jpeg" alt="" />
@@ -46,11 +82,11 @@ const Login = () => {
                     </div>
                     <button 
                         className="bg-c_3 p-2 hover:bg-opacity-[30%] border-2 border-c_3 transition-all duration-200 ease-in"
+                        onClick={handleSubmit}
                         type="submit">Login
                     </button>
                 </form>
             </div>
-            
         </div>
     );
 };

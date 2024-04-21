@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 // morphcast
 import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "./helpers/ai-sdk/externalScriptsLoader";
@@ -117,12 +118,11 @@ function App() {
 
 
     return (
-    <div className="flex flex-col bg-c_2 h-screen">
-        <Router>
-            <Navbar />
-            <div className='flex flex-col absolute justify-center items-center  w-full h-[70vh] translate-y-[25%]'>
+        <div className="bg-c_2 h-auto flex flex-col justify-between w-[100%]">
+            <Router>
+                <Navbar />
                 <div className="flex flex-col justify-center items-center p-5 bg-c_2 text-white">
-                    <div className="relative">
+                    <div className="relative ">
                         <FaceTrackerComponent videoEl={videoEl}
                         ></FaceTrackerComponent>
                     </div>
@@ -143,49 +143,47 @@ function App() {
                             placeholder="Enter your name"
                         />
                     </div>
-                    
-                    <GenderComponent
-                        userData={userData}
-                        setUserData={setUserData}
-                        isTyping={isTyping}
-                        setUserDataChanged={setUserDataChanged}
-                    ></GenderComponent>
-                    <DominantEmotionComponent
-                        userData={userData}
-                        setUserData={setUserData}
-                        isTyping={isTyping}
-                        setUserDataChanged={setUserDataChanged}
-                    ></DominantEmotionComponent>
-                    <AgeComponent
-                        userData={userData}
-                        setUserData={setUserData}
-                        isTyping={isTyping}
-                        setUserDataChanged={setUserDataChanged}
-                    ></AgeComponent>
-                    <FeatureComponent
-                        userData={userData}
-                        setUserData={setUserData}
-                        isTyping={isTyping}
-                        setUserDataChanged={setUserDataChanged}
-                    ></FeatureComponent>
-                    <EngagementComponent
-                        userData={userData}
-                        setUserData={setUserData}
-                        isTyping={isTyping}
-                        setUserDataChanged={setUserDataChanged}
-                    ></EngagementComponent>
+                    <div>
+                        <GenderComponent
+                            userData={userData}
+                            setUserData={setUserData}
+                            isTyping={isTyping}
+                            setUserDataChanged={setUserDataChanged}
+                        ></GenderComponent>
+                        <DominantEmotionComponent
+                            userData={userData}
+                            setUserData={setUserData}
+                            isTyping={isTyping}
+                            setUserDataChanged={setUserDataChanged}
+                        ></DominantEmotionComponent>
+                        <AgeComponent
+                            userData={userData}
+                            setUserData={setUserData}
+                            isTyping={isTyping}
+                            setUserDataChanged={setUserDataChanged}
+                        ></AgeComponent>
+                        <FeatureComponent
+                            userData={userData}
+                            setUserData={setUserData}
+                            isTyping={isTyping}
+                            setUserDataChanged={setUserDataChanged}
+                        ></FeatureComponent>
+                        <EngagementComponent
+                            userData={userData}
+                            setUserData={setUserData}
+                            isTyping={isTyping}
+                            setUserDataChanged={setUserDataChanged}
+                        ></EngagementComponent>
+                    </div>
                 </div>
-                <div className='w-full h-[100%] flex justify-center items-center'>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="/quiz" element={<iframe className='h-[100%] w-full' src="/quiz.html" title="Quiz"></iframe>} />
-                    </Routes>
-                </div>
-            </div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/quiz" element={<iframe className='h-screen w-full' src="/quiz.html" title="Quiz"></iframe>} />
+                </Routes>
+                <Footer />
         </Router>
-        <Footer />
     </div>
     )
 }
