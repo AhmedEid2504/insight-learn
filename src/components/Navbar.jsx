@@ -57,11 +57,11 @@ const Navbar =() => {
                     <div>
                         <div className="bg-c_3 text-center items-center justify-center w-[400px] -skew-x-12 h-[96px] top-0 -z-50 absolute  right-5 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/video">Video</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/pdf">Pdf</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/video">Video</Link></li>
                             <div className="flex justify-center items-center text-center content-center gap-3"> 
                                 <button className="hover:text-c_4 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
                                     <img src="images/user.png" alt="user settings icon" />
@@ -80,27 +80,32 @@ const Navbar =() => {
                         </ul>
                     </div>
                 ) : (
-                    <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                        <div className="flex justify-center items-center text-center content-center gap-2">
-                            <button className="hover:text-c_4 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
-                                ☰
-                            </button>
-                        </div>
-                        {showUserMenu && (
-                            <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-16 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
-                                    <>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
-                                        <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/video">Video</Link></li>
-                                    </> 
-                                    {/* <>
-                                        <li><button className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
-                                    </> */}
-                            </ul>
-                        )}
-                    </ul>
+                    <div>
+                        <div className="bg-c_3 text-center items-center justify-center w-[100px] -skew-x-12 h-[104px] top-0 -z-50 absolute  right-5 flex"></div>
+                        <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
+                            <div className="flex justify-center items-center text-center content-center gap-2">
+                                <button className="hover:text-c_4 transition-all ease-in duration-200 text-2xl flex items-center justify-center"  onClick={toggleUserMenu}>
+                                    ☰
+                                </button>
+                            </div>
+                            {showUserMenu && (
+                                <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-16 top-0 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
+                                        <>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/pdf">Pdf</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/video">Video</Link></li>
+                                        </> 
+                                        {/* <>
+                                            <li><button className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
+                                        </> */}
+                                </ul>
+                            )}
+                        </ul>
+
+                    </div>
                     
                 )}
             </div>
