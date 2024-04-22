@@ -101,19 +101,7 @@ function App() {
     //     return () => clearInterval(intervalId); // Clean up on component unmount
     // }, [userData, userDataChanged]);
 
-    useEffect(() => {
-        const iframe = document.querySelector('iframe[name="moodleFrame"]');
-        const handleNavigation = (event) => {
-            if (event.target === iframe && event.type === 'load') {
-                console.log('Iframe navigated:', iframe.src);
-                // You can perform any necessary actions here after iframe navigation
-            }
-        };
-        iframe.addEventListener('load', handleNavigation);
-        return () => {
-            iframe.removeEventListener('load', handleNavigation);
-        };
-    }, []);
+    
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
