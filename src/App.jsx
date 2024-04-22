@@ -16,8 +16,8 @@ import DominantEmotionComponent from "./components/morphcomponents/DominantEmoti
 import FeatureComponent from "./components/morphcomponents/FeatureComponent";
 import EngagementComponent from "./components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "./components/morphcomponents/FaceTrackerComponent";
-import { ref, push, serverTimestamp, set } from "firebase/database";
-import {database} from "/src/firebase";
+import { serverTimestamp } from "firebase/database";
+// import {database} from "/src/firebase";
 import Dashboard from './pages/Dashboard';
 
 function App() {
@@ -70,40 +70,43 @@ function App() {
 
     // sending data to django api
 
-    async function saveToServer() {
+    async function sendDataToAPI() {
         if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
-            setIsSendingData(true);
-            const response = await fetch('https://morph-1.onrender.com/add/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: userData.userName,
-                    arousal: userData.arousal,
-                    attention: userData.attention,
-                    dominantEmotion: userData.dominantEmotion
-                }),
-            });
+            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            try {
+                const response = await fetch('https://morph-1.onrender.com/add/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: userData.userName,
+                        arousal: userData.arousal,
+                        attention: userData.attention,
+                        dominantEmotion: userData.dominantEmotion
+                    })
+                });
+    
+                if (response.ok) {
+                    console.log("Data sent to API successfully");
+                    setUserDataChanged(false); // Reset userDataChanged after data is sent
+                } else {
+                    console.error("Failed to send data to API:", response.status);
+                }
+            } catch (error) {
+                console.error("Error sending data:", error);
+            } finally {
+                setTimeout(() => {
+                    setIsSendingData(false); // Reset isSendingData after the delay
+                }, 3000); // 3-second delay
             }
-    
-            console.log("Data saved to server");
-            setUserDataChanged(false);
-            setTimeout(() => {
-                setIsSendingData(false);
-            }, 3000);
         }
     }
     
+    // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            saveToServer().catch(e => console.error(e));
-        }, 3000); // Send data every 3 seconds
-    
-        return () => clearInterval(intervalId); // Clean up on component unmount
+        sendDataToAPI();
     }, [userData, userDataChanged]);
 
     
