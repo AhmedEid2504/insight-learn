@@ -186,7 +186,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/quiz" element={<iframe className='h-screen w-full' src="/quiz.html" title="Quiz" />} />
                     <Route path="/moodle" element={<iframe name="moodleFrame" src="http://4.157.125.46" width="80%" height="800"></iframe>} />
-                    <Route path="/spotify" element={<iframe className='h-screen w-full' src="https://open.spotify.com/embed/track/1Cj2vqUwlJVG27gJrun92y" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>} />
+                    <Route path="/video" element={<iframe className='h-[50vh] w-full' src="https://www.youtube.com/embed/bMknfKXIFA8" title="React Course - Beginner&#39;s Tutorial for React JavaScript Library [2022]" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>} />
                 </Routes>
                 <Footer />
         </Router>
