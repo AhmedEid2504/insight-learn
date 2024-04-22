@@ -41,65 +41,70 @@ function App() {
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
 
-    async function saveToFirebase() {
-        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
-            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-            const dataRef = ref(database, "data/" + userData.userName);
-            const newDataRef = push(dataRef);
+    // async function saveToFirebase() {
+    //     if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+    //         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+    //         const dataRef = ref(database, "data/" + userData.userName);
+    //         const newDataRef = push(dataRef);
     
-            set(newDataRef, userData)
-                .then(() => {
-                    console.log("Data saved to Firebase");
-                    setUserDataChanged(false); // Reset userDataChanged after data is saved
-                })
-                .catch((error) => {
-                    console.error("Error saving:", error);
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        setIsSendingData(false); // Reset isSendingData after the delay
-                    }, 3000); // 3-second delay
-                });
-        }
-    }
+    //         set(newDataRef, userData)
+    //             .then(() => {
+    //                 console.log("Data saved to Firebase");
+    //                 setUserDataChanged(false); // Reset userDataChanged after data is saved
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error saving:", error);
+    //             })
+    //             .finally(() => {
+    //                 setTimeout(() => {
+    //                     setIsSendingData(false); // Reset isSendingData after the delay
+    //                 }, 3000); // 3-second delay
+    //             });
+    //     }
+    // }
 
-    // Use useEffect to trigger saveToFirebase when userData changes
-    useEffect(() => {
-        saveToFirebase();
-    }, [userData, userDataChanged]);
+    // // Use useEffect to trigger saveToFirebase when userData changes
+    // useEffect(() => {
+    //     saveToFirebase();
+    // }, [userData, userDataChanged]);
 
     // sending data to django api
 
-    // async function saveToServer() {
-    //     if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
-    //         setIsSendingData(true);
-    //         const response = await fetch('http://localhost:8000/userdata/', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(userData),
-    //         });
+    async function saveToServer() {
+        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+            setIsSendingData(true);
+            const response = await fetch('https://morph-1.onrender.com/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: userData.userName,
+                    arousal: userData.arousal,
+                    attention: userData.attention,
+                    dominantEmotion: userData.dominantEmotion
+                }),
+            });
     
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
     
-    //         console.log("Data saved to server");
-    //         setUserDataChanged(false);
-    //         setTimeout(() => {
-    //             setIsSendingData(false);
-    //         }, 3000);
-    //     }
-    // }
+            console.log("Data saved to server");
+            setUserDataChanged(false);
+            setTimeout(() => {
+                setIsSendingData(false);
+            }, 3000);
+        }
+    }
     
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         saveToServer().catch(e => console.error(e));
-    //     }, 3000); // Send data every 3 seconds
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            saveToServer().catch(e => console.error(e));
+        }, 3000); // Send data every 3 seconds
     
-    //     return () => clearInterval(intervalId); // Clean up on component unmount
-    // }, [userData, userDataChanged]);
+        return () => clearInterval(intervalId); // Clean up on component unmount
+    }, [userData, userDataChanged]);
 
     
 
