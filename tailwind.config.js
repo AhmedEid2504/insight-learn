@@ -10,6 +10,8 @@ export default {
       c_2:  "#1E3C85",
       c_3:  "#070D57",
       c_4: "#366D9A",
+      c_5: "#e9f2ff",
+      black: "#000000",
       white: "#ffffff"
     },
     extend: {},
