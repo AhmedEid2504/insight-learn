@@ -1,13 +1,28 @@
 import Session from "../components/Session"
-
+import { useState } from "react"
 
 const Home = () => {
+    const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
+    
+    const handleSessionStart = () => {
+        setSessionStarted(true);
+        window.open('http://4.157.125.46', '_blank')
+    };
+    
+    const handleSessionEnd = () => {
+        setSessionStarted(false);
+    }
+
     return (
         <div className="flex flex-col">
             <div className="bg-c_4 h-[40vh]">
 
             </div>
-            <Session />
+            <Session 
+                handleSessionStart={handleSessionStart}
+                handleSessionEnd={handleSessionEnd}
+                sessionStarted={sessionStarted}
+            />
 
             <div className="bg-c_4 h-[40vh]">
 

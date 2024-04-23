@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -43,7 +43,6 @@ function App() {
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
-
 
     let timeoutId = null; // Declare a variable to hold the timeout ID
 
@@ -135,7 +134,6 @@ useEffect(() => {
         }
         getAiSdk();
     }, [aiSdkState, mphToolsState]);
-
     
 
     return (
