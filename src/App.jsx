@@ -105,12 +105,9 @@ useEffect(() => {
             } catch (error) {
                 console.error("Error sending data:", error);
             } finally {
-                if (timeoutId) {
-                    clearTimeout(timeoutId); // Clear the timeout if it exists
-                }
-                timeoutId = setTimeout(() => {
+                setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 4000); // 3-second delay
+                }, 3000); // 3-second delay
             }
         }
     }
