@@ -9,7 +9,7 @@ const Session = (props) => {
                     <div className="flex basis-1/2">
                         <img className="w-auto" src="images/session.png" alt="" />
                     </div>
-                    <div className="flex bg-c_5 gap-10 basis-1/2 py-20 max-sm:px-5 flex-col justify-center items-center">
+                    <div className="flex bg-c_5 gap-10 basis-1/2 py-20 px-5 flex-col justify-center items-center">
                             {!props.sessionStarted ?
                                 <span className=" text-center font-bold text-xl">
                                     <h2>Start Your Session And Navigate</h2>
@@ -22,10 +22,10 @@ const Session = (props) => {
                             
                         
                         {!props.sessionStarted && <p className="text-center">Click the button below to start your session</p>}
+                        {props.sessionStarted && <p className="text-center">You are now redirected to Moodle</p>}
                         {props.sessionStarted ? <button onClick={props.handleSessionEnd} className="bg-black text-white border-2 hover:bg-c_5 hover:text-black transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >End Session</button>
                         : <button onClick={props.handleSessionStart} className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Start Session</button>    
                         }
-                        {props.sessionStarted && <p className="text-center">You are now being redirected to Moodle</p>}
                     </div>
                 </div>
             </div>
