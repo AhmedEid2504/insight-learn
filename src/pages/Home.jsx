@@ -18,6 +18,60 @@ import { set, ref, push } from "firebase/database";
 import {database} from "/src/firebase";
 
 const Home = () => {
+    
+    const handleSessionStart = () => {
+        setSessionStarted(true);
+        setUserData(prevUserData => ({...prevUserData, 
+            SessionStartedAt: {startTime: new Date().toLocaleTimeString(),
+                startDate: new Date().toLocaleDateString()
+        }}));
+        window.open('http://4.157.125.46', '_blank')
+    };
+    
+    const handleSessionEnd = () => {
+        setSessionStarted(false);
+        
+        // Create a copy of userData and update the SessionEndedAt field
+        const finalUserData = {
+            ...userData,
+            SessionEndedAt: {
+                endTime: new Date().toLocaleTimeString(),
+                endDate: new Date().toLocaleDateString()
+            }
+        };
+    
+        // Send the final record to Firebase
+        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
+        const newDataRef = push(dataRef);
+        
+        set(newDataRef, finalUserData)
+        .then(() => {
+                console.log("Final session record saved to Firebase");
+            })
+            .catch((error) => {
+                console.error("Error saving final session record:", error);
+            });
+    }
+    
+    // morphcast
+    const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
+    const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
+    const videoEl = useRef(undefined)
+    const [userData, setUserData] = useState({
+        userName:'',
+        dominantEmotion: '',
+        arousal: '',
+        valence: '',
+        attention:'',
+        features: ["","","","",""],
+        time:0,
+        volume: 0,
+        SessionStartedAt: {startTime:0, startDate:0},
+        SessionEndedAt: {endTime:0, endDate:0}
+    })
+    const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
+    const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
+    const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     
     useEffect(() => {
@@ -42,63 +96,9 @@ const Home = () => {
         };
     }, []);
     
-    const handleSessionStart = () => {
-        setSessionStarted(true);
-        setUserData(prevUserData => ({...prevUserData, 
-            SessionStartedAt: {startTime: new Date().toLocaleTimeString(),
-                            startDate: new Date().toLocaleDateString()
-        }}));
-        window.open('http://4.157.125.46', '_blank')
-    };
-    
-    const handleSessionEnd = () => {
-        setSessionStarted(false);
-    
-        // Create a copy of userData and update the SessionEndedAt field
-        const finalUserData = {
-            ...userData,
-            SessionEndedAt: {
-                endTime: new Date().toLocaleTimeString(),
-                endDate: new Date().toLocaleDateString()
-            }
-        };
-    
-        // Send the final record to Firebase
-        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
-        const newDataRef = push(dataRef);
-    
-        set(newDataRef, finalUserData)
-            .then(() => {
-                console.log("Final session record saved to Firebase");
-            })
-            .catch((error) => {
-                console.error("Error saving final session record:", error);
-            });
-    }
-
-  // morphcast
-  const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
-    const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
-    const videoEl = useRef(undefined)
-    const [userData, setUserData] = useState({
-        userName:'',
-        dominantEmotion: '',
-        arousal: '',
-        valence: '',
-        attention:'',
-        features: ["","","","",""],
-        time:0,
-        volume: 0,
-        SessionStartedAt: {startTime:0, startDate:0},
-        SessionEndedAt: {endTime:0, endDate:0}
-    })
-    const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
-    const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
-    const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
-
     let timeoutId = null; // Declare a variable to hold the timeout ID
-
-async function saveToFirebase() {
+    
+    async function saveToFirebase() {
     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
         const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.startTime + "/");
