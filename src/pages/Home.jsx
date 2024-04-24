@@ -22,35 +22,35 @@ const Home = () => {
     
     useEffect(() => {
         const handleBeforeUnload = (e) => {
-            handleSessionEnd();
+            setSessionStarted(false);
+    
+        // Create a copy of userData and update the SessionEndedAt field
+        const finalUserData = {
+            ...userData,
+            SessionEndedAt: {
+                endTime: new Date().toLocaleTimeString(),
+                endDate: new Date().toLocaleDateString()
+            }
+        };
+    
+        // Send the final record to Firebase
+        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
+        const newDataRef = push(dataRef);
+    
+        set(newDataRef, finalUserData)
+            .then(() => {
+                console.log("Final session record saved to Firebase");
+            })
+            .catch((error) => {
+                console.error("Error saving final session record:", error);
+            });
             const confirmationMessage = 'Are you sure you want to leave, your session will end ?';
             e.returnValue = confirmationMessage;
             return confirmationMessage;
         };
     
         const handleUnload = () => {
-            setSessionStarted(false);
-    
-            // Create a copy of userData and update the SessionEndedAt field
-            const finalUserData = {
-                ...userData,
-                SessionEndedAt: {
-                    endTime: new Date().toLocaleTimeString(),
-                    endDate: new Date().toLocaleDateString()
-                }
-            };
-        
-            // Send the final record to Firebase
-            const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
-            const newDataRef = push(dataRef);
-        
-            set(newDataRef, finalUserData)
-                .then(() => {
-                    console.log("Final session record saved to Firebase");
-                })
-                .catch((error) => {
-                    console.error("Error saving final session record:", error);
-                });
+            handleSessionEnd();
         };
     
         window.addEventListener('beforeunload', handleBeforeUnload);
