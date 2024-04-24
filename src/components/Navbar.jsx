@@ -54,9 +54,9 @@ const Navbar =() => {
             <div className="bg-c_3 text-center items-center justify-center p-7 absolute top-5 right-5 flex">
                 {windowWidth > 800 ? (
                     <div>
-                        <div className="bg-c_3 text-center items-center justify-center w-[400px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-5 flex"></div>
+                        <div className="bg-c_3 text-center items-center justify-center w-[400px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
-                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/pdf">Pdf</Link></li>
@@ -91,7 +91,7 @@ const Navbar =() => {
                                 <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-[54px] top-6 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                         <>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
-                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/home">Home</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/quiz">Quiz</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/moodle">Moodle</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/pdf">Pdf</Link></li>

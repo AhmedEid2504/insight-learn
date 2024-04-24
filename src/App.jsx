@@ -24,21 +24,55 @@ import Dashboard from './pages/Dashboard';
 
 function App() {
 
+    const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
+    
+    useEffect(() => {
+        const handleBeforeUnload = (e) => {
+            const confirmationMessage = 'Are you sure you want to leave, your session will end ?';
+            e.returnValue = confirmationMessage;
+            return confirmationMessage;
+        };
+    
+        const handleUnload = () => {
+            handleSessionEnd();
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('unload', handleUnload);
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            window.removeEventListener('unload', handleUnload);
+        };
+    }, []);
+    
+    const handleSessionStart = () => {
+        setSessionStarted(true);
+        window.open('http://4.157.125.46', '_blank')
+    };
+    
+    const handleSessionEnd = () => {
+        setSessionStarted(false);
+        userData.SessionEndedAt.sessionTime = new Date().toLocaleTimeString();
+        userData.SessionEndedAt.sessionDate = new Date().toLocaleDateString();
+        saveToFirebase();
+    }
+
   // morphcast
   const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
     const [userData, setUserData] = useState({
         userName:'',
-        age:'',
-        gender: '',
         dominantEmotion: '',
         arousal: '',
         valence: '',
         attention:'',
         features: ["","","","",""],
-        time:serverTimestamp(),
-        volume: 0
+        time:0,
+        volume: 0,
+        SessionEndedAt: {sessionTime:0, sessionDate:0},
+        SessionStartedAt: {sessionTime:0, sessionDate:0}
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
@@ -49,7 +83,7 @@ function App() {
 async function saveToFirebase() {
     if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName);
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.sessionDate + "/" + userData.SessionStartedAt.sessionTime);
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
@@ -71,51 +105,53 @@ async function saveToFirebase() {
     }
 }
 
+
 // Use useEffect to trigger saveToFirebase when userData changes
 useEffect(() => {
     saveToFirebase();
 }, [userData, userDataChanged]);
 
+
     // sending data to django api
 
-    async function sendDataToAPI() {
-        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
-            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+    // async function sendDataToAPI() {
+    //     if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+    //         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
-            try {
-                const response = await fetch('https://morph-1.onrender.com/add/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: userData.userName,
-                        arousal: userData.arousal,
-                        attention: userData.attention,
-                        dominantEmotion: userData.dominantEmotion
-                    })
-                });
+    //         try {
+    //             const response = await fetch('https://morph-1.onrender.com/add/', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 body: JSON.stringify({
+    //                     username: userData.userName,
+    //                     arousal: userData.arousal,
+    //                     attention: userData.attention,
+    //                     dominantEmotion: userData.dominantEmotion
+    //                 })
+    //             });
     
-                if (response.ok) {
-                    console.log("Data sent to API successfully");
-                    setUserDataChanged(false); // Reset userDataChanged after data is sent
-                } else {
-                    console.error("Failed to send data to API:", response.status);
-                }
-            } catch (error) {
-                console.error("Error sending data:", error);
-            } finally {
-                setTimeout(() => {
-                    setIsSendingData(false); // Reset isSendingData after the delay
-                }, 3000); // 3-second delay
-            }
-        }
-    }
+    //             if (response.ok) {
+    //                 console.log("Data sent to API successfully");
+    //                 setUserDataChanged(false); // Reset userDataChanged after data is sent
+    //             } else {
+    //                 console.error("Failed to send data to API:", response.status);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error sending data:", error);
+    //         } finally {
+    //             setTimeout(() => {
+    //                 setIsSendingData(false); // Reset isSendingData after the delay
+    //             }, 3000); // 3-second delay
+    //         }
+    //     }
+    // }
     
-    // Use useEffect to trigger sendDataToAPI when userData changes
-    useEffect(() => {
-        sendDataToAPI();
-    }, [userData, userDataChanged]);
+    // // Use useEffect to trigger sendDataToAPI when userData changes
+    // useEffect(() => {
+    //     sendDataToAPI();
+    // }, [userData, userDataChanged]);
 
     
 
@@ -198,7 +234,7 @@ useEffect(() => {
                     </div>
                 </div>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home handleSessionStart={handleSessionStart} handleSessionEnd={handleSessionEnd} sessionStarted={sessionStarted} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/dashboard" element={<Dashboard />} />
