@@ -53,8 +53,10 @@ function App() {
     
     const handleSessionEnd = () => {
         setSessionStarted(false);
-        userData.SessionEndedAt.sessionTime = new Date().toLocaleTimeString();
-        userData.SessionEndedAt.sessionDate = new Date().toLocaleDateString();
+        setUserData(prevUserData => ({...prevUserData, 
+            SessionEndedAt: {sessionTime: new Date().toLocaleTimeString(),
+                            sessionDate: new Date().toLocaleDateString()
+        }}));
         saveToFirebase();
     }
 
@@ -81,7 +83,7 @@ function App() {
     let timeoutId = null; // Declare a variable to hold the timeout ID
 
 async function saveToFirebase() {
-    if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+    if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
         const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.sessionDate + "/" + userData.SessionStartedAt.sessionTime);
         const newDataRef = push(dataRef);
