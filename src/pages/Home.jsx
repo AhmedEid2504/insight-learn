@@ -56,7 +56,7 @@ const Home = () => {
         const finalUserData = {
             ...userData,
             SessionEndedAt: {
-                endTime: new Date().toLocaleDateString(),
+                endTime: new Date().toLocaleTimeString(),
                 endDate: new Date().toLocaleDateString()
             }
         };
