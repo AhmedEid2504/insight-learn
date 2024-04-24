@@ -29,6 +29,7 @@ const Home = () => {
     
         const handleUnload = () => {
             handleSessionEnd();
+            saveToFirebase();
         };
     
         window.addEventListener('beforeunload', handleBeforeUnload);
@@ -83,7 +84,7 @@ const Home = () => {
 async function saveToFirebase() {
     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.sessionTime + "/");
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.startTime + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
