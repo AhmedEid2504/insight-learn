@@ -64,7 +64,7 @@ const Home = () => {
         valence: '',
         attention:'',
         features: ["","","","",""],
-        time:serverTimestamp().toLocaleTimeString(),
+        time:new Date().toLocaleTimeString(),
         volume: 0,
         SessionStartedAt: {startTime:0, startDate:0},
         SessionEndedAt: {endTime:0, endDate:0}
