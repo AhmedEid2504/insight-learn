@@ -21,44 +21,24 @@ const Home = () => {
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     
     useEffect(() => {
-        const handleBeforeUnload = (e) => {
-            setSessionStarted(false);
-    
-        // Create a copy of userData and update the SessionEndedAt field
-        const finalUserData = {
-            ...userData,
-            SessionEndedAt: {
-                endTime: new Date().toLocaleTimeString(),
-                endDate: new Date().toLocaleDateString()
-            }
-        };
-    
-        // Send the final record to Firebase
-        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
-        const newDataRef = push(dataRef);
-    
-        set(newDataRef, finalUserData)
-            .then(() => {
-                console.log("Final session record saved to Firebase");
-            })
-            .catch((error) => {
-                console.error("Error saving final session record:", error);
-            });
+        const handleBeforeUnload = async (e) => {
+
+            await handleSessionEnd();
             const confirmationMessage = 'Are you sure you want to leave, your session will end ?';
             e.returnValue = confirmationMessage;
             return confirmationMessage;
         };
     
-        const handleUnload = () => {
-            handleSessionEnd();
-        };
-    
+        async function handleUnload () {
+            await handleSessionEnd();
+        }
+        
         window.addEventListener('beforeunload', handleBeforeUnload);
-        window.addEventListener('unload', handleUnload);
-    
+        window.addEventListener("unload", handleUnload);
+
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
-            window.removeEventListener('unload', handleUnload);
+            window.removeEventListener("unload", handleUnload);
         };
     }, []);
     
