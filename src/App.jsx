@@ -17,7 +17,7 @@ import FeatureComponent from "./components/morphcomponents/FeatureComponent";
 import EngagementComponent from "./components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "./components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push , serverTimestamp } from "firebase/database";
+import { set, ref, push } from "firebase/database";
 import {database} from "/src/firebase";
 import Dashboard from './pages/Dashboard';
 
@@ -48,6 +48,10 @@ function App() {
     
     const handleSessionStart = () => {
         setSessionStarted(true);
+        setUserData(prevUserData => ({...prevUserData, 
+            SessionStartedAt: {sessionTime: new Date().toLocaleTimeString(),
+                            sessionDate: new Date().toLocaleDateString()
+        }}));
         window.open('http://4.157.125.46', '_blank')
     };
     
@@ -85,7 +89,7 @@ function App() {
 async function saveToFirebase() {
     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.sessionDate + "/" + userData.SessionStartedAt.sessionTime);
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.sessionDate + userData.SessionStartedAt.sessionTime + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
@@ -110,8 +114,8 @@ async function saveToFirebase() {
 
 // Use useEffect to trigger saveToFirebase when userData changes
 useEffect(() => {
-    saveToFirebase();
-}, [userData, userDataChanged]);
+    {sessionStarted && saveToFirebase()}
+}, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
