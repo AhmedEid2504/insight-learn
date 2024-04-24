@@ -29,7 +29,6 @@ const Home = () => {
     
         const handleUnload = () => {
             handleSessionEnd();
-            saveToFirebase();
         };
     
         window.addEventListener('beforeunload', handleBeforeUnload);
@@ -52,11 +51,27 @@ const Home = () => {
     
     const handleSessionEnd = () => {
         setSessionStarted(false);
-        setUserData(prevUserData => ({...prevUserData, 
-            SessionEndedAt: {endTime: new Date().toLocaleTimeString(),
-                            endDate: new Date().toLocaleDateString()
-        }}));
-        saveToFirebase();
+    
+        // Create a copy of userData and update the SessionEndedAt field
+        const finalUserData = {
+            ...userData,
+            SessionEndedAt: {
+                endTime: new Date().getTime(),
+                endDate: new Date().toLocaleDateString()
+            }
+        };
+    
+        // Send the final record to Firebase
+        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
+        const newDataRef = push(dataRef);
+    
+        set(newDataRef, finalUserData)
+            .then(() => {
+                console.log("Final session record saved to Firebase");
+            })
+            .catch((error) => {
+                console.error("Error saving final session record:", error);
+            });
     }
 
   // morphcast
