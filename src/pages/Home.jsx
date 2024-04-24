@@ -14,7 +14,7 @@ import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push } from "firebase/database";
+import { set, ref, push, serverTimestamp } from "firebase/database";
 import {database} from "/src/firebase";
 
 const Home = () => {
@@ -64,7 +64,7 @@ const Home = () => {
         valence: '',
         attention:'',
         features: ["","","","",""],
-        time:0,
+        time:serverTimestamp().toLocaleTimeString(),
         volume: 0,
         SessionStartedAt: {startTime:0, startDate:0},
         SessionEndedAt: {endTime:0, endDate:0}
@@ -75,16 +75,15 @@ const Home = () => {
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     
     useEffect(() => {
-        const handleBeforeUnload = async (e) => {
-
-            await handleSessionEnd();
+        const handleBeforeUnload =  (e) => {
+            setSessionStarted(false);
             const confirmationMessage = 'Are you sure you want to leave, your session will end ?';
             e.returnValue = confirmationMessage;
             return confirmationMessage;
         };
     
-        async function handleUnload () {
-            await handleSessionEnd();
+        const handleUnload = () => {
+            setSessionStarted(false);
         }
         
         window.addEventListener('beforeunload', handleBeforeUnload);
