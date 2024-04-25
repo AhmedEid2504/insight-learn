@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import Session from "../components/Session"
-import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 // morphcast
@@ -251,7 +250,7 @@ useEffect(() => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
             />
-            <div className="h-[310px] max-sm:h-[480px] max-md:h-[480px]">
+            <div className="h-[310px] max-md:h-[490px]">
                 <iframe className='h-full w-full' src="/footer.html" title="Footer" />
             </div>
         </div>

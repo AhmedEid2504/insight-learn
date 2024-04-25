@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -40,7 +41,8 @@ const Login = () => {
 
 
     return (
-        <div className="flex flex-col self-center items-center">
+        <div className="flex flex-col self-center items-center h-screen pt-[20vh]">
+            <Navbar />
             <h2 className="text-white">New user ? <span className="">Create an account</span></h2>
             <div className="flex flex-col justify-center w-fit self-center bg-opacity-[50%] bg-white mt-5 text-white items-center border-[1px] border-white p-5">
                 <img className="w-[120px]" src="images/login-profile.png" alt="" />
