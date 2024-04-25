@@ -37,7 +37,7 @@ const Home = () => {
         };
     
         // Send the final record to Firebase
-        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt.startTime + "/");
+        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
         
         set(newDataRef, finalUserData)
@@ -97,7 +97,7 @@ const Home = () => {
     async function saveToFirebase() {
     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt.startTime + "/");
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
