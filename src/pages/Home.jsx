@@ -251,7 +251,9 @@ useEffect(() => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
             />
-            <iframe className='h-[310px] w-full' src="/footer.html" title="Footer" />
+            <div className="h-[310px] max-sm:h-[480px] max-md:h-[480px]">
+                <iframe className='h-full w-full' src="/footer.html" title="Footer" />
+            </div>
         </div>
     )
 }
