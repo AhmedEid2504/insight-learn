@@ -63,8 +63,11 @@ const Home = () => {
         arousal: '',
         valence: '',
         attention:'',
-        features: ["","","","",""],
-        time:new Date().toLocaleTimeString(),
+        feature_1: '',
+        feature_2: '',
+        feature_3: '',
+        feature_4: '',
+        feature_5: '',
         volume: 0,
         SessionStartedAt: {startTime:0, startDate:0},
         SessionEndedAt: {endTime:0, endDate:0}
