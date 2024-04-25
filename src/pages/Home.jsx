@@ -188,7 +188,10 @@ useEffect(() => {
     return (
         <div className="flex flex-col">
             <Navbar />
-            <div className="flex flex-col justify-center items-center p-5 mt-40 bg-c_2 text-white">
+            <div className="h-screen">
+                <iframe className='h-full w-full' src="/header.html" title="Header" />
+            </div>
+            <div className="flex flex-col justify-center items-center p-5 bg-c_2 text-white">
                     <div className="relative ">
                         <FaceTrackerComponent videoEl={videoEl}
                         ></FaceTrackerComponent>
@@ -258,3 +261,16 @@ useEffect(() => {
 }
 
 export default Home
+
+
+
+
+
+
+
+
+
+
+
+
+

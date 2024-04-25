@@ -20,14 +20,13 @@ body {
     padding: 0.625rem;
     text-align: center;
     display: flex;
-    flex-flow: row wrap;
     justify-content: space-evenly;
     font-family: 'Mulish', 'Open Sans', sans-serif;
 }
 
 .contact,
 .quick-links {
-    width: 35%;
+    width: 38%;
     vertical-align: top;
     text-align: left;
     margin: 1rem;
@@ -80,11 +79,11 @@ body {
         padding-left: 0;
         text-align: center;
     }
-    
-    .contact,
-    .quick-links {
-        margin: 0.625rem;
+
+    .footer {
+        flex-flow: column wrap;
     }
+
     
     .contact h3,
     .quick-links h3 {
