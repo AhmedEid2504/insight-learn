@@ -14,7 +14,7 @@ import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push, serverTimestamp } from "firebase/database";
+import { set, ref, push } from "firebase/database";
 import {database} from "/src/firebase";
 
 const Home = () => {
@@ -22,9 +22,8 @@ const Home = () => {
     const handleSessionStart = () => {
         setSessionStarted(true);
         setUserData(prevUserData => ({...prevUserData, 
-            SessionStartedAt: {startTime: new Date().toLocaleTimeString(),
-                startDate: new Date().toLocaleDateString()
-        }}));
+            SessionStartedAt: new Date().toLocaleTimeString()
+        }));
         window.open('http://4.157.125.46', '_blank')
     };
     
@@ -34,10 +33,7 @@ const Home = () => {
         // Create a copy of userData and update the SessionEndedAt field
         const finalUserData = {
             ...userData,
-            SessionEndedAt: {
-                endTime: new Date().toLocaleTimeString(),
-                endDate: new Date().toLocaleDateString()
-            }
+            SessionEndedAt:new Date().toLocaleTimeString()
         };
     
         // Send the final record to Firebase
@@ -69,8 +65,8 @@ const Home = () => {
         feature_4: '',
         feature_5: '',
         volume: 0,
-        SessionStartedAt: {startTime:0, startDate:0},
-        SessionEndedAt: {endTime:0, endDate:0}
+        SessionStartedAt: 0,
+        SessionEndedAt: 0
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
