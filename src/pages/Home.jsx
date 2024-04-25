@@ -65,8 +65,6 @@ const Home = () => {
         feature_4: '',
         feature_5: '',
         volume: 0,
-        SessionStartedAt: 0,
-        SessionEndedAt: 0
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData

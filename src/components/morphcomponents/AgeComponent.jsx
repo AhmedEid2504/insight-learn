@@ -9,11 +9,11 @@ const AgeComponent = (props) => {
       window.addEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
     }
 
-    function handleAgeEvent(evt) {
+    function handleAgeEvent() {
       // set userData from props to save dominantEmotion 
       props.setUserData(prevUserData => ({
         ...prevUserData,
-        age: Math.floor(evt.detail.output.numericAge) || 0,
+        // age: Math.floor(evt.detail.output.numericAge) || 0,
         volume: volume
       }));
       props.setUserDataChanged(true)
