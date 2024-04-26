@@ -186,7 +186,7 @@ useEffect(() => {
 
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
             <Navbar />
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
@@ -253,8 +253,8 @@ useEffect(() => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
             />
-            <div className="h-[310px] max-md:h-[490px]">
-                <iframe className='h-full w-full' src="/footer.html" title="Footer" />
+            <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex">
+                <iframe className="h- w-full" src="/footer.html" title="Footer" />
             </div>
         </div>
     )
