@@ -11,29 +11,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Be carful the clip-path: polygon style appears only a specific part of div but the rest of div still in the web page (hidden) */
-/*logo style*/
-.logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 6;
-    display: flex;
-    height: 300px;
-    width: 335px;
-    background-color: var(--secondary-color);
-    clip-path: polygon(0 0, 71% 0, 58% 29%, 0 29%);
-    justify-content: center;
-    align-items: flex-start;
-}
 
-.logo img {
-    width: 32%;
-    height: 26%;
-    position: relative;
-    right: 55px;
-    top: 4px;
-}
 
 /*Qr Code style */
 .qrcode{
@@ -43,16 +21,16 @@ body {
     z-index: 6;
     display: flex;
     height: 50%;
-    width: 30%;
+    width: 40vh;
     background-color: var(--secondary-color);
     clip-path: polygon(0px 75%, 56% 74%, 40% 100%, 0px 100%);
     justify-content: center;
 }
 
 .qrcode img {
-    width: 20%;
-    height: 20%;
+    width: auto;
     position: relative;
+    height: 20%;
     right: 25%;
     top: 77%;
 }
@@ -118,7 +96,7 @@ body {
         color: var(--text-color);
         overflow: hidden;
         background-color: var(--main-color);
-        width: 70vw;
+        width: 80vw;
         height: 100vh;
         clip-path: polygon(0 0, 68% 0, 42% 100%, 0% 100%);
         position: absolute;
@@ -131,6 +109,7 @@ body {
         justify-content: flex-start;
         font-family: 'Mulish', 'Open Sans', sans-serif;
 }
+
 
 .info h2{
     position: relative;
