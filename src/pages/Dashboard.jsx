@@ -24,62 +24,64 @@ const Dashboard = () => {
 
     return (
         <div className=" flex bg-c_2 h-screen overflow-hidden">
-            { showSideBar ? 
-                <div>
-                    { window.innerWidth < 768 ? 
-                        <div>
-                            <div className='z-50 absolute w-screen'>
-                                <Sidebar 
-                                    showSideBar={showSideBar}
-                                    toggleSideBar={toggleSideBar}
-                                />
-                            </div>
-                            <div className="flex p-5 justify-center items-center bg-c_2 text-white overflow-x-scroll">
-                                <Outlet/>
-                            </div>
-                        </div>
-                    :
-                        <div className='flex justify-start items-center'>
-                            <div className='w-1/4 justify-start'>
-                                    <Sidebar 
-                                        showSideBar={showSideBar}
-                                        toggleSideBar={toggleSideBar}
-                                    />
-                            </div>
-                            <div className="flex w-full p-5 justify-center items-center bg-c_2 text-white">
-                                    <Outlet/>
-                            </div>
-                        </div>
-                    }
+            { window.innerWidth < 768 ? 
+                <div className='flex flex-col'>
+                    <div className=' bottom-0 w-screen h-[10vh] z-10'>
+                            <Sidebar 
+                                showSideBar={showSideBar}
+                                toggleSideBar={toggleSideBar}
+                            />
+                    </div>
+                    <div className="flex h-[50dvh] justify-center items-start bg-c_2 text-white pt-10">
+                            <Outlet/>
+                    </div>
                 </div>
-            : 
+            :
                 <div>
-                    { window.innerWidth < 768 ? 
-                        <div className='flex flex-col'>
-                            <div className=' bottom-0 w-screen h-[10vh] z-10'>
-                                    <Sidebar 
-                                        showSideBar={showSideBar}
-                                        toggleSideBar={toggleSideBar}
-                                    />
+                        { showSideBar ? 
+                            <div>
+                                { window.innerWidth < 768 ? 
+                                    <div>
+                                        <div className='z-50 absolute w-screen'>
+                                            <Sidebar 
+                                                showSideBar={showSideBar}
+                                                toggleSideBar={toggleSideBar}
+                                            />
+                                        </div>
+                                        <div className="flex p-5 justify-center items-center bg-c_2 text-white overflow-x-scroll">
+                                            <Outlet/>
+                                        </div>
+                                    </div>
+                                :
+                                    <div className='flex justify-start items-center'>
+                                        <div className='w-1/4 justify-start'>
+                                                <Sidebar 
+                                                    showSideBar={showSideBar}
+                                                    toggleSideBar={toggleSideBar}
+                                                />
+                                        </div>
+                                        <div className="flex w-full p-5 justify-center items-center bg-c_2 text-white">
+                                                <Outlet/>
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <div className="flex h-[50dvh] justify-center items-start bg-c_2 text-white pt-10">
-                                    <Outlet/>
+                        : 
+                            <div>
+                                
+                                    <div className='flex'>
+                                        <div className=''>
+                                                <Sidebar 
+                                                    showSideBar={showSideBar}
+                                                    toggleSideBar={toggleSideBar}
+                                                />
+                                        </div>
+                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-c_2 text-white">
+                                                <Outlet/>
+                                        </div>
+                                    </div>
                             </div>
-                        </div>
-                    
-                    :
-                        <div className='flex'>
-                            <div className=''>
-                                    <Sidebar 
-                                        showSideBar={showSideBar}
-                                        toggleSideBar={toggleSideBar}
-                                    />
-                            </div>
-                            <div className="w-[90vw] p-5 flex justify-center items-center bg-c_2 text-white">
-                                    <Outlet/>
-                            </div>
-                        </div>
-                    }
+                        }
                 </div>
             }
         </div>
