@@ -4,10 +4,10 @@ const Predictions = () => {
   const skeletonCount = 4; // Adjust this number as needed
 
   return (
-    <div className="w-[300px] h-screen flex gap-10 p-5 flex-col items-center justify-start overflow-x-scroll">
+    <div className="w-[60dvw] h-[80dvh] flex gap-10 p-5 flex-col items-start justify-start overflow-x-scroll">
       {/* Generate skeleton cards directly within the Reports component */}
       {Array.from({ length: skeletonCount }, (_, index) => (
-        <div key={index} className="bg-white shadow-md rounded-lg w-[2350px] animate-pulse">
+        <div key={index} className="bg-white shadow-md rounded-lg w-[830px] animate-pulse">
           {/* Skeleton for chart title */}
           <div className="bg-gray-300 rounded text-black">Test</div>
 

@@ -1,18 +1,18 @@
 
 const Reports = () => {
   // Define the number of skeleton cards you want to render
-  const skeletonCount = 1; // Adjust this number as needed
+  const skeletonCount = 2; // Adjust this number as needed
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="w-[300px] h-[80dvh] flex gap-10 p-5 flex-col items-center justify-start overflow-x-scroll">
       {/* Generate skeleton cards directly within the Reports component */}
       {Array.from({ length: skeletonCount }, (_, index) => (
-        <div key={index} className="bg-white shadow-md rounded-lg w-auto animate-pulse">
+        <div key={index} className="bg-white shadow-md rounded-lg w-[230px] animate-pulse">
           {/* Skeleton for chart title */}
-          <div className="h-6 bg-gray-300 rounded mb-2"></div>
+          <div className="bg-gray-300 rounded text-black">Test</div>
 
           {/* Skeleton for chart */}
-          <div className="h-64 bg-gray-300 rounded"></div>
+          <div className="h-[20vh]  bg-gray-300 rounded"></div>
         </div>
       ))}
     </div>

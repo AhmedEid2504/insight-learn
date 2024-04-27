@@ -23,7 +23,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className=" flex bg-c_2 h-screen overflow-x-hidden">
+        <div className=" flex bg-c_2 h-screen overflow-hidden">
             { showSideBar ? 
                 <div>
                     { window.innerWidth < 768 ? 
@@ -39,14 +39,14 @@ const Dashboard = () => {
                             </div>
                         </div>
                     :
-                        <div>
-                            <div className='w-1/4 fixed left-0 top-0 bottom-0'>
+                        <div className='flex justify-start items-center'>
+                            <div className='w-1/4 justify-start'>
                                     <Sidebar 
                                         showSideBar={showSideBar}
                                         toggleSideBar={toggleSideBar}
                                     />
                             </div>
-                            <div className=" translate-x-[45vw] flex p-5 justify-center items-center bg-c_2 text-white">
+                            <div className="flex w-full p-5 justify-center items-center bg-c_2 text-white">
                                     <Outlet/>
                             </div>
                         </div>
@@ -55,27 +55,27 @@ const Dashboard = () => {
             : 
                 <div>
                     { window.innerWidth < 768 ? 
-                        <div>
-                            <div className='w-1/7 fixed'>
+                        <div className='flex flex-col'>
+                            <div className=' bottom-0 w-screen h-[10vh] z-10'>
                                     <Sidebar 
                                         showSideBar={showSideBar}
                                         toggleSideBar={toggleSideBar}
                                     />
                             </div>
-                            <div className=" translate-x-[35vw] p-5 flex justify-center items-center bg-c_2 text-white">
+                            <div className="flex h-[50dvh] justify-center items-start bg-c_2 text-white pt-10">
                                     <Outlet/>
                             </div>
                         </div>
                     
                     :
-                        <div>
-                            <div className='w-1/7 fixed left-0 top-0 bottom-0'>
+                        <div className='flex'>
+                            <div className=''>
                                     <Sidebar 
                                         showSideBar={showSideBar}
                                         toggleSideBar={toggleSideBar}
                                     />
                             </div>
-                            <div className=" translate-x-[15vw] p-5 flex justify-center items-center bg-c_2 text-white">
+                            <div className="w-[90vw] p-5 flex justify-center items-center bg-c_2 text-white">
                                     <Outlet/>
                             </div>
                         </div>
