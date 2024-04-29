@@ -133,7 +133,7 @@ const Home = () => {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
             try {
-                const response = await fetch('https://dj-render-ldb1.onrender.com/add', {
+                const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
