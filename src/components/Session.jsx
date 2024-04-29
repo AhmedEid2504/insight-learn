@@ -4,7 +4,7 @@ const Session = (props) => {
     return (
         <div className="bg-white ">
             <div className="flex flex-col relative items-center justify-center gap-10 py-10 p-7">
-                <h1 className="text-3xl">Dear Student</h1>
+                <h1 className="text-3xl">Dear  { props.userName}</h1>
                 <div className="flex max-sm:flex-col gap-10 justify-center items-center">
                     <div className="flex basis-1/2">
                         <img className="w-auto" src="images/session.png" alt="" />

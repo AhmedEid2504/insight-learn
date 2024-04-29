@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (event) => {
         if(event.target.name === 'username') {
@@ -15,32 +17,38 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
     
-        const response = await fetch('https://dj-render-ldb1.onrender.com/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        });
+        try {
+            const response = await fetch('https://dj-render-ldb1.onrender.com/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            });
     
-        const data = await response.json();
+            const data = await response.json();
     
-        if (response.ok) {
-            // Store token in local storage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('username', username);
-            // Redirect using router after successful login
-            window.location.href = '/';
-        } else {
-            console.error(data);
-            alert('Login failed. Please check your credentials.');
+            if (response.ok) {
+                // Store token in local storage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', username);
+                // Redirect using router after successful login
+                window.location.href = '/';
+            } else {
+                // Handle error here
+                console.error(data);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     }
-
 
 
     return (
@@ -87,8 +95,16 @@ const Login = () => {
                     </div>
                     <button 
                         className="bg-c_3 p-2 hover:bg-opacity-[30%] border-2 border-c_3 transition-all duration-200 ease-in"
+                        disabled={isLoading}
                         onClick={handleSubmit}
-                        type="submit">Login
+                        type="submit">
+                            {isLoading ? (
+                                <Spinner animation="border" role="status">
+                                    <span className="">Loading...</span>
+                                </Spinner>
+                            ) : (
+                                'Log In'
+                            )}
                     </button>
                 </form>
             </div>

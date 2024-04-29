@@ -55,17 +55,19 @@ const Navbar =(props) => {
             <div className="bg-c_3 text-center items-center justify-center p-7 absolute top-5 right-5 flex">
                 {windowWidth > 800 ? (
                     <div>
-                        <div className="bg-c_3 text-center items-center justify-center w-[350px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
+
+                        <div className="bg-c_3 text-center items-center justify-center w-[300px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
-                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
                             { !props.isLoggedIn ?
                                 <div className="flex gap-5">
                                     <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                     <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
                                 </div>
                             :
-                                <div>
+                                <div className="flex gap-5">
+
+                                    <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </div>
                             }
@@ -83,16 +85,15 @@ const Navbar =(props) => {
                             {showUserMenu && (
                                 <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-[30px] top-1 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                         <>
-                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
-                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
                                             { !props.isLoggedIn ?
                                                 <div className="flex flex-col gap-3">
                                                     <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                                     <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
                                                 </div>
                                             :
-                                                <div>
+                                                <div className="flex flex-col gap-3">
+                                                    <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                                 </div>
                                             }

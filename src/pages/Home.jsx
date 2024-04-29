@@ -89,6 +89,7 @@ const Home = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
         // Redirect or perform any other action after logout
+        window.location.href = '/login';
     };
 
     useEffect(() => {
@@ -203,35 +204,16 @@ const Home = () => {
 
     return (
         <div className="flex flex-col w-full">
-            <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+            <Navbar isLoggedIn={isLoggedIn} userName={userData.userName} handleLogout={handleLogout} />
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
             </div>
-            <div className="flex flex-col justify-center items-center p-5 bg-c_2 text-white">
-                    <div className="relative ">
+            <div className="flex flex-col justify-center items-center bg-c_2 text-white">
+                    <div className="relative">
                         <FaceTrackerComponent videoEl={videoEl}
                         ></FaceTrackerComponent>
                     </div>
-                    <div className='flex flex-col '>
-                        {/* Input field for the user's name */}
-                        <label htmlFor="userName">Your Name</label>
-                        <input
-                            id="userName"
-                            className='w-[100%] h-10 bg-c_3 rounded-sm p-2 border-none'
-                            type="text"
-                            value={userData.userName}
-                            onChange={(e) => {
-                                setUserData({ ...userData, userName : e.target.value })
-                                setIsTyping(true); // Set isTyping to true while the user is typing
-                                setUserDataChanged(true);
-                                
-                            }}
-                            onBlur={() => setIsTyping(false)} // Set isTyping to false when the input field loses focus
-                            placeholder="Enter your name"
-                        />
-                    </div>
                     <div>
-                        
                         <GenderComponent
                             userData={userData}
                             setUserData={setUserData}
@@ -269,6 +251,7 @@ const Home = () => {
                 handleSessionStart={handleSessionStart}
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
+                userName={userData.userName}
             />
             )}
             <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex">
