@@ -63,6 +63,7 @@ const Home = () => {
         feature_3: '',
         feature_4: '',
         feature_5: '',
+        gender: '',
         volume: 0,
     })
     const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
@@ -137,7 +138,20 @@ const Home = () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(userData)
+                    body: JSON.stringify({
+                        arousal: userData.arousal,
+                        attention: userData.attention,
+                        dominantEmotion: userData.dominantEmotion,
+                        feature_1: userData.feature_1,
+                        feature_2: userData.feature_2,
+                        feature_3: userData.feature_3,
+                        feature_4: userData.feature_4,
+                        feature_5: userData.feature_5,
+                        gender: userData.gender,
+                        userName: userData.userName,
+                        valence: userData.valence,
+                        volume: userData.volume
+                    })
                 });
     
                 if (response.ok) {
