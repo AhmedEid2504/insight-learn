@@ -16,6 +16,11 @@ const Signup = () => {
             return;
         }
 
+        if (!email.endsWith('@alexu.edu.eg')) {
+            alert("Please use your alexu.edu.eg email");
+            return;
+        }
+
         const response = await fetch('https://dj-render-ldb1.onrender.com/signup/', {
             method: 'POST',
             headers: {
