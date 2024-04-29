@@ -71,12 +71,16 @@ const Home = () => {
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
-    
+
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
         if (token) {
             setIsLoggedIn(true);
+            setUserData(prevUserData => ({...prevUserData, userName: username}));
+        } else {
+            window.location.href = '/login';
         }
     }, []);
 
@@ -145,7 +149,7 @@ const Home = () => {
     // sending data to django api
 
     async function sendDataToAPI() {
-        if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+        if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
             try {
@@ -260,11 +264,13 @@ const Home = () => {
                         ></EngagementComponent>
                     </div>
                 </div>
+            { userData.userName.trim() !== "ahmed" && (
             <Session 
                 handleSessionStart={handleSessionStart}
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
             />
+            )}
             <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex">
                 <iframe className=" w-full" src="/footer.html" title="Footer" />
             </div>
