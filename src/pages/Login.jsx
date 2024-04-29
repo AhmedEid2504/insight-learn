@@ -30,11 +30,13 @@ const Login = () => {
         const data = await response.json();
     
         if (response.ok) {
-            // Handle successful login here
-            console.log(data);
+            // Store token in local storage
+            localStorage.setItem('token', data.token);
+            // Redirect using router after successful login
+            window.location.href = '/';
         } else {
-            // Handle error here
             console.error(data);
+            alert('Login failed. Please check your credentials.');
         }
     }
 

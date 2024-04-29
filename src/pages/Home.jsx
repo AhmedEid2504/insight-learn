@@ -47,11 +47,12 @@ const Home = () => {
                 console.error("Error saving final session record:", error);
             });
     }
-    
+
     // morphcast
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
         userName:'',
         dominantEmotion: '',
@@ -71,6 +72,21 @@ const Home = () => {
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     
+    useEffect(() => {
+        // Check if token exists in local storage
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        // Clear token from local storage
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        // Redirect or perform any other action after logout
+    };
+
     useEffect(() => {
         const handleBeforeUnload =  (e) => {
             setSessionStarted(false);
@@ -183,7 +199,7 @@ const Home = () => {
 
     return (
         <div className="flex flex-col w-full">
-            <Navbar />
+            <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
             </div>
