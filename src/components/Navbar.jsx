@@ -59,6 +59,7 @@ const Navbar =() => {
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
+                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
                             {/* <li><button className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li> */}
                         </ul>
                     </div>
@@ -77,6 +78,7 @@ const Navbar =() => {
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/dashboard">Dashboard</Link></li>
+                                            <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/signup">Sign Up</Link></li>
                                             {/* <li><button className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li> */}
                                         </> 
                                         {/* <>

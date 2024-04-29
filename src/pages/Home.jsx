@@ -91,80 +91,75 @@ const Home = () => {
         };
     }, []);
     
-    let timeoutId = null; // Declare a variable to hold the timeout ID
+//     let timeoutId = null; // Declare a variable to hold the timeout ID
     
-    async function saveToFirebase() {
-    if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
-        setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
-        const newDataRef = push(dataRef);
+//     async function saveToFirebase() {
+//     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+//         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+//         const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
+//         const newDataRef = push(dataRef);
 
-        set(newDataRef, userData)
-            .then(() => {
-                console.log("Data saved to Firebase");
-                setUserDataChanged(false); // Reset userDataChanged after data is saved
-            })
-            .catch((error) => {
-                console.error("Error saving:", error);
-            })
-            .finally(() => {
-                if (timeoutId) {
-                    clearTimeout(timeoutId); // Clear the timeout if it exists
-                }
-                timeoutId = setTimeout(() => {
-                    setIsSendingData(false); // Reset isSendingData after the delay
-                }, 3000); // 3-second delay
-            });
-    }
-}
+//         set(newDataRef, userData)
+//             .then(() => {
+//                 console.log("Data saved to Firebase");
+//                 setUserDataChanged(false); // Reset userDataChanged after data is saved
+//             })
+//             .catch((error) => {
+//                 console.error("Error saving:", error);
+//             })
+//             .finally(() => {
+//                 if (timeoutId) {
+//                     clearTimeout(timeoutId); // Clear the timeout if it exists
+//                 }
+//                 timeoutId = setTimeout(() => {
+//                     setIsSendingData(false); // Reset isSendingData after the delay
+//                 }, 3000); // 3-second delay
+//             });
+//     }
+// }
 
 
-// Use useEffect to trigger saveToFirebase when userData changes
-useEffect(() => {
-    {sessionStarted && saveToFirebase()}
-}, [sessionStarted, userData, userDataChanged]);
+// // Use useEffect to trigger saveToFirebase when userData changes
+// useEffect(() => {
+//     {sessionStarted && saveToFirebase()}
+// }, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
 
-    // async function sendDataToAPI() {
-    //     if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
-    //         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+    async function sendDataToAPI() {
+        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
-    //         try {
-    //             const response = await fetch('https://morph-1.onrender.com/add/', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify({
-    //                     username: userData.userName,
-    //                     arousal: userData.arousal,
-    //                     attention: userData.attention,
-    //                     dominantEmotion: userData.dominantEmotion
-    //                 })
-    //             });
+            try {
+                const response = await fetch('https://dj-render-ldb1.onrender.com/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
     
-    //             if (response.ok) {
-    //                 console.log("Data sent to API successfully");
-    //                 setUserDataChanged(false); // Reset userDataChanged after data is sent
-    //             } else {
-    //                 console.error("Failed to send data to API:", response.status);
-    //             }
-    //         } catch (error) {
-    //             console.error("Error sending data:", error);
-    //         } finally {
-    //             setTimeout(() => {
-    //                 setIsSendingData(false); // Reset isSendingData after the delay
-    //             }, 3000); // 3-second delay
-    //         }
-    //     }
-    // }
+                if (response.ok) {
+                    console.log("Data sent to API successfully");
+                    setUserDataChanged(false); // Reset userDataChanged after data is sent
+                } else {
+                    console.error("Failed to send data to API:", response.status);
+                }
+            } catch (error) {
+                console.error("Error sending data:", error);
+            } finally {
+                setTimeout(() => {
+                    setIsSendingData(false); // Reset isSendingData after the delay
+                }, 3000); // 3-second delay
+            }
+        }
+    }
     
-    // // Use useEffect to trigger sendDataToAPI when userData changes
-    // useEffect(() => {
-    //     sendDataToAPI();
-    // }, [userData, userDataChanged]);
+    // Use useEffect to trigger sendDataToAPI when userData changes
+    useEffect(() => {
+        sendDataToAPI();
+    }, [userData, userDataChanged]);
 
     
 
@@ -254,7 +249,7 @@ useEffect(() => {
                 sessionStarted={sessionStarted}
             />
             <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex">
-                <iframe className="h- w-full" src="/footer.html" title="Footer" />
+                <iframe className=" w-full" src="/footer.html" title="Footer" />
             </div>
         </div>
     )

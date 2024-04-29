@@ -15,8 +15,8 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const response = await fetch('https://auth-elk1.onrender.com/login/', {
+    
+        const response = await fetch('https://dj-render-ldb1.onrender.com/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,9 +26,9 @@ const Login = () => {
                 password: password,
             }),
         });
-
+    
         const data = await response.json();
-
+    
         if (response.ok) {
             // Handle successful login here
             console.log(data);
