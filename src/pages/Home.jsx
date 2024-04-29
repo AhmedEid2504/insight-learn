@@ -139,6 +139,7 @@ const Home = () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        SessionStartedAt: userData.SessionStartedAt,
                         arousal: userData.arousal,
                         attention: userData.attention,
                         dominantEmotion: userData.dominantEmotion,
