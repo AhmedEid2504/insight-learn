@@ -129,7 +129,7 @@ const Home = () => {
     // sending data to django api
 
     async function sendDataToAPI() {
-        if (!isTyping && userDataChanged && userData.userName.trim() !== "" && !isSendingData) {
+        if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
             try {
@@ -138,21 +138,7 @@ const Home = () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        SessionStartedAt: userData.SessionStartedAt,
-                        arousal: userData.arousal,
-                        attention: userData.attention,
-                        dominantEmotion: userData.dominantEmotion,
-                        feature_1: userData.feature_1,
-                        feature_2: userData.feature_2,
-                        feature_3: userData.feature_3,
-                        feature_4: userData.feature_4,
-                        feature_5: userData.feature_5,
-                        gender: userData.gender,
-                        userName: userData.userName,
-                        valence: userData.valence,
-                        volume: userData.volume
-                    })
+                    body: JSON.stringify(userData)
                 });
     
                 if (response.ok) {
