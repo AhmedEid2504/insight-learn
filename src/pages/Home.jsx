@@ -173,8 +173,8 @@ const Home = () => {
     
     // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
-        sendDataToAPI();
-    }, [userData, userDataChanged]);
+        {sessionStarted && sendDataToAPI()}
+    }, [sessionStarted, userData, userDataChanged]);
 
     
 
