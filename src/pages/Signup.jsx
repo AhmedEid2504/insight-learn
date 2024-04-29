@@ -10,22 +10,44 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
+        setErrorMessage(''); // Clear any previous error message
+
+        // Validation
+        if (!username.trim()) {
+            setErrorMessage("Username is required");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!email.trim()) {
+            setErrorMessage("Email is required");
+            setIsLoading(false);
+            return;
+        }
+        
+        if (!email.endsWith('@alexu.edu.eg')) {
+            setErrorMessage("Please use your alexu.edu.eg email");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!password.trim()) {
+            setErrorMessage("Password is required");
+            setIsLoading(false);
+            return;
+        }
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            setErrorMessage("Passwords do not match!");
             setIsLoading(false);
             return;
         }
 
-        if (!email.endsWith('@alexu.edu.eg')) {
-            alert("Please use your alexu.edu.eg email");
-            setIsLoading(false);
-            return;
-        }
 
         try {
             const response = await fetch('https://dj-render-ldb1.onrender.com/signup/', {
@@ -47,11 +69,11 @@ const Signup = () => {
                 window.location.href = '/login';
             } else {
                 // Handle error here
-                console.error(data);
+                setErrorMessage(data.error || 'An error occurred');
                 setIsLoading(false);
             }
         } catch (error) {
-            console.error(error);
+            setErrorMessage(error.message);
             setIsLoading(false);
         } finally {
             setIsLoading(false);
@@ -62,7 +84,7 @@ const Signup = () => {
         <div className="flex flex-col self-center items-center h-screen pt-[20vh]">
             <Navbar />
             <h2 className="text-white">Already have an account? <span className="">
-            <Link className="hover:text-c_4 transition-all ease-in duration-200" to="/login">Login</Link>
+            <Link className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" to="/login">Login</Link>
                 </span></h2>
             <div className="flex flex-col justify-center w-fit self-center bg-opacity-[50%] bg-white mt-5 text-white items-center border-[1px] border-white p-5">
                 <img className="w-[120px]" src="/images/login-profile.png" alt="" />
@@ -118,6 +140,9 @@ const Signup = () => {
                             required
                         />
                         <img className="w-[50px]" src="/images/lock-icon.jpeg" alt="lock icon" />
+                    </div>
+                    <div className='w-full'>
+                        {errorMessage && <p className='bg-opacity-5 text-center font-bold text-[#930505] text-md'>{errorMessage}</p>}
                     </div>
 
                     <button 

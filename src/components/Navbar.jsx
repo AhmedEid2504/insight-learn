@@ -83,7 +83,7 @@ const Navbar =(props) => {
                                 </button>
                             </div>
                             {showUserMenu && (
-                                <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 px-[30px] top-1 right-0 translate-y-20 h-auto w-auto transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
+                                <ul className={showUserMenu ? "absolute bg-c_3 flex flex-col justify-center gap-3 items-center bg-third p-10 w-[136px] top-1 right-0 translate-y-20 transition-all ease-in duration-200" : "translate-y-20 transition-all ease-in duration-200"} ref={ulRef}>
                                         <>
                                             <li><Link className="hover:text-c_4 transition-all ease-in duration-200" to="/">Home</Link></li>
                                             { !props.isLoggedIn ?
