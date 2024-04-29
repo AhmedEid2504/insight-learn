@@ -67,7 +67,6 @@ const Home = () => {
         gender: '',
         volume: 0,
     })
-    const [isTyping, setIsTyping] = useState(false); // State variable to track whether the user is typing
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
@@ -217,31 +216,26 @@ const Home = () => {
                         <GenderComponent
                             userData={userData}
                             setUserData={setUserData}
-                            isTyping={isTyping}
                             setUserDataChanged={setUserDataChanged}
                         ></GenderComponent>
                         <DominantEmotionComponent
                             userData={userData}
                             setUserData={setUserData}
-                            isTyping={isTyping}
                             setUserDataChanged={setUserDataChanged}
                         ></DominantEmotionComponent>
                         <AgeComponent
                             userData={userData}
                             setUserData={setUserData}
-                            isTyping={isTyping}
                             setUserDataChanged={setUserDataChanged}
                         ></AgeComponent>
                         <FeatureComponent
                             userData={userData}
                             setUserData={setUserData}
-                            isTyping={isTyping}
                             setUserDataChanged={setUserDataChanged}
                         ></FeatureComponent>
                         <EngagementComponent
                             userData={userData}
                             setUserData={setUserData}
-                            isTyping={isTyping}
                             setUserDataChanged={setUserDataChanged}
                         ></EngagementComponent>
                     </div>
