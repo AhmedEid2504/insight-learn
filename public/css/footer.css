@@ -2,7 +2,7 @@
 
 :root {
     --main-color: #E9F2FF;
-    --secondary-color: #1D3984;
+    --secondary-color: #070D57;
     --text-color: #101C42;
 }
 
@@ -11,7 +11,6 @@ body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: 100vh;
 }
 
 

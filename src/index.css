@@ -14,3 +14,30 @@
 .mphTollsContainer[data-v-6dbae097] {
     max-width: 50%;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-corner {
+    background: #070D57;
+    cursor: pointer;
+}
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+
+
+::-webkit-scrollbar-track {
+    background:#e9f2ff;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #070D57;
+    cursor: pointer;
+}
