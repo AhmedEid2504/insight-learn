@@ -54,6 +54,7 @@ const Home = () => {
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
+        SessionStartedAt: '',
         userName:'',
         dominantEmotion: '',
         arousal: '',

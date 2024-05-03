@@ -9,7 +9,6 @@ const Sidebar = (props) => {
     };
 
     const location = useLocation();
-    console.log(location.pathname); // This will log the current pathname
 
     return (
         <motion.div className='relative' initial={false} animate={props.showSideBar ? "expanded" : "collapsed"} variants={sidebarVariants}>
