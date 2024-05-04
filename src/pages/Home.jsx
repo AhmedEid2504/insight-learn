@@ -50,18 +50,17 @@ const Home = () => {
                     if (response.ok) {
                         console.log("Data sent to API successfully");
                         setUserDataChanged(false); // Reset userDataChanged after data is sent
+                        setIsSendingData(false); // Reset isSendingData after the delay
                     } else {
                         console.error("Failed to send data to API:", response.status);
                     }
                 } catch (error) {
                     console.error("Error sending data:", error);
-                } finally {
-                    setTimeout(() => {
-                        setIsSendingData(false); // Reset isSendingData after the delay
-                    }, 3000); // 3-second delay
                 }
             }
         }
+        sendDataToAPI(); 
+    
     };
 
     // morphcast
