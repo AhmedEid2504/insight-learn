@@ -36,8 +36,8 @@ const Signup = () => {
             return;
         }
 
-        if (!password.trim()) {
-            setErrorMessage("Password is required");
+        if (!password.trim() || password.length < 8) {
+            setErrorMessage("Password must be at least 8 characters long");
             setIsLoading(false);
             return;
         }
