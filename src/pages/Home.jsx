@@ -31,25 +31,36 @@ const Home = () => {
         setSessionStarted(false);
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setUserData({ ...userData, SessionEndedAt: currentTime });
+
         
         // Save user data to api
-        try {
-            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        async function sendDataToAPI() {
+            if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+                setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+        
+                try {
+                    const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+        
+                    if (response.ok) {
+                        console.log("Data sent to API successfully");
+                        setUserDataChanged(false); // Reset userDataChanged after data is sent
+                    } else {
+                        console.error("Failed to send data to API:", response.status);
+                    }
+                } catch (error) {
+                    console.error("Error sending data:", error);
+                } finally {
+                    setTimeout(() => {
+                        setIsSendingData(false); // Reset isSendingData after the delay
+                    }, 3000); // 3-second delay
+                }
             }
-    
-            // You can use the response here if needed
-    
-        } catch (error) {
-            console.error('There was a problem with the fetch operation: ', error);
         }
     };
 
@@ -72,7 +83,6 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
-        SessionEndedAt: ''
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
