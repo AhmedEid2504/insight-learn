@@ -30,8 +30,9 @@ const Home = () => {
     const handleSessionEnd = async () => {
         setSessionStarted(false);
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setUserData({ ...userData, SessionEndedAt: currentTime });
-        setIsSendingData(true);
+        setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: currentTime }));
+    
+        // Save user data to api
         try {
             const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
                 method: 'POST',
@@ -46,7 +47,6 @@ const Home = () => {
             }
     
             console.log("Data sent to API successfully");
-            setUserDataChanged(false); // Reset userDataChanged after data is sent
     
         } catch (error) {
             console.error('There was a problem with the fetch operation: ', error);
