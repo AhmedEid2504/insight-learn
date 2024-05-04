@@ -29,24 +29,53 @@ const Home = () => {
     
     const handleSessionEnd = () => {
         setSessionStarted(false);
-        
+        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         // Create a copy of userData and update the SessionEndedAt field
         const finalUserData = {
             ...userData,
-            SessionEndedAt:new Date().toLocaleTimeString()
+            SessionEndedAt: currentTime
         };
-    
-        // Send the final record to Firebase
-        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
-        const newDataRef = push(dataRef);
+        console.log("Final session record saved to Api");
+
+        // Send the final record to Api
+        fetch('https://dj-render-ldb1.onrender.com/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(finalUserData)
+        })
+        .then((response) => response.json())
+        .catch((error) => console.error("Error saving final session record:", error));
         
-        set(newDataRef, finalUserData)
-        .then(() => {
-                console.log("Final session record saved to Firebase");
-            })
-            .catch((error) => {
-                console.error("Error saving final session record:", error);
-            });
+        // Reset User Data for the next session
+        setUserData({
+            userName: userData.userName,
+            dominantEmotion: '',
+            arousal: '',
+            valence: '',
+            attention: '',
+            feature_1: '',
+            feature_2: '',
+            feature_3: '',
+            feature_4: '',
+            feature_5: '',
+            SessionStartedAt: "",
+            SessionEndedAt: ""
+        });
+        
+    
+        // // Send the final record to Firebase
+        // const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
+        // const newDataRef = push(dataRef);
+        
+        // set(newDataRef, finalUserData)
+        // .then(() => {
+        //         console.log("Final session record saved to Firebase");
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error saving final session record:", error);
+        //     });
     }
 
     // morphcast
@@ -68,6 +97,7 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
+        SessionEndedAt: ''
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
