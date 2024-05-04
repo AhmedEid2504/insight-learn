@@ -31,22 +31,26 @@ const Home = () => {
         setSessionStarted(false);
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setUserData({ ...userData, SessionEndedAt: currentTime });
-
-        const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        });
-
-        if (response.ok) {
+        setIsSendingData(true);
+        try {
+            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
             console.log("Data sent to API successfully");
             setUserDataChanged(false); // Reset userDataChanged after data is sent
-        } else {
-            console.error("Failed to send data to API:", response.status);
-        }
     
+        } catch (error) {
+            console.error('There was a problem with the fetch operation: ', error);
+        }
     };
 
     // morphcast
