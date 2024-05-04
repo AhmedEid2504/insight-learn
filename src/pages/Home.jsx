@@ -21,7 +21,7 @@ const Home = () => {
     const handleSessionStart = () => {
         setSessionStarted(true);
         setUserData(prevUserData => ({...prevUserData, 
-            SessionStartedAt: new Date().toLocaleTimeString()
+            SessionStartedAt: "6:44:35"
         }));
         window.open('http://4.157.125.46', '_blank')
     };
