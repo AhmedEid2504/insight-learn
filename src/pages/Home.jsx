@@ -32,34 +32,20 @@ const Home = () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setUserData({ ...userData, SessionEndedAt: currentTime });
 
-        
-        // Save user data to api
-        async function sendDataToAPI() {
-            if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
-                setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        
-                try {
-                    const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(userData)
-                    });
-        
-                    if (response.ok) {
-                        console.log("Data sent to API successfully");
-                        setUserDataChanged(false); // Reset userDataChanged after data is sent
-                        setIsSendingData(false); // Reset isSendingData after the delay
-                    } else {
-                        console.error("Failed to send data to API:", response.status);
-                    }
-                } catch (error) {
-                    console.error("Error sending data:", error);
-                }
-            }
+        const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (response.ok) {
+            console.log("Data sent to API successfully");
+            setUserDataChanged(false); // Reset userDataChanged after data is sent
+        } else {
+            console.error("Failed to send data to API:", response.status);
         }
-        sendDataToAPI(); 
     
     };
 
