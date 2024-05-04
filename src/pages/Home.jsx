@@ -29,35 +29,24 @@ const Home = () => {
     
     const handleSessionEnd = () => {
         setSessionStarted(false);
-        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+        
         // Create a copy of userData and update the SessionEndedAt field
         const finalUserData = {
             ...userData,
-            SessionEndedAt: currentTime
+            SessionEndedAt:new Date().toLocaleTimeString()
         };
-        console.log("Final session record saved to Api");
-
-        // Send the final record to Api
-        fetch('https://dj-render-ldb1.onrender.com/add/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(finalUserData)
-        })
-        
     
-        // // Send the final record to Firebase
-        // const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
-        // const newDataRef = push(dataRef);
+        // Send the final record to Firebase
+        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
+        const newDataRef = push(dataRef);
         
-        // set(newDataRef, finalUserData)
-        // .then(() => {
-        //         console.log("Final session record saved to Firebase");
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error saving final session record:", error);
-        //     });
+        set(newDataRef, finalUserData)
+        .then(() => {
+                console.log("Final session record saved to Firebase");
+            })
+            .catch((error) => {
+                console.error("Error saving final session record:", error);
+            });
     }
 
     // morphcast
