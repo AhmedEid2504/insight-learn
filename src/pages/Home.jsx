@@ -27,27 +27,31 @@ const Home = () => {
         window.open('http://4.157.125.46', '_blank')
     };
     
-    const handleSessionEnd = () => {
+    const handleSessionEnd = async () => {
         setSessionStarted(false);
+        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+        setUserData({ ...userData, SessionEndedAt: currentTime });
         
-        // Create a copy of userData and update the SessionEndedAt field
-        const finalUserData = {
-            ...userData,
-            SessionEndedAt:new Date().toLocaleTimeString()
-        };
-    
-        // Send the final record to Firebase
-        const dataRef = ref(database, "data/" + finalUserData.userName + "/" + finalUserData.SessionStartedAt + "/");
-        const newDataRef = push(dataRef);
-        
-        set(newDataRef, finalUserData)
-        .then(() => {
-                console.log("Final session record saved to Firebase");
-            })
-            .catch((error) => {
-                console.error("Error saving final session record:", error);
+        // Save user data to api
+        try {
+            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
             });
-    }
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            // You can use the response here if needed
+    
+        } catch (error) {
+            console.error('There was a problem with the fetch operation: ', error);
+        }
+    };
 
     // morphcast
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
@@ -68,6 +72,7 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
+        SessionEndedAt: ''
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
