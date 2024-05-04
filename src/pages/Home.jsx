@@ -20,10 +20,8 @@ const Home = () => {
     
     const handleSessionStart = () => {
         setSessionStarted(true);
-        const currentTime = new Date().toISOString(); // Formats the time in ISO 8601 format
-        setUserData(prevUserData => ({
-            ...prevUserData, 
-            SessionStartedAt: currentTime
+        setUserData(prevUserData => ({...prevUserData, 
+            SessionStartedAt: new Date().toLocaleTimeString()
         }));
         window.open('http://4.157.125.46', '_blank')
     };
