@@ -92,7 +92,7 @@ const Signup = () => {
                     <div className="flex justify-between w-full text-c_3">
                         <img className="w-[50px]" src="images/user-icon.jpeg" alt="user icon" />
                         <input
-                            className='w-[80%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
+                            className='w-[90%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
                             type="text"
                             id="username"
                             name="username"
@@ -104,7 +104,7 @@ const Signup = () => {
                     </div>
                     <div className="flex justify-between w-full text-c_3">
                         <input
-                            className='w-[80%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
+                            className='w-[90%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
                             type="email"
                             id="email"
                             name="email"
@@ -118,7 +118,7 @@ const Signup = () => {
                     <div className="flex justify-between w-full text-c_3">
                         <img className="w-[50px]" src="/images/lock-icon.jpeg" alt="lock icon" />
                         <input
-                            className='w-[80%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
+                            className='w-[90%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
                             type="password"
                             id="password"
                             name="password"
@@ -130,7 +130,7 @@ const Signup = () => {
                     </div>
                     <div className="flex justify-between w-full text-c_3">
                         <input
-                            className='w-[80%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
+                            className='w-[90%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
                             type="password"
                             id="confirmPassword"
                             name="confirmPassword"
