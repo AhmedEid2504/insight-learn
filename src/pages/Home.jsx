@@ -45,24 +45,6 @@ const Home = () => {
             },
             body: JSON.stringify(finalUserData)
         })
-        .then((response) => response.json())
-        .catch((error) => console.error("Error saving final session record:", error));
-        
-        // Reset User Data for the next session
-        setUserData({
-            userName: userData.userName,
-            dominantEmotion: '',
-            arousal: '',
-            valence: '',
-            attention: '',
-            feature_1: '',
-            feature_2: '',
-            feature_3: '',
-            feature_4: '',
-            feature_5: '',
-            SessionStartedAt: "",
-            SessionEndedAt: ""
-        });
         
     
         // // Send the final record to Firebase
@@ -97,7 +79,6 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
-        SessionEndedAt: ''
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
