@@ -20,8 +20,9 @@ const Home = () => {
     
     const handleSessionStart = () => {
         setSessionStarted(true);
+        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setUserData(prevUserData => ({...prevUserData, 
-            SessionStartedAt: "6:44:35"
+            SessionStartedAt:  currentTime
         }));
         window.open('http://4.157.125.46', '_blank')
     };
@@ -32,7 +33,7 @@ const Home = () => {
         // Create a copy of userData and update the SessionEndedAt field
         const finalUserData = {
             ...userData,
-            SessionEndedAt:"6:44:35"
+            SessionEndedAt:new Date().toLocaleTimeString()
         };
     
         // Send the final record to Firebase
@@ -54,7 +55,6 @@ const Home = () => {
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
-        
         userName:'',
         dominantEmotion: '',
         arousal: '',
@@ -67,6 +67,7 @@ const Home = () => {
         feature_5: '',
         gender: '',
         volume: 0,
+        SessionStartedAt: '',
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
