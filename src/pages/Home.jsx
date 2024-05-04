@@ -32,7 +32,7 @@ const Home = () => {
         // Create a copy of userData and update the SessionEndedAt field
         const finalUserData = {
             ...userData,
-            SessionEndedAt:new Date().toLocaleTimeString()
+            SessionEndedAt:"6:44:35"
         };
     
         // Send the final record to Firebase
@@ -54,6 +54,7 @@ const Home = () => {
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
+        
         userName:'',
         dominantEmotion: '',
         arousal: '',
