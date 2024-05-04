@@ -54,7 +54,6 @@ const Home = () => {
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
-        SessionStartedAt: '',
         userName:'',
         dominantEmotion: '',
         arousal: '',
@@ -113,38 +112,38 @@ const Home = () => {
         };
     }, []);
     
-//     let timeoutId = null; // Declare a variable to hold the timeout ID
+    let timeoutId = null; // Declare a variable to hold the timeout ID
     
-//     async function saveToFirebase() {
-//     if (!isTyping && userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
-//         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-//         const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
-//         const newDataRef = push(dataRef);
+    async function saveToFirebase() {
+    if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+        setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
+        const newDataRef = push(dataRef);
 
-//         set(newDataRef, userData)
-//             .then(() => {
-//                 console.log("Data saved to Firebase");
-//                 setUserDataChanged(false); // Reset userDataChanged after data is saved
-//             })
-//             .catch((error) => {
-//                 console.error("Error saving:", error);
-//             })
-//             .finally(() => {
-//                 if (timeoutId) {
-//                     clearTimeout(timeoutId); // Clear the timeout if it exists
-//                 }
-//                 timeoutId = setTimeout(() => {
-//                     setIsSendingData(false); // Reset isSendingData after the delay
-//                 }, 3000); // 3-second delay
-//             });
-//     }
-// }
+        set(newDataRef, userData)
+            .then(() => {
+                console.log("Data saved to Firebase");
+                setUserDataChanged(false); // Reset userDataChanged after data is saved
+            })
+            .catch((error) => {
+                console.error("Error saving:", error);
+            })
+            .finally(() => {
+                if (timeoutId) {
+                    clearTimeout(timeoutId); // Clear the timeout if it exists
+                }
+                timeoutId = setTimeout(() => {
+                    setIsSendingData(false); // Reset isSendingData after the delay
+                }, 3000); // 3-second delay
+            });
+    }
+}
 
 
-// // Use useEffect to trigger saveToFirebase when userData changes
-// useEffect(() => {
-//     {sessionStarted && saveToFirebase()}
-// }, [sessionStarted, userData, userDataChanged]);
+// Use useEffect to trigger saveToFirebase when userData changes
+useEffect(() => {
+    {sessionStarted && saveToFirebase()}
+}, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
