@@ -51,7 +51,7 @@ const Login = () => {
             if (response.ok) {
                 // Store token in local storage
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('username', username);
+                localStorage.setItem('userEmail', data.user.email);
                 // Redirect using router after successful login
                 window.location.href = '/';
             } else {

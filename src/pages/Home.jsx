@@ -69,7 +69,7 @@ const Home = () => {
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
-        userName:'',
+        userEmail:'',
         dominantEmotion: '',
         arousal: '',
         valence: '',
@@ -90,10 +90,10 @@ const Home = () => {
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
-        const username = localStorage.getItem('username');
+        const userEmail = localStorage.getItem('userEmail');
         if (token) {
             setIsLoggedIn(true);
-            setUserData(prevUserData => ({...prevUserData, userName: username}));
+            setUserData(prevUserData => ({...prevUserData, userEmail: userEmail}));
         } else {
             window.location.href = '/login';
         }
@@ -165,7 +165,7 @@ const Home = () => {
     // sending data to django api
 
     async function sendDataToAPI() {
-        if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+        if ( userDataChanged && sessionStarted && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
     
             try {
@@ -219,7 +219,7 @@ const Home = () => {
 
     return (
         <div className="flex flex-col w-full">
-            <Navbar isLoggedIn={isLoggedIn} userName={userData.userName} handleLogout={handleLogout} />
+            <Navbar isLoggedIn={isLoggedIn} userEmail={userData.userEmail} handleLogout={handleLogout} />
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
             </div>
@@ -256,14 +256,14 @@ const Home = () => {
                         ></EngagementComponent>
                     </div>
                 </div>
-            { userData.userName.trim() !== "ahmed" && (
+            
             <Session 
                 handleSessionStart={handleSessionStart}
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
-                userName={userData.userName}
+                userEmail={userData.userEmail}
             />
-            )}
+            
             <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex bg-c_3">
                 <iframe className=" w-full" src="/footer.html" title="Footer" />
             </div>
