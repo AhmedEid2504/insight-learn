@@ -81,7 +81,7 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex flex-col self-center items-center h-screen pt-[20vh]">
+        <div className="flex flex-col self-center items-center py-[20vh]">
             <Navbar />
             <h2 className="text-white">Already have an account? <span className="">
             <Link className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" to="/login">Login</Link>
