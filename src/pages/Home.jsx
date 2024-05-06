@@ -86,7 +86,7 @@ const Home = () => {
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
-
+    const username = localStorage.getItem( "username" )
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
@@ -262,6 +262,7 @@ const Home = () => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
                 userEmail={userData.userEmail}
+                username={username}
             />
             
             <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex bg-c_3">
