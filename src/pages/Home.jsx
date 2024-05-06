@@ -82,7 +82,7 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
-        CaptureTime: new Date().toLocaleTimeString([], {hour12: false})
+        CaptureTime: ''
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
@@ -168,7 +168,7 @@ const Home = () => {
     async function sendDataToAPI() {
         if ( userDataChanged && sessionStarted && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-    
+            setUserData(prevUserData => ({ ...prevUserData, CaptureTime: new Date().toLocaleTimeString([], {hour12: false}) }));
             try {
                 const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
                     method: 'POST',
