@@ -52,7 +52,7 @@ const Login = () => {
                 // Store token in local storage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userEmail', data.user.email);
-                localStorage.setItem('userName', data.user.username);
+                localStorage.setItem('username', data.user.username);
                 // Redirect using router after successful login
                 window.location.href = '/';
             } else {
