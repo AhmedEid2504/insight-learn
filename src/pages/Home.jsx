@@ -82,6 +82,7 @@ const Home = () => {
         gender: '',
         volume: 0,
         SessionStartedAt: '',
+        CaptureTime: new Date().toISOString()
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
