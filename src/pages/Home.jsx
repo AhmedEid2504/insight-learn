@@ -132,9 +132,9 @@ const Home = () => {
     let fTimeoutId = null; // Declare a variable to hold the timeout ID
     
     async function saveToFirebase() {
-    if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+    if ( userDataChanged && sessionStarted && !isSendingData) {
         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
+        const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
@@ -142,8 +142,8 @@ const Home = () => {
                 console.log("Data saved to Firebase");
                 setUserDataChanged(false); // Reset userDataChanged after data is saved
             })
-            .catch((error) => {
-                console.error("Error saving:", error);
+            .catch(() => {
+                console.error("Error saving:");
             })
             .finally(() => {
                 if (fTimeoutId) {
