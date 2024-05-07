@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 // import Reports from './components/Reports';
 // import Settings from './components/Settings';
 // import Predictions from './components/Predictions';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     </Route> */}
                 </Routes>
             </Router>
+            <Analytics />
         </div>
     )
 }
