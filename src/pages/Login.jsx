@@ -4,15 +4,15 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
 
     const handleChange = (event) => {
-        if(event.target.name === 'username') {
-            setUsername(event.target.value);
+        if(event.target.name === 'email') {
+            setEmail(event.target.value);
         } else {
             setPassword(event.target.value);
         }
@@ -24,13 +24,13 @@ const Login = () => {
         setErrorMessage(''); // Clear any previous error message
         
         // Validation
-        if (!username.trim()) {
-            setErrorMessage("Username is required");
+        if (!email.trim()) {
+            setErrorMessage("Email is required");
             setIsLoading(false);
             return;
         }
         if (!password.trim() || password.length < 8) {
-            setErrorMessage("Password must be at least 8 characters long");
+            setErrorMessage("Password Is Required");
             setIsLoading(false);
             return;
         }
@@ -41,7 +41,7 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: username,
+                    email: email,
                     password: password,
                 }),
             });
@@ -84,11 +84,11 @@ const Login = () => {
                         <input
                             className='w-[90%] h-13 bg-opacity-[50%] bg-white  rounded-sm p-2 border-none'
                             type="text"
-                            id="username"
-                            name="username"
-                            value={username}
+                            id="email"
+                            name="email"
+                            value={email}
                             onChange={handleChange}
-                            placeholder="User Name"
+                            placeholder="University Email"
                             required
                         />
                     </div>
