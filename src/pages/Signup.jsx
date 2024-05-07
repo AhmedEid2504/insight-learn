@@ -82,12 +82,12 @@ const Signup = () => {
 
     return (
         <div className='bg-c_5'>
-            <div className="flex flex-col self-center items-center py-[20vh]">
+            <div className="flex flex-col self-center items-center py-[150px] h-screen">
                 <Navbar />
                 <h2 className="text-c_3">Already have an account? <span className="">
                 <Link className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" to="/login">Login</Link>
                     </span></h2>
-                <div className="flex flex-col justify-center w-fit self-center bg-c_3 mt-5 text-white items-center border-[1px] border-white p-5">
+                <div className="flex flex-col justify-center w-fit self-center bg-c_1 mt-5 text-white items-center border-[1px] border-white p-5">
                     <img className="w-[120px]" src="/images/login-profile.png" alt="" />
                     <form className='flex flex-col gap-5 p-5' onSubmit={handleSubmit}>
                         <div className="flex justify-between w-full text-c_3">
