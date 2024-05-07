@@ -13,8 +13,8 @@ import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-// import { set, ref, push } from "firebase/database";
-// import {database} from "/src/firebase";
+import { set, ref, push } from "firebase/database";
+import {database} from "/src/firebase";
 
 const Home = () => {
     
@@ -129,42 +129,41 @@ const Home = () => {
         };
     }, []);
     
-//     let timeoutId = null; // Declare a variable to hold the timeout ID
+    let fTimeoutId = null; // Declare a variable to hold the timeout ID
     
-//     async function saveToFirebase() {
-//     if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
-//         setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-//         const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
-//         const newDataRef = push(dataRef);
+    async function saveToFirebase() {
+    if ( userDataChanged && sessionStarted && userData.userName.trim() !== "" && !isSendingData) {
+        setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+        const dataRef = ref(database, "data/" + userData.userName + "/" + userData.SessionStartedAt + "/");
+        const newDataRef = push(dataRef);
 
-//         set(newDataRef, userData)
-//             .then(() => {
-//                 console.log("Data saved to Firebase");
-//                 setUserDataChanged(false); // Reset userDataChanged after data is saved
-//             })
-//             .catch((error) => {
-//                 console.error("Error saving:", error);
-//             })
-//             .finally(() => {
-//                 if (timeoutId) {
-//                     clearTimeout(timeoutId); // Clear the timeout if it exists
-//                 }
-//                 timeoutId = setTimeout(() => {
-//                     setIsSendingData(false); // Reset isSendingData after the delay
-//                 }, 3000); // 3-second delay
-//             });
-//     }
-// }
+        set(newDataRef, userData)
+            .then(() => {
+                console.log("Data saved to Firebase");
+                setUserDataChanged(false); // Reset userDataChanged after data is saved
+            })
+            .catch((error) => {
+                console.error("Error saving:", error);
+            })
+            .finally(() => {
+                if (fTimeoutId) {
+                    clearTimeout(fTimeoutId); // Clear the timeout if it exists
+                }
+                fTimeoutId = setTimeout(() => {
+                    setIsSendingData(false); // Reset isSendingData after the delay
+                }, 15000); // 15-second delay
+            });
+    }
+}
 
-
-// // Use useEffect to trigger saveToFirebase when userData changes
-// useEffect(() => {
-//     {sessionStarted && saveToFirebase()}
-// }, [sessionStarted, userData, userDataChanged]);
+// Use useEffect to trigger saveToFirebase when userData changes
+useEffect(() => {
+    {sessionStarted && saveToFirebase()}
+}, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
-
+    let aTimeoutId = null; // Declare a variable to hold the timeout ID
     async function sendDataToAPI() {
         if ( userDataChanged && sessionStarted && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
@@ -187,7 +186,10 @@ const Home = () => {
             } catch (error) {
                 console.error("Error sending data:", error);
             } finally {
-                setTimeout(() => {
+                if (aTimeoutId) {
+                    clearTimeout(aTimeoutId); // Clear the timeout if it exists
+                }
+                aTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
                 }, 15000); // 15-second delay
             }
