@@ -57,18 +57,19 @@ const Navbar =(props) => {
                 {windowWidth > 800 ? (
                     <div>
 
-                        <div className="bg-c_3 text-center items-center justify-center w-[300px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
+                        <div className="bg-c_3 text-center items-center justify-center w-[200px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
                             <li><Link className={location.pathname === "/" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/">Home</Link></li>
                             { !props.isLoggedIn ?
                                 <div className="flex gap-5">
+                                    <div className="bg-c_3 text-center items-center justify-center w-[250px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                                     <li><Link className={location.pathname === "/login" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/login">Login</Link></li>
                                     <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                 </div>
                             :
                                 <div className="flex gap-5">
 
-                                    <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                    {/* <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li> */}
                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </div>
                             }
@@ -94,7 +95,7 @@ const Navbar =(props) => {
                                                 </div>
                                             :
                                                 <div className="flex flex-col gap-3">
-                                                    <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                                    {/* <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li> */}
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                                 </div>
                                             }

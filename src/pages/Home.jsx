@@ -189,7 +189,7 @@ const Home = () => {
             } finally {
                 setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 3000); // 3-second delay
+                }, 15000); // 15-second delay
             }
         }
     }
