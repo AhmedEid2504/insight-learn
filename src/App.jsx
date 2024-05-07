@@ -12,7 +12,7 @@ import { Analytics } from "@vercel/analytics/react"
 function App() {
 
     return (
-        <div className="bg-c_2 h-auto flex flex-col justify-between">
+        <div className="bg-c_5 h-auto flex flex-col justify-between">
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
