@@ -61,12 +61,12 @@ const Home = () => {
                         .finally(() => {
                             console.log("Final Data sent to firebase");
                         });
-                        
+
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
     
                     // Reset SessionEndedAt field
-                    setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: null }));
+                    setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
                     setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
