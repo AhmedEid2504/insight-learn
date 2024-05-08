@@ -47,6 +47,24 @@ const Home = () => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
+
+                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+                    const newDataRef = push(dataRef);
+
+                    set(newDataRef, updatedUserData)
+                        .then(() => {
+                            console.log("Data saved to Firebase");
+                        })
+                        .catch(() => {
+                            console.error("Error saving:");
+                        })
+                        .finally(() => {
+                            if (fTimeoutId) {
+                                clearTimeout(fTimeoutId); // Clear the timeout if it exists
+                            }
+                            fTimeoutId = setTimeout(() => {
+                        }, 10000); // 10-second delay
+                    });
             
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
@@ -148,7 +166,7 @@ const Home = () => {
                     clearTimeout(fTimeoutId); // Clear the timeout if it exists
                 }
                 fTimeoutId = setTimeout(() => {
-                }, 5000); // 5-second delay
+                }, 10000); // 10-second delay
             });
     }
 }
