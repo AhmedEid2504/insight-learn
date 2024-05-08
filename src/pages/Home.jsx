@@ -59,13 +59,9 @@ const Home = () => {
                             console.error("Error saving:");
                         })
                         .finally(() => {
-                            if (fTimeoutId) {
-                                clearTimeout(fTimeoutId); // Clear the timeout if it exists
-                            }
-                            fTimeoutId = setTimeout(() => {
-                        }, 10000); // 10-second delay
-                    });
-            
+                            console.log("Final Data sent to firebase");
+                        });
+                        
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
     
