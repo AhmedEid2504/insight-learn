@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import Session from "../components/Session"
 import Navbar from '../components/Navbar';
+
 // morphcast
 import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "../helpers/ai-sdk/externalScriptsLoader";
@@ -130,87 +131,85 @@ const Home = () => {
         };
     }, []);
     
-    
+let sendTimeoutId = null; // Declare a variable to hold the timeout ID for sending data
 
-    // Declare sendTimeoutId as a ref
-    const sendTimeoutIdRef = useRef(null);
-    
-    async function sendData() {
-        if (userDataChanged && sessionStarted && !isSendingData) {
-            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
-    
-            // Prepare data
-            const updatedUserData = { ...userData, CaptureTime: new Date().toLocaleTimeString([], { hour12: false }) };
-    
-            // Delay execution for 15 seconds
-            sendTimeoutIdRef.current = setTimeout(async () => {
-                // Send data to API
-                try {
-                    const apiResponse = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedUserData)
-                    });
-    
-                    if (!apiResponse.ok) {
-                        throw new Error(`Failed to send data to API: ${apiResponse.status}`);
-                    }
-    
-                    console.log("Data sent to API successfully");
-                } catch (error) {
-                    console.error("Error sending data to API:", error);
+async function sendData() {
+    if (userDataChanged && sessionStarted && !isSendingData) {
+        setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
+
+        // Prepare data
+        const updatedUserData = { ...userData, CaptureTime: new Date().toLocaleTimeString([], { hour12: false }) };
+
+        // Delay execution for 15 seconds
+        sendTimeoutId = setTimeout(async () => {
+            // Send data to API
+            try {
+                const apiResponse = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedUserData)
+                });
+
+                if (!apiResponse.ok) {
+                    throw new Error(`Failed to send data to API: ${apiResponse.status}`);
                 }
-    
-                // Save data to Firebase
-                const dataRef = ref(database, `data/${username}/${userData.SessionStartedAt}/`);
-                const newDataRef = push(dataRef, userData);
-    
-                try {
-                    await set(newDataRef, userData);
-                    console.log("Data saved to Firebase");
-                } catch (error) {
-                    console.error("Error saving data to Firebase:", error);
-                } finally {
-                    setIsSendingData(false); // Reset isSendingData after sending and saving data
-                    setUserDataChanged(false); // Reset userDataChanged after data is sent and saved
-                }
-            }, 15000); // 15-second delay
-        }
-    }
-    
-    // Use useEffect to trigger sendData when userData changes and sessionStarted is true
-    useEffect(() => {
-        if (sessionStarted) {
-            sendData();
-        }
-    }, [sessionStarted, userData, userDataChanged]);
-    
-    // Reset timeout if conditions change
-    useEffect(() => {
-        // Clear previous timeout if it exists
-        if (sendTimeoutIdRef.current) {
-            clearTimeout(sendTimeoutIdRef.current);
-            sendTimeoutIdRef.current = null;
-        }
-    
-        // Call sendData again if conditions change
-        if (sessionStarted) {
-            sendData();
-        }
-    }, [sessionStarted, userData, userDataChanged]);
-    
-    // Clear timeout when session ends
-    useEffect(() => {
-        return () => {
-            // Clear the timeout when the component unmounts or when session ends
-            if (sendTimeoutIdRef.current) {
-                clearTimeout(sendTimeoutIdRef.current);
-                sendTimeoutIdRef.current = null;
+
+                console.log("Data sent to API successfully");
+            } catch (error) {
+                console.error("Error sending data to API:", error);
             }
-        };
-    }, [sessionStarted]);
+
+            // Save data to Firebase
+            const dataRef = ref(database, `data/${username}/${userData.SessionStartedAt}/`);
+            const newDataRef = push(dataRef, userData);
+
+            try {
+                await set(newDataRef, userData);
+                console.log("Data saved to Firebase");
+            } catch (error) {
+                console.error("Error saving data to Firebase:", error);
+            } finally {
+                setIsSendingData(false); // Reset isSendingData after sending and saving data
+                setUserDataChanged(false); // Reset userDataChanged after data is sent and saved
+            }
+        }, 15000); // 15-second delay
+    }
+}
+
+// Use useEffect to trigger sendData when userData changes and sessionStarted is true
+useEffect(() => {
+    if (sessionStarted) {
+        sendData();
+    }
+}, [sessionStarted, userData, userDataChanged]);
+
+// Reset timeout if conditions change
+useEffect(() => {
+    // Clear previous timeout if it exists
+    if (sendTimeoutId) {
+        clearTimeout(sendTimeoutId);
+        sendTimeoutId = null;
+    }
+
+    // Call sendData again if conditions change
+    if (sessionStarted) {
+        sendData();
+    }
+}, [sessionStarted, userData, userDataChanged]);
+
+// Clear timeout when session ends
+useEffect(() => {
+    return () => {
+        // Clear the timeout when the component unmounts or when session ends
+        if (sendTimeoutId) {
+            clearTimeout(sendTimeoutId);
+            sendTimeoutId = null;
+        }
+    };
+}, [sessionStarted]);
+
     
     
     
