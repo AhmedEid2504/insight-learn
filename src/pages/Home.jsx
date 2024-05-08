@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "../helpers/ai-sdk/externalScriptsLoader";
 import { getAiSdkControls } from "../helpers/ai-sdk/loader";
 import GenderComponent from "../components/morphcomponents/GenderComponent";
-import AgeComponent from "../components/morphcomponents/AgeComponent";
+import Volume from "../components/morphcomponents/Volume";
 import DominantEmotionComponent from "../components/morphcomponents/DominantEmotionComponent";
 import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
@@ -151,7 +151,7 @@ const Home = () => {
                 }
                 fTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 15000); // 15-second delay
+                }, 18000); // 15-second delay
             });
     }
 }
@@ -191,7 +191,7 @@ useEffect(() => {
                 }
                 aTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 15000); // 15-second delay
+                }, 12000); // 15-second delay
             }
         }
     }
@@ -242,11 +242,11 @@ useEffect(() => {
                             setUserData={setUserData}
                             setUserDataChanged={setUserDataChanged}
                         ></DominantEmotionComponent>
-                        <AgeComponent
+                        <Volume
                             userData={userData}
                             setUserData={setUserData}
                             setUserDataChanged={setUserDataChanged}
-                        ></AgeComponent>
+                        ></Volume>
                         <FeatureComponent
                             userData={userData}
                             setUserData={setUserData}
