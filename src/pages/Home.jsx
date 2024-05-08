@@ -151,15 +151,10 @@ const Home = () => {
                 }
                 fTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 18000); // 15-second delay
+                }, 8000); // 8-second delay
             });
     }
 }
-
-// Use useEffect to trigger saveToFirebase when userData changes
-useEffect(() => {
-    {sessionStarted && saveToFirebase()}
-}, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
@@ -191,15 +186,24 @@ useEffect(() => {
                 }
                 aTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
-                }, 12000); // 15-second delay
+                }, 15000); // 15-second delay
             }
         }
     }
     
-    // Use useEffect to trigger sendDataToAPI when userData changes
-    useEffect(() => {
-        {sessionStarted && sendDataToAPI()}
-    }, [sessionStarted, userData, userDataChanged]);
+// Use useEffect to trigger sendDataToAPI when userData changes and sessionStarted is true
+useEffect(() => {
+    if (sessionStarted && userDataChanged) {
+        sendDataToAPI();
+    }
+}, [sessionStarted, userData, userDataChanged]);
+
+// Use useEffect to trigger saveToFirebase when userData changes and sessionStarted is true
+useEffect(() => {
+    if (sessionStarted && userDataChanged && !isSendingData) {
+        saveToFirebase();
+    }
+}, [sessionStarted, userData, userDataChanged, isSendingData]);
 
     
 
