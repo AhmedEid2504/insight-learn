@@ -129,6 +129,8 @@ const Home = () => {
         };
     }, []);
     
+    let sendTimeoutId = null; // Declare a variable to hold the timeout ID for sending data
+
     async function sendData() {
         if (userDataChanged && sessionStarted && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
@@ -136,49 +138,65 @@ const Home = () => {
             // Prepare data
             const updatedUserData = { ...userData, CaptureTime: new Date().toLocaleTimeString([], { hour12: false }) };
     
-            // Send data to API
-            try {
-                const apiResponse = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(updatedUserData)
-                });
+            // Delay execution for 15 seconds
+            sendTimeoutId = setTimeout(async () => {
+                // Send data to API
+                try {
+                    const apiResponse = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedUserData)
+                    });
     
-                if (!apiResponse.ok) {
-                    throw new Error(`Failed to send data to API: ${apiResponse.status}`);
+                    if (!apiResponse.ok) {
+                        throw new Error(`Failed to send data to API: ${apiResponse.status}`);
+                    }
+    
+                    console.log("Data sent to API successfully");
+                } catch (error) {
+                    console.error("Error sending data to API:", error);
                 }
     
-                console.log("Data sent to API successfully");
-            } catch (error) {
-                console.error("Error sending data to API:", error);
-            }
+                // Save data to Firebase
+                const dataRef = ref(database, `data/${username}/${userData.SessionStartedAt}/`);
+                const newDataRef = push(dataRef, userData);
     
-            // Save data to Firebase
-            const dataRef = ref(database, `data/${username}/${userData.SessionStartedAt}/`);
-            const newDataRef = push(dataRef);
-    
-            set(newDataRef, userData)
-                .then(() => {
+                try {
+                    await set(newDataRef, userData);
                     console.log("Data saved to Firebase");
-                })
-                .catch((error) => {
+                } catch (error) {
                     console.error("Error saving data to Firebase:", error);
-                })
-                .finally(() => {
+                } finally {
                     setIsSendingData(false); // Reset isSendingData after sending and saving data
                     setUserDataChanged(false); // Reset userDataChanged after data is sent and saved
-                });
+                }
+            }, 15000); // 15-second delay
         }
     }
     
     // Use useEffect to trigger sendData when userData changes and sessionStarted is true
-    useEffect(() => {
-        if (sessionStarted) {
-            sendData();
-        }
-    }, [sessionStarted, userData, userDataChanged]);
+useEffect(() => {
+    if (sessionStarted) {
+        sendData();
+    }
+}, [sessionStarted, userData, userDataChanged]);
+    
+    // Reset timeout if conditions change
+useEffect(() => {
+    // Clear previous timeout if it exists
+    if (sendTimeoutId) {
+        clearTimeout(sendTimeoutId);
+        sendTimeoutId = null;
+    }
+
+    // Call sendData again if conditions change
+    if (sessionStarted) {
+        sendData();
+    }
+}, [sessionStarted, userData, userDataChanged]);
+    
     
     
 
