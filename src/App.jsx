@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import Dashboard from './pages/Dashboard';
-// import Reports from './components/Reports';
-// import Settings from './components/Settings';
-// import Predictions from './components/Predictions';
+import Dashboard from './pages/Dashboard';
+import Reports from './components/Reports';
+import Settings from './components/Settings';
+import Predictions from './components/Predictions';
 import { Analytics } from "@vercel/analytics/react"
+import Materials from './components/Materials';
+import Courses from './components/Courses';
 
 function App() {
 
@@ -18,11 +20,13 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    {/* <Route path="dashboard" element={<Dashboard />} >
+                    <Route path="dashboard" element={<Dashboard />} >
                         <Route path='reports' element={<Reports />}/>
                         <Route path='settings' element={<Settings />}/>
                         <Route path='predictions' element={<Predictions />}/>
-                    </Route> */}
+                        <Route path='materials' element={<Materials/>}/>
+                        <Route path='courses' element={<Courses/>}/>
+                    </Route>
                 </Routes>
             </Router>
             <Analytics />

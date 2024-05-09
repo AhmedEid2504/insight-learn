@@ -233,7 +233,11 @@ useEffect(() => {
 
     return (
         <div className="flex flex-col w-full">
-            <Navbar isLoggedIn={isLoggedIn} userEmail={userData.userEmail} handleLogout={handleLogout} />
+            <Navbar 
+                isLoggedIn={isLoggedIn} 
+                userEmail={userData.userEmail} 
+                handleLogout={handleLogout} 
+            />
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
             </div>

@@ -68,8 +68,12 @@ const Navbar =(props) => {
                                 </div>
                             :
                                 <div className="flex gap-5">
-
-                                    {/* <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li> */}
+                                    {props.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                                        <>
+                                            <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
+                                            <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                        </>                                    
+                                    }
                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </div>
                             }
@@ -95,7 +99,9 @@ const Navbar =(props) => {
                                                 </div>
                                             :
                                                 <div className="flex flex-col gap-3">
-                                                    {/* <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li> */}
+                                                    {props.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                                                        <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                                    }
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                                 </div>
                                             }
