@@ -13,21 +13,21 @@ const Materials = () => {
                     <div className="flex flex-col gap-5">
                         <div className="flex justify-between items-center">
                             <h3 className="text-xl">Material 1</h3>
-                            <div className="flex gap-5">
+                            <div className="flex max-sm:flex-col gap-5">
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Edit</button> 
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Delete</button> 
                             </div>
                         </div>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between  items-center">
                             <h3 className="text-xl">Material 2</h3>
-                            <div className="flex gap-5">
+                            <div className="flex max-sm:flex-col gap-5">
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Edit</button> 
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Delete</button> 
                             </div>
                         </div>
                         <div className="flex justify-between items-center">
                             <h3 className="text-xl">Material 3</h3>
-                            <div className="flex gap-5">
+                            <div className="flex max-sm:flex-col gap-5">
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Edit</button> 
                                 <button className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl" >Delete</button> 
                             </div>

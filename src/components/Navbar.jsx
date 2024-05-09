@@ -98,9 +98,11 @@ const Navbar =(props) => {
                                                     <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                                 </div>
                                             :
-                                                <div className="flex flex-col gap-3">
+                                            <div className="flex flex-col gap-3">
                                                     {props.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
-                                                        <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                                        <div>
+                                                            <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                                        </div>
                                                     }
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                                 </div>
