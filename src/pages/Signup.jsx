@@ -29,12 +29,6 @@ const Signup = () => {
             setIsLoading(false);
             return;
         }
-        
-        if (!email.endsWith('@alexu.edu.eg')) {
-            setErrorMessage("Please use your alexu.edu.eg email");
-            setIsLoading(false);
-            return;
-        }
 
         if (!password.trim() || password.length < 8) {
             setErrorMessage("Password must be at least 8 characters long");
