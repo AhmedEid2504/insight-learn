@@ -57,7 +57,7 @@ const Login = () => {
                 window.location.href = '/';
             } else {
                 // Handle error here
-                setErrorMessage(data.message);
+                setErrorMessage(data.detail);
                 setIsLoading(false);
             }
         } catch (error) {
