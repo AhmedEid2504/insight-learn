@@ -57,17 +57,16 @@ const Signup = () => {
             });
     
             const data = await response.json();
-    
             if (response.ok) {
                 // Handle successful signup here
                 window.location.href = '/login';
             } else {
                 // Handle error here
-                setErrorMessage(data.error || 'An error occurred');
+                setErrorMessage(data.username || 'An error occurred');
                 setIsLoading(false);
             }
         } catch (error) {
-            setErrorMessage(error.message);
+            setErrorMessage(error.error);
             setIsLoading(false);
         } finally {
             setIsLoading(false);
