@@ -241,7 +241,7 @@ useEffect(() => {
             <div className="h-screen">
                 <iframe className='h-full w-full' src="/header.html" title="Header" />
             </div>
-            <div className="flex flex-col justify-center items-center bg-c_2 text-white">
+            <div className="flex flex-col justify-center items-center bg-c_1 text-white">
                     <div className="relative">
                         <FaceTrackerComponent videoEl={videoEl}
                         ></FaceTrackerComponent>
@@ -283,7 +283,7 @@ useEffect(() => {
                 username={username}
             />
             
-            <div className="h-[260px] max-md:h-[410px] max-sm:h-[450px] w-full flex bg-c_1">
+            <div className="h-[220px] max-md:h-[320px] max-sm:h-[320px] w-full flex bg-c_1">
                 <iframe className=" w-full" src="/footer.html" title="Footer" />
             </div>
         </div>

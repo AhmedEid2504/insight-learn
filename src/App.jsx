@@ -10,6 +10,7 @@ import Predictions from './components/Predictions';
 import { Analytics } from "@vercel/analytics/react"
 import Materials from './components/Materials';
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 
 function App() {
 
@@ -25,7 +26,9 @@ function App() {
                         <Route path='settings' element={<Settings />}/>
                         <Route path='predictions' element={<Predictions />}/>
                         <Route path='materials' element={<Materials/>}/>
-                        <Route path='courses' element={<Courses/>}/>
+                        <Route path='courses' element={<Courses/>}>
+                            <Route path=':courseId' element={<CourseDetail />}/>
+                        </Route>
                     </Route>
                 </Routes>
             </Router>
