@@ -283,7 +283,7 @@ useEffect(() => {
                 username={username}
             />
             
-            <div className="h-[220px] max-md:h-[320px] max-sm:h-[320px] w-full flex bg-c_1">
+            <div className="h-[260px] max-md:h-[360px] max-sm:h-[350px] w-full flex bg-c_1">
                 <iframe className=" w-full" src="/footer.html" title="Footer" />
             </div>
         </div>
