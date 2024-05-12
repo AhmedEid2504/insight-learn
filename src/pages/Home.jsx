@@ -97,7 +97,7 @@ const Home = () => {
         volume: 0,
         SessionStartedAt: '',
         CaptureTime: '',
-        session_for:'SA-quiz'
+        Session_for:'SA-quiz'
     })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
