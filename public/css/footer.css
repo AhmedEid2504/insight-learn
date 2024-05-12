@@ -17,41 +17,67 @@ body {
 .footer {
     background-color: var(--main-color);
     color: var(--text-color);
+    padding: 0.625rem;
     text-align: center;
-    display: flex;
-    justify-content: space-evenly;
     font-family: 'Mulish', 'Open Sans', sans-serif;
+}
+
+.footer-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .contact,
 .quick-links {
-    vertical-align: top;
-    text-align: left;
-    padding-left: 6.25rem;
+    flex: 1;
+    padding: 0 20px;
+    margin-bottom: 20px;
 }
 
 .contact h3,
 .quick-links h3 {
+    margin-bottom: 10px;
+}
+
+.contact-columns {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    column-gap: 18%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.icon {
+    margin-bottom: 10px;
+}
+
+.icon a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.icon i {
+    margin-right: 10px;
+}
+.contact h3,
+.quick-links h3 {
     font-size: 1.52rem;
     margin-bottom: 0.625rem;
-    padding-left: 1rem;
+    padding-left: 0rem;
 }
 
 .contact p,
 .quick-links p {
     font-size: 0.94rem;
     margin: 1.25rem;
-}
-
-.contact ul,
-.quick-links ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.contact li,
-.quick-links li {
-    margin-bottom: 0.625rem;
 }
 
 .contact a,
@@ -69,25 +95,45 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .footer,
+    .footer-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .contact,
     .quick-links {
         width: 100%;
-        padding-left: 0;
-        text-align: center;
+        padding: 0; 
+        margin: 0;
     }
-    
-    
+
     .contact h3,
     .quick-links h3 {
         padding-left: 0;
+        text-align: center;
     }
-    .footer {
-        flex-direction: column;
+
+    .contact-columns {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 7%;
+        column-gap: 0;
     }
-    .social-text {
+
+    .column {
+        flex-direction: row;
+        margin-bottom: 0; 
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    span{
         display: none;
     }
+
 }
 
 
