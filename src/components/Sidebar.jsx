@@ -58,6 +58,14 @@ const Sidebar = (props) => {
                             </li>
                             <li>
                                 <Link 
+                                    className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
+                                    onClick={() => props.toggleSideBar()}
+                                >
+                                    Users Data
+                                </Link>
+                            </li>
+                            <li>
+                                <Link 
                                     className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/courses" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/courses"
                                     onClick={() => props.toggleSideBar()}
                                 >
@@ -102,6 +110,14 @@ const Sidebar = (props) => {
                             <li>
                                 <Link 
                                     className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
+                                    onClick={() => props.toggleSideBar()}
+                                >
+                                    <img className='w-10' src="/images/users.png" alt="users icon" />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link 
+                                    className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                     onClick={() => props.toggleSideBar()}
                                 >
                                     <img className='w-10' src="/images/users.png" alt="users icon" />

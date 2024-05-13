@@ -6,32 +6,41 @@ const Users = () => {
     const [filterType, setFilterType] = useState('contains');
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(30);
-
+    const [filterActive, setFilterActive] = useState('all');
+    
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/users/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                // Include any other headers your API requires, such as an Authorization header
             },
         })
         .then(response => response.json())
         .then(data => setUsers(data))
+        .then( console.log(users)) 
         .catch(error => console.error('Error:', error));
     }, []);
     
     const filteredUsers = users.filter(user => {
-        const lowerCaseUsername = user.username.toLowerCase();
-        const lowerCaseSearchTerm = searchTerm.toLowerCase();
-
+        let userValue = user.username.toLowerCase();
+        let term = searchTerm.toLowerCase();
+    
         switch (filterType) {
             case 'startsWith':
-                return lowerCaseUsername.startsWith(lowerCaseSearchTerm);
+                return userValue.startsWith(term);
             case 'endsWith':
-                return lowerCaseUsername.endsWith(lowerCaseSearchTerm);
-            case 'contains':
+                return userValue.endsWith(term);
             default:
-                return lowerCaseUsername.includes(lowerCaseSearchTerm);
+                return userValue.includes(term);
+        }
+    }).filter(user => {
+        switch (filterActive) {
+            case 'active':
+                return user.is_active;
+            case 'inactive':
+                return !user.is_active;
+            default:
+                return true;
         }
     });
 
@@ -61,12 +70,22 @@ const Users = () => {
                     <option value="startsWith">Starts with</option>
                     <option value="endsWith">Ends with</option>
                 </select>
+                <select
+                    value={filterActive}
+                    onChange={event => setFilterActive(event.target.value)}
+                    className="p-2 mb-4 border-2 border-c_2 rounded-md"
+                >
+                    <option value="all">All</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
             </div>
             <div className="flex flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
                 {currentUsers.map(user => (
                     <div key={user.id} className=" flex flex-col border-2 max-sm:w-[90%] w-full border-c_2 p-4 m-2 rounded-md ">
                         <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>
                         <p className="text-gray-700 max-sm:text-[65%]">{user.email}</p>
+                        <p className="text-gray-700 max-sm:text-[65%]">{user.is_active ? 'Active' : 'Not Active'}</p>
                     </div>
                 ))}
             </div>

@@ -11,8 +11,8 @@ import { Analytics } from "@vercel/analytics/react"
 import Materials from './components/Materials';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-import Users from './components/morphcomponents/Users';
-
+import Users from './components/Users';
+import UsersData from './components/UsersData';
 function App() {
 
     return (
@@ -27,6 +27,7 @@ function App() {
                         <Route path='settings' element={<Settings />}/>
                         <Route path='predictions' element={<Predictions />}/>
                         <Route path="users" element={<Users />} />
+                        <Route path='usersdata' element={<UsersData />}/>
                         <Route path='materials' element={<Materials/>}/>
                         <Route path='courses' element={<Courses/>}>
                             <Route path=':courseId' element={<CourseDetail />}/>
