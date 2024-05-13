@@ -124,7 +124,7 @@ const Login = () => {
                     </button>
                 </form>
             </div>
-            {/* <a className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" href="https://auth-new.onrender.com/reset_password/">Forgot Password ?</a> */}
+            <a className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" href="https://dj-render-ldb1.onrender.com/reset_password/">Forgot Password ?</a>
         </div>
     );
 };
