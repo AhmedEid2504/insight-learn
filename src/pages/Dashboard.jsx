@@ -23,7 +23,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className=" flex bg-white h-screen overflow-hidden">
+        <div className=" flex bg-white h-[100dvh] overflow-hidden">
                 <div>
                         { showSideBar ? 
                             <div>
