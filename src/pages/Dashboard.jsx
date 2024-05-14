@@ -40,8 +40,8 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 :
-                                    <div className='flex justify-start items-center'>
-                                        <div className='w-[250px] justify-start'>
+                                    <div className='flex w-screen  items-center'>
+                                        <div className=' justify-start'>
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
