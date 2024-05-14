@@ -13,6 +13,7 @@ import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 import Users from './components/Users';
 import UsersData from './components/UsersData';
+import AddUser from './components/AddUser';
 function App() {
 
     return (
@@ -28,6 +29,7 @@ function App() {
                         <Route path='predictions' element={<Predictions />}/>
                         <Route path="users" element={<Users />} />
                         <Route path='usersdata' element={<UsersData />}/>
+                        <Route path='add-user' element={<AddUser />}/>
                         <Route path='materials' element={<Materials/>}/>
                         <Route path='courses' element={<Courses/>}>
                             <Route path=':courseId' element={<CourseDetail />}/>

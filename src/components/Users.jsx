@@ -53,8 +53,9 @@ const Users = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div className="flex flex-col h-[90vh] gap-5 overflow-y-scroll items-center justify-center">
-            <div className="flex justify-center gap-5 items-center flex-wrap">
+        <div className="flex flex-col h-[90vh]  gap-5 overflow-y-scroll items-center justify-center">
+            <h1 className="text-xl">Users: {users.length}</h1>
+            <div className="flex justify-center text-center gap-5 items-center flex-wrap">
                 <input
                     type="text"
                     placeholder="Search..."
@@ -80,7 +81,7 @@ const Users = () => {
                     <option value="inactive">Inactive</option>
                 </select>
             </div>
-            <div className="flex flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
+            <div className="flex bg-c_5 p-3 rounded-md shadow-md flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
                 {currentUsers.map(user => (
                     <div key={user.id} className=" flex flex-col border-2 max-sm:w-[90%] w-full border-c_2 p-4 m-2 rounded-md ">
                         <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>

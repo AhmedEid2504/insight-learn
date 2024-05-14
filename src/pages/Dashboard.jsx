@@ -23,7 +23,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className=" flex bg-c_5 h-screen overflow-hidden">
+        <div className=" flex bg-white h-screen overflow-hidden">
                 <div>
                         { showSideBar ? 
                             <div>
@@ -35,7 +35,7 @@ const Dashboard = () => {
                                                 toggleSideBar={toggleSideBar}
                                             />
                                         </div>
-                                        <div className="flex p-5 justify-center items-center bg-c_5 text-black overflow-x-scroll">
+                                        <div className="flex p-5 justify-center items-center bg-white text-black overflow-x-scroll">
                                             <Outlet/>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@ const Dashboard = () => {
                                                     toggleSideBar={toggleSideBar}
                                                 />
                                         </div>
-                                        <div className="flex w-full p-5 justify-center items-center bg-c_5 text-black">
+                                        <div className="flex w-full p-5 justify-center items-center bg-white text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@ const Dashboard = () => {
                                                     toggleSideBar={toggleSideBar}
                                                 />
                                         </div>
-                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-c_5 text-black">
+                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-white text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@ const Dashboard = () => {
                                                     toggleSideBar={toggleSideBar}
                                                 />
                                         </div>
-                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-c_5 text-black">
+                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-white text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>

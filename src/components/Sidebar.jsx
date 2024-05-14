@@ -27,58 +27,47 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
+                                        className={`flex gap-3 items-center p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
                                         onClick={() => props.toggleSideBar()}
                                     >
+                                        <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
                                         Reports
                                     </Link>
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
+                                        className={`flex gap-3 items-center p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
                                         onClick={() => props.toggleSideBar()}
-                                    >   
+                                    >
+                                        <img className='w-10' src="/images/predictionsicon.png" alt="predictions icon" />
                                         Predictions
                                     </Link>
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/materials" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/materials"
+                                        className={`flex gap-3 items-center p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        Materials
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
+                                        <img className='w-10' src="/images/users.png" alt="users icon" />
                                         Users
                                     </Link>
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
+                                        className={`flex gap-3 items-center p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
                                         onClick={() => props.toggleSideBar()}
                                     >
+                                        <img className='w-10' src="/images/add-user.png" alt="users icon" />
+                                        Add User
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        className={`flex gap-3 items-center p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/user-data.png" alt="user data icon" />
                                         Users Data
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/courses" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/courses"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        Courses
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-5 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        Settings
                                     </Link>
                                 </li>
                             </ul>
@@ -118,52 +107,55 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
+                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/add-user.png" alt="users icon" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
                                         className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/users.png" alt="users icon" />
+                                        <img className='w-10' src="/images/user-data.png" alt="user data icon" />
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/materials" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/materials"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-10' src="/images/materials.png" alt="materials icon" />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/courses" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/courses"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-10' src="/images/materials.png" alt="materials icon" />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
-                                    </Link>
-                                </li>
+                                
                             </ul>
                         )}
                     </motion.div>
                 </div>
-                <motion.button 
-                    onClick={() => props.toggleSideBar()} 
-                    className='bottom-0 bg-c_3 bg-opacity-10 hover:bg-opacity-25 rounded-2xl text-white p-2'
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                >
-                    {props.showSideBar ?
-                        <img className='w-5' src="/images/leftarrow.png" alt="leftarrow" />
-                        :
-                        <img className='w-5' src="/images/rightarrow.png" alt="rightarrow" />
+                <div className='w-full flex flex-col gap-2 justify-center'>
+                    <div className='w-[80%] h-0.5 self-center bg-c_5'></div>
+                    {props.showSideBar ? 
+                        <Link 
+                            className={`flex p-5 text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
+                            onClick={() => props.toggleSideBar()}
+                        >
+                            Settings
+                        </Link>
+                    :
+                        <Link 
+                            className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
+                            onClick={() => props.toggleSideBar()}
+                        >
+                            <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
+                        </Link>
                     }
-                </motion.button>
+                    <motion.button 
+                        onClick={() => props.toggleSideBar()} 
+                        className='pl-2 w-[40px] self-center bg-c_3 bg-opacity-10 hover:bg-opacity-25 rounded-2xl text-white'
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                    >
+                        {props.showSideBar ?
+                            <img className='w-5' src="/images/leftarrow.png" alt="leftarrow" />
+                            :
+                            <img className='w-5' src="/images/rightarrow.png" alt="rightarrow" />
+                        }
+                    </motion.button>
+                </div>
             </div>
         </motion.div>
     )
