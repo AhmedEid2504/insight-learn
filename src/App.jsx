@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
@@ -22,19 +22,23 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
-                    {/* <Route path="/signup" element={<Signup />} /> */}
-                    <Route path="dashboard" element={<Dashboard />} >
-                        <Route path='reports' element={<Reports />}/>
-                        <Route path='settings' element={<Settings />}/>
-                        <Route path='predictions' element={<Predictions />}/>
-                        <Route path="users" element={<Users />} />
-                        <Route path='usersdata' element={<UsersData />}/>
-                        <Route path='add-user' element={<AddUser />}/>
-                        <Route path='materials' element={<Materials/>}/>
-                        <Route path='courses' element={<Courses/>}>
-                            <Route path=':courseId' element={<CourseDetail />}/>
+                    {localStorage.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                    <>
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="dashboard" element={<Dashboard />} >
+                            <Route path='reports' element={<Reports />}/>
+                            <Route path='settings' element={<Settings />}/>
+                            <Route path='predictions' element={<Predictions />}/>
+                            <Route path="users" element={<Users />} />
+                            <Route path='usersdata' element={<UsersData />}/>
+                            <Route path='add-user' element={<AddUser />}/>
+                            <Route path='materials' element={<Materials/>}/>
+                            <Route path='courses' element={<Courses/>}>
+                                <Route path=':courseId' element={<CourseDetail />}/>
+                            </Route>
                         </Route>
-                    </Route>
+                    </>
+                    }
                 </Routes>
             </Router>
             <Analytics />

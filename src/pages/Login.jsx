@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const handleChange = (event) => {
@@ -71,7 +72,7 @@ const Login = () => {
 
 
     return (
-        <div className="flex flex-col bg-c_5 self-center items-center w-screen py-[200px] h-screen">
+        <div className="flex flex-col self-center items-center w-screen py-[200px] h-screen">
             <Navbar />
             <h2 className="text-c_3">New user ? <span className="text-c_4">
             <Link className="hover:text-c_3 transition-all ease-in duration-200" to="/signup">Sign Up</Link>
@@ -92,11 +93,11 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div className="flex justify-between w-full text-c_3">
+                    <div className="flex relative justify-between w-full text-c_3">
                         
                         <input
-                            className='w-[90%] h-13 bg-c_5 p-2 border-none'
-                            type="password"
+                            className='w-[90%] relative h-13 bg-c_5 p-2 border-none'
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
                             placeholder="Password"
@@ -104,6 +105,15 @@ const Login = () => {
                             onChange={handleChange}
                             required
                         />
+                        <button className="absolute top-4 right-16" type="button" onClick={() => setShowPassword(!showPassword)}>
+                            <div className='w-5'>
+                                {showPassword ? 
+                                    <img src="/images/open-eye.png" alt="" />
+                                : 
+                                    <img src="/images/closed-eye.png" alt="" />
+                                }
+                            </div>
+                        </button>
                         <img className="w-[50px]" src="images/lock-icon.jpeg" alt="" />
                     </div>
                     <div className='w-full'>
