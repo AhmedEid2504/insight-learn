@@ -27,6 +27,15 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
+                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/dashboard.png" alt="dashboard icon" />
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
                                         onClick={() => props.toggleSideBar()}
                                     >
@@ -79,6 +88,14 @@ const Sidebar = (props) => {
                                             className='px-10 py-5' src="/images/logo.png" alt="logo" animate={{ width: props.showSideBar ? (window.innerWidth > 768 ? "100%" : "50%") : "50%", minWidth: "50px", padding: "8px" }} 
                                             onClick={() => props.toggleSideBar()}
                                         />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
                                     </Link>
                                 </li>
                                 <li>
