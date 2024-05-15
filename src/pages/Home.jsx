@@ -65,8 +65,21 @@ const Home = () => {
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
     
-                    // Reset SessionEndedAt field
-                    setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
+                    // Reset userData fields
+                    setUserData(prevUserData => {
+                        return {
+                            ...prevUserData,
+                            userEmail: '',
+                            dominantEmotion: '',
+                            arousal: '',
+                            valence: '',
+                            attention: '',
+                            volume: 0,
+                            SessionStartedAt: '',
+                            CaptureTime: '',
+                            Session_for: 'SA-quiz'
+                        };
+                    })
                     setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
