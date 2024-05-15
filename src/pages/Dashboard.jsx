@@ -1,13 +1,29 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 
 const Dashboard = () => {
     const [showSideBar, setShowSideBar ] = useState('true');
 
+    const sidebarRef = useRef(null);
+
     const toggleSideBar = () => {
         setShowSideBar(!showSideBar);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setShowSideBar(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -29,7 +45,7 @@ const Dashboard = () => {
                             <div>
                                 { window.innerWidth < 768 ? 
                                     <div>
-                                        <div className='w-screen'>
+                                        <div ref={sidebarRef} className='w-screen'>
                                             <Sidebar 
                                                 showSideBar={showSideBar}
                                                 toggleSideBar={toggleSideBar}
@@ -41,7 +57,7 @@ const Dashboard = () => {
                                     </div>
                                 :
                                     <div className='flex w-screen  items-center'>
-                                        <div className=' justify-start'>
+                                        <div ref={sidebarRef} className=' justify-start'>
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
@@ -57,7 +73,7 @@ const Dashboard = () => {
                             <div>   
                                 { window.innerWidth < 768 ? 
                                     <div className='flex'>
-                                        <div className=''>
+                                        <div ref={sidebarRef} className=''>
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
@@ -71,7 +87,7 @@ const Dashboard = () => {
                                 :
 
                                     <div className='flex'>
-                                        <div className=''>
+                                        <div ref={sidebarRef} className=''>
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
