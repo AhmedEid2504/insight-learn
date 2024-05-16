@@ -27,7 +27,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/dashboard.png" alt="dashboard icon" />
+                                        <img className='w-8' src="/images/dashboard.png" alt="dashboard icon" />
                                         Dashboard
                                     </Link>
                                 </li>
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
+                                        <img className='w-8' src="/images/reportsicon.png" alt="reports icon" />
                                         Reports
                                     </Link>
                                 </li>
@@ -45,7 +45,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/predictionsicon.png" alt="predictions icon" />
+                                        <img className='w-8' src="/images/predictionsicon.png" alt="predictions icon" />
                                         Predictions
                                     </Link>
                                 </li>
@@ -54,7 +54,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/users.png" alt="users icon" />
+                                        <img className='w-8' src="/images/users.png" alt="users icon" />
                                         Users
                                     </Link>
                                 </li>
@@ -63,7 +63,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/add-user.png" alt="users icon" />
+                                        <img className='w-8' src="/images/add-user.png" alt="users icon" />
                                         Add User
                                     </Link>
                                 </li>
@@ -72,7 +72,7 @@ const Sidebar = (props) => {
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                         onClick={() => props.toggleSideBar()}
                                     >
-                                        <img className='w-10' src="/images/user-data.png" alt="user data icon" />
+                                        <img className='w-8' src="/images/user-data.png" alt="user data icon" />
                                         Users Data
                                     </Link>
                                 </li>
@@ -90,7 +90,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
@@ -98,7 +98,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
@@ -106,7 +106,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/predictionsicon.png" alt="predictions icon" />
@@ -114,7 +114,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/users.png" alt="users icon" />
@@ -122,7 +122,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/add-user.png" alt="users icon" />
@@ -130,7 +130,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/user-data.png" alt="user data icon" />
@@ -144,26 +144,41 @@ const Sidebar = (props) => {
                 <div className='w-full flex flex-col gap-2 justify-center'>
                     <div className='w-[80%] h-0.5 self-center bg-c_5'></div>
                     {props.showSideBar ? 
-                        <Link 
-                            className={`flex p-2 items-center text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                            onClick={() => props.toggleSideBar()}
-                        >
-                            <img className='w-12' src="/images/settingsicon.png" alt="settings icon" />
-                            Settings
-                        </Link>
+                        <div className='flex flex-col gap-3'>
+                            <Link 
+                                className={`flex p-1 items-center text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
+                                onClick={() => props.toggleSideBar()}
+                            >
+                                <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
+                                Settings
+                            </Link>
+                            <Link 
+                                className={`flex p-2 px-2 gap-2 items-center text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/profile" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/profile"
+                                onClick={() => props.toggleSideBar()}
+                            >
+                                <img className='w-8' src="/images/profile.png" alt="profile icon" />
+                                Profile
+                            </Link>
+                        </div>
                     :
-                        <Link 
-                            className={`flex p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                            onClick={() => props.toggleSideBar()}
-                        >
-                            <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
-                        </Link>
+                        <div className='flex flex-col gap-2'>
+                            <Link 
+                                className={`flex p-2.5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
+                                onClick={() => props.toggleSideBar()}
+                            >
+                                <img className='w-12' src="/images/settingsicon.png" alt="settings icon" />
+                            </Link>
+                            <Link 
+                                className={`flex p-3 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/profile" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/profile"
+                                onClick={() => props.toggleSideBar()}
+                            >
+                                <img className='w-12' src="/images/profile.png" alt="profile icon" />
+                            </Link>
+                        </div>
                     }
                     <button 
                         onClick={() => props.toggleSideBar()} 
                         className='pl-2 w-[40px] self-center bg-c_3 bg-opacity-10 hover:bg-opacity-25 rounded-2xl text-white'
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
                     >
                         {props.showSideBar ?
                             <img className='w-5' src="/images/leftarrow.png" alt="leftarrow" />
