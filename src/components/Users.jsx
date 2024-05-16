@@ -98,7 +98,7 @@ const Users = () => {
     return (
         <div className="flex flex-col h-[90vh] gap-5 overflow-y-scroll items-center justify-center">
             <h1 className="text-xl">Users: {filteredUsers.length}</h1>
-            <div className="flex justify-center text-center gap-5 items-center flex-wrap">
+            <div className="flex max-sm:flex-col justify-center text-center gap-5 items-center flex-wrap">
                 <input
                     type="text"
                     placeholder="Search..."
@@ -130,16 +130,16 @@ const Users = () => {
                 : 
                 <>
                     {currentUsers.map(user => (
-                        <div key={user.id} className=" flex gap-5 justify-between items-center border-2 max-sm:w-[90%] w-full border-c_2 p-4 m-2 rounded-md ">
+                        <div key={user.id} className=" flex max-sm:flex-col gap-5 justify-between items-center border-2 max-sm:w-[70%] w-full border-c_2 p-4 m-2 rounded-md ">
                             <div>
                                 <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>
-                                <p className="text-gray-700 max-sm:text-[65%]">{user.email}</p>
-                                <p className="text-gray-700 max-sm:text-[65%]">{user.is_active ? 'Active' : 'Not Active'}</p>
-                                <p>Total Time On Site: {user.Total_Session_Duration_Txt}</p>
+                                <p className="text-gray-700 max-sm:text-[75%]">{user.email}</p>
+                                <p className="text-gray-700 max-sm:text-[90%]">{user.is_active ? 'Active' : 'Not Active'}</p>
+                                <p className="text-sm">Total Time On Site: {user.Total_Session_Duration_Txt}</p>
                             </div>
                             <button 
                                 onClick={() => toggleIsActive(user)}
-                                className="bg-c_1 p-2 text-white hover:text-white hover:bg-opacity-[30%] border-2 border-c_3 transition-all duration-200 ease-in"
+                                className="bg-c_1 max-sm:p-0.5 max-sm:text-sm p-2 text-white hover:text-white hover:bg-opacity-[30%] border-2 border-c_3 transition-all duration-200 ease-in"
                                 >
                                 {user.is_active ? "Suspend" : "Activate"}
                             </button>

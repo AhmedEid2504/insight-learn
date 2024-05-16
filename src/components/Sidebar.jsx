@@ -1,26 +1,23 @@
 /* eslint-disable react/prop-types */
 import { Link, useLocation  } from 'react-router-dom';
-import { motion } from 'framer-motion';
+
 
 const Sidebar = (props) => {
-    const sidebarVariants = {
-        collapsed: { width: "50px" },
-        expanded: { width: (window.innerWidth > 768 ? "250px" : "100%") }
-    };
+
 
     const location = useLocation();
 
     return (
-        <motion.div className='relative'  initial={false} animate={props.showSideBar ? "expanded" : "collapsed"} variants={sidebarVariants}>
+        <div className={props.showSideBar ? window.innerWidth > 768 ? "relative w-[250px]" : "relative w-[100%]" : "relative w-[50px]"}>
             <div className="bg-c_3 text-white h-[100dvh] flex flex-col items-center justify-between py-3">
                 <div className=' overflow-auto'>
-                    <motion.div>
+                    <div>
                         {props.showSideBar ? (
                             <ul className='text-xl flex flex-col gap-2 max-sm:w-screen w-full'>
                                 <li>
                                     <Link to="/">
-                                        <motion.img 
-                                            className='px-10 py-5' src="/images/logo.png" alt="logo" animate={{ width: props.showSideBar ? (window.innerWidth > 768 ? "100%" : "20%") : "50%", minWidth: "70px", padding: "10px 20px"  }} 
+                                        <img 
+                                            src="/images/logo.png" alt="logo" className={props.showSideBar ? window.innerWidth > 768 ? "px-10 py-5 w-[100%] min-w-[70px]" : "px-10 py-5 w-[20%] min-w-[70px]" : "px-10 py-5 w-[100%] min-w-[70px]"} 
                                             onClick={() => props.toggleSideBar()}
                                         />
                                     </Link>
@@ -41,15 +38,6 @@ const Sidebar = (props) => {
                                     >
                                         <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
                                         Reports
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link 
-                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usage" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usage"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
-                                        Usage
                                     </Link>
                                 </li>
                                 <li>
@@ -90,18 +78,19 @@ const Sidebar = (props) => {
                                 </li>
                             </ul>
                         ) : (
-                            <ul className='text-xl flex flex-col gap-5'>
+                            <ul className='text-xl flex flex-col gap-3'>
                                 <li>
                                     <Link to="/">
-                                        <motion.img 
-                                            className='px-10 py-5' src="/images/logo.png" alt="logo" animate={{ width: props.showSideBar ? (window.innerWidth > 768 ? "100%" : "50%") : "50%", minWidth: "50px", padding: "8px" }} 
+                                        <img 
+                                            src="/images/logo.png" alt="logo" 
+                                            className={props.showSideBar ? window.innerWidth > 768 ? "px-10 py-5 w-[100%] min-w-[50px]" : "px-10 py-5 w-[50%] min-w-[50px]" : "px-4 py-2 w-[50%] min-w-[70px]"} 
                                             onClick={() => props.toggleSideBar()}
                                         />
                                     </Link>
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
@@ -109,7 +98,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reports" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reports"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
@@ -117,7 +106,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/predictionsicon.png" alt="predictions icon" />
@@ -125,7 +114,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/users" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/users.png" alt="users icon" />
@@ -133,7 +122,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/add-user.png" alt="users icon" />
@@ -141,7 +130,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex p-3 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
+                                        className={`flex px-5 py-1 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/user-data.png" alt="user data icon" />
@@ -150,7 +139,7 @@ const Sidebar = (props) => {
                                 
                             </ul>
                         )}
-                    </motion.div>
+                    </div>
                 </div>
                 <div className='w-full flex flex-col gap-2 justify-center'>
                     <div className='w-[80%] h-0.5 self-center bg-c_5'></div>
@@ -170,7 +159,7 @@ const Sidebar = (props) => {
                             <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
                         </Link>
                     }
-                    <motion.button 
+                    <button 
                         onClick={() => props.toggleSideBar()} 
                         className='pl-2 w-[40px] self-center bg-c_3 bg-opacity-10 hover:bg-opacity-25 rounded-2xl text-white'
                         whileHover={{ scale: 1.2 }}
@@ -181,10 +170,10 @@ const Sidebar = (props) => {
                             :
                             <img className='w-5' src="/images/rightarrow.png" alt="rightarrow" />
                         }
-                    </motion.button>
+                    </button>
                 </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
 

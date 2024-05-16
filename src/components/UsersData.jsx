@@ -22,7 +22,7 @@ const UserData = () => {
     }, []);
 
     return (
-        <div className="flex flex-col h-[90vh] gap-5 overflow-y-scroll items-center justify-start">
+        <div className="flex flex-col  h-[90vh] gap-5 overflow-y-scroll items-center justify-start">
             {data.map(user => (
                 <div key={user.id} className="border-2 h-[80vh] border-blue-200 p-4 m-2  rounded-md">
                     <h2 className="text-xl font-bold mb-2">{user.userEmail}</h2>
