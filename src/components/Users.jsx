@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
+    const [sessionDurations, setSessionDurations] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState('contains');
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(30);
     const [filterActive, setFilterActive] = useState('all');
     const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
+        // Fetch users
         fetch('https://dj-render-ldb1.onrender.com/users/', {
             method: 'GET',
             headers: {
@@ -18,14 +21,28 @@ const Users = () => {
         .then(response => response.json())
         .then(data => setUsers(data))
         .then(() => setIsLoading(false)) 
-        .then( console.log(users)) 
         .catch(error => console.error('Error:', error));
+
+        // Fetch session durations
+        fetch('https://dj-render-ldb1.onrender.com/total_sessions_duration/')
+            .then(response => response.json())
+            .then(data => setSessionDurations(data));
     }, []);
+
+    // Merge users and session durations
+    const mergedUsers = users.map(user => {
+        const sessionDuration = sessionDurations.find(item => item.userEmail === user.email);
+        return {
+            ...user,
+            Total_Session_Duration: sessionDuration ? sessionDuration.Total_Session_Duration : 0,
+            Total_Session_Duration_Txt: sessionDuration ? sessionDuration.Total_Session_Duration_Txt : '0 minutes'
+        };
+    });
     
-    const filteredUsers = users.filter(user => {
+    const filteredUsers = mergedUsers.filter(user => {
         let userValue = user.username.toLowerCase();
         let term = searchTerm.toLowerCase();
-    
+
         switch (filterType) {
             case 'startsWith':
                 return userValue.startsWith(term);
@@ -118,6 +135,7 @@ const Users = () => {
                                 <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>
                                 <p className="text-gray-700 max-sm:text-[65%]">{user.email}</p>
                                 <p className="text-gray-700 max-sm:text-[65%]">{user.is_active ? 'Active' : 'Not Active'}</p>
+                                <p>Total Time On Site: {user.Total_Session_Duration_Txt}</p>
                             </div>
                             <button 
                                 onClick={() => toggleIsActive(user)}

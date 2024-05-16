@@ -14,7 +14,10 @@ import CourseDetail from './components/CourseDetail';
 import Users from './components/Users';
 import UsersData from './components/UsersData';
 import AddUser from './components/AddUser';
+import Usage from './components/Usage';
 function App() {
+    const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
+
 
     return (
         <div className="h-auto flex flex-col justify-between">
@@ -22,11 +25,12 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
-                    {localStorage.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                    {adminEmails.includes(localStorage.userEmail) && 
                     <>
                         <Route path="/signup" element={<Signup />} />
                         <Route path="dashboard" element={<Dashboard />} >
                             <Route path='reports' element={<Reports />}/>
+                            <Route path='usage' element={<Usage />}/>
                             <Route path='settings' element={<Settings />}/>
                             <Route path='predictions' element={<Predictions />}/>
                             <Route path="users" element={<Users />} />

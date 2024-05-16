@@ -45,6 +45,15 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
+                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usage" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usage"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/reportsicon.png" alt="reports icon" />
+                                        Usage
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
                                         className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/predictions"
                                         onClick={() => props.toggleSideBar()}
                                     >

@@ -9,6 +9,7 @@ const Navbar =(props) => {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const location = useLocation();
     const ulRef = useRef(null);
+    const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
 
 
 
@@ -64,11 +65,11 @@ const Navbar =(props) => {
                                 <div className="flex gap-5">
                                     <div className="bg-c_1 text-center items-center justify-center w-[250px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                                     <li><Link className={location.pathname === "/login" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/login">Login</Link></li>
-                                    {/* <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li> */}
+                                    <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                 </div>
                             :
                                 <div className="flex gap-5">
-                                    {props.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                                    {adminEmails.includes(localStorage.userEmail) && 
                                         <>
                                             <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
                                             <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
@@ -95,11 +96,11 @@ const Navbar =(props) => {
                                             { !props.isLoggedIn ?
                                                 <div className="flex flex-col gap-3">
                                                     <li><Link className={location.pathname === "/login" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/login">Login</Link></li>
-                                                    {/* <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li> */}
+                                                    <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                                 </div>
                                             :
                                             <div className="flex flex-col gap-3">
-                                                    {props.userEmail === import.meta.env.VITE_ADMIN_EMAIL && 
+                                                    {adminEmails.includes(localStorage.userEmail) && 
                                                         <div>
                                                             <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
                                                         </div>
