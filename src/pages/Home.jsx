@@ -64,22 +64,6 @@ const Home = () => {
 
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
-    
-                    // Reset userData fields
-                    setUserData(prevUserData => {
-                        return {
-                            ...prevUserData,
-                            userEmail: '',
-                            dominantEmotion: '',
-                            arousal: '',
-                            valence: '',
-                            attention: '',
-                            volume: 0,
-                            SessionStartedAt: '',
-                            CaptureTime: '',
-                            Session_for: 'SA-quiz'
-                        };
-                    })
                     setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
@@ -122,12 +106,29 @@ const Home = () => {
         }
     }, []);
 
-    const handleLogout = () => {
-        // Clear token from local storage
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        // Redirect or perform any other action after logout
-        window.location.href = '/login';
+    const handleLogout = async () => {
+        const token = localStorage.getItem('token');
+    
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            },
+        };
+    
+        const response = await fetch('https://dj-render-ldb1.onrender.com/logout/', requestOptions);
+    
+        if (response.ok) {
+            // Clear token from local storage
+            localStorage.removeItem('token');
+            setIsLoggedIn(false);
+            // Redirect or perform any other action after logout
+            window.location.href = '/login';
+        } else {
+            // Handle error
+            console.error('Logout failed');
+        }
     };
 
     useEffect(() => {

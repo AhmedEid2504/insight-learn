@@ -10,7 +10,6 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-
     const handleChange = (event) => {
         if(event.target.name === 'email') {
             setEmail(event.target.value);
@@ -58,7 +57,7 @@ const Login = () => {
                 window.location.href = '/';
             } else {
                 // Handle error here
-                setErrorMessage(data.detail);
+                setErrorMessage(data.details);
                 setIsLoading(false);
             }
         } catch (error) {
