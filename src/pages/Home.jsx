@@ -33,6 +33,7 @@ const Home = () => {
         setUserData(prevUserData => {
             const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime };
             
+            
             // Save user data to api
             (async () => {
                 try {
@@ -189,6 +190,7 @@ const Home = () => {
                     setUserDataChanged(false); // Reset userDataChanged after data is sent
                 } else {
                     console.error("Failed to send data to API:", response.status);
+                    console.log(userData);
                 }
             } catch (error) {
                 console.error("Error sending data:", error);
