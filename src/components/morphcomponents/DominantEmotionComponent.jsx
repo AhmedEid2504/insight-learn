@@ -14,6 +14,7 @@ const GenderComponent = (props) => {
         ...prevUserData,
         dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
       }));
+      props.setUserDataChanged(true)
     });
   }
   return (
