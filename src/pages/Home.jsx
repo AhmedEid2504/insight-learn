@@ -11,8 +11,8 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-// import { set, ref, push } from "firebase/database";
-// import {database} from "/src/firebase";
+import { set, ref, push } from "firebase/database";
+import {database} from "/src/firebase";
 
 const Home = () => {
     const handleSessionStart = () => {
@@ -32,33 +32,53 @@ const Home = () => {
     };
 
     const handleSessionEnd = async () => {
-        try {
-            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
-            setUserData(prevUserData => ({
-                ...prevUserData,
-                SessionEndedAt: currentTime
-            }));
+        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+        setSessionStarted(false);
+        setUserData(prevUserData => {
+            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime };
             
-            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
+            // Save user data to api
+            (async () => {
+                try {
+                    const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedUserData)
+                    });
+            
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-            if (response.ok) {
-                console.log("Final Data sent to API successfully");
-                setSessionStarted(false);
+                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+                    const newDataRef = push(dataRef);
 
-            } else {
-                console.error("Failed to send data to API:", response.status);
-                setSessionStarted(false);
-            }
-        } catch (error) {
-            console.error("Error ending session:", error);
-            setSessionStarted(false);
-        }
+                    set(newDataRef, updatedUserData)
+                        .then(() => {
+                            console.log("Data saved to Firebase");
+                        })
+                        .catch(() => {
+                            console.error("Error saving:");
+                        })
+                        .finally(() => {
+                            console.log("Final Data sent to firebase");
+                        });
+
+                    console.log("Data sent to API successfully");
+                    setUserDataChanged(false);
+    
+                    // Reset SessionEndedAt field
+                    setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
+                    setSessionStarted(false);
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation: ', error);
+                }
+            })();
+    
+            return updatedUserData;
+        });
     };
 
 
