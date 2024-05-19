@@ -3,7 +3,7 @@ import Session from "../components/Session"
 import Navbar from '../components/Navbar';
 
 // morphcast
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback  } from "react";
 import { useExternalScript } from "../helpers/ai-sdk/externalScriptsLoader";
 import { getAiSdkControls } from "../helpers/ai-sdk/loader";
 import GenderComponent from "../components/morphcomponents/GenderComponent";
@@ -94,6 +94,9 @@ const Home = () => {
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     const username = localStorage.getItem( "username" )
+    const [timeoutId, setTimeoutId] = useState(null);
+    
+    
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
@@ -181,50 +184,46 @@ useEffect(() => {
     {sessionStarted && saveToFirebase()}
 }, [sessionStarted, userData, userDataChanged]);
 
-const API_URL = 'https://dj-render-ldb1.onrender.com/add/'; // Move URL to a constant
 
-const intervalId = useRef(null);
-
-async function sendDataToAPI() {
+const sendDataToAPI = useCallback(async () => {
     if (userDataChanged && sessionStarted && !isSendingData) {
         setIsSendingData(true);
-        setUserData(prevUserData => ({ ...prevUserData, CaptureTime: new Date().toLocaleTimeString([], {hour12: false}) }));
+        const updatedUserData = { ...userData, CaptureTime: new Date().toLocaleTimeString([], { hour12: false }) };
 
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify(updatedUserData)
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            if (response.ok) {
+                console.log("Data sent to API successfully");
+                setUserDataChanged(false);
+            } else {
+                console.error("Failed to send data to API:", response.status);
             }
-
-            console.log("Data sent to API successfully");
-            setUserDataChanged(false);
         } catch (error) {
             console.error("Error sending data:", error);
         } finally {
-            setIsSendingData(false);
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            const newTimeoutId = setTimeout(() => {
+                setIsSendingData(false);
+            }, 15000); // 15-second delay
+            setTimeoutId(newTimeoutId);
         }
     }
-}
+}, [userData, userDataChanged, sessionStarted, isSendingData, timeoutId]);
 
 useEffect(() => {
-    if (sessionStarted) {
-        intervalId.current = setInterval(sendDataToAPI, 15000);
+    if (sessionStarted && userDataChanged) {
+        sendDataToAPI();
     }
-
-    // Clear interval on unmount
-    return () => {
-        if (intervalId.current) {
-            clearInterval(intervalId.current);
-        }
-    };
-}, [sessionStarted, userData, userDataChanged]);
+}, [sessionStarted, userData, userDataChanged, sendDataToAPI]);
 
     
 
