@@ -11,22 +11,21 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-// import { set, ref, push } from "firebase/database";
-// import {database} from "/src/firebase";
+import { set, ref, push } from "firebase/database";
+import {database} from "/src/firebase";
 
 const Home = () => {
     const handleSessionStart = () => {
         try {
+            setSessionStarted(true);
             const currentTime = new Date().toLocaleTimeString([], {hour12: false});
             setUserData(prevUserData => ({...prevUserData, 
                 SessionEndedAt: '',
                 SessionStartedAt:  currentTime
             }));
             window.open('http://4.157.125.46', '_blank');
-            setSessionStarted(true);
         } catch (error) {
             console.error("Error starting session:", error);
-            setSessionStarted(false);
             setUserData(prevUserData => ({...prevUserData, 
                 SessionEndedAt: '',
                 SessionStartedAt:  '',
@@ -36,7 +35,7 @@ const Home = () => {
 
     const handleSessionEnd = async () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        
+        setSessionStarted(false);
         setUserData(prevUserData => {
             const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime};
             
@@ -55,6 +54,23 @@ const Home = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
+                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+                    const newDataRef = push(dataRef);
+
+                    set(newDataRef, updatedUserData)
+                        .then(() => {
+                            console.log("Data saved to Firebase");
+                        })
+                        .catch(() => {
+                            console.error("Error saving:");
+                        })
+                        .finally(() => {
+                            console.log("Final Data sent to firebase");
+                        });
+
+                    console.log("Data sent to API successfully");
+                    setUserDataChanged(false);
+                    setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
                     setUserData(prevUserData => ({...prevUserData, 
@@ -68,7 +84,7 @@ const Home = () => {
                 SessionEndedAt: '',
                 SessionStartedAt:  ''
             }));
-            setSessionStarted(false);
+    
             return updatedUserData;
             
         });
