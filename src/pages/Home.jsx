@@ -161,6 +161,35 @@ const Home = () => {
         };
     }, []);
 
+    let fTimeoutId = null; // Declare a variable to hold the timeout ID
+    
+    async function saveToFirebase() {
+    if ( userDataChanged && sessionStarted && !isSendingData) {
+        const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+        const newDataRef = push(dataRef);
+
+        set(newDataRef, userData)
+            .then(() => {
+                console.log("Data saved to Firebase");
+            })
+            .catch(() => {
+                console.error("Error saving:");
+            })
+            .finally(() => {
+                if (fTimeoutId) {
+                    clearTimeout(fTimeoutId); // Clear the timeout if it exists
+                }
+                fTimeoutId = setTimeout(() => {
+                }, 15000); // 10-second delay
+            });
+    }
+}
+
+// Use useEffect to trigger saveToFirebase when userData changes
+useEffect(() => {
+    {sessionStarted && saveToFirebase()}
+}, [sessionStarted, userData, userDataChanged]);
+
 
     // sending data to django api
     let aTimeoutId = null; // Declare a variable to hold the timeout ID
