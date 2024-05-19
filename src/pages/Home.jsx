@@ -11,27 +11,34 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push } from "firebase/database";
-import {database} from "/src/firebase";
+// import { set, ref, push } from "firebase/database";
+// import {database} from "/src/firebase";
 
 const Home = () => {
-    
     const handleSessionStart = () => {
-        setSessionStarted(true);
-        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setUserData(prevUserData => ({...prevUserData, 
-            SessionStartedAt:  currentTime
-        }));
-        window.open('http://4.157.125.46', '_blank')
+        try {
+            const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+            setUserData(prevUserData => ({...prevUserData, 
+                SessionEndedAt: '',
+                SessionStartedAt:  currentTime
+            }));
+            window.open('http://4.157.125.46', '_blank');
+            setSessionStarted(true);
+        } catch (error) {
+            console.error("Error starting session:", error);
+            setSessionStarted(false);
+            setUserData(prevUserData => ({...prevUserData, 
+                SessionEndedAt: '',
+                SessionStartedAt:  '',
+            }));
+        }
     };
 
     const handleSessionEnd = async () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setSessionStarted(false);
+        
         setUserData(prevUserData => {
-            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime };
-            // reset SessionEndedAt to empty string
-            setUserData(prevUserData => ({...prevUserData, SessionEndedAt: ''}));
+            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime};
             
             // Save user data to api
             (async () => {
@@ -48,29 +55,22 @@ const Home = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-                    const newDataRef = push(dataRef);
-
-                    set(newDataRef, updatedUserData)
-                        .then(() => {
-                            console.log("Data saved to Firebase");
-                        })
-                        .catch(() => {
-                            console.error("Error saving:");
-                        })
-                        .finally(() => {
-                            console.log("Final Data sent to firebase");
-                        });
-
-                    console.log("Data sent to API successfully");
-                    setUserDataChanged(false);
-                    setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
+                    setUserData(prevUserData => ({...prevUserData, 
+                        SessionEndedAt: '',
+                        SessionStartedAt:  '',
+                    }));
                 }
             })();
-    
+            // reset SessionEndedAt to empty string
+            setUserData(prevUserData => ({...prevUserData, 
+                SessionEndedAt: '',
+                SessionStartedAt:  ''
+            }));
+            setSessionStarted(false);
             return updatedUserData;
+            
         });
     };
 
@@ -91,6 +91,7 @@ const Home = () => {
         Session_for:'SA-quiz',
         SessionEndedAt: ''
     })
+
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
