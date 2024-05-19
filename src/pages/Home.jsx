@@ -18,59 +18,56 @@ const Home = () => {
     const handleSessionStart = () => {
         try {
             setSessionStarted(true);
-            const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-            setUserData(prevUserData => ({...prevUserData, 
+            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
+            setUserData(prevUserData => ({
+                ...prevUserData,
                 SessionEndedAt: '',
-                SessionStartedAt:  currentTime
+                SessionStartedAt: currentTime
             }));
             window.open('http://4.157.125.46', '_blank');
         } catch (error) {
             setSessionStarted(false);
             console.error("Error starting session:", error);
-            setUserData(prevUserData => ({...prevUserData, 
+            setUserData(prevUserData => ({
+                ...prevUserData,
                 SessionEndedAt: '',
-                SessionStartedAt:  '',
+                SessionStartedAt: '',
             }));
         }
     };
-const [updatedUserData, setUpdatedUserData] = useState({}); // State variable to hold updated user data
-        const handleSessionEnd = async () => {
-        
-        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setUpdatedUserData({...userData, 
-            SessionEndedAt: currentTime
-        });
 
-        // Save user data to api
+    const handleSessionEnd = async () => {
         try {
-            const response =  fetch('https://dj-render-ldb1.onrender.com/add/', {
+            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                SessionEndedAt: currentTime
+            }));
+            
+            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(updatedUserData)
+                body: JSON.stringify(userData)
             });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
 
-            console.log("Final Data sent to API successfully");
-            setSessionStarted(false);
+            if (response.ok) {
+                console.log("Data sent to API successfully");
+                setUserData(prevUserData => ({
+                    ...prevUserData,
+                    SessionStartedAt: '',
+                    SessionEndedAt: ''
+                }));
+                setSessionStarted(false);
+            } else {
+                console.error("Failed to send data to API:", response.status);
+            }
         } catch (error) {
-            console.error('There was a problem with the fetch operation: ', error);
-            setUserData(prevUserData => ({...prevUserData, 
-                SessionEndedAt: '',
-                SessionStartedAt:  '',
-            }));
+            console.error("Error ending session:", error);
         }
-        
-        // reset SessionEndedAt to empty string
-        setUserData(prevUserData => ({...prevUserData, 
-            SessionEndedAt: '',
-            SessionStartedAt:  ''
-        }));
     };
+
 
     // morphcast
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
