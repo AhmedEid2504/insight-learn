@@ -25,6 +25,7 @@ const Home = () => {
             }));
             window.open('http://4.157.125.46', '_blank');
         } catch (error) {
+            setSessionStarted(false);
             console.error("Error starting session:", error);
             setUserData(prevUserData => ({...prevUserData, 
                 SessionEndedAt: '',
@@ -57,18 +58,9 @@ const Home = () => {
                     const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
                     const newDataRef = push(dataRef);
 
-                    set(newDataRef, updatedUserData)
-                        .then(() => {
-                            console.log("Data saved to Firebase");
-                        })
-                        .catch(() => {
-                            console.error("Error saving:");
-                        })
-                        .finally(() => {
-                            console.log("Final Data sent to firebase");
-                        });
+                    set(newDataRef, updatedUserData);
 
-                    console.log("Data sent to API successfully");
+                    console.log("Final Data sent to API successfully");
                     setUserDataChanged(false);
                     setSessionStarted(false);
                 } catch (error) {
