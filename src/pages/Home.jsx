@@ -218,10 +218,18 @@ useEffect(() => {
     
     // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
-        {sessionStarted && sendDataToAPI()}
+        if (sessionStarted) {
+            sendDataToAPI();
+        }
+    
+        // Clear timeout on unmount
+        return () => {
+            if (aTimeoutId) {
+                clearTimeout(aTimeoutId);
+            }
+        };
     }, [sessionStarted, userData, userDataChanged]);
 
-    
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
