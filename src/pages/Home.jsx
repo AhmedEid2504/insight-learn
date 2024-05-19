@@ -53,13 +53,14 @@ const Home = () => {
             });
 
             if (response.ok) {
-                console.log("Data sent to API successfully");
+                console.log("Final Data sent to API successfully");
                 setUserData(prevUserData => ({
                     ...prevUserData,
                     SessionStartedAt: '',
                     SessionEndedAt: ''
                 }));
                 setSessionStarted(false);
+
             } else {
                 console.error("Failed to send data to API:", response.status);
             }
