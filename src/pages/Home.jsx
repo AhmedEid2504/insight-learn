@@ -171,7 +171,7 @@ const Home = () => {
     let fTimeoutId = null; // Declare a variable to hold the timeout ID
     
     async function saveToFirebase() {
-    if ( sessionStarted && !isSendingData) {
+    if ( userDataChanged && sessionStarted && !isSendingData) {
         const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
 
@@ -195,13 +195,14 @@ const Home = () => {
 // Use useEffect to trigger saveToFirebase when userData changes
 useEffect(() => {
     {sessionStarted && saveToFirebase()}
-}, [sessionStarted, userData]);
+}, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
     let aTimeoutId = null; // Declare a variable to hold the timeout ID
     async function sendDataToAPI() {
-        if ( sessionStarted ) {
+        if ( userDataChanged && sessionStarted && !isSendingData) {
+            setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
             setUserData(prevUserData => ({ ...prevUserData, CaptureTime: new Date().toLocaleTimeString([], {hour12: false}) }));
             try {
                 const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
@@ -214,6 +215,7 @@ useEffect(() => {
     
                 if (response.ok) {
                     console.log("Data sent to API successfully");
+                    setUserDataChanged(false); // Reset userDataChanged after data is sent
                 } else {
                     console.error("Failed to send data to API:", response.status);
                 }
@@ -224,6 +226,7 @@ useEffect(() => {
                     clearTimeout(aTimeoutId); // Clear the timeout if it exists
                 }
                 aTimeoutId = setTimeout(() => {
+                    setIsSendingData(false); // Reset isSendingData after the delay
                 }, 15000); // 15-second delay
             }
         }
@@ -232,7 +235,7 @@ useEffect(() => {
     // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
         {sessionStarted && sendDataToAPI()}
-    }, [sessionStarted, userData]);
+    }, [sessionStarted, userData, userDataChanged]);
 
     
 
