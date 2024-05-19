@@ -6,7 +6,6 @@ import Navbar from '../components/Navbar';
 import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "../helpers/ai-sdk/externalScriptsLoader";
 import { getAiSdkControls } from "../helpers/ai-sdk/loader";
-import GenderComponent from "../components/morphcomponents/GenderComponent";
 import Volume from "../components/morphcomponents/Volume";
 import DominantEmotionComponent from "../components/morphcomponents/DominantEmotionComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
@@ -64,22 +63,6 @@ const Home = () => {
 
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
-    
-                    // Reset userData fields
-                    setUserData(prevUserData => {
-                        return {
-                            ...prevUserData,
-                            userEmail: '',
-                            dominantEmotion: '',
-                            arousal: '',
-                            valence: '',
-                            attention: '',
-                            volume: 0,
-                            SessionStartedAt: '',
-                            CaptureTime: '',
-                            Session_for: 'SA-quiz'
-                        };
-                    })
                     setSessionStarted(false);
                 } catch (error) {
                     console.error('There was a problem with the fetch operation: ', error);
@@ -244,11 +227,6 @@ const Home = () => {
                         ></FaceTrackerComponent>
                     </div>
                     <div>
-                        <GenderComponent
-                            userData={userData}
-                            setUserData={setUserData}
-                            setUserDataChanged={setUserDataChanged}
-                        ></GenderComponent>
                         <DominantEmotionComponent
                             userData={userData}
                             setUserData={setUserData}
