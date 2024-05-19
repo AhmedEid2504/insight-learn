@@ -9,7 +9,6 @@ import { getAiSdkControls } from "../helpers/ai-sdk/loader";
 import GenderComponent from "../components/morphcomponents/GenderComponent";
 import Volume from "../components/morphcomponents/Volume";
 import DominantEmotionComponent from "../components/morphcomponents/DominantEmotionComponent";
-import FeatureComponent from "../components/morphcomponents/FeatureComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
@@ -260,11 +259,6 @@ const Home = () => {
                             setUserData={setUserData}
                             setUserDataChanged={setUserDataChanged}
                         ></Volume>
-                        <FeatureComponent
-                            userData={userData}
-                            setUserData={setUserData}
-                            setUserDataChanged={setUserDataChanged}
-                        ></FeatureComponent>
                         <EngagementComponent
                             userData={userData}
                             setUserData={setUserData}
