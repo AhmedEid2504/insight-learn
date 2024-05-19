@@ -63,9 +63,11 @@ const Home = () => {
 
             } else {
                 console.error("Failed to send data to API:", response.status);
+                setSessionStarted(false);
             }
         } catch (error) {
             console.error("Error ending session:", error);
+            setSessionStarted(false);
         }
     };
 
