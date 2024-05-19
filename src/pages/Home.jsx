@@ -206,9 +206,6 @@ useEffect(() => {
             } catch (error) {
                 console.error("Error sending data:", error);
             } finally {
-                if (aTimeoutId) {
-                    clearTimeout(aTimeoutId); // Clear the timeout if it exists
-                }
                 aTimeoutId = setTimeout(() => {
                     setIsSendingData(false); // Reset isSendingData after the delay
                 }, 15000); // 15-second delay
@@ -218,18 +215,10 @@ useEffect(() => {
     
     // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
-        if (sessionStarted) {
-            sendDataToAPI();
-        }
-    
-        // Clear timeout on unmount
-        return () => {
-            if (aTimeoutId) {
-                clearTimeout(aTimeoutId);
-            }
-        };
+        {sessionStarted && sendDataToAPI()}
     }, [sessionStarted, userData, userDataChanged]);
 
+    
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
