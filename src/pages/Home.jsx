@@ -22,17 +22,12 @@ const Home = () => {
             setUserData(prevUserData => ({
                 ...prevUserData,
                 SessionEndedAt: '',
+                CaptureTime: currentTime,
                 SessionStartedAt: currentTime
             }));
             window.open('http://4.157.125.46', '_blank');
         } catch (error) {
-            setSessionStarted(false);
             console.error("Error starting session:", error);
-            setUserData(prevUserData => ({
-                ...prevUserData,
-                SessionEndedAt: '',
-                SessionStartedAt: '',
-            }));
         }
     };
 
@@ -54,11 +49,6 @@ const Home = () => {
 
             if (response.ok) {
                 console.log("Final Data sent to API successfully");
-                setUserData(prevUserData => ({
-                    ...prevUserData,
-                    SessionStartedAt: '',
-                    SessionEndedAt: ''
-                }));
                 setSessionStarted(false);
 
             } else {
