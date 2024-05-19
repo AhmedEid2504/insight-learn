@@ -11,8 +11,8 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push } from "firebase/database";
-import {database} from "/src/firebase";
+// import { set, ref, push } from "firebase/database";
+// import {database} from "/src/firebase";
 
 const Home = () => {
     const handleSessionStart = () => {
@@ -33,53 +33,43 @@ const Home = () => {
             }));
         }
     };
-
-    const handleSessionEnd = async () => {
-        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+const [updatedUserData, setUpdatedUserData] = useState({}); // State variable to hold updated user data
+        const handleSessionEnd = async () => {
         
-        setUserData(prevUserData => {
-            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime};
-            
-            // Save user data to api
-            (async () => {
-                try {
-                    const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedUserData)
-                    });
-            
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
+        setUpdatedUserData({...userData, 
+            SessionEndedAt: currentTime
+        });
 
-                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-                    const newDataRef = push(dataRef);
+        // Save user data to api
+        try {
+            const response =  fetch('https://dj-render-ldb1.onrender.com/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedUserData)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
-                    set(newDataRef, updatedUserData);
-
-                    console.log("Final Data sent to API successfully");
-                    setUserDataChanged(false);
-                    setSessionStarted(false);
-                } catch (error) {
-                    console.error('There was a problem with the fetch operation: ', error);
-                    setUserData(prevUserData => ({...prevUserData, 
-                        SessionEndedAt: '',
-                        SessionStartedAt:  '',
-                    }));
-                }
-            })();
-            // reset SessionEndedAt to empty string
+            console.log("Final Data sent to API successfully");
+            setSessionStarted(false);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation: ', error);
             setUserData(prevUserData => ({...prevUserData, 
                 SessionEndedAt: '',
-                SessionStartedAt:  ''
+                SessionStartedAt:  '',
             }));
-    
-            return updatedUserData;
-            
-        });
+        }
+        
+        // reset SessionEndedAt to empty string
+        setUserData(prevUserData => ({...prevUserData, 
+            SessionEndedAt: '',
+            SessionStartedAt:  ''
+        }));
     };
 
     // morphcast
