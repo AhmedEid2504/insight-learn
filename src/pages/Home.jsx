@@ -36,7 +36,7 @@ const Home = () => {
 
     const handleSessionEnd = async () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setSessionStarted(false);
+        
         setUserData(prevUserData => {
             const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime};
             
