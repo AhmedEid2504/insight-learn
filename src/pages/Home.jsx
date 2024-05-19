@@ -87,7 +87,6 @@ const Home = () => {
         SessionStartedAt: '',
         CaptureTime: '',
         Session_for:'SA-quiz',
-        SessionEndedAt: ''
     })
 
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
