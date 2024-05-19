@@ -24,13 +24,14 @@ const Home = () => {
         }));
         window.open('http://4.157.125.46', '_blank')
     };
-    
+
     const handleSessionEnd = async () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setSessionStarted(false);
         setUserData(prevUserData => {
             const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime };
-            
+            // reset SessionEndedAt to empty string
+            setUserData(prevUserData => ({...prevUserData, SessionEndedAt: ''}));
             
             // Save user data to api
             (async () => {
