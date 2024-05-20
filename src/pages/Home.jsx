@@ -35,7 +35,7 @@ const Home = () => {
         const currentTime = new Date().toLocaleTimeString([], {hour12: false});
         setSessionStarted(false);
         setUserData(prevUserData => {
-            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime };
+            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime, CaptureTime: currentTime};
             
             // Save user data to api
             (async () => {
