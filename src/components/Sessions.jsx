@@ -4,6 +4,7 @@ const SessionTable = () => {
     const [sessions, setSessions] = useState([]);
     const [filterEmail, setFilterEmail] = useState('');
     const [filterDuration, setFilterDuration] = useState('');
+    const [filterSessionType, setFilterSessionType] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
@@ -13,8 +14,11 @@ const SessionTable = () => {
     }, []);
 
     const filteredSessions = sessions.filter(session => {
-        return session.userEmail.includes(filterEmail) && session.Session_Duration >= filterDuration;
+        return session.userEmail.includes(filterEmail) 
+            && session.Session_Duration >= filterDuration
+            && (filterSessionType === '' || session.session_for === filterSessionType);
     });
+
 
     return (
         <div className="flex flex-col items-start justify-start h-[80dvh] overflow-scroll">
@@ -26,6 +30,15 @@ const SessionTable = () => {
                     onChange={e => setFilterEmail(e.target.value)} 
                     className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
                 />
+                <select 
+                    value={filterSessionType} 
+                    onChange={e => setFilterSessionType(e.target.value)} 
+                    className="mb-4 p-2 border border-gray-300 rounded"
+                >
+                    <option value="">All session types</option>
+                    <option value="SA-quiz">SA-quiz</option>
+                    <option value="MOT-quiz">MOT-quiz</option>
+                </select>
                 <select 
                     value={filterDuration} 
                     onChange={e => setFilterDuration(e.target.value)} 
