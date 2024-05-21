@@ -44,6 +44,7 @@ const SessionTable = () => {
                     className="mb-4 p-2 border border-gray-300 rounded"
                 >
                     <option value="">All session types</option>
+                    <option value="assignment">Assignment</option>
                     <option value="SA-quiz">SA-quiz</option>
                     <option value="MOT-quiz">MOT-quiz</option>
                 </select>
