@@ -68,7 +68,7 @@ const Home = () => {
 
                     console.log("Data sent to API successfully");
                     setUserDataChanged(false);
-    
+
                     // Reset SessionEndedAt field
                     setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
                     setSessionStarted(false);
@@ -76,7 +76,7 @@ const Home = () => {
                     console.error('There was a problem with the fetch operation: ', error);
                 }
             })();
-    
+
             return updatedUserData;
         });
     };
@@ -90,9 +90,9 @@ const Home = () => {
     const [userData, setUserData] = useState({
         userEmail:'',
         dominantEmotion: '',
-        arousal: '',
-        valence: '',
-        attention:'',
+        arousal: 0,
+        valence: 0,
+        attention:0,
         volume: 0,
         SessionStartedAt: '',
         CaptureTime: '',

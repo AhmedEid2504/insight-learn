@@ -76,6 +76,15 @@ const Sidebar = (props) => {
                                         Users Data
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link 
+                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/sessions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/sessions"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-8' src="/images/sessions.png" alt="sessions icon" />
+                                        Users Data
+                                    </Link>
+                                </li>
                             </ul>
                         ) : (
                             <ul className='text-xl flex flex-col gap-3'>
@@ -134,6 +143,14 @@ const Sidebar = (props) => {
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/user-data.png" alt="user data icon" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/sessions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/sessions"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
                                     </Link>
                                 </li>
                                 

@@ -15,6 +15,7 @@ import Users from './components/Users';
 import UsersData from './components/UsersData';
 import AddUser from './components/AddUser';
 import Usage from './components/Usage';
+import Sessions from './components/Sessions';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
 
@@ -37,6 +38,7 @@ function App() {
                             <Route path='usersdata' element={<UsersData />}/>
                             <Route path='add-user' element={<AddUser />}/>
                             <Route path='materials' element={<Materials/>}/>
+                            <Route path='Sessions' element={<Sessions/>}/>
                             <Route path='courses' element={<Courses/>}>
                                 <Route path=':courseId' element={<CourseDetail />}/>
                             </Route>
