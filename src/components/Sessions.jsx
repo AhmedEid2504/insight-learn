@@ -37,7 +37,7 @@ const SessionTable = () => {
             {
                 label: 'Session Duration',
                 data: filteredSessions.map(session => session.Session_Duration),
-                fill: false,
+                fill: true,
                 backgroundColor: 'rgb(75, 192, 192)',
                 borderColor: 'rgba(75, 192, 192, 0.2)',
             },
