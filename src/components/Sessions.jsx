@@ -9,7 +9,15 @@ const SessionTable = () => {
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
             .then(response => response.json())
-            .then(data => setSessions(data))
+            .then(data => {
+                const modifiedData = data.map(session => {
+                    if (session.session_for === '') {
+                        session.session_for = 'assignment';
+                    }
+                    return session;
+                });
+                setSessions(modifiedData);
+            })
             .catch(error => console.error('Error:', error));
     }, []);
 
