@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
 
+Chart.register(CategoryScale);
 const SessionTable = () => {
     const [sessions, setSessions] = useState([]);
     const [filterEmail, setFilterEmail] = useState('');
@@ -27,9 +31,23 @@ const SessionTable = () => {
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
 
+    const chartData = {
+        labels: filteredSessions.map((session, index) => `Session ${index + 1}`),
+        datasets: [
+            {
+                label: 'Session Duration',
+                data: filteredSessions.map(session => session.Session_Duration),
+                fill: false,
+                backgroundColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgba(75, 192, 192, 0.2)',
+            },
+        ],
+    };
+
 
     return (
         <div className="flex flex-col items-start justify-start h-[80dvh] overflow-scroll">
+            <Line data={chartData} />
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
                 <input 
                     type="text" 
@@ -86,6 +104,7 @@ const SessionTable = () => {
                     </tbody>
                 </table>
             </div>
+            
         </div>
     );
 };
