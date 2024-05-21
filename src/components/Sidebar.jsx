@@ -82,7 +82,7 @@ const Sidebar = (props) => {
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-8' src="/images/sessions.png" alt="sessions icon" />
-                                        Users Data
+                                        Sessions
                                     </Link>
                                 </li>
                             </ul>
