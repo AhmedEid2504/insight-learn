@@ -47,8 +47,11 @@ const SessionTable = () => {
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]  ">
-            
-                <Line data={chartData} />
+            <div className='flex flex-col justify-start items-start overflow-x-scroll'>
+                <div className=' max-sm:w-[45rem] max-sm:h-[50dvh] sm:w-[80vw] sm:h-[50vh]'>
+                    <Line data={chartData} />
+                </div>
+            </div>
             
             <div className='flex flex-col '>
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
