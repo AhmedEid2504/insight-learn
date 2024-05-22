@@ -57,16 +57,13 @@ const Home = () => {
 
                     set(newDataRef, updatedUserData)
                         .then(() => {
-                            console.log("Data saved to Firebase");
+                            console.log("Final Data sent to firebase successfully");
                         })
-                        .catch(() => {
-                            console.error("Error saving:");
+                        .catch((error) => {
+                            console.error("Error saving:", error);
                         })
-                        .finally(() => {
-                            console.log("Final Data sent to firebase");
-                        });
 
-                    console.log("Data sent to API successfully");
+                    console.log("Final Data sent to API successfully");
                     setUserDataChanged(false);
 
                     // Reset SessionEndedAt field
@@ -129,10 +126,8 @@ const Home = () => {
         const response = await fetch('https://dj-render-ldb1.onrender.com/logout/', requestOptions);
     
         if (response.ok) {
-            // Clear token from local storage
             localStorage.removeItem('token');
             setIsLoggedIn(false);
-            // Redirect or perform any other action after logout
             window.location.href = '/login';
         } else {
             // Handle error
@@ -208,7 +203,7 @@ useEffect(() => {
     
                 if (response.ok) {
                     console.log("Data sent to API successfully");
-                    setUserDataChanged(false); // Reset userDataChanged after data is sent
+                    setUserDataChanged(false);
                 } else {
                     console.error("Failed to send data to API:", response.status);
                     console.log(userData);
@@ -217,10 +212,10 @@ useEffect(() => {
                 console.error("Error sending data:", error);
             } finally {
                 if (aTimeoutId) {
-                    clearTimeout(aTimeoutId); // Clear the timeout if it exists
+                    clearTimeout(aTimeoutId); 
                 }
                 aTimeoutId = setTimeout(() => {
-                    setIsSendingData(false); // Reset isSendingData after the delay
+                    setIsSendingData(false); 
                 }, 15000); // 15-second delay
             }
         }
