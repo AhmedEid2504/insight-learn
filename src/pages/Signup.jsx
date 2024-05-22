@@ -11,6 +11,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -109,11 +111,11 @@ const Signup = () => {
                             />
                             <img className="w-[50px] p-3 bg-white" src="images/email-icon.png" alt="email icon" />
                         </div>
-                        <div className="flex justify-between w-full text-c_3">
+                        <div className="flex relative justify-between w-full text-c_3">
                             <img className="w-[50px]" src="/images/lock-icon.jpeg" alt="lock icon" />
                             <input
-                                className='w-[90%] h-13 bg-c_5 p-2 border-none'
-                                type="password"
+                                className='w-[90%] relative h-13 bg-c_5 pr-12 p-2 border-none'
+                                type={showPassword ? "text" : "password"}
                                 id="password"
                                 name="password"
                                 value={password}
@@ -121,18 +123,36 @@ const Signup = () => {
                                 placeholder="Password"
                                 required
                             />
+                            <button className="absolute top-4 right-4" type="button" onClick={() => setShowPassword(!showPassword)}>
+                                <div className='w-5'>
+                                    {showPassword ? 
+                                        <img src="/images/open-eye.png" alt="" />
+                                    : 
+                                        <img src="/images/closed-eye.png" alt="" />
+                                    }
+                                </div>
+                            </button>
                         </div>
-                        <div className="flex justify-between w-full text-c_3">
+                        <div className="flex relative justify-between w-full text-c_3">
                             <input
                                 className='w-[90%] h-13 bg-c_5 p-2 border-none'
-                                type="password"
+                                type={showConfirmPassword ? "text" : "password"}
                                 id="confirmPassword"
                                 name="confirmPassword"
-                                value={confirmPassword}
+                                value={showConfirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="Confirm Password"
                                 required
                             />
+                            <button className="absolute top-4 right-16" type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                            <div className='w-5'>
+                                {showConfirmPassword ? 
+                                    <img src="/images/open-eye.png" alt="" />
+                                : 
+                                    <img src="/images/closed-eye.png" alt="" />
+                                }
+                            </div>
+                        </button>
                             <img className="w-[50px]" src="/images/lock-icon.jpeg" alt="lock icon" />
                         </div>
                         <div className='w-full'>
