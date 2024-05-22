@@ -95,7 +95,7 @@ const Login = () => {
                     <div className="flex relative justify-between w-full text-c_3">
                         
                         <input
-                            className='w-[90%] relative h-13 bg-c_5 p-2 border-none'
+                            className='w-[90%] pr-10 relative h-13 bg-c_5 p-2 border-none'
                             type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
