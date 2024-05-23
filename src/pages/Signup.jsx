@@ -76,7 +76,7 @@ const Signup = () => {
     };
 
     return (
-        <div className='bg-c_5'>
+        <div className='bg-c_5 h-[100dvh]'>
             <div className="flex flex-col self-center items-center py-[150px] h-screen">
                 <Navbar />
                 <h2 className="text-c_3">Already have an account? <span className="">
