@@ -139,7 +139,7 @@ const Signup = () => {
                                 type={showConfirmPassword ? "text" : "password"}
                                 id="confirmPassword"
                                 name="confirmPassword"
-                                value={showConfirmPassword}
+                                value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="Confirm Password"
                                 required
