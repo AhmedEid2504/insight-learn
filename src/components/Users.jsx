@@ -57,24 +57,40 @@ const Users = () => {
                 return user.is_active;
             case 'inactive':
                 return !user.is_active;
+            case 'staff':
+                return user.is_staff;
+            case 'superusers':
+                return user.is_superuser;
             default:
                 return true;
         }
     });
 
     const toggleIsActive = (user) => {
-        fetch('https://dj-render-ldb1.onrender.com/suspend/', {
+        toggleUserStatus(user, 'is_active', 'https://dj-render-ldb1.onrender.com/suspend/');
+    };
+    
+    const toggleIsStaff = (user) => {
+        toggleUserStatus(user, 'is_staff', 'https://dj-render-ldb1.onrender.com/update_user_staff_status/');
+    };
+    
+    const toggleIsSuperuser = (user) => {
+        toggleUserStatus(user, 'is_superuser', 'https://dj-render-ldb1.onrender.com/update_user_superuser_status/');
+    };
+    
+    const toggleUserStatus = (user, statusField, url) => {
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: user.email,
-                is_active: user.is_active ? "False" : "True",
+                [statusField]: user[statusField] ? "False" : "True",
             }),
         })
         .then(() => {
-            const updatedUsers = users.map(u => u.email === user.email ? { ...u, is_active: !u.is_active } : u);
+            const updatedUsers = users.map(u => u.email === user.email ? { ...u, [statusField]: !u[statusField] } : u);
             setUsers(updatedUsers);
         })
         .catch((error) => {
@@ -114,14 +130,16 @@ const Users = () => {
                     <option value="startsWith">Starts with</option>
                     <option value="endsWith">Ends with</option>
                 </select>
-                <select
-                    value={filterActive}
-                    onChange={event => setFilterActive(event.target.value)}
-                    className="p-2 mb-4 border-2 border-c_2 rounded-md"
+                <select 
+                    value={filterActive} 
+                    onChange={e => setFilterActive(e.target.value)} 
+                    className="form-select block w-full p-2 mb-4 border-2 border-c_2 rounded-md"
                 >
                     <option value="all">All</option>
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
+                    <option value="staff">Staff</option>
+                    <option value="superusers">Superusers</option>
                 </select>
             </div>
             <div className="flex bg-c_5 p-3 rounded-md shadow-md flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
@@ -137,12 +155,35 @@ const Users = () => {
                                 <p className="text-gray-700 max-sm:text-[90%]">{user.is_active ? 'Active' : 'Not Active'}</p>
                                 <p className="text-sm">Total Time On Site: {user.Total_Session_Duration_Txt}</p>
                             </div>
-                            <button 
-                                onClick={() => toggleIsActive(user)}
-                                className="bg-c_1 max-sm:p-0.5 max-sm:text-sm p-2 text-white hover:text-white hover:bg-opacity-[30%] border-2 border-c_3 transition-all duration-200 ease-in"
-                                >
-                                {user.is_active ? "Suspend" : "Activate"}
-                            </button>
+                            <div className="flex space-x-4">
+                                <label className="flex cursor-pointer items-center">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={user.is_active} 
+                                        onChange={() => toggleIsActive(user)}
+                                        className="form-checkbox cursor-pointer h-5 w-5 text-blue-600"
+                                    />
+                                    <span className="ml-2 text-gray-700">Active</span>
+                                </label>
+                                <label className="flex cursor-pointer items-center">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={user.is_staff} 
+                                        onChange={() => toggleIsStaff(user)}
+                                        className="form-checkbox cursor-pointer h-5 w-5 text-blue-600"
+                                    />
+                                    <span className="ml-2 text-gray-700">Staff</span>
+                                </label>
+                                <label className="flex cursor-pointer items-center">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={user.is_superuser} 
+                                        onChange={() => toggleIsSuperuser(user)}
+                                        className="form-checkbox cursor-pointer h-5 w-5 text-blue-600"
+                                    />
+                                    <span className="ml-2 text-gray-700">Superuser</span>
+                                </label>
+                            </div>
                         </div>
                     ))}
                 </>
