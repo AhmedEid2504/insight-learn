@@ -9,7 +9,7 @@ const Courses = () => {
         const fetchCourses = async () => {
             try {
                 const response = await axios.get('https://dj-render-ldb1.onrender.com/fetchcourse');
-                const mappedData = response.data.data5.map(course => ({
+                const mappedData = response.data.map(course => ({
                     id: course.id,
                     name: course.Course,
                     semester: course.Semester
