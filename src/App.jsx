@@ -19,7 +19,6 @@ import Sessions from './components/Sessions';
 import TotalSessions from './components/TotalSessions';
 import QuizReport from './components/QuizReports';
 function App() {
-    const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
     const [user, setUser] = useState(null);
 
     return (
@@ -29,7 +28,6 @@ function App() {
                     <Route path="/" element={<Home user={user} setUser={setUser} />} />
                     <Route path="/login" element={<Login setUser={setUser} />} />
                     <Route path="/signup" element={<Signup />} />
-                    {adminEmails.includes(localStorage.userEmail) && 
                     <>
                         <Route path="dashboard" element={<Dashboard />} >
                             <Route path='reports' element={<Reports />}/>
@@ -47,7 +45,6 @@ function App() {
                             <Route path="quizreports/:courseName" element={<QuizReport />} />
                         </Route>
                     </>
-                    }
                 </Routes>
             </Router>
             <Analytics />

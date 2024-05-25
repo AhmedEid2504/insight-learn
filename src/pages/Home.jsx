@@ -247,7 +247,8 @@ useEffect(() => {
 
     return (
         <div className="flex flex-col w-full">
-            <Navbar 
+            <Navbar
+                user={props.user}
                 isLoggedIn={isLoggedIn} 
                 userEmail={userData.userEmail} 
                 handleLogout={handleLogout} 
