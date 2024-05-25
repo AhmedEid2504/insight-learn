@@ -33,7 +33,7 @@
 
 
 ::-webkit-scrollbar-track {
-    background:white;
+    background:transparent;
     cursor: pointer;
 }
 

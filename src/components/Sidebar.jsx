@@ -85,6 +85,15 @@ const Sidebar = (props) => {
                                         Sessions
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link 
+                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/courses" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/courses"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-8' src="/images/courses.png" alt="courses icon" />
+                                        Courses
+                                    </Link>
+                                </li>
                             </ul>
                         ) : (
                             <ul className='text-xl flex flex-col gap-3'>
@@ -151,6 +160,14 @@ const Sidebar = (props) => {
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/courses" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/courses"
+                                        onClick={() => props.toggleSideBar()}
+                                    >
+                                        <img className='w-10' src="/images/courses.png" alt="courses icon" />
                                     </Link>
                                 </li>
                                 

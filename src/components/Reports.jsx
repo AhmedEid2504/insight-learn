@@ -12,6 +12,7 @@ const Reports = () => {
     const [showAttention, setShowAttention] = useState(true);
     const [showArousal, setShowArousal] = useState(true);
     const [showValence, setShowValence] = useState(true);
+    // const [imageSrc, setImageSrc] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
@@ -27,6 +28,19 @@ const Reports = () => {
             })
             .catch(error => console.error('Error:', error));
     }, []);
+
+    // useEffect(() => {
+    //     fetch('https://grad-go2g.onrender.com/unique/') // Replace with your API URL
+    //         .then(response => {
+    //             const base64Data = response.data.image; // Assuming the API response contains a key 'image'
+    //             setImageSrc(base64Data);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching the image:', error);
+    //         });
+    // }, []);
+
+    
 
     const filterSessions = () => {
         return sessions.filter(session => {
@@ -134,6 +148,8 @@ const Reports = () => {
     return (
         <div className="flex flex-wrap gap-5 h-[80dvh]">
             <div className='flex flex-col'>
+            {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
+
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
                     <input 
                         type="text" 

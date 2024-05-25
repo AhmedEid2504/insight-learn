@@ -1,25 +1,57 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Courses = () => {
-    // Replace this with your actual list of courses
-    const courses = [
-        { id: 1, name: 'Course 1', description: 'This is course 1' },
-        { id: 2, name: 'Course 2', description: 'This is course 2' },
-        { id: 3, name: 'Course 3', description: 'This is course 3' },
-    ];
+    const [courses, setCourses] = useState([]);
+    const [selectedSemester, setSelectedSemester] = useState(null);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await axios.get('https://dj-render-ldb1.onrender.com/fetchcourse');
+                const mappedData = response.data.data5.map(course => ({
+                    id: course.id,
+                    name: course.Course,
+                    semester: course.Semester
+                }));
+                setCourses(mappedData);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+
+        fetchCourses();
+    }, []);
+
+    const semesters = [...new Set(courses.map(course => course.semester))];
 
     return (
-        <div className="p-6">
-            <h1 className="text-3xl font-bold mb-4">Courses</h1>
-            {courses.map((course) => (
-                <div key={course.id} className="mb-6 p-4 border rounded shadow">
-                    <h2 className="text-xl font-semibold mb-2">{course.name}</h2>
-                    <p className="mb-2">{course.description}</p>
-                    <Link to={`/dashboard/courses/${course.id}`} className="text-blue-500 hover:underline">View Details</Link>
+        <div className="container mx-auto h-[90dvh] flex flex-col gap-5">
+            <div className='bg-c_5 p-5 flex flex-col shadow-md'>
+                <h1 className="text-2xl self-center font-bold mb-4">Semesters</h1>
+                <div className="flex flex-wrap overflow-scroll h-[40dvh] max-sm:h-[30dvh] justify-start">
+                    {semesters.map((semester, index) => (
+                        <div key={index} className="p-4 border rounded-lg hover:bg-black hover:bg-opacity-10  shadow-md m-2 cursor-pointer" onClick={() => setSelectedSemester(semester)}>
+                            <h2 className="text-lg font-semibold">{semester}</h2>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
+
+            {selectedSemester && (
+                <div className='bg-c_5 p-5 flex flex-col shadow-md'>
+                    <h1 className="text-2xl font-bold mb-4">Courses for {selectedSemester}</h1>
+                    <div className="flex flex-wrap overflow-scroll h-[30dvh] max-sm:h-[20dvh] justify-start">
+                        {courses.filter(course => course.semester === selectedSemester).map((course) => (
+                            <div key={course.id} className="p-4 border flex justify-center items-center rounded-lg hover:bg-black hover:bg-opacity-10  shadow-md m-2 cursor-pointer">
+                                <h2 className="text-lg font-semibold">{course.name}</h2>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
-};
+}
 
 export default Courses;

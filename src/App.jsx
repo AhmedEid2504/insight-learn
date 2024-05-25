@@ -10,13 +10,13 @@ import Predictions from './components/Predictions';
 import { Analytics } from "@vercel/analytics/react"
 import Materials from './components/Materials';
 import Courses from './components/Courses';
-import CourseDetail from './components/CourseDetail';
 import Users from './components/Users';
 import UsersData from './components/UsersData';
 import AddUser from './components/AddUser';
 import Usage from './components/Usage';
 import Sessions from './components/Sessions';
 import TotalSessions from './components/TotalSessions';
+import QuizReport from './components/QuizReport';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
 
@@ -41,10 +41,8 @@ function App() {
                             <Route path='materials' element={<Materials/>}/>
                             <Route path='sessions' element={<Sessions/>}/>
                             <Route path='totalsessions' element={<TotalSessions/>}/>
-                            
-                            <Route path='courses' element={<Courses/>}>
-                                <Route path=':courseId' element={<CourseDetail />}/>
-                            </Route>
+                            <Route path='quizreport' element={<QuizReport/>}/>
+                            <Route path='courses' element={<Courses/>}/>
                         </Route>
                     </>
                     }
