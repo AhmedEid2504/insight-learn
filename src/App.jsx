@@ -16,7 +16,7 @@ import AddUser from './components/AddUser';
 import Usage from './components/Usage';
 import Sessions from './components/Sessions';
 import TotalSessions from './components/TotalSessions';
-import QuizReport from './components/QuizReport';
+import QuizReport from './components/QuizReports';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
 
