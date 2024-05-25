@@ -43,6 +43,7 @@ function App() {
                             <Route path='totalsessions' element={<TotalSessions/>}/>
                             <Route path='quizreport' element={<QuizReport/>}/>
                             <Route path='courses' element={<Courses/>}/>
+                            <Route path="quizreports/:courseName" element={<QuizReport />} />
                         </Route>
                     </>
                     }

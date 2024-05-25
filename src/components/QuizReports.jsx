@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
@@ -5,9 +6,8 @@ import Chart from 'chart.js/auto';
 
 Chart.register(CategoryScale);
 
-const QuizReport = () => {
+const QuizReport = (props) => {
     const [quizzes, setQuizzes] = useState([]);
-    const [filterEmail, setFilterEmail] = useState('');
     const [filterCourse, setFilterCourse] = useState('');
     const [filterSemester, setFilterSemester] = useState('');
 
@@ -24,20 +24,25 @@ const QuizReport = () => {
         .catch(error => console.error('Error:', error));
     }, []);
 
-    const filteredQuizzes = quizzes.filter(quiz => {
-        return quiz.email.includes(filterEmail) 
-            && quiz.Course.includes(filterCourse)
-            && quiz.Semester.includes(filterSemester);
-    });
+
+    const filteredQuizzes = quizzes.filter(quiz => quiz.Course === props.courseName);
+
+
+    const gradeRanges = {
+        'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
+        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 10 && quiz.sumgrades < 15).length,
+        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 15 && quiz.sumgrades < 20).length,
+        'More than 20': filteredQuizzes.filter(quiz => quiz.sumgrades > 20).length,
+    };
 
     const chartData = {
-        labels: filteredQuizzes.map((quiz, index) => `Quiz ${index + 1}`),
+        labels: Object.keys(gradeRanges),
         datasets: [
             {
-                label: 'Quiz Grades',
-                data: filteredQuizzes.map(quiz => quiz.sumgrades),
-                backgroundColor: filteredQuizzes.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`),
-                borderColor: filteredQuizzes.map(() => 'rgba(0, 0, 0, 0.1)'),
+                label: 'Students',
+                data: Object.values(gradeRanges),
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
                 borderWidth: 1,
             },
         ],
@@ -53,13 +58,6 @@ const QuizReport = () => {
             
             <div className='flex flex-col'>
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
-                    <input 
-                        type="text" 
-                        placeholder="Filter by email" 
-                        value={filterEmail} 
-                        onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
-                    />
                     <input 
                         type="text" 
                         placeholder="Filter by course" 
