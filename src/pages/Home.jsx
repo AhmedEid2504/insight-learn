@@ -53,7 +53,7 @@ const Home = (props) => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const dataRef = ref(database, "data/" + props.user.username + "/" + userData.SessionStartedAt + "/");
+                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
                     const newDataRef = push(dataRef);
 
                     set(newDataRef, updatedUserData)
@@ -85,6 +85,7 @@ const Home = (props) => {
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const username = localStorage.getItem( "username" )
     const [userData, setUserData] = useState({
         userEmail:'',
         dominantEmotion: '',
@@ -106,7 +107,7 @@ const Home = (props) => {
         
         if (token) {
             setIsLoggedIn(true);
-            setUserData(prevUserData => ({...prevUserData, userEmail: props.user.email}));
+            setUserData(prevUserData => ({...prevUserData, userEmail: localStorage.email}));
         } else {
             window.location.href = '/login';
         }
@@ -127,6 +128,8 @@ const Home = (props) => {
     
         if (response.ok) {
             localStorage.removeItem('token');
+            localStorage.removeItem('email');
+            localStorage.removeItem('username');
             setIsLoggedIn(false);
             window.location.href = '/login';
         } else {
@@ -160,7 +163,7 @@ const Home = (props) => {
     
     async function saveToFirebase() {
     if ( userDataChanged && sessionStarted && !isSendingData) {
-        const dataRef = ref(database, "data/" + props.user.username + "/" + userData.SessionStartedAt + "/");
+        const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
@@ -285,7 +288,7 @@ useEffect(() => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
                 userEmail={userData.userEmail}
-                username={props.user.username}
+                username={username}
             />
             
             <div className="h-[260px] max-md:h-[360px] max-sm:h-[350px] w-full flex bg-c_1">

@@ -54,6 +54,12 @@ const Login = ({ setUser }) => {
             if (response.ok) {
                 // Store token in local storage
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('email', data.user.email);
+                localStorage.setItem('username', data.user.username);
+                localStorage.setItem('is_active', data.user.is_active);
+                localStorage.setItem('is_staff', data.user.is_staff);
+                localStorage.setItem('is_superuser', data.user.is_superuser);
+                // Set user state
                 setUser({
                     token: data.token,
                     email: data.user.email,

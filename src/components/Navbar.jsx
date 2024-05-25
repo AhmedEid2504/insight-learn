@@ -9,6 +9,12 @@ const Navbar =(props) => {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const location = useLocation();
     const ulRef = useRef(null);
+    // const username = localStorage.getItem('username');
+    // const email = localStorage.getItem('email');
+    // const is_active = localStorage.getItem('is_active');
+    const is_staff = localStorage.getItem('is_staff');
+    const is_superuser = localStorage.getItem('is_superuser');
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -66,7 +72,7 @@ const Navbar =(props) => {
                                 </div>
                             :
                                 <div className="flex gap-5">
-                                    {(props.user.is_superuser || props.user.is_staff ) && 
+                                    {(is_superuser || is_staff ) && 
                                         <>
                                             <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
                                             <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
@@ -97,7 +103,7 @@ const Navbar =(props) => {
                                                 </div>
                                             :
                                             <div className="flex flex-col gap-3">
-                                                    {(props.user.is_superuser || props.user.is_staff ) && 
+                                                    {(is_superuser || is_staff ) && 
                                                         <div>
                                                             <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
                                                         </div>
