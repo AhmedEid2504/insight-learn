@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 
@@ -15,7 +15,7 @@ const QuizReport = () => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
         .then(response => response.json())
         .then(data => {
-            const mappedData = data.data.map(quiz => ({
+            const mappedData = data.map(quiz => ({
                 ...quiz,
                 sumgrades: parseFloat(quiz.sumgrades)
             }));
@@ -36,9 +36,9 @@ const QuizReport = () => {
             {
                 label: 'Quiz Grades',
                 data: filteredQuizzes.map(quiz => quiz.sumgrades),
-                fill: true,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+                backgroundColor: filteredQuizzes.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`),
+                borderColor: filteredQuizzes.map(() => 'rgba(0, 0, 0, 0.1)'),
+                borderWidth: 1,
             },
         ],
     };
@@ -47,7 +47,7 @@ const QuizReport = () => {
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]">
             <div className='flex flex-col justify-start items-start overflow-x-scroll'>
                 <div className=' max-sm:w-[45rem] max-sm:h-[50dvh] sm:w-[80vw] sm:h-[50vh]'>
-                    <Line data={chartData} />
+                    <Pie data={chartData} />
                 </div>
             </div>
             
