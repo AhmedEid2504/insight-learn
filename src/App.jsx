@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import Home from './pages/Home'
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+// import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
@@ -27,7 +27,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home user={user} setUser={setUser} />} />
                     <Route path="/login" element={<Login setUser={setUser} />} />
-                    <Route path="/signup" element={<Signup />} />
+                    {/* <Route path="/signup" element={<Signup />} /> */}
                     <>
                         <Route path="dashboard" element={<Dashboard />} >
                             <Route path='reports' element={<Reports />}/>
