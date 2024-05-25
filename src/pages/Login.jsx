@@ -1,14 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    
 
     const handleChange = (event) => {
         if(event.target.name === 'email') {
@@ -51,10 +54,16 @@ const Login = () => {
             if (response.ok) {
                 // Store token in local storage
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('userEmail', data.user.email);
-                localStorage.setItem('username', data.user.username);
+                setUser({
+                    token: data.token,
+                    email: data.user.email,
+                    username: data.user.username,
+                    is_active: data.user.is_active,
+                    is_staff: data.user.is_staff,
+                    is_superuser: data.user.is_superuser,
+                });
                 // Redirect using router after successful login
-                window.location.href = '/';
+                navigate('/');
             } else {
                 // Handle error here
                 setErrorMessage(data.details);

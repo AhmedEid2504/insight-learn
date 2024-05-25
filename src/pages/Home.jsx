@@ -14,7 +14,8 @@ import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerCompo
 import { set, ref, push } from "firebase/database";
 import {database} from "/src/firebase";
 
-const Home = () => {
+const Home = (props) => {
+    
     const handleSessionStart = () => {
         try {
             setSessionStarted(true);
@@ -52,7 +53,7 @@ const Home = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+                    const dataRef = ref(database, "data/" + props.user.username + "/" + userData.SessionStartedAt + "/");
                     const newDataRef = push(dataRef);
 
                     set(newDataRef, updatedUserData)
@@ -99,14 +100,13 @@ const Home = () => {
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
-    const username = localStorage.getItem( "username" )
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
-        const userEmail = localStorage.getItem('userEmail');
+        
         if (token) {
             setIsLoggedIn(true);
-            setUserData(prevUserData => ({...prevUserData, userEmail: userEmail}));
+            setUserData(prevUserData => ({...prevUserData, userEmail: props.user.email}));
         } else {
             window.location.href = '/login';
         }
@@ -160,7 +160,7 @@ const Home = () => {
     
     async function saveToFirebase() {
     if ( userDataChanged && sessionStarted && !isSendingData) {
-        const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+        const dataRef = ref(database, "data/" + props.user.username + "/" + userData.SessionStartedAt + "/");
         const newDataRef = push(dataRef);
 
         set(newDataRef, userData)
@@ -284,7 +284,7 @@ useEffect(() => {
                 handleSessionEnd={handleSessionEnd}
                 sessionStarted={sessionStarted}
                 userEmail={userData.userEmail}
-                username={username}
+                username={props.user.username}
             />
             
             <div className="h-[260px] max-md:h-[360px] max-sm:h-[350px] w-full flex bg-c_1">
