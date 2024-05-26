@@ -26,7 +26,7 @@ const Home = () => {
                 CaptureTime: currentTime,
                 SessionStartedAt: currentTime
             }));
-            window.open('http://4.157.125.46', '_blank');
+            window.open('http://insightlearn.me/', '_blank');
         } catch (error) {
             console.error("Error starting session:", error);
         }
