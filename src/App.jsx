@@ -4,19 +4,18 @@ import Home from './pages/Home'
 import Login from './pages/Login';
 // import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import Reports from './components/Reports';
+import Reports from './components/reports/Reports';
 import Settings from './components/Settings';
-import Predictions from './components/Predictions';
+import Predictions from './components/reports/Predictions';
 import { Analytics } from "@vercel/analytics/react"
-import Materials from './components/Materials';
-import Courses from './components/Courses';
-import Users from './components/Users';
-import UsersData from './components/UsersData';
+import Courses from './components/reports/Courses';
+import Users from './components/reports/Users';
+import UsersData from './components/reports/UsersData';
 import AddUser from './components/AddUser';
-import Usage from './components/Usage';
-import Sessions from './components/Sessions';
-import TotalSessions from './components/TotalSessions';
-import QuizReport from './components/QuizReports';
+import Usage from './components/reports/Usage';
+import Sessions from './components/reports/Sessions';
+import TotalSessions from './components/reports/TotalSessions';
+import QuizReport from './components/reports/QuizReports';
 function App() {
 
     return (
@@ -35,7 +34,6 @@ function App() {
                             <Route path="users" element={<Users />} />
                             <Route path='usersdata' element={<UsersData />}/>
                             <Route path='add-user' element={<AddUser />}/>
-                            <Route path='materials' element={<Materials/>}/>
                             <Route path='sessions' element={<Sessions/>}/>
                             <Route path='totalsessions' element={<TotalSessions/>}/>
                             <Route path='quizreport' element={<QuizReport/>}/>
