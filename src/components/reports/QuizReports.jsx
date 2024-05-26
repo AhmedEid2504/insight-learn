@@ -10,6 +10,7 @@ const QuizReport = (props) => {
     const [quizzes, setQuizzes] = useState([]);
     const [filterCourse, setFilterCourse] = useState('');
     const [filterSemester, setFilterSemester] = useState('');
+    const [gradeRange, setGradeRange] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
@@ -25,8 +26,24 @@ const QuizReport = (props) => {
     }, []);
 
 
-    const filteredQuizzes = quizzes.filter(quiz => quiz.Course === props.courseName);
+    const filteredQuizzes = quizzes.filter(quiz => {
+        if (quiz.Course !== props.courseName) {
+            return false;
+        }
 
+        switch (gradeRange) {
+            case '0-10':
+                return quiz.sumgrades < 10;
+            case '10-15':
+                return quiz.sumgrades >= 10 && quiz.sumgrades < 15;
+            case '15-20':
+                return quiz.sumgrades >= 15 && quiz.sumgrades < 20;
+            case '20+':
+                return quiz.sumgrades > 20;
+            default:
+                return true;
+        }
+    });
 
     const gradeRanges = {
         'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
@@ -58,20 +75,17 @@ const QuizReport = (props) => {
             
             <div className='flex flex-col'>
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
-                    <input 
-                        type="text" 
-                        placeholder="Filter by course" 
-                        value={filterCourse} 
-                        onChange={e => setFilterCourse(e.target.value)} 
-                        className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
-                    />
-                    <input 
-                        type="text" 
-                        placeholder="Filter by semester" 
-                        value={filterSemester} 
-                        onChange={e => setFilterSemester(e.target.value)} 
-                        className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
-                    />
+                    <select 
+                        value={gradeRange} 
+                        onChange={e => setGradeRange(e.target.value)} 
+                        className="mb-4 p-2 w-[100%] border border-gray-300 rounded"
+                    >
+                        <option value="">All grades</option>
+                        <option value="0-10">Less than 10</option>
+                        <option value="10-15">10 to 15</option>
+                        <option value="15-20">15 to 20</option>
+                        <option value="20+">More than 20</option>
+                    </select>
                 </div>
                 <div className="shadow h-[40dvh] w-[80vw] overflow-scroll l border-b border-gray-200  sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
