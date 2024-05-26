@@ -14,7 +14,7 @@ import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerCompo
 import { set, ref, push } from "firebase/database";
 import {database} from "/src/firebase";
 
-const Home = (props) => {
+const Home = () => {
     
     const handleSessionStart = () => {
         try {
@@ -130,6 +130,10 @@ const Home = (props) => {
             localStorage.removeItem('token');
             localStorage.removeItem('email');
             localStorage.removeItem('username');
+            localStorage.removeItem('is_active');
+            localStorage.removeItem('is_staff');
+            localStorage.removeItem('is_superuser');
+            
             setIsLoggedIn(false);
             window.location.href = '/login';
         } else {
@@ -251,7 +255,6 @@ useEffect(() => {
     return (
         <div className="flex flex-col w-full">
             <Navbar
-                user={props.user}
                 isLoggedIn={isLoggedIn} 
                 userEmail={userData.userEmail} 
                 handleLogout={handleLogout} 

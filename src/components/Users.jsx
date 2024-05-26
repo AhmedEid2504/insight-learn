@@ -11,22 +11,39 @@ const Users = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch users
-        fetch('https://dj-render-ldb1.onrender.com/users/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => setUsers(data))
-        .then(() => setIsLoading(false)) 
-        .catch(error => console.error('Error:', error));
+        const fetchData = async () => {
+            try {
+                // Fetch users
+                const usersResponse = await fetch('https://dj-render-ldb1.onrender.com/users/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const usersData = await usersResponse.json();
+                console.log('Users data:', usersData);
+                setUsers(usersData);
 
-        // Fetch session durations
-        fetch('https://dj-render-ldb1.onrender.com/total_sessions_duration/')
-            .then(response => response.json())
-            .then(data => setSessionDurations(data));
+                // Fetch session durations
+                fetch('https://dj-render-ldb1.onrender.com/total_sessions_duration/') // Replace with your API URL
+                    .then(response => response.json())
+                    .then(data => {
+                        const mappedData = data.map(user => ({
+                            ...user,
+                            
+                        }));
+                        setSessionDurations(mappedData);
+                    })
+                    .catch(error => console.error('Error:', error));
+
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
     }, []);
 
     // Merge users and session durations
@@ -38,7 +55,7 @@ const Users = () => {
             Total_Session_Duration_Txt: sessionDuration ? sessionDuration.Total_Session_Duration_Txt : '0 minutes'
         };
     });
-    
+
     const filteredUsers = mergedUsers.filter(user => {
         let userValue = user.username.toLowerCase();
         let term = searchTerm.toLowerCase();
@@ -66,18 +83,6 @@ const Users = () => {
         }
     });
 
-    const toggleIsActive = (user) => {
-        toggleUserStatus(user, 'is_active', 'https://dj-render-ldb1.onrender.com/suspend/');
-    };
-    
-    const toggleIsStaff = (user) => {
-        toggleUserStatus(user, 'is_staff', 'https://dj-render-ldb1.onrender.com/update_user_staff_status/');
-    };
-    
-    const toggleIsSuperuser = (user) => {
-        toggleUserStatus(user, 'is_superuser', 'https://dj-render-ldb1.onrender.com/update_user_superuser_status/');
-    };
-    
     const toggleUserStatus = (user, statusField, url) => {
         fetch(url, {
             method: 'POST',
@@ -98,10 +103,21 @@ const Users = () => {
         });
     };
 
+    const toggleIsActive = (user) => {
+        toggleUserStatus(user, 'is_active', 'https://dj-render-ldb1.onrender.com/suspend/');
+    };
+    
+    const toggleIsStaff = (user) => {
+        toggleUserStatus(user, 'is_staff', 'https://dj-render-ldb1.onrender.com/update_user_staff_status/');
+    };
+    
+    const toggleIsSuperuser = (user) => {
+        toggleUserStatus(user, 'is_superuser', 'https://dj-render-ldb1.onrender.com/update_user_superuser_status/');
+    };
+
     if (isLoading) {
         return <div>Loading...</div>; // Replace this with your skeleton loading screen
     }
-
 
     // Get current users
     const indexOfLastUser = currentPage * usersPerPage;
@@ -148,14 +164,13 @@ const Users = () => {
                 : 
                 <>
                     {currentUsers.map(user => (
-                        <div key={user.id} className=" flex max-sm:flex-col gap-5 justify-between items-center border-2 max-sm:w-[70%] w-full border-c_2 p-4 m-2 rounded-md ">
+                        <div key={user.id} className="flex max-sm:flex-col gap-5 justify-between items-center border-2 max-sm:w-[70%] w-full border-c_2 p-4 m-2 rounded-md ">
                             <div>
                                 <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>
                                 <p className="text-gray-700 max-sm:text-[75%]">{user.email}</p>
                                 <p className="text-gray-700 max-sm:text-[90%]">{user.is_active ? 'Active' : 'Not Active'}</p>
-                                <p className="text-sm">Total Time On Site: {user.Total_Session_Duration_Txt}</p>
                             </div>
-                            <div className="flex space-x-4">
+                            <div className="flex flex-wrap justify-center items-center space-x-2">
                                 <label className="flex cursor-pointer items-center">
                                     <input 
                                         type="checkbox" 
@@ -201,7 +216,7 @@ const Users = () => {
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Users;

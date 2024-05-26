@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Login = ({ setUser }) => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -60,14 +60,6 @@ const Login = ({ setUser }) => {
                 localStorage.setItem('is_staff', data.user.is_staff);
                 localStorage.setItem('is_superuser', data.user.is_superuser);
                 // Set user state
-                setUser({
-                    token: data.token,
-                    email: data.user.email,
-                    username: data.user.username,
-                    is_active: data.user.is_active,
-                    is_staff: data.user.is_staff,
-                    is_superuser: data.user.is_superuser,
-                });
                 // Redirect using router after successful login
                 navigate('/');
             } else {

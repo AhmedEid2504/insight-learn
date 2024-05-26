@@ -1,6 +1,5 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import Home from './pages/Home'
 import Login from './pages/Login';
 // import Signup from './pages/Signup';
@@ -19,14 +18,13 @@ import Sessions from './components/Sessions';
 import TotalSessions from './components/TotalSessions';
 import QuizReport from './components/QuizReports';
 function App() {
-    const [user, setUser] = useState(null);
 
     return (
         <div className="h-auto flex flex-col justify-between">
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home user={user} setUser={setUser} />} />
-                    <Route path="/login" element={<Login setUser={setUser} />} />
+                    <Route path="/" element={<Home  />} />
+                    <Route path="/login" element={<Login />} />
                     {/* <Route path="/signup" element={<Signup />} /> */}
                     <>
                         <Route path="dashboard" element={<Dashboard />} >
