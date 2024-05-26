@@ -8,8 +8,6 @@ Chart.register(CategoryScale);
 
 const QuizReport = (props) => {
     const [quizzes, setQuizzes] = useState([]);
-    const [filterCourse, setFilterCourse] = useState('');
-    const [filterSemester, setFilterSemester] = useState('');
     const [gradeRange, setGradeRange] = useState('');
 
     useEffect(() => {
