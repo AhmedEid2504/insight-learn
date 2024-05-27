@@ -29,19 +29,6 @@ const Reports = () => {
             .catch(error => console.error('Error:', error));
     }, []);
 
-    // useEffect(() => {
-    //     fetch('https://grad-go2g.onrender.com/unique/') // Replace with your API URL
-    //         .then(response => {
-    //             const base64Data = response.data.image; // Assuming the API response contains a key 'image'
-    //             setImageSrc(base64Data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching the image:', error);
-    //         });
-    // }, []);
-
-    
-
     const filterSessions = () => {
         return sessions.filter(session => {
             return session.userEmail.includes(filterEmail) 

@@ -44,7 +44,7 @@ const TotalSessionsGraph = () => {
 
     return (
         <div>
-            <div className=' max-sm:w-[45rem] max-sm:h-[50dvh] sm:w-[80vw] sm:h-[50vh]'>
+            <div className=' max-sm:w-[45rem] max-sm:h-fit sm:w-[80vw] sm:h-fit'>
                 <Line data={chartData} />
             </div>
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
