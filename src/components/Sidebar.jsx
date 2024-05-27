@@ -228,13 +228,6 @@ const Sidebar = (props) => {
                     {props.showSideBar ? 
                         <div className='flex flex-col gap-3'>
                             <Link 
-                                className={`flex p-1 items-center text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                                onClick={() => props.toggleSideBar()}
-                            >
-                                <img className='w-10' src="/images/settingsicon.png" alt="settings icon" />
-                                Settings
-                            </Link>
-                            <Link 
                                 className={`flex p-2 px-2 gap-2 items-center text-xl cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/profile" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/profile"
                                 onClick={() => props.toggleSideBar()}
                             >
@@ -244,12 +237,6 @@ const Sidebar = (props) => {
                         </div>
                     :
                         <div className='flex flex-col gap-2'>
-                            <Link 
-                                className={`flex p-2.5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/settings" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/settings"
-                                onClick={() => props.toggleSideBar()}
-                            >
-                                <img className='w-12' src="/images/settingsicon.png" alt="settings icon" />
-                            </Link>
                             <Link 
                                 className={`flex p-3 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/profile" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/profile"
                                 onClick={() => props.toggleSideBar()}
