@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
+import TotalSessionsGraph from './graphs/TotalSessionsGraph';
 
 Chart.register(CategoryScale);
 const SessionTable = () => {
@@ -31,25 +31,14 @@ const SessionTable = () => {
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
 
-    const chartData = {
-        labels: filteredSessions.map((session, index) => `Session ${index + 1}`),
-        datasets: [
-            {
-                label: 'Session Duration',
-                data: filteredSessions.map(session => session.Session_Duration),
-                fill: true,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
-            },
-        ],
-    };
+
 
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]  ">
             <div className='flex flex-col justify-start items-start overflow-x-scroll'>
-                <div className=' max-sm:w-[45rem] max-sm:h-[50dvh] sm:w-[80vw] sm:h-[50vh]'>
-                    <Line data={chartData} />
+                <div className='flex flex-col justify-start items-start overflow-x-scroll'>
+                    <TotalSessionsGraph sessions={filteredSessions} />
                 </div>
             </div>
             

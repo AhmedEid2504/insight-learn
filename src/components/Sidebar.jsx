@@ -26,7 +26,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-8' src="/images/dashboard.png" alt="dashboard icon" />
@@ -131,7 +131,7 @@ const Sidebar = (props) => {
                                 </li>
                                 <li>
                                     <Link 
-                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard"
+                                        className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
                                         onClick={() => props.toggleSideBar()}
                                     >
                                         <img className='w-10' src="/images/dashboard.png" alt="reports icon" />

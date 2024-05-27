@@ -75,7 +75,7 @@ const Navbar =(props) => {
                                     {(is_superuser || is_staff ) && 
                                         <>
                                             <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
-                                            <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                            <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
                                         </>                                    
                                     }
                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
@@ -105,7 +105,7 @@ const Navbar =(props) => {
                                             <div className="flex flex-col gap-3">
                                                     {(is_superuser || is_staff ) && 
                                                         <div>
-                                                            <li><Link className={location.pathname === "/dashboard" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard">Dashboard</Link></li>
+                                                            <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
                                                         </div>
                                                     }
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
