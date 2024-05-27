@@ -15,6 +15,7 @@ import Sessions from './components/reports/Sessions';
 import TotalSessions from './components/reports/TotalSessions';
 import QuizReport from './components/reports/QuizReports';
 import MainDash from './components/reports/MainDash';
+import Profile from './components/Profile';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
 
@@ -38,6 +39,8 @@ function App() {
                             <Route path='totalsessions' element={<TotalSessions/>}/>
                             <Route path='courses' element={<Courses/>}/>
                             <Route path="quizreports/:courseName" element={<QuizReport />} />
+                            <Route path='profile' element={<Profile/>}/>
+                            
                         </Route>
                     </>
                     }
