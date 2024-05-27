@@ -38,14 +38,32 @@ const TotalSessionsGraph = () => {
                 fill: true,
                 backgroundColor: 'rgb(75, 192, 192)',
                 borderColor: 'rgba(75, 192, 192, 0.2)',
+                userEmail: filteredSessions.map(session => session.userEmail),
             },
         ],
     };
+    
+    const chartOptions = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const userEmail = context.dataset.userEmail[context.dataIndex];
+                        return [
+                            `Session ${context.dataIndex + 1}: ${context.parsed.y}`,
+                            `Email: ${userEmail}`
+                        ];
+                    }
+                }
+            }
+        }
+    };
+
 
     return (
         <div>
             <div className='max-sm:h-fit  sm:h-fit'>
-                <Line data={chartData} />
+                <Line data={chartData} options={chartOptions} />
             </div>
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
                 <input 
