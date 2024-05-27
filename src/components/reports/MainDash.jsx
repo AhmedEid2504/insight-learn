@@ -152,7 +152,7 @@ const MainDash = () => {
                 </div>
                 
             </div>
-            <div className=" basis-[100%] overflow-x-auto p-4 m-4 bg-white rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto  bg-white rounded shadow">
                 <h2 className="text-xl font-bold mb-2">Total Session Duration Graph</h2>
                 <TotalSessionsGraph  />
             </div>

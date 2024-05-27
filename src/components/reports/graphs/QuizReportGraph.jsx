@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 Chart.register(CategoryScale);
@@ -57,11 +57,30 @@ const QuizReportGraph = () => {
             },
         ],
     };
+
+    const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+const top10Quizzes = sortedQuizzes.slice(0, 10);
+
+const leaderboardData = {
+    labels: top10Quizzes.map(quiz => quiz.username),
+    datasets: [{
+        label: 'Top 10 Students',
+        data: top10Quizzes.map(quiz => quiz.sumgrades),
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75,192,192,0.7)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+    }]
+};
     return (
         <div>
             <div className='flex flex-col justify-start items-start overflow-x-scroll'>
                 <div className=' max-sm:w-[auto] max-sm:h-[40rem] sm:w-[auto] sm:h-[20rem]'>
                     <Pie data={chartData} />
+                </div>
+                <div className=' max-sm:w-[auto] max-sm:h-[40rem] sm:w-[auto] sm:h-[20rem]'>
+                    <Bar data={leaderboardData} />
                 </div>
             </div>
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>

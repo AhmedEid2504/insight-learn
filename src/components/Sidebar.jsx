@@ -72,7 +72,7 @@ const Sidebar = (props) => {
                                         </Link>
                                         {showDropdown && (
                                             <ul className="flex flex-col pl-5 gap-2">
-                                                <li>
+                                                {/* <li>
                                                     <Link 
                                                         className="flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in hover:bg-c_5 hover:bg-opacity-15" to="/dashboard/usersdata"
                                                         onClick={() => props.toggleSideBar()}
@@ -80,7 +80,7 @@ const Sidebar = (props) => {
                                                         <img className='w-8' src="/images/user-data.png" alt="users icon" />
                                                         User Data
                                                     </Link>
-                                                </li>
+                                                </li> */}
                                                 <li>
                                                     <Link 
                                                         className="flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in hover:bg-c_5 hover:bg-opacity-15" to="/dashboard/add-user"
@@ -175,14 +175,14 @@ const Sidebar = (props) => {
                                             </Link>
                                             {showDropdown && (
                                                 <ul className="flex flex-col gap-2">
-                                                    <li>
+                                                    {/* <li>
                                                         <Link 
                                                             className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/usersdata" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/usersdata"
                                                             onClick={() => props.toggleSideBar()}
                                                         >
                                                             <img className='w-10' src="/images/user-data.png" alt="user data icon" />
                                                         </Link>
-                                                    </li>
+                                                    </li> */}
                                                     <li>
                                                         <Link 
                                                             className={`flex px-5 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/add-user" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 
@@ -63,11 +63,37 @@ const QuizReport = (props) => {
         ],
     };
 
+    const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+    const top10Quizzes = sortedQuizzes.slice(0, 10);
+
+
+
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]">
-            <div className='flex flex-col justify-start items-start overflow-x-scroll'>
-                <div className=' max-sm:w-[45rem] max-sm:h-[50dvh] sm:w-[80vw] sm:h-[50vh]'>
-                    <Pie data={chartData} />
+            <div className='flex flex-wrap justify-center items-center'>
+                <div className='flex flex-col justify-start items-start overflow-x-scroll'>
+                    <div className='max-sm:h-fit sm:h-fit'>
+                        <Pie data={chartData} />
+                    </div>
+                </div>
+                <div className='flex flex-col justify-center items-center'>
+                    <h1>Top 10</h1>
+                    <table className="table-auto">
+                        <thead>
+                            <tr>
+                                <th className="px-4 py-2">Username</th>
+                                <th className="px-4 py-2">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {top10Quizzes.map((quiz, index) => (
+                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                    <td className="border px-4 py-2">{quiz.username}</td>
+                                    <td className="border px-4 py-2">{quiz.sumgrades}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
             
