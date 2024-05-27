@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 Chart.register(CategoryScale);
@@ -7,6 +7,7 @@ Chart.register(CategoryScale);
 const QuizReportGraph = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [gradeRange, setGradeRange] = useState('');
+    const [course, setCourse] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
@@ -59,42 +60,51 @@ const QuizReportGraph = () => {
     };
 
     const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
-const top10Quizzes = sortedQuizzes.slice(0, 10);
-
-const leaderboardData = {
-    labels: top10Quizzes.map(quiz => quiz.username),
-    datasets: [{
-        label: 'Top 10 Students',
-        data: top10Quizzes.map(quiz => quiz.sumgrades),
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.7)',
-        hoverBorderColor: 'rgba(75,192,192,1)',
-    }]
-};
+    const top10Quizzes = sortedQuizzes.slice(0, 10);
+    
+    const courseNames = [...new Set(quizzes.map(quiz => quiz.Course))];
+    
     return (
         <div>
-            <div className='flex flex-col justify-start items-start overflow-x-scroll'>
-                <div className=' max-sm:w-[auto] max-sm:h-[40rem] sm:w-[auto] sm:h-[20rem]'>
-                    <Pie data={chartData} />
+            <div className='flex flex-wrap justify-center items-center'>
+            <div className="flex flex-col">
+                    <div className='flex flex-col justify-start items-start overflow-x-scroll'>
+                        <div className='max-sm:h-fit sm:h-fit'>
+                            <Pie data={chartData} />
+                        </div>
+                    </div>
+                    <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
+                        <select 
+                            value={course} 
+                            onChange={e => setCourse(e.target.value)} 
+                            className="mb-4 p-2 w-[100%] border border-gray-300 rounded"
+                        >
+                            <option value="">All courses</option>
+                            {courseNames.map((courseName, index) => (
+                                <option key={index} value={courseName}>{courseName}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-                <div className=' max-sm:w-[auto] max-sm:h-[40rem] sm:w-[auto] sm:h-[20rem]'>
-                    <Bar data={leaderboardData} />
+                <div className='flex flex-col justify-center items-center'>
+                    <h1>Top 10</h1>
+                    <table className="table-auto">
+                        <thead>
+                            <tr>
+                                <th className="px-4 py-2">Username</th>
+                                <th className="px-4 py-2">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {top10Quizzes.map((quiz, index) => (
+                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                    <td className="border px-4 py-2">{quiz.username}</td>
+                                    <td className="border px-4 py-2">{quiz.sumgrades}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
-                <select 
-                    value={gradeRange} 
-                    onChange={e => setGradeRange(e.target.value)} 
-                    className="mb-4 p-2 w-[100%] border border-gray-300 rounded"
-                >
-                    <option value="">All grades</option>
-                    <option value="0-10">Less than 10</option>
-                    <option value="10-15">10 to 15</option>
-                    <option value="15-20">15 to 20</option>
-                    <option value="20+">More than 20</option>
-                </select>
             </div>
         </div>
     )
