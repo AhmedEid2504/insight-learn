@@ -11,8 +11,8 @@ import DominantEmotionComponent from "../components/morphcomponents/DominantEmot
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-import { set, ref, push } from "firebase/database";
-import {database} from "/src/firebase";
+// import { set, ref, push } from "firebase/database";
+// import {database} from "/src/firebase";
 
 const Home = () => {
     
@@ -53,16 +53,16 @@ const Home = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-                    const newDataRef = push(dataRef);
+                    // const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+                    // const newDataRef = push(dataRef);
 
-                    set(newDataRef, updatedUserData)
-                        .then(() => {
-                            console.log("Final Data sent to firebase successfully");
-                        })
-                        .catch((error) => {
-                            console.error("Error saving:", error);
-                        })
+                    // set(newDataRef, updatedUserData)
+                    //     .then(() => {
+                    //         console.log("Final Data sent to firebase successfully");
+                    //     })
+                    //     .catch((error) => {
+                    //         console.error("Error saving:", error);
+                    //     })
 
                     console.log("Final Data sent to API successfully");
                     setUserDataChanged(false);
@@ -85,7 +85,7 @@ const Home = () => {
     const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const username = localStorage.getItem( "username" )
+    const username = localStorage.getItem("username")
     const [userData, setUserData] = useState({
         userEmail:'',
         dominantEmotion: '',
@@ -104,7 +104,6 @@ const Home = () => {
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
-        
         if (token) {
             setIsLoggedIn(true);
             setUserData(prevUserData => ({...prevUserData, userEmail:localStorage.email}));
@@ -163,34 +162,34 @@ const Home = () => {
         };
     }, []);
 
-    let fTimeoutId = null; // Declare a variable to hold the timeout ID
-    
-    async function saveToFirebase() {
-    if ( userDataChanged && sessionStarted && !isSendingData) {
-        const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-        const newDataRef = push(dataRef);
+//     let fTimeoutId = null; // Declare a variable to hold the timeout ID
 
-        set(newDataRef, userData)
-            .then(() => {
-                console.log("Data saved to Firebase");
-            })
-            .catch(() => {
-                console.error("Error saving:");
-            })
-            .finally(() => {
-                if (fTimeoutId) {
-                    clearTimeout(fTimeoutId); // Clear the timeout if it exists
-                }
-                fTimeoutId = setTimeout(() => {
-                }, 15000); // 10-second delay
-            });
-    }
-}
+//     async function saveToFirebase() {
+//     if ( userDataChanged && sessionStarted && !isSendingData) {
+//         const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
+//         const newDataRef = push(dataRef);
+
+//         set(newDataRef, userData)
+//             .then(() => {
+//                 console.log("Data saved to Firebase");
+//             })
+//             .catch(() => {
+//                 console.error("Error saving:");
+//             })
+//             .finally(() => {
+//                 if (fTimeoutId) {
+//                     clearTimeout(fTimeoutId); // Clear the timeout if it exists
+//                 }
+//                 fTimeoutId = setTimeout(() => {
+//                 }, 15000); // 10-second delay
+//             });
+//     }
+// }
 
 // Use useEffect to trigger saveToFirebase when userData changes
-useEffect(() => {
-    {sessionStarted && saveToFirebase()}
-}, [sessionStarted, userData, userDataChanged]);
+// useEffect(() => {
+//     {sessionStarted && saveToFirebase()}
+// }, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
@@ -227,13 +226,11 @@ useEffect(() => {
             }
         }
     }
-    
+
     // Use useEffect to trigger sendDataToAPI when userData changes
     useEffect(() => {
         {sessionStarted && sendDataToAPI()}
     }, [sessionStarted, userData, userDataChanged]);
-
-    
 
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
@@ -250,7 +247,6 @@ useEffect(() => {
         }
         getAiSdk();
     }, [aiSdkState, mphToolsState]);
-
 
     return (
         <div className="flex flex-col w-full">
