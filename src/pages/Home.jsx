@@ -107,7 +107,7 @@ const Home = () => {
         
         if (token) {
             setIsLoggedIn(true);
-            setUserData(prevUserData => ({...prevUserData, userEmail: localStorage.email}));
+            setUserData(prevUserData => ({...prevUserData, userEmail: localStorage.userEmail}));
         } else {
             window.location.href = '/login';
         }

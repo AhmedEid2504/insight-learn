@@ -9,22 +9,29 @@ const Reports = () => {
     const [sessions, setSessions] = useState([]);
     const [filterEmail, setFilterEmail] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
-    // const [imageSrc, setImageSrc] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
             .then(response => response.json())
             .then(data => {
-                const modifiedData = data.map(session => {
+                const normalizedData = data.map(session => {
                     if (session.session_for === '') {
                         session.session_for = 'assignment';
                     }
-                    return session;
+                    return {
+                        ...session,
+                        average_arousal: normalize(session.average_arousal),
+                        average_valence: normalize(session.average_valence)
+                    };
                 });
-                setSessions(modifiedData);
+                setSessions(normalizedData);
             })
             .catch(error => console.error('Error:', error));
     }, []);
+
+    const normalize = (value) => {
+        return value / 100;
+    };
 
     const filterSessions = () => {
         return sessions.filter(session => {
@@ -74,7 +81,7 @@ const Reports = () => {
     const avgArousalData = groupedData.map(group => group.avgArousal);
     const avgValenceData = groupedData.map(group => group.avgValence);
 
-    const chartData = {
+    const attentionChartData = {
         labels: labels,
         datasets: [
             {
@@ -83,7 +90,13 @@ const Reports = () => {
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
-            },
+            }
+        ]
+    };
+
+    const valenceArousalChartData = {
+        labels: labels,
+        datasets: [
             {
                 label: 'Average Arousal',
                 data: avgArousalData,
@@ -109,7 +122,7 @@ const Reports = () => {
             },
             title: {
                 display: true,
-                text: 'Average Attention, Arousal, and Valence by Session Duration',
+                text: 'Average Levels by Session Duration',
             },
         },
         scales: {
@@ -132,9 +145,12 @@ const Reports = () => {
     return (
         <div className="flex flex-wrap gap-5">
             <div className='flex flex-col'>
-            {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
-                <div className='w-[80vw]  flex self-center'>
-                    <Bar data={chartData} options={options} />
+                <div className='w-[80vw] flex self-center mb-8'>
+                    <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
+                </div>
+
+                <div className='w-[80vw] flex self-center'>
+                    <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} />
                 </div>
 
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>

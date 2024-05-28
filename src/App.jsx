@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Home from './pages/Home'
 import Login from './pages/Login';
 // import Signup from './pages/Signup';
@@ -18,6 +19,23 @@ import MainDash from './components/reports/MainDash';
 import Profile from './components/Profile';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // On component mount, check if the user prefers dark mode
+    useEffect(() => {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setIsDarkMode(true);
+        }
+    }, []);
+
+    // When isDarkMode changes, add or remove the 'dark' class
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDarkMode]);
 
     return (
         <div className="h-auto flex flex-col justify-between">
