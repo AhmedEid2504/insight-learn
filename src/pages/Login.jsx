@@ -48,9 +48,9 @@ const Login = () => {
                     password: password,
                 }),
             });
-    
+
             const data = await response.json();
-    
+
             if (response.ok) {
                 // Store token in local storage
                 localStorage.setItem('token', data.token);
