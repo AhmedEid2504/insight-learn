@@ -22,7 +22,7 @@
 }
 
 ::-webkit-scrollbar-corner {
-    background: #060B7D;
+    background: #070D57;
     cursor: pointer;
 }
 ::-webkit-scrollbar-button {
@@ -38,6 +38,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #060B7D;
+    background: #070D57;
     cursor: pointer;
 }
