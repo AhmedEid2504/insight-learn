@@ -128,19 +128,19 @@ const Users = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div className="flex flex-col h-[90vh] gap-5 overflow-y-scroll items-center justify-center">
+        <div className="flex flex-col h-[90vh] gap-5 overflow-y-scroll dark:text-white items-center justify-center">
             <h1 className="text-xl">Users: {filteredUsers.length}</h1>
             <div className="flex max-sm:flex-col justify-center text-center gap-5 items-center flex-wrap">
                 <input
                     type="text"
                     placeholder="Search..."
                     onChange={event => setSearchTerm(event.target.value)}
-                    className="p-2 mb-4 border-2 border-c_2 rounded-md"
+                    className="p-2 mb-4 dark:bg-black dark:bg-opacity-25 border-2 border-black rounded-md"
                 />
                 <select
                     value={filterType}
                     onChange={event => setFilterType(event.target.value)}
-                    className="p-2 mb-4 border-2 border-c_2 rounded-md"
+                    className="p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
                 >
                     <option value="contains">Contains</option>
                     <option value="startsWith">Starts with</option>
@@ -149,7 +149,7 @@ const Users = () => {
                 <select 
                     value={filterActive} 
                     onChange={e => setFilterActive(e.target.value)} 
-                    className="form-select block w-full p-2 mb-4 border-2 border-c_2 rounded-md"
+                    className="form-select block w-full p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
                 >
                     <option value="all">All</option>
                     <option value="active">Active</option>
@@ -158,7 +158,7 @@ const Users = () => {
                     <option value="superusers">Superusers</option>
                 </select>
             </div>
-            <div className="flex bg-c_5 p-3 rounded-md shadow-md flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
+            <div className="flex bg-c_5 dark:bg-black dark:bg-opacity-25 p-3 rounded-md shadow-md flex-wrap h-[80vh] overflow-y-scroll items-center justify-center">
                 {filteredUsers.length === 0 ? 
                     <div>No users found</div> 
                 : 
