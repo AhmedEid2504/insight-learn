@@ -71,37 +71,37 @@ const cgpaHistogramData = {
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
             <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
-                <div className="flex flex-wrap">
-                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+                <div className="flex flex-wrap gap-5">
+                    <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Total Users</h2>
                         <p>{isLoading ? "Loading..." : users.length}</p>
                     </div>
-                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+                    <div className="w-auto h-fit overflow-auto p-3 dark:text-white  dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Male Users</h2>
                         <p>{isLoading ? "Loading..." : maleUsers}</p>
                     </div>
-                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+                    <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Female Users</h2>
                         <p>{isLoading ? "Loading..." : femaleUsers}</p>
                     </div>
                 </div>
-                <div className=" h-fit w-[80vw] dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+                <div className=" h-fit w-[80vw] dark:text-white p-4 dark:bg-black dark:bg-opacity-15 rounded shadow">
                     {isLoading ? "Loading..." : <Bar data={cgpaHistogramData} />}
                 </div>
-                <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+                <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] p-4 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                     {isLoading ? "Loading..." : <Pie data={genderData} />}
                 </div>
             </div>
             <div className="flex justify-center items-center flex-wrap">
             </div>
-            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto p-4  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <QuizReportGraph  />
             </div>
-            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <h2 className="text-xl font-bold mb-2">Total Session Duration Graph</h2>
                 <TotalSessionsGraph  />
             </div>
-            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <AverageReportsGraph  />
             </div>
 
