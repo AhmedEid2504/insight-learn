@@ -255,6 +255,16 @@ const Sidebar = (props) => {
                             <img className='w-5' src="/images/rightarrow.png" alt="rightarrow" />
                         }
                     </button>
+                    <button 
+                        onClick={() => props.setIsDarkMode(!props.isDarkMode)} 
+                        className='pl-2 w-[40px] self-center bg-c_3 bg-opacity-10 hover:bg-opacity-25 rounded-2xl text-white'
+                    >
+                        {props.isDarkMode ?
+                            <img className='w-5' src="/images/moon.png" alt="leftarrow" />
+                            :
+                            <img className='w-5' src="/images/sun.png" alt="rightarrow" />
+                        }
+                    </button>
                 </div>
             </div>
         </div>

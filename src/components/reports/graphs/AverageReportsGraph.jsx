@@ -164,7 +164,7 @@ const Reports = () => {
                     <select 
                         value={filterSessionType} 
                         onChange={e => setFilterSessionType(e.target.value)} 
-                        className="mb-4 p-2 border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:text-black border border-gray-300 rounded"
                     >
                         <option value="">All session types</option>
                         <option value="assignment">Assignment</option>

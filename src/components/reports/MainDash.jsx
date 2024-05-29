@@ -45,58 +45,63 @@ const MainDash = () => {
         ]
     };
 
-    const cgpaData = users.map(user => user.CGPA); // Assuming CGPA is a property in your user data
+    const bins = ['0 - 1', '1 - 2', '2 - 3', '3 - 3.5', '3.5 - 4'];
 
-    const cgpaHistogramData = {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        datasets: [
-            {
-                label: 'CGPA Distribution',
-                data: cgpaData,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(75,192,192,0.7)',
-                hoverBorderColor: 'rgba(75,192,192,1)',
-            }
-        ]
-    };
+    const binCounts = bins.map(bin => {
+    const [min, max] = bin.split('-').map(Number);
+    return users.filter(user => user.CGPA >= min && user.CGPA < max).length;
+});
+
+const cgpaHistogramData = {
+    labels: bins,
+    datasets: [
+    {
+        label: 'Students',
+        data: binCounts,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75,192,192,0.7)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+    }
+    ]
+};
     
     
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
             <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
                 <div className="flex flex-wrap">
-                    <div className="w-auto h-fit overflow-auto p-2 bg-white rounded shadow">
+                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Total Users</h2>
                         <p>{isLoading ? "Loading..." : users.length}</p>
                     </div>
-                    <div className="w-auto h-fit overflow-auto p-2 bg-white rounded shadow">
+                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Male Users</h2>
                         <p>{isLoading ? "Loading..." : maleUsers}</p>
                     </div>
-                    <div className="w-auto h-fit overflow-auto p-2 bg-white rounded shadow">
+                    <div className="w-auto h-fit overflow-auto p-2 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">Female Users</h2>
                         <p>{isLoading ? "Loading..." : femaleUsers}</p>
                     </div>
                 </div>
-                <div className=" h-fit w-[80vw] bg-white rounded shadow">
+                <div className=" h-fit w-[80vw] dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                     {isLoading ? "Loading..." : <Bar data={cgpaHistogramData} />}
                 </div>
-                <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] bg-white rounded shadow">
+                <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                     {isLoading ? "Loading..." : <Pie data={genderData} />}
                 </div>
             </div>
             <div className="flex justify-center items-center flex-wrap">
             </div>
-            <div className=" basis-[100%] overflow-x-auto  bg-white rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <QuizReportGraph  />
             </div>
-            <div className=" basis-[100%] overflow-x-auto  bg-white rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <h2 className="text-xl font-bold mb-2">Total Session Duration Graph</h2>
                 <TotalSessionsGraph  />
             </div>
-            <div className=" basis-[100%] overflow-x-auto  bg-white rounded shadow">
+            <div className=" basis-[100%] overflow-x-auto  dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
                 <AverageReportsGraph  />
             </div>
 

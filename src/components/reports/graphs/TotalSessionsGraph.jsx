@@ -76,7 +76,7 @@ const TotalSessionsGraph = () => {
                 <select 
                     value={filterSessionType} 
                     onChange={e => setFilterSessionType(e.target.value)} 
-                    className="mb-4 p-2 border border-gray-300 rounded"
+                    className="mb-4 p-2 border dark:text-black border-gray-300 rounded"
                 >
                     <option value="">All session types</option>
                     <option value="assignment">Assignment</option>
@@ -86,7 +86,7 @@ const TotalSessionsGraph = () => {
                 <select 
                     value={filterDuration} 
                     onChange={e => setFilterDuration(e.target.value)} 
-                    className="mb-4 p-2 border border-gray-300 rounded"
+                    className="mb-4 p-2 border dark:text-black border-gray-300 rounded"
                 >
                     <option value="">All durations</option>
                     <option value="10">10+ minutes</option>

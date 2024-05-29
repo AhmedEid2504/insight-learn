@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState, useRef} from 'react';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     const [showSideBar, setShowSideBar ] = useState('true');
 
     const sidebarRef = useRef(null);
@@ -39,7 +40,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className=" flex bg-white h-[100dvh] overflow-hidden">
+        <div className=" flex dark:bg-[#222831] h-[100dvh] overflow-hidden">
                 <div>
                         { showSideBar ? 
                             <div>
@@ -49,9 +50,11 @@ const Dashboard = () => {
                                             <Sidebar 
                                                 showSideBar={showSideBar}
                                                 toggleSideBar={toggleSideBar}
+                                                setIsDarkMode={props.setIsDarkMode}
+                                                isDarkMode={props.isDarkMode}
                                             />
                                         </div>
-                                        <div className="flex p-5 justify-center items-center bg-white text-black overflow-x-scroll">
+                                        <div className="flex p-5 justify-center items-center dark:bg-grey text-black overflow-x-scroll">
                                             <Outlet/>
                                         </div>
                                     </div>
@@ -61,9 +64,11 @@ const Dashboard = () => {
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
+                                                    setIsDarkMode={props.setIsDarkMode}
+                                                    isDarkMode={props.isDarkMode}
                                                 />
                                         </div>
-                                        <div className="flex w-full p-5 justify-center items-center bg-white text-black">
+                                        <div className="flex w-full p-5 justify-center items-center dark:bg-grey text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>
@@ -77,9 +82,11 @@ const Dashboard = () => {
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
+                                                    setIsDarkMode={props.setIsDarkMode}
+                                                    isDarkMode={props.isDarkMode}
                                                 />
                                         </div>
-                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-white text-black">
+                                        <div className="w-[90vw] p-5 flex justify-center items-center dark:bg-grey text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>
@@ -91,9 +98,11 @@ const Dashboard = () => {
                                                 <Sidebar 
                                                     showSideBar={showSideBar}
                                                     toggleSideBar={toggleSideBar}
+                                                    setIsDarkMode={props.setIsDarkMode}
+                                                    isDarkMode={props.isDarkMode}
                                                 />
                                         </div>
-                                        <div className="w-[90vw] p-5 flex justify-center items-center bg-white text-black">
+                                        <div className="w-[90vw] p-5 flex justify-center items-center dark:bg-grey text-black">
                                                 <Outlet/>
                                         </div>
                                     </div>

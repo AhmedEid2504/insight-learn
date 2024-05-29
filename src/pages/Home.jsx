@@ -15,7 +15,6 @@ import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerCompo
 // import {database} from "/src/firebase";
 
 const Home = () => {
-    
     const handleSessionStart = () => {
         try {
             setSessionStarted(true);
@@ -78,7 +77,6 @@ const Home = () => {
             return updatedUserData;
         });
     };
-
 
     // morphcast
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");

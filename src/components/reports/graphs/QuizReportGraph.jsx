@@ -50,7 +50,7 @@ const QuizReportGraph = () => {
         labels: Object.keys(gradeRanges),
         datasets: [
             {
-                label: 'Students',
+                label: 'grades',
                 data: Object.values(gradeRanges),
                 backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
                 borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
@@ -77,11 +77,11 @@ const QuizReportGraph = () => {
                         <select 
                             value={course} 
                             onChange={e => setCourse(e.target.value)} 
-                            className="mb-4 p-2 w-[100%] border border-gray-300 rounded"
+                            className="mb-4 p-2 w-[100%] dark:text-black border border-gray-300 rounded"
                         >
-                            <option value="">All courses</option>
+                            <option className='dark:text-black' value="">All courses</option>
                             {courseNames.map((courseName, index) => (
-                                <option key={index} value={courseName}>{courseName}</option>
+                                <option className='dark:text-black' key={index} value={courseName}>{courseName}</option>
                             ))}
                         </select>
                     </div>

@@ -41,12 +41,12 @@ function App() {
         <div className="h-auto flex flex-col justify-between">
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home  />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     {/* <Route path="/signup" element={<Signup />} /> */}
                     {adminEmails.includes(localStorage.email) && 
                     <>
-                        <Route path="dashboard" element={<Dashboard />} >
+                        <Route path="dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} >
                             <Route path='maindash' element={<MainDash />}/>
                             <Route path='reports' element={<Reports />}/>
                             <Route path='predictions' element={<Predictions />}/>
@@ -58,7 +58,6 @@ function App() {
                             <Route path='courses' element={<Courses/>}/>
                             <Route path="quizreports/:courseName" element={<QuizReport />} />
                             <Route path='profile' element={<Profile/>}/>
-                            
                         </Route>
                     </>
                     }

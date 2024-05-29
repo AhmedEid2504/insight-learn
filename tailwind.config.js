@@ -24,7 +24,9 @@ export default {
           c_4: "#59bada",
           c_5: "#e9f2ff",
           black: "#ffffff",
-          white: "#000000"
+          grey:"#222831",
+          white: "#000000",
+          text:"#ffffff",
         },
       },
     },
