@@ -47,7 +47,7 @@ const SessionTable = () => {
                         placeholder="Filter by email" 
                         value={filterEmail} 
                         onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
+                        className="mb-4 p-2 w-[60%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                     />
                     <select 
                         value={filterSessionType} 
@@ -71,7 +71,7 @@ const SessionTable = () => {
                     </select>
                 </div>
                 <div className="shadow h-[40dvh] w-[80vw] overflow-scroll l border-b border-gray-200  sm:rounded-lg">
-                    <table className="min-w-full divide-y divide-gray-200 ">
+                    <table className="min-w-full dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200 ">
                         <thead className="bg-gray-50">
                             <tr>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User Email</th>
@@ -82,7 +82,7 @@ const SessionTable = () => {
                                 {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration (minutes)</th> */}
                             </tr>
                         </thead>
-                        <tbody className="bg-white  divide-y divide-gray-200">
+                        <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white  divide-y divide-gray-200">
                             {filteredSessions.map((session, index) => (
                                 <tr key={index}>
                                     <td className="px-6 py-4 whitespace-nowrap">{session.userEmail}</td>
