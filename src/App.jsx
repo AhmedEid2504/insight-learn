@@ -53,6 +53,7 @@ function App() {
                             <Route path="users" element={<Users />} />
                             <Route path='usersdata' element={<UsersData />}/>
                             <Route path='add-user' element={<AddUser />}/>
+                            <Route path='users-data' element={<UsersData />}/>
                             <Route path='sessions' element={<Sessions/>}/>
                             <Route path='totalsessions' element={<TotalSessions/>}/>
                             <Route path='courses' element={<Courses/>}/>
