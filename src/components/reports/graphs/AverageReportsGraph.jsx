@@ -159,12 +159,12 @@ const Reports = () => {
                         placeholder="Filter by email" 
                         value={filterEmail} 
                         onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                     />
                     <select 
                         value={filterSessionType} 
                         onChange={e => setFilterSessionType(e.target.value)} 
-                        className="mb-4 p-2 dark:text-black border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                     >
                         <option value="">All session types</option>
                         <option value="assignment">Assignment</option>

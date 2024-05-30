@@ -77,7 +77,7 @@ const QuizReportGraph = () => {
                         <select 
                             value={course} 
                             onChange={e => setCourse(e.target.value)} 
-                            className="mb-4 p-2 w-[100%] dark:text-black border border-gray-300 rounded"
+                            className="mb-4 p-2 w-[100%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                         >
                             <option className='dark:text-black' value="">All courses</option>
                             {courseNames.map((courseName, index) => (

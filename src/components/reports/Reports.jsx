@@ -18,16 +18,24 @@ const Reports = () => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
             .then(response => response.json())
             .then(data => {
-                const modifiedData = data.map(session => {
+                const normalizedData = data.map(session => {
                     if (session.session_for === '') {
                         session.session_for = 'assignment';
                     }
-                    return session;
+                    return {
+                        ...session,
+                        average_arousal: normalize(session.average_arousal),
+                        average_valence: normalize(session.average_valence)
+                    };
                 });
-                setSessions(modifiedData);
+                setSessions(normalizedData);
             })
             .catch(error => console.error('Error:', error));
     }, []);
+
+    const normalize = (value) => {
+        return value / 100;
+    };
 
     const filterSessions = () => {
         return sessions.filter(session => {
@@ -77,7 +85,7 @@ const Reports = () => {
     const avgArousalData = groupedData.map(group => group.avgArousal);
     const avgValenceData = groupedData.map(group => group.avgValence);
 
-    const chartData = {
+    const attentionChartData = {
         labels: labels,
         datasets: [
             {
@@ -86,7 +94,13 @@ const Reports = () => {
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
-            },
+            }
+        ]
+    };
+
+    const valenceArousalChartData = {
+        labels: labels,
+        datasets: [
             {
                 label: 'Average Arousal',
                 data: avgArousalData,
@@ -112,7 +126,7 @@ const Reports = () => {
             },
             title: {
                 display: true,
-                text: 'Average Attention, Arousal, and Valence by Session Duration',
+                text: 'Average Levels by Session Duration',
             },
         },
         scales: {
@@ -133,29 +147,37 @@ const Reports = () => {
     };
 
     return (
-        <div className="flex flex-wrap gap-5 h-[80dvh]">
+        <div className="flex  flex-wrap gap-5 overflow-y-scroll h-[80dvh]">
             <div className='flex flex-col'>
             {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
+            <div className='flex flex-col overflow-scroll'>
+                    <div className='w-[80vw] flex self-center mb-8'>
+                        <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
+                    </div>
 
+                    <div className='w-[80vw] flex self-center'>
+                        <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} />
+                    </div>
+                </div>
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
                     <input 
                         type="text" 
                         placeholder="Filter by email" 
                         value={filterEmail} 
                         onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 w-[60%] border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-gray-300 rounded"
                     />
                     <select 
                         value={filterSessionType} 
                         onChange={e => setFilterSessionType(e.target.value)} 
-                        className="mb-4 p-2 border border-gray-300 rounded"
+                        className="mb-4 dark:bg-black dark:bg-opacity-25 dark:text-white p-2 border border-gray-300 rounded"
                     >
                         <option value="">All session types</option>
                         <option value="assignment">Assignment</option>
                         <option value="SA-quiz">SA-quiz</option>
                         <option value="MOT-quiz">MOT-quiz</option>
                     </select>
-                    <div className='flex flex-wrap items-center justify-center gap-2'>
+                    <div className='flex flex-wrap dark:text-white items-center justify-center gap-2'>
                         <div className='flex gap-2'>
                             <input 
                                 type="checkbox" 
@@ -182,7 +204,7 @@ const Reports = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex self-center shadow h-[40dvh] w-[80vw] overflow-scroll border-b border-gray-200 sm:rounded-lg">
+                <div className="flex self-center shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll border-b border-gray-200 sm:rounded-lg">
                     <table className="divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
@@ -196,7 +218,7 @@ const Reports = () => {
                                 {showValence && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Valence</th>}
                             </tr>
                         </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
+                        <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
                             {filteredSessions.map((session, index) => (
                                 <tr key={index}>
                                     <td className="px-6 py-4 whitespace-nowrap">{session.userEmail}</td>
@@ -212,9 +234,7 @@ const Reports = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className='w-[80vw] h-[40dvh] flex self-center'>
-                    <Bar data={chartData} options={options} />
-                </div>
+                
             </div>
         </div>
     );
