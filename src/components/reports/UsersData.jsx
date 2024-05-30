@@ -8,7 +8,7 @@ const DataTable = () => {
     const [filterEmail, setFilterEmail] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
 
-    useEffect(() => {
+    const fetchData = () => {
         axios.get('https://dj-render-ldb1.onrender.com/view/') // Replace with your API URL
         .then(response => {
             const modifiedData = response.data['users-data'].map(session => {
@@ -20,7 +20,16 @@ const DataTable = () => {
             setSessions(modifiedData);
         })
         .catch(error => console.error('Error:', error));
-    }, []);
+    };
+
+    useEffect(fetchData, []);
+
+    const refreshData = () => {
+        // Fetch the data
+        fetchData();
+
+        setCurrentPage(1);
+    };
 
     
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
@@ -36,25 +45,26 @@ const DataTable = () => {
     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     
     return (
-    <div className="flex flex-col justify-around items-center container mx-auto px-4">
+    <div className="flex flex-col justify-around items-center gap-4 container mx-auto px-4">
         <div className='flex justify-center items-center'>
             <input 
                 type="text" 
                 placeholder="Filter by email" 
                 value={filterEmail} 
                 onChange={e => setFilterEmail(e.target.value)} 
-                className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-gray-300 rounded"
+                className="p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-gray-300 rounded"
             />
             <select 
                 value={filterSessionType} 
                 onChange={e => setFilterSessionType(e.target.value)} 
-                className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                className="p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
             >
                 <option value="">All session types</option>
                 <option value="assignment">Assignment</option>
                 <option value="SA-quiz">SA-quiz</option>
                 <option value="MOT-quiz">MOT-quiz</option>
             </select>
+            <button onClick={() => refreshData()} className=" p-2 border-2 bg-blue-500 text-white rounded">Refresh</button>
         </div>
         <div className="flex self-center shadow h-[70dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll border-b border-gray-200 sm:rounded-lg">
             <table className="divide-y divide-gray-200">
