@@ -8,6 +8,7 @@ const Sidebar = (props) => {
     const location = useLocation();
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
+    const is_active = localStorage.getItem('is_active');
 
     return (
         <div className={props.showSideBar ? window.innerWidth > 768 ? "relative w-[250px]" : "relative w-[100%]" : "relative w-[50px]"}>
@@ -117,6 +118,19 @@ const Sidebar = (props) => {
                                         </li>
                                     </>
                                 )}
+                                {!is_staff && !is_superuser && (
+                                    <>
+                                        <li>
+                                            <Link 
+                                                className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-8' src="/images/sessions.png" alt="sessions icon" />
+                                                Personal Reports
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
                             </ul>
                         ) : (
                             <ul className='text-xl flex flex-col gap-3'>
@@ -217,7 +231,16 @@ const Sidebar = (props) => {
                                         </li>
                                     </>
                                 )}
-                                
+                                {is_active && (
+                                    <li>
+                                        <Link 
+                                            className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
+                                            onClick={() => props.toggleSideBar()}
+                                        >
+                                            <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
+                                        </Link>
+                                    </li>
+                                )}
                                 
                             </ul>
                         )}

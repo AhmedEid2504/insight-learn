@@ -7,24 +7,38 @@ import Chart from 'chart.js/auto';
 Chart.register(CategoryScale);
 
 const QuizReport = (props) => {
-    const [quizzes, setQuizzes] = useState([]);
+    const [studentsgrades, setStudentsGrades] = useState([]);
     const [gradeRange, setGradeRange] = useState('');
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
-        .then(response => response.json())
-        .then(data => {
-            const mappedData = data.map(quiz => ({
-                ...quiz,
-                sumgrades: parseFloat(quiz.sumgrades)
-            }));
-            setQuizzes(mappedData);
-        })
-        .catch(error => console.error('Error:', error));
-    }, []);
+            .then(response => response.json())
+            .then(data => {
+                const mappedData = data
+                    .filter(student => student.sumgrades !== null)
+                    .map(student => ({
+                        ...student,
+                        sumgrades: parseFloat(student.sumgrades)
+                    }));
+    
+                // Filter the grades for the selected course
+                const courseGrades = mappedData.filter(quiz => quiz.Course === props.courseName);
+                setStudentsGrades(courseGrades);
+                console.log(`Total students in ${props.courseName}: ${courseGrades.length}`);
+    
+            })
+            .catch(error => console.error('Error:', error));
+    
+        // Cleanup function to reset state when component unmounts
+        return () => {
+            setStudentsGrades([]);
+            setGradeRange('');
+        };
+    }, [props.courseName]);
 
-
-    const filteredQuizzes = quizzes.filter(quiz => {
+    const invalidQuizzes = studentsgrades.filter(quiz => quiz.sumgrades > 40);
+    console.log(invalidQuizzes);
+    const filteredQuizzes = studentsgrades.filter(quiz => {
         if (quiz.Course !== props.courseName) {
             return false;
         }
@@ -36,8 +50,14 @@ const QuizReport = (props) => {
                 return quiz.sumgrades >= 10 && quiz.sumgrades < 15;
             case '15-20':
                 return quiz.sumgrades >= 15 && quiz.sumgrades < 20;
-            case '20+':
-                return quiz.sumgrades > 20;
+            case '20-25':
+                return quiz.sumgrades >= 20 && quiz.sumgrades < 25;
+            case '25-30':
+                return quiz.sumgrades >= 25 && quiz.sumgrades < 30;
+            case '30-35':
+                return quiz.sumgrades >= 30 && quiz.sumgrades < 35;
+            case '35-40':
+                return quiz.sumgrades >= 35 && quiz.sumgrades < 40;
             default:
                 return true;
         }
@@ -47,8 +67,13 @@ const QuizReport = (props) => {
         'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
         '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 10 && quiz.sumgrades < 15).length,
         '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 15 && quiz.sumgrades < 20).length,
-        'More than 20': filteredQuizzes.filter(quiz => quiz.sumgrades > 20).length,
+        '20 to 25': filteredQuizzes.filter(quiz => quiz.sumgrades >= 20 && quiz.sumgrades < 25).length,
+        '25 to 30': filteredQuizzes.filter(quiz => quiz.sumgrades >= 25 && quiz.sumgrades < 30).length,
+        '30 to 35': filteredQuizzes.filter(quiz => quiz.sumgrades >= 30 && quiz.sumgrades < 35).length,
+        '35 to 40': filteredQuizzes.filter(quiz => quiz.sumgrades >= 35 && quiz.sumgrades < 40).length,
     };
+
+    
 
     const chartData = {
         labels: Object.keys(gradeRanges),
@@ -63,7 +88,7 @@ const QuizReport = (props) => {
         ],
     };
 
-    const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+    const sortedQuizzes = [...studentsgrades].sort((a, b) => b.sumgrades - a.sumgrades);
     const top10Quizzes = sortedQuizzes.slice(0, 10);
 
 

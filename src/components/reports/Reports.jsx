@@ -151,11 +151,11 @@ const Reports = () => {
             <div className='flex flex-col'>
             {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
             <div className='flex flex-col overflow-scroll'>
-                    <div className='w-[80vw] flex self-center mb-8'>
+                    <div className='w-[80vw] min-w-[80vw] flex self-center mb-8'>
                         <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                     </div>
 
-                    <div className='w-[80vw] flex self-center'>
+                    <div className='w-[80vw] min-w-[80vw] flex self-center'>
                         <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} />
                     </div>
                 </div>

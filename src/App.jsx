@@ -17,6 +17,7 @@ import TotalSessions from './components/reports/TotalSessions';
 import QuizReport from './components/reports/QuizReports';
 import MainDash from './components/reports/MainDash';
 import Profile from './components/Profile';
+import PersonalReport from './components/reports/PersonalReport';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -59,6 +60,7 @@ function App() {
                             <Route path='courses' element={<Courses/>}/>
                             <Route path="quizreports/:courseName" element={<QuizReport />} />
                             <Route path='profile' element={<Profile/>}/>
+                            <Route path='personal-report' element={<PersonalReport/>}/>
                         </Route>
                     </>
                     }
