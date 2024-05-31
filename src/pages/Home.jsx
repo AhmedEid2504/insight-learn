@@ -207,6 +207,7 @@ const Home = () => {
     
                 if (response.ok) {
                     console.log("Data sent to API successfully");
+                    console.log(userData);
                     setUserDataChanged(false);
                 } else {
                     console.error("Failed to send data to API:", response.status);
