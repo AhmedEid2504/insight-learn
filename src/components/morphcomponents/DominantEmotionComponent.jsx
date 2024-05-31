@@ -19,7 +19,6 @@ const GenderComponent = (props) => {
         dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
       }));
       console.log(evt.detail.output.dominantEmotion);
-      props.setUserDataChanged(true);
     }, 5000); // Delay of 5 seconds
   }
 
