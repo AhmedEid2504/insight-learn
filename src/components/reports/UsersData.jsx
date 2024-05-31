@@ -21,8 +21,12 @@ const DataTable = () => {
         })
         .catch(error => console.error('Error:', error));
     };
-
-    useEffect(fetchData, []);
+    
+    useEffect(() => {
+        const interval = setInterval(fetchData, 5000); // Fetches data every 5 seconds
+    
+        return () => clearInterval(interval); // This is important to clear the interval when the component unmounts
+    }, []);
 
     const refreshData = () => {
         // Fetch the data

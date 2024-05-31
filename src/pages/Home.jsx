@@ -93,7 +93,7 @@ const Home = () => {
         volume: 0,
         SessionStartedAt: '',
         CaptureTime: '',
-        Session_for:'MOT-quiz',
+        Session_for:'MOT-lecture',
     })
 
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
