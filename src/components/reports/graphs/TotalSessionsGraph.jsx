@@ -44,6 +44,10 @@ const TotalSessionsGraph = () => {
     };
     
     const chartOptions = {
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+        },
         plugins: {
             tooltip: {
                 callbacks: {
@@ -62,8 +66,8 @@ const TotalSessionsGraph = () => {
 
     return (
         <div>
-            <div className='max-sm:h-fit  sm:h-fit'>
-                <Line data={chartData} options={chartOptions} />
+            <div className='min-h-[500px] min-w-[300px]'>
+                <Line data={chartData} options={chartOptions} width={300} height={300} />
             </div>
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
                 <input 

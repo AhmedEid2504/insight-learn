@@ -66,7 +66,12 @@ const cgpaHistogramData = {
     }
     ]
 };
-    
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    width: 300,
+    height: 300,
+};
     
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
@@ -86,10 +91,10 @@ const cgpaHistogramData = {
                     </div>
                 </div>
                 <div className=" h-fit w-[80vw] dark:text-white p-4 dark:bg-black dark:bg-opacity-15 rounded shadow">
-                    {isLoading ? "Loading..." : <Bar data={cgpaHistogramData} />}
+                    {isLoading ? "Loading..." : <Bar data={cgpaHistogramData} options={chartOptions} width={300} height={300} />}
                 </div>
                 <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] p-4 dark:text-white dark:bg-black dark:bg-opacity-15 rounded shadow">
-                    {isLoading ? "Loading..." : <Pie data={genderData} />}
+                    {isLoading ? "Loading..." : <Pie data={genderData} options={chartOptions} width={100} height={300} />}
                 </div>
             </div>
             <div className="flex justify-center items-center flex-wrap">
