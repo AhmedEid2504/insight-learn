@@ -150,7 +150,7 @@ const Reports = () => {
         <div className="flex  flex-wrap gap-5 overflow-y-scroll h-[80dvh]">
             <div className='flex flex-col'>
             {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
-            <div className='flex flex-col overflow-scroll'>
+            <div className='flex flex-col'>
                     <div className='w-[80vw] min-w-[80vw] flex self-center mb-8'>
                         <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                     </div>
