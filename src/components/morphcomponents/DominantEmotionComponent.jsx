@@ -1,49 +1,38 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-const GenderComponent = (props) => {  
-  const [emotionBuffer, setEmotionBuffer] = useState([]);
 
+const GenderComponent = (props) => {  
+  const [ dominantEmotion, setDominantEmotion ] = useState("Neutral");
   useEffect(() => {
     bindEvents();
-    const interval = setInterval(calculateDominantEmotion, 5000); // Calculate dominant emotion every 5 seconds
-    return () => {
-      clearInterval(interval); // Clear interval when component unmounts
-      window.removeEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent); // Remove event listener when component unmounts
-    };
   }, []);
 
   function bindEvents(){
-    window.addEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent);
+    window.addEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent );
   }
 
-  function handleEmotionEvent(evt) {
-    setEmotionBuffer(prevBuffer => [...prevBuffer, evt.detail.output.dominantEmotion || "Neutral"]);
+  function handleEmotionEvent(event){
+    setDominantEmotion(event.detail.dominantEmotion);
   }
 
-  function calculateDominantEmotion() {
-    if (emotionBuffer.length === 0) return;
+  useEffect(() => {
+    const interval = setInterval(handleSetEmotion, 5000); // Fetches data every 5 seconds
 
-    const emotionCounts = emotionBuffer.reduce((acc, curr) => {
-      if (curr in acc) {
-        acc[curr]++;
-      } else {
-        acc[curr] = 1;
-      }
-      return acc;
-    }, {});
+    return () => clearInterval(interval); // This is important to clear the interval when the component unmounts
+}, []);
 
-    const dominantEmotion = Object.keys(emotionCounts).reduce((a, b) => emotionCounts[a] > emotionCounts[b] ? a : b);
-
-    props.setUserData(prevUserData => ({
-      ...prevUserData,
-      dominantEmotion: dominantEmotion
-    }));
-
-    console.log(dominantEmotion);
-    props.setUserDataChanged(true);
-    setEmotionBuffer([]); // Clear the buffer
+  function handleSetEmotion() {
+      // set userData from props to save dominantEmotion 
+      props.setUserData(prevUserData => ({
+        ...prevUserData,
+        dominantEmotion: dominantEmotion || "Neutral"
+      }));
+      console.log(dominantEmotion);
+      props.setUserDataChanged(true);
   }
+
+  
 
   return (
     <div >
