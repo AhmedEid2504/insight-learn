@@ -18,7 +18,7 @@ const GenderComponent = (props) => {
         ...prevUserData,
         dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
       }));
-      console.log(evt.detail.output.dominantEmotion);
+      console.log(props.userData.dominantEmotion);
     }, 5000); // Delay of 5 seconds
   }
 
