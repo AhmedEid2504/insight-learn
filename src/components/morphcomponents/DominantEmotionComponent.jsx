@@ -9,13 +9,15 @@ const GenderComponent = (props) => {
 
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      // set userData from props to save dominantEmotion 
-      props.setUserData(prevUserData => ({
-        ...prevUserData,
-        dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
-      }));
-      console.log(evt.detail.output.dominantEmotion);
-      props.setUserDataChanged(true)
+      setTimeout(() => {
+        // set userData from props to save dominantEmotion 
+        props.setUserData(prevUserData => ({
+          ...prevUserData,
+          dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
+        }));
+        console.log(evt.detail.output.dominantEmotion);
+        props.setUserDataChanged(true);
+      }, 5000); // Delay of 5 seconds
     });
   }
   return (
