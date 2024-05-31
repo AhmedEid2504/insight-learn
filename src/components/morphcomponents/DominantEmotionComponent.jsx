@@ -27,7 +27,7 @@ const GenderComponent = (props) => {
       // set userData from props to save dominantEmotion 
       props.setUserData(prevUserData => ({
         ...prevUserData,
-        dominantEmotion: dominantEmotion === '' ? 'Neutral' : dominantEmotion
+        dominantEmotion: (dominantEmotion !== 'Undefined' || '' || ' ' )  && dominantEmotion
       }));
       console.log(dominantEmotion);
       props.setUserDataChanged(true);

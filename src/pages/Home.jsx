@@ -86,7 +86,7 @@ const Home = () => {
     const username = localStorage.getItem("username")
     const [userData, setUserData] = useState({
         userEmail:'',
-        dominantEmotion: '',
+        dominantEmotion: 'Neutral',
         arousal: 0,
         valence: 0,
         attention:0,
