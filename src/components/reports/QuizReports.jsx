@@ -25,7 +25,7 @@ const QuizReport = (props) => {
                 const courseGrades = mappedData.filter(quiz => quiz.Course === props.courseName);
                 setStudentsGrades(courseGrades);
                 console.log(`Total students in ${props.courseName}: ${courseGrades.length}`);
-    
+                
             })
             .catch(error => console.error('Error:', error));
     
@@ -36,8 +36,7 @@ const QuizReport = (props) => {
         };
     }, [props.courseName]);
 
-    const invalidQuizzes = studentsgrades.filter(quiz => quiz.sumgrades > 40);
-    console.log(invalidQuizzes);
+
     const filteredQuizzes = studentsgrades.filter(quiz => {
         if (quiz.Course !== props.courseName) {
             return false;
@@ -47,17 +46,17 @@ const QuizReport = (props) => {
             case '0-10':
                 return quiz.sumgrades < 10;
             case '10-15':
-                return quiz.sumgrades >= 10 && quiz.sumgrades < 15;
+                return quiz.sumgrades >= 11 && quiz.sumgrades < 15;
             case '15-20':
-                return quiz.sumgrades >= 15 && quiz.sumgrades < 20;
+                return quiz.sumgrades >= 16 && quiz.sumgrades < 20;
             case '20-25':
-                return quiz.sumgrades >= 20 && quiz.sumgrades < 25;
+                return quiz.sumgrades >= 21 && quiz.sumgrades < 25;
             case '25-30':
-                return quiz.sumgrades >= 25 && quiz.sumgrades < 30;
+                return quiz.sumgrades >= 26 && quiz.sumgrades < 30;
             case '30-35':
-                return quiz.sumgrades >= 30 && quiz.sumgrades < 35;
+                return quiz.sumgrades >= 31 && quiz.sumgrades < 35;
             case '35-40':
-                return quiz.sumgrades >= 35 && quiz.sumgrades < 40;
+                return quiz.sumgrades >= 36 && quiz.sumgrades <= 40;
             default:
                 return true;
         }
@@ -65,28 +64,44 @@ const QuizReport = (props) => {
 
     const gradeRanges = {
         'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
-        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 10 && quiz.sumgrades < 15).length,
-        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 15 && quiz.sumgrades < 20).length,
-        '20 to 25': filteredQuizzes.filter(quiz => quiz.sumgrades >= 20 && quiz.sumgrades < 25).length,
-        '25 to 30': filteredQuizzes.filter(quiz => quiz.sumgrades >= 25 && quiz.sumgrades < 30).length,
-        '30 to 35': filteredQuizzes.filter(quiz => quiz.sumgrades >= 30 && quiz.sumgrades < 35).length,
-        '35 to 40': filteredQuizzes.filter(quiz => quiz.sumgrades >= 35 && quiz.sumgrades < 40).length,
+        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 11 && quiz.sumgrades < 15).length,
+        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 16 && quiz.sumgrades < 20).length,
+        '20 to 25': filteredQuizzes.filter(quiz => quiz.sumgrades >= 21 && quiz.sumgrades <= 25).length,
+        '25 to 30': filteredQuizzes.filter(quiz => quiz.sumgrades >= 26 && quiz.sumgrades < 30).length,
+        '30 to 35': filteredQuizzes.filter(quiz => quiz.sumgrades >= 31 && quiz.sumgrades < 35).length,
+        '35 to 40': filteredQuizzes.filter(quiz => quiz.sumgrades >= 36 && quiz.sumgrades <= 40).length,
     };
 
     
 
     const chartData = {
-        labels: Object.keys(gradeRanges),
-        datasets: [
-            {
-                label: 'Students',
-                data: Object.values(gradeRanges),
-                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-                borderWidth: 1,
-            },
-        ],
-    };
+    labels: Object.keys(gradeRanges),
+    datasets: [
+        {
+            label: 'Students',
+            data: Object.values(gradeRanges),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',  // Less than 10
+                'rgba(54, 162, 235, 0.2)',  // 10 to 15
+                'rgba(255, 206, 86, 0.2)',  // 15 to 20
+                'rgba(75, 192, 192, 0.2)',  // 20 to 25
+                'rgba(153, 102, 255, 0.2)', // 25 to 30
+                'rgba(255, 159, 64, 0.2)',  // 30 to 35
+                'rgba(0, 240, 0, 0.2)'  // 35 to 40
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',    // Less than 10
+                'rgba(54, 162, 235, 1)',    // 10 to 15
+                'rgba(255, 206, 86, 1)',    // 15 to 20
+                'rgba(75, 192, 192, 1)',    // 20 to 25
+                'rgba(153, 102, 255, 1)',   // 25 to 30
+                'rgba(255, 159, 64, 1)',    // 30 to 35
+                'rgba(199, 199, 199, 1)'    // 35 to 40
+            ],
+            borderWidth: 1,
+        },
+    ],
+};
 
     const sortedQuizzes = [...studentsgrades].sort((a, b) => b.sumgrades - a.sumgrades);
     const top10Quizzes = sortedQuizzes.slice(0, 10);

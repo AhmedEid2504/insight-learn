@@ -18,32 +18,47 @@ const QuizReportGraph = () => {
                 sumgrades: parseFloat(quiz.sumgrades)
             }));
             setQuizzes(mappedData);
+            setCourse(data[0].Course);
         })
         .catch(error => console.error('Error:', error));
     }, []);
+    
+    const courseNames = [...new Set(quizzes.map(quiz => quiz.Course))];
+    const filteredQuizzes = quizzes.filter(quiz => quiz.Course === course);
 
-
-    const filteredQuizzes = quizzes.filter(quiz => {
+    const filteredGrades = filteredQuizzes.filter(quiz => {
+        if (quiz.Course !== course) {
+            return false;
+        }
 
         switch (gradeRange) {
             case '0-10':
                 return quiz.sumgrades < 10;
             case '10-15':
-                return quiz.sumgrades >= 10 && quiz.sumgrades < 15;
+                return quiz.sumgrades >= 11 && quiz.sumgrades < 15;
             case '15-20':
-                return quiz.sumgrades >= 15 && quiz.sumgrades < 20;
-            case '20+':
-                return quiz.sumgrades > 20;
+                return quiz.sumgrades >= 16 && quiz.sumgrades < 20;
+            case '20-25':
+                return quiz.sumgrades >= 21 && quiz.sumgrades < 25;
+            case '25-30':
+                return quiz.sumgrades >= 26 && quiz.sumgrades < 30;
+            case '30-35':
+                return quiz.sumgrades >= 31 && quiz.sumgrades < 35;
+            case '35-40':
+                return quiz.sumgrades >= 36 && quiz.sumgrades <= 40;
             default:
                 return true;
         }
     });
 
     const gradeRanges = {
-        'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
-        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 10 && quiz.sumgrades < 15).length,
-        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 15 && quiz.sumgrades < 20).length,
-        'More than 20': filteredQuizzes.filter(quiz => quiz.sumgrades > 20).length,
+        'Less than 10': filteredGrades.filter(quiz => quiz.sumgrades < 10).length,
+        '10 to 15': filteredGrades.filter(quiz => quiz.sumgrades >= 11 && quiz.sumgrades < 15).length,
+        '15 to 20': filteredGrades.filter(quiz => quiz.sumgrades >= 16 && quiz.sumgrades < 20).length,
+        '20 to 25': filteredGrades.filter(quiz => quiz.sumgrades >= 21 && quiz.sumgrades <= 25).length,
+        '25 to 30': filteredGrades.filter(quiz => quiz.sumgrades >= 26 && quiz.sumgrades < 30).length,
+        '30 to 35': filteredGrades.filter(quiz => quiz.sumgrades >= 31 && quiz.sumgrades < 35).length,
+        '35 to 40': filteredGrades.filter(quiz => quiz.sumgrades >= 36 && quiz.sumgrades <= 40).length,
     };
 
     const chartData = {
@@ -52,17 +67,32 @@ const QuizReportGraph = () => {
             {
                 label: 'Students',
                 data: Object.values(gradeRanges),
-                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',  // Less than 10
+                    'rgba(54, 162, 235, 0.2)',  // 10 to 15
+                    'rgba(255, 206, 86, 0.2)',  // 15 to 20
+                    'rgba(75, 192, 192, 0.2)',  // 20 to 25
+                    'rgba(153, 102, 255, 0.2)', // 25 to 30
+                    'rgba(255, 159, 64, 0.2)',  // 30 to 35
+                    'rgba(0, 240, 0, 0.2)'  // 35 to 40
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',    // Less than 10
+                    'rgba(54, 162, 235, 1)',    // 10 to 15
+                    'rgba(255, 206, 86, 1)',    // 15 to 20
+                    'rgba(75, 192, 192, 1)',    // 20 to 25
+                    'rgba(153, 102, 255, 1)',   // 25 to 30
+                    'rgba(255, 159, 64, 1)',    // 30 to 35
+                    'rgba(199, 199, 199, 1)'    // 35 to 40
+                ],
                 borderWidth: 1,
             },
         ],
     };
 
-    const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+    const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
     const top10Quizzes = sortedQuizzes.slice(0, 10);
     
-    const courseNames = [...new Set(quizzes.map(quiz => quiz.Course))];
     
     return (
         <div>
@@ -79,7 +109,6 @@ const QuizReportGraph = () => {
                             onChange={e => setCourse(e.target.value)} 
                             className="mb-4 p-2 w-[100%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                         >
-                            <option className='dark:text-black' value="">All courses</option>
                             {courseNames.map((courseName, index) => (
                                 <option className='dark:text-black' key={index} value={courseName}>{courseName}</option>
                             ))}
