@@ -46,15 +46,15 @@ const QuizReport = (props) => {
             case '0-10':
                 return quiz.sumgrades < 10;
             case '10-15':
-                return quiz.sumgrades >= 11 && quiz.sumgrades < 15;
+                return quiz.sumgrades >= 11 && quiz.sumgrades <= 15;
             case '15-20':
-                return quiz.sumgrades >= 16 && quiz.sumgrades < 20;
+                return quiz.sumgrades >= 16 && quiz.sumgrades <= 20;
             case '20-25':
-                return quiz.sumgrades >= 21 && quiz.sumgrades < 25;
+                return quiz.sumgrades >= 21 && quiz.sumgrades <= 25;
             case '25-30':
-                return quiz.sumgrades >= 26 && quiz.sumgrades < 30;
+                return quiz.sumgrades >= 26 && quiz.sumgrades <= 30;
             case '30-35':
-                return quiz.sumgrades >= 31 && quiz.sumgrades < 35;
+                return quiz.sumgrades >= 31 && quiz.sumgrades <= 35;
             case '35-40':
                 return quiz.sumgrades >= 36 && quiz.sumgrades <= 40;
             default:
@@ -64,11 +64,11 @@ const QuizReport = (props) => {
 
     const gradeRanges = {
         'Less than 10': filteredQuizzes.filter(quiz => quiz.sumgrades < 10).length,
-        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 11 && quiz.sumgrades < 15).length,
-        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 16 && quiz.sumgrades < 20).length,
+        '10 to 15': filteredQuizzes.filter(quiz => quiz.sumgrades >= 11 && quiz.sumgrades <= 15).length,
+        '15 to 20': filteredQuizzes.filter(quiz => quiz.sumgrades >= 16 && quiz.sumgrades <= 20).length,
         '20 to 25': filteredQuizzes.filter(quiz => quiz.sumgrades >= 21 && quiz.sumgrades <= 25).length,
-        '25 to 30': filteredQuizzes.filter(quiz => quiz.sumgrades >= 26 && quiz.sumgrades < 30).length,
-        '30 to 35': filteredQuizzes.filter(quiz => quiz.sumgrades >= 31 && quiz.sumgrades < 35).length,
+        '25 to 30': filteredQuizzes.filter(quiz => quiz.sumgrades >= 26 && quiz.sumgrades <= 30).length,
+        '30 to 35': filteredQuizzes.filter(quiz => quiz.sumgrades >= 31 && quiz.sumgrades <= 35).length,
         '35 to 40': filteredQuizzes.filter(quiz => quiz.sumgrades >= 36 && quiz.sumgrades <= 40).length,
     };
 
@@ -96,7 +96,7 @@ const QuizReport = (props) => {
                 'rgba(75, 192, 192, 1)',    // 20 to 25
                 'rgba(153, 102, 255, 1)',   // 25 to 30
                 'rgba(255, 159, 64, 1)',    // 30 to 35
-                'rgba(199, 199, 199, 1)'    // 35 to 40
+                'rgba(0, 199, 199, 1)'    // 35 to 40
             ],
             borderWidth: 1,
         },
