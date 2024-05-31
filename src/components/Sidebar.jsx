@@ -118,7 +118,7 @@ const Sidebar = (props) => {
                                         </li>
                                     </>
                                 )}
-                                {!is_staff && !is_superuser && (
+                                {/* {is_active && (
                                     <>
                                         <li>
                                             <Link 
@@ -130,7 +130,7 @@ const Sidebar = (props) => {
                                             </Link>
                                         </li>
                                     </>
-                                )}
+                                )} */}
                             </ul>
                         ) : (
                             <ul className='text-xl flex flex-col gap-3'>
@@ -231,7 +231,7 @@ const Sidebar = (props) => {
                                         </li>
                                     </>
                                 )}
-                                {is_active && (
+                                {/* {is_active && (
                                     <li>
                                         <Link 
                                             className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
@@ -240,7 +240,7 @@ const Sidebar = (props) => {
                                             <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
                                         </Link>
                                     </li>
-                                )}
+                                )} */}
                                 
                             </ul>
                         )}
