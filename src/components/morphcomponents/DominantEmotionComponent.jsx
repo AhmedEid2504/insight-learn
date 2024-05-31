@@ -21,6 +21,9 @@ const GenderComponent = (props) => {
       console.log(props.userData.dominantEmotion);
     }, 5000); // Delay of 5 seconds
   }
+  useEffect (() => {
+    handleEmotionEvent();
+  }, []);
 
   return (
     <div >
