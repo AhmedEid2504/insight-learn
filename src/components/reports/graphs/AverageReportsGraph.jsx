@@ -116,7 +116,6 @@ const Reports = () => {
 
     const options = {
         responsive: true,
-        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
@@ -147,11 +146,11 @@ const Reports = () => {
         <div className="flex flex-wrap gap-5">
             <div className='flex flex-col'>
                 <div className='w-[80vw] flex self-center mb-8'>
-                    <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} width={300} height={300} />
+                    <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                 </div>
 
                 <div className='w-[80vw] flex self-center'>
-                    <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} width={300} height={300} />
+                    <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} />
                 </div>
 
                 <div className='flex flex-wrap gap-1 justify-center items-center self-center'>

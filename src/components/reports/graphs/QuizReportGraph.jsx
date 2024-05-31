@@ -59,11 +59,6 @@ const QuizReportGraph = () => {
         ],
     };
 
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-    };
-
     const sortedQuizzes = [...quizzes].sort((a, b) => b.sumgrades - a.sumgrades);
     const top10Quizzes = sortedQuizzes.slice(0, 10);
     
@@ -75,7 +70,7 @@ const QuizReportGraph = () => {
             <div className="flex flex-col">
                     <div className='flex flex-col justify-start items-start overflow-x-scroll'>
                         <div className='max-sm:h-fit sm:h-fit'>
-                            <Pie data={chartData} options={chartOptions} width={300} height={300} />
+                            <Pie data={chartData} />
                         </div>
                     </div>
                     <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
