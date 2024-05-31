@@ -4,20 +4,19 @@ import { useEffect } from "react";
 
 const GenderComponent = (props) => {  
   useEffect(() => {
-    bindEvents();
+    const interval =  setInterval(bindEvents, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      setTimeout(() => {
-        // set userData from props to save dominantEmotion 
-        props.setUserData(prevUserData => ({
-          ...prevUserData,
-          dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
-        }));
-        console.log(evt.detail.output.dominantEmotion);
-        props.setUserDataChanged(true);
-      }, 5000); // Delay of 5 seconds
+      // set userData from props to save dominantEmotion 
+      props.setUserData(prevUserData => ({
+        ...prevUserData,
+        dominantEmotion: evt.detail.output.dominantEmotion || "Neutral"
+      }));
+      console.log(evt.detail.output.dominantEmotion);
+      props.setUserDataChanged(true)
     });
   }
   return (
