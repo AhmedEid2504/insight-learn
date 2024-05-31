@@ -3,18 +3,14 @@ import { useEffect, useState } from "react";
 
 
 const GenderComponent = (props) => { 
-  const [ dominantEmotion, setDominantEmotion ] = useState("Neutral");
   useEffect(() => {
     bindEvents();
   }, []);
 
   function bindEvents(){
-    window.addEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent );
+    window.addEventListener("CY_FACE_EMOTION_RESULT", handleSetEmotion );
   }
 
-  function handleEmotionEvent(event){
-    setDominantEmotion(event.detail.dominantEmotion);
-  }
 
   useEffect(() => {
     const interval = setInterval(handleSetEmotion, 5000); // Fetches data every 5 seconds
@@ -28,7 +24,7 @@ const GenderComponent = (props) => {
         ...prevUserData,
         dominantEmotion: event.detail.dominantEmotion === ('' || 'Undefined' || 'undefined') ? 'Neutral' : event.detail.dominantEmotion
       }));
-      console.log(dominantEmotion);
+      console.log(event.detail.dominantEmotion);
       props.setUserDataChanged(true);
   }
 
