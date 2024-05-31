@@ -67,6 +67,7 @@ const DataTable = () => {
                 <option value="assignment">Assignment</option>
                 <option value="SA-quiz">SA-quiz</option>
                 <option value="MOT-quiz">MOT-quiz</option>
+                <option value="MOT-lecture">MOT-lecture</option>
             </select>
             <button onClick={() => refreshData()} className=" p-2 border-2 bg-blue-500 text-white rounded">Refresh</button>
         </div>
