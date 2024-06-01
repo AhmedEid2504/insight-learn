@@ -93,8 +93,11 @@ const QuizReportGraph = () => {
     };
 
     const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
-    const top10Quizzes = sortedQuizzes.slice(0, 10);
-    
+   // Check if sortedQuizzes is not null and has at least one element before accessing the first element
+const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
+
+// Check if sortedQuizzes is not null before calling filter
+const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
     
     return (
         <div>
@@ -118,8 +121,9 @@ const QuizReportGraph = () => {
                     </div>
                 </div>
                 <div className='flex flex-col justify-center items-center'>
-                    <h1>Top 10</h1>
+                    <h1>Students With Full Mark: {fullMarkQuizzes.length}</h1>
                     <table className="table-auto">
+                            <div className='overflow-auto h-[40dvh]'>
                         <thead>
                             <tr>
                                 <th className="px-4 py-2">Username</th>
@@ -127,13 +131,14 @@ const QuizReportGraph = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {top10Quizzes.map((quiz, index) => (
-                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
-                                    <td className="border px-4 py-2">{quiz.username}</td>
-                                    <td className="border px-4 py-2">{quiz.sumgrades}</td>
-                                </tr>
-                            ))}
+                                {fullMarkQuizzes.map((quiz, index) => (
+                                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                        <td className="border px-4 py-2">{quiz.username}</td>
+                                        <td className="border px-4 py-2">{quiz.sumgrades}</td>
+                                    </tr>
+                                ))}
                         </tbody>
+                            </div>
                     </table>
                 </div>
             </div>

@@ -94,6 +94,7 @@ const cgpaHistogramData = {
             <div className="flex justify-center items-center flex-wrap">
             </div>
             <div className=" basis-[100%] overflow-x-auto p-4  dark:text-white dark:bg-black dark:bg-opacity-15 bg-c_4 bg-opacity-25 rounded shadow">
+                <h2 className="text-xl font-bold mb-2">Quiz Grades Pie Chart</h2>
                 <QuizReportGraph  />
             </div>
             <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">

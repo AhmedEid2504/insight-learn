@@ -8,7 +8,6 @@ const Sidebar = (props) => {
     const location = useLocation();
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
-    const is_active = localStorage.getItem('is_active');
 
     return (
         <div className={props.showSideBar ? window.innerWidth > 768 ? "relative w-[250px]" : "relative w-[100%]" : "relative w-[50px]"}>
