@@ -45,7 +45,7 @@ const AboutUs = () => {
 
 
     return (
-        <div className="flex flex-col">
+        <div className="flex overflow-hidden flex-col">
             <div className="h-[15dvh]">
                 <Navbar
                         isLoggedIn={isLoggedIn} 
@@ -53,7 +53,7 @@ const AboutUs = () => {
                 />
             </div>
             
-            <div className="h-[1204px] w-full flex bg-c_1">
+            <div className="h-[85dvh] max w-full flex bg-c_1">
                 <iframe className="w-full" src="/about-us.html" title="About Us" />
             </div>
         </div>
