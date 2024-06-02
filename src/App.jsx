@@ -18,6 +18,7 @@ import QuizReport from './components/reports/QuizReports';
 import MainDash from './components/reports/MainDash';
 import Profile from './components/Profile';
 import PersonalReport from './components/reports/PersonalReport';
+import AboutUs from './pages/AboutUs';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -44,6 +45,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/about-us" element={<AboutUs />} />
                     {/* <Route path="/signup" element={<Signup />} /> */}
                     {adminEmails.includes(localStorage.email) && 
                     <>
