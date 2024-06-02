@@ -10,11 +10,12 @@ const GenderComponent = (props) => {
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
       // set userData from props to save dominantEmotion 
-        { evt.detail.output.dominantGender !== undefined && props.setUserData(prevUserData => ({
-          ...prevUserData,
-          dominantGender: evt.detail.output.dominantGender
-        }));
-      }
+      props.setUserData((prevData) => {
+        return {
+          ...prevData,
+          dominantEmotion: evt.detail.dominantEmotion
+        }
+      });
     });
   }
   return (
