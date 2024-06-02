@@ -4,6 +4,33 @@
     --text-color: #101C42;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-corner {
+    background: #59bada;
+    cursor: pointer;
+}
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+
+
+::-webkit-scrollbar-track {
+    background:#e9f2ff;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #59bada;
+    cursor: pointer;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
