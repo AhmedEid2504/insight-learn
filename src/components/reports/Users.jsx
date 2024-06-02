@@ -5,6 +5,7 @@ const Users = () => {
     const [sessionDurations, setSessionDurations] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState('contains');
+    const [filterBy, setFilterBy] = useState('username');
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(30);
     const [filterActive, setFilterActive] = useState('all');
@@ -57,8 +58,9 @@ const Users = () => {
     });
 
     const filteredUsers = mergedUsers.filter(user => {
-        let userValue = user.username.toLowerCase();
-        let term = searchTerm.toLowerCase();
+        const filterField = filterBy === 'username' ? 'username' : 'email';
+        const userValue = user[filterField].toLowerCase();
+        const term = searchTerm.toLowerCase();
 
         switch (filterType) {
             case 'startsWith':
@@ -137,6 +139,14 @@ const Users = () => {
                     onChange={event => setSearchTerm(event.target.value)}
                     className="p-2 mb-4 dark:bg-black dark:bg-opacity-25 border-2 border-black rounded-md"
                 />
+                <select 
+                    value={filterBy} 
+                    onChange={e => setFilterBy(e.target.value)} 
+                    className="p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
+                >
+                    <option value="username">Username</option>
+                    <option value="email">Email</option>
+                </select>
                 <select
                     value={filterType}
                     onChange={event => setFilterType(event.target.value)}
