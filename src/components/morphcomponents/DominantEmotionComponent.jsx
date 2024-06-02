@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 const GenderComponent = (props) => {  
-  const [dominantEmotion, setDominantEmotion] = useState("");
+  const [dominantEmotion, setDominantEmotion] = useState("Neutral");
 
   useEffect(() => {
     bindEvents();
@@ -11,7 +11,7 @@ const GenderComponent = (props) => {
 
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      setDominantEmotion(evt.detail.output.dominantEmotion || "") ;
+      setDominantEmotion(evt.detail.output.dominantEmotion || "Neutral") ;
       // set userData from props to save dominantEmotion 
       
       props.setUserData((prevData) => {
