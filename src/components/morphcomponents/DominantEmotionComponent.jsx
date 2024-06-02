@@ -1,31 +1,43 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
-
-const GenderComponent = (props) => {  
-  const [dominantEmotion, setDominantEmotion] = useState("Neutral");
+const EmotionBarsComponent = ({ setUserData }) => {
+  const timeout = useRef(undefined);
 
   useEffect(() => {
-    bindEvents();
-  }, []);
+    function resetTimeout() {
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => {
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          dominantEmotion: "Neutral",
+        }));
+      }, 3000);
+    }
 
-  function bindEvents(){
-    window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      setDominantEmotion(evt.detail.output.dominantEmotion || "Neutral") ;
-      // set userData from props to save dominantEmotion 
-      
-      props.setUserData((prevData) => {
-        return {
-          ...prevData,
-          dominantEmotion: dominantEmotion
-        }
-      });
-    });
-  }
-  return (
-    <div >
-    </div>
-  );
+    function handleEmotionEvent(evt) {
+      resetTimeout();
+      const emotions = evt.detail.output.emotion;
+      const dominantEmotion = getDominantEmotion(emotions);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        dominantEmotion,
+      }));
+    }
+
+    function getDominantEmotion(emotions) {
+      return Object.keys(emotions).reduce((a, b) => (emotions[a] > emotions[b] ? a : b));
+    }
+
+    window.addEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent);
+
+    return () => {
+      clearTimeout(timeout.current);
+      window.removeEventListener("CY_FACE_EMOTION_RESULT", handleEmotionEvent);
+    };
+  }, [setUserData]);
+
+  return null; // No visualizations needed
 };
 
-export default GenderComponent;
+export default EmotionBarsComponent;
