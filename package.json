@@ -16,6 +16,7 @@
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "firebase": "^10.10.0",
     "framer-motion": "^11.1.7",
     "pdfjs-dist": "^4.1.392",

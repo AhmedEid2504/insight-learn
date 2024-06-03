@@ -48,36 +48,38 @@ import { useEffect, useState } from 'react';
                 <option value="pass">Pass</option>
                 <option value="fail">Fail</option>
             </select>
+
+            <div>
+                <h2 className="text-lg font-semibold dark:text-white">Total Predictions: {predictions.length}</h2>
+                {filteredPredictions.some(prediction => prediction.predictions !== 1) ? (
+                <h2 className="text-lg font-semibold dark:text-white">Failed Predictions: {filteredPredictions.filter(prediction => prediction.predictions !== 1).length}</h2>
+                ) : (
+                <h2 className="text-lg font-semibold dark:text-white">All students are expected to pass.</h2>
+                )}
+            </div>
+
             <div className='overflow-auto dark:bg-black dark:bg-opacity-25 h-[70vh] w-[70vw]'>
                 <table className="min-w-full bg-c_5 dark:bg-black dark:bg-opacity-25 dark:text-white">
-                    <thead>
-                        <tr>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Email</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Arousal</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Attention</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Valence</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Volume</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200">Prediction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <thead>
+                    <tr>
+                    <th className="py-2 px-4 border-b-2 border-gray-200">Email</th>
+                    <th className="py-2 px-4 border-b-2 border-gray-200">Prediction</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {filteredPredictions.map((prediction, index) => (
-                        <tr key={index} className="hover:bg-gray-100">
-                            <td className="py-2 px-4 text-center border-b">{prediction.email}</td>
-                            <td className="py-2 px-4 text-center border-b">{prediction.arousal}</td>
-                            <td className="py-2 px-4 text-center border-b">{prediction.attention}</td>
-                            <td className="py-2 px-4 text-center border-b">{prediction.valence}</td>
-                            <td className="py-2 px-4 text-center border-b">{prediction.volume}</td>
-                            <td className="py-2 px-4 text-center border-b">
-                                {prediction.predictions === 1 ? (
-                                <span className="text-green-500 font-semibold">Pass</span>
-                                ) : (
-                                <span className="text-red-500 font-semibold">Fail</span>
-                                )}
-                            </td>
-                        </tr>
+                    <tr key={index} className="hover:bg-c_4">
+                        <td className="py-2 px-4 text-start border-b">{prediction.email}</td>
+                        <td className="py-2 px-4 text-center border-b">
+                        {prediction.predictions === 1 ? (
+                            <span className="text-green-500 font-semibold">Pass</span>
+                        ) : (
+                            <span className="text-red-500 font-semibold">Fail</span>
+                        )}
+                        </td>
+                    </tr>
                     ))}
-                    </tbody>
+                </tbody>
                 </table>
             </div>
         </div>
