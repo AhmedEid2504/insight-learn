@@ -20,7 +20,7 @@ const QuizReport = (props) => {
                         ...student,
                         sumgrades: parseFloat(student.sumgrades)
                     }));
-    
+
                 // Filter the grades for the selected course
                 const courseGrades = mappedData.filter(quiz => quiz.Course === props.courseName);
                 setStudentsGrades(courseGrades);
@@ -35,7 +35,6 @@ const QuizReport = (props) => {
             setGradeRange('');
         };
     }, [props.courseName]);
-
 
     const filteredQuizzes = studentsgrades.filter(quiz => {
         if (quiz.Course !== props.courseName) {

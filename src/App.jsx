@@ -21,6 +21,7 @@ import Profile from './components/Profile';
 import ReportCard from './components/reports/ReportCard'; 
 import AboutUs from './pages/AboutUs';
 import PersonalPredictions from './components/reports/PersonalPredictions';
+import PersonalReport from './components/reports/PersonalReport';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -57,6 +58,7 @@ function App() {
                             <Route path='reports' element={<Reports />}/>
                             <Route path='predictions' element={<Predictions />}/>
                             <Route path='personal-predictions' element={<PersonalPredictions />}/>
+                            <Route path='personal-report' element={<PersonalReport />}/>
                             <Route path="users" element={<Users />} />
                             <Route path='usersdata' element={<UsersData />}/>
                             <Route path='add-user' element={<AddUser />}/>

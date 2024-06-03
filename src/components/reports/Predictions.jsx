@@ -7,6 +7,6 @@ const Predictions = () => {
             <img className="w-full" src="/images/underconstruction.png" alt="underconstruction" />
         </div>
     );
-  };
-  
-  export default Predictions
+};
+
+export default Predictions

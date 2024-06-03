@@ -52,20 +52,6 @@ const UserReports = () => {
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
-            {
-                label: 'Average Arousal',
-                data: showArousal ? sessions.map(session => session.average_arousal) : [],
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
-            },
-            {
-                label: 'Average Valence',
-                data: showValence ? sessions.map(session => session.average_valence) : [],
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                borderColor: 'rgba(255, 159, 64, 1)',
-                borderWidth: 1,
-            },
         ],
     };
 

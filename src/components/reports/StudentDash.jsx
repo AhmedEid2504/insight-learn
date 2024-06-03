@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
-import TotalSessionsGraph from "./graphs/TotalSessionsGraph";
-import AverageReportsGraph from "./graphs/AverageReportsGraph";
+import PersonalReport from "./PersonalReport"
 
 const MainDash = () => {
     const [users, setUsers] = useState([]);
@@ -41,10 +40,6 @@ const MainDash = () => {
                                 <h2 className="text-xl font-bold mb-2">Total Users</h2>
                                 <p>{isLoading ? "Loading..." : users.length}</p>
                             </div>
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,11 +48,9 @@ const MainDash = () => {
             </div>
             <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                 <h2 className="text-xl font-bold mb-2">Total Session Duration Graph</h2>
-                <TotalSessionsGraph  />
+                <PersonalReport />
             </div>
-            <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                <AverageReportsGraph  />
-            </div>
+
 
         </div>
     )

@@ -135,8 +135,8 @@ const Sidebar = (props) => {
                                                 className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
                                                 onClick={() => props.toggleSideBar()}
                                             >
-                                                <img className='w-8' src="/images/sessions.png" alt="sessions icon" />
-                                                Reports
+                                                <img className='w-8' src="/images/eye.png" alt="sessions icon" />
+                                                Attention Report
                                             </Link>
                                         </li>
                                         <li>
@@ -270,7 +270,7 @@ const Sidebar = (props) => {
                                                 className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/studentdash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/studentdash"
                                                 onClick={() => props.toggleSideBar()}
                                             >
-                                                <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
+                                                <img className='w-10' src="/images/dashboard.png" alt="dashboard icon" />
                                             </Link>
                                         </li>
                                         <li>
@@ -278,7 +278,7 @@ const Sidebar = (props) => {
                                                 className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
                                                 onClick={() => props.toggleSideBar()}
                                             >
-                                                <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
+                                                <img className='w-10' src="/images/eye.png" alt="sessions icon" />
                                             </Link>
                                         </li>
                                         <li>
