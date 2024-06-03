@@ -15,7 +15,6 @@ const Navbar =(props) => {
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
 
-
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -39,7 +38,6 @@ const Navbar =(props) => {
         }
     };
 
-
     const toggleUserMenu = (event) => {
         event.stopPropagation(); // Stop event propagation
         setShowUserMenu(!showUserMenu);
@@ -48,14 +46,14 @@ const Navbar =(props) => {
     return (
         <nav className="z-50 text-white shadow-sm shadow-black flex justify-between items-center font-sans transition-all ease-in duration-200">
             <div>
-                    <Link                            
-                        to="/">
-                            <div className=' bg-c_1  px-6 py-4 absolute top-0 left-0'>
-                                <div className=' bg-c_1   px-5 py-2 absolute top-0 left-0 w-[180px] -skew-x-[30deg] h-full -z-50'>
-                                </div>
-                                <img className='w-[100px] h-auto' src="images/logo.png" alt="logo image" />
+                <Link                            
+                    to="/">
+                        <div className=' bg-c_1 px-6 py-4 absolute top-0 left-0'>
+                            <div className=' bg-c_1 px-5 py-2 absolute top-0 left-0 w-[180px] -skew-x-[30deg] h-full -z-50'>
                             </div>
-                    </Link>
+                            <img className='w-[100px] h-auto' src="images/logo.png" alt="logo image" />
+                        </div>
+                </Link>
             </div>
             <div className="bg-c_1 text-center items-center justify-center p-7 absolute top-5 right-5 flex">
                 {windowWidth > 800 ? (
@@ -83,6 +81,8 @@ const Navbar =(props) => {
                             { props.isLoggedIn &&
                                 <>
                                     <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
+                                    <li><Link className={location.pathname === "/dashboard/profile" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/profile">Profile</Link></li>
+                                    
                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                 </>
                             }
@@ -119,6 +119,8 @@ const Navbar =(props) => {
                                             { props.isLoggedIn &&
                                                 <>
                                                     <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
+                                                    <li><Link className={location.pathname === "/dashboard/profile" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/profile">Profile</Link></li>
+                                                    
                                                     <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
                                                 </>
                                             }
@@ -140,9 +142,6 @@ Navbar.propTypes = {
         darkMode: PropTypes.bool,
         toggleDarkMode: PropTypes.func,
         changeComponent: PropTypes.func,
-
 };
 
 export default Navbar;
-
-
