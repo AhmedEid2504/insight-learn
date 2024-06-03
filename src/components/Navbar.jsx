@@ -59,7 +59,7 @@ const Navbar =(props) => {
                 {windowWidth > 800 ? (
                     <div>
 
-                        <div className="bg-c_1 text-center items-center justify-center w-[390px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
+                        <div className="bg-c_1 text-center items-center justify-center w-[450px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
                             <li><Link className={location.pathname === "/" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/">Home</Link></li>
                             { !props.isLoggedIn ?
