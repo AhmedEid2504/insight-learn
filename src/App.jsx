@@ -16,9 +16,11 @@ import Sessions from './components/reports/Sessions';
 import TotalSessions from './components/reports/TotalSessions';
 import QuizReport from './components/reports/QuizReports';
 import MainDash from './components/reports/MainDash';
+import StudentDash from './components/reports/StudentDash';
 import Profile from './components/Profile';
-import PersonalReport from './components/reports/PersonalReport';
+import ReportCard from './components/reports/ReportCard'; 
 import AboutUs from './pages/AboutUs';
+import PersonalPredictions from './components/reports/PersonalPredictions';
 function App() {
     const adminEmails = import.meta.env.VITE_ADMIN_EMAILS.split(',');
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -51,8 +53,10 @@ function App() {
                     <>
                         <Route path="dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} >
                             <Route path='maindash' element={<MainDash />}/>
+                            <Route path='studentdash' element={<StudentDash />}/>
                             <Route path='reports' element={<Reports />}/>
                             <Route path='predictions' element={<Predictions />}/>
+                            <Route path='personal-predictions' element={<PersonalPredictions />}/>
                             <Route path="users" element={<Users />} />
                             <Route path='usersdata' element={<UsersData />}/>
                             <Route path='add-user' element={<AddUser />}/>
@@ -62,7 +66,7 @@ function App() {
                             <Route path='courses' element={<Courses/>}/>
                             <Route path="quizreports/:courseName" element={<QuizReport />} />
                             <Route path='profile' element={<Profile/>}/>
-                            <Route path='personal-report' element={<PersonalReport/>}/>
+                            <Route path='reportcard' element={<ReportCard/>}/>
                         </Route>
                     </>
                     }

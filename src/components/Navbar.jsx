@@ -80,8 +80,12 @@ const Navbar =(props) => {
                                     }
                                 </div>
                             }
-                            <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
-                            <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
+                            { props.isLoggedIn &&
+                                <>
+                                    <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
+                                    <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
+                                </>
+                            }
                         </ul>
                     </div>
                 ) : (
@@ -112,8 +116,12 @@ const Navbar =(props) => {
                                                 </div>
                                             }
                                         </> 
-                                            <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
-                                            <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
+                                            { props.isLoggedIn &&
+                                                <>
+                                                    <li><Link className={location.pathname === "/about-us" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/about-us">About Us</Link></li>
+                                                    <li><button onClick={props.handleLogout} className="hover:text-c_4 transition-all ease-in duration-200" >Sign Out</button></li>
+                                                </>
+                                            }
                                 </ul>
                             )}
                         </ul>

@@ -103,10 +103,13 @@ const QuizReport = (props) => {
     ],
 };
 
-    const sortedQuizzes = [...studentsgrades].sort((a, b) => b.sumgrades - a.sumgrades);
-    const top10Quizzes = sortedQuizzes.slice(0, 10);
+const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+// Check if sortedQuizzes is not null and has at least one element before accessing the first element
+const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
 
-
+// Check if sortedQuizzes is not null before calling filter
+const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
+ 
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]">
@@ -117,8 +120,9 @@ const QuizReport = (props) => {
                     </div>
                 </div>
                 <div className='flex flex-col justify-center items-center'>
-                    <h1>Top 10</h1>
+                    <h1>Students With Full Mark: {fullMarkQuizzes.length}</h1>
                     <table className="table-auto">
+                            <div className='overflow-auto h-[40dvh]'>
                         <thead>
                             <tr>
                                 <th className="px-4 py-2">Username</th>
@@ -126,31 +130,19 @@ const QuizReport = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {top10Quizzes.map((quiz, index) => (
-                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
-                                    <td className="border px-4 py-2">{quiz.username}</td>
-                                    <td className="border px-4 py-2">{quiz.sumgrades}</td>
-                                </tr>
-                            ))}
+                                {fullMarkQuizzes.map((quiz, index) => (
+                                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                        <td className="border px-4 py-2">{quiz.username}</td>
+                                        <td className="border px-4 py-2">{quiz.sumgrades}</td>
+                                    </tr>
+                                ))}
                         </tbody>
+                            </div>
                     </table>
                 </div>
             </div>
             
             <div className='flex flex-col'>
-                <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
-                    <select 
-                        value={gradeRange} 
-                        onChange={e => setGradeRange(e.target.value)} 
-                        className="mb-4 p-2 w-[100%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
-                    >
-                        <option value="">All grades</option>
-                        <option value="0-10">Less than 10</option>
-                        <option value="10-15">10 to 15</option>
-                        <option value="15-20">15 to 20</option>
-                        <option value="20+">More than 20</option>
-                    </select>
-                </div>
                 <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 w-[80vw] overflow-scroll l border-b border-gray-200  sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">

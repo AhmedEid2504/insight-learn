@@ -2,8 +2,9 @@
 const Profile = () => {
     return (
         <div className="flex flex-col justify-center items-center">
-            <h1 className="text-2xl font-bold">Under Construction</h1>
-            <img className="w-full" src="/images/underconstruction.png" alt="underconstruction" />
+            <div className="h-[60dvh] w-[60vw] flex">
+                <iframe className="w-full" src="/profile1.html" title="About Us" />
+            </div>
         </div>
     )
 }

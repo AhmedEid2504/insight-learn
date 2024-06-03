@@ -1,3 +1,30 @@
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-corner {
+    background: #59bada;
+    cursor: pointer;
+}
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+
+
+::-webkit-scrollbar-track {
+    background:#e9f2ff;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #59bada;
+    cursor: pointer;
+}
+
 body {
     font-family: Arial, sans-serif;
     font-size: medium ;
@@ -5,14 +32,14 @@ body {
     color: #1D3984;
     margin: 0;
     padding: 0;
-    background-color: #E9F2FF;
+    background-color: #c4e0fc;
 }
 
 .profile {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    background-color: transparent;
 }
 
 .profile-card {
@@ -24,6 +51,7 @@ body {
     padding-right: 80px;
     padding-bottom: 50px;
     padding-left: 80px;
+    width: 100vw;
 }
 
 .profile-picture {
@@ -42,8 +70,7 @@ body {
 .image-container {
     display: flex;
     justify-content: right; 
-    align-items: center; 
-    height: 100vh; 
+    align-items: center;  
 }
 
 button {

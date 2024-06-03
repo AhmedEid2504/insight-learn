@@ -24,15 +24,17 @@ const Sidebar = (props) => {
                                         />
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link 
-                                        className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-8' src="/images/dashboard.png" alt="dashboard icon" />
-                                        Dashboard
-                                    </Link>
-                                </li>
+                                { is_staff === "true" || is_superuser === "true" && (
+                                    <li>
+                                        <Link 
+                                            className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
+                                            onClick={() => props.toggleSideBar()}
+                                        >
+                                            <img className='w-8' src="/images/dashboard.png" alt="dashboard icon" />
+                                            Dashboard
+                                        </Link>
+                                    </li>
+                                )}
                                 {is_staff === "true" && (
                                     <>
                                         <li>
@@ -121,11 +123,29 @@ const Sidebar = (props) => {
                                     <>
                                         <li>
                                             <Link 
+                                                className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/studentdash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/studentdash"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-8' src="/images/dashboard.png" alt="dashboard icon" />
+                                                Dashboard
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link 
                                                 className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
                                                 onClick={() => props.toggleSideBar()}
                                             >
                                                 <img className='w-8' src="/images/sessions.png" alt="sessions icon" />
                                                 Personal Reports
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link 
+                                                className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-predictions"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-8' src="/images/predictionsicon.png" alt="predictionsicon icon" />
+                                                Personal Predictions
                                             </Link>
                                         </li>
                                     </>
@@ -142,14 +162,18 @@ const Sidebar = (props) => {
                                         />
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link 
-                                        className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
-                                        onClick={() => props.toggleSideBar()}
-                                    >
-                                        <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
-                                    </Link>
-                                </li>
+                                { is_staff === "true" || is_superuser === "true" && (
+                                    <>
+                                        <li>
+                                            <Link 
+                                                className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
                                 {is_staff === "true" && (
                                     <>
                                         <li>
@@ -231,14 +255,40 @@ const Sidebar = (props) => {
                                     </>
                                 )}
                                 {(is_superuser === "false" && is_staff === "false") && (
-                                    <li>
-                                        <Link 
-                                            className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
-                                            onClick={() => props.toggleSideBar()}
-                                        >
-                                            <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
-                                        </Link>
-                                    </li>
+                                    <>
+                                        <li>
+                                            <Link 
+                                                className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/studentdash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/studentdash"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-10' src="/images/dashboard.png" alt="reports icon" />
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link 
+                                                className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-report" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-report"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-10' src="/images/sessions.png" alt="sessions icon" />
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link 
+                                                className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/personal-predictions" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/personal-predictions"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-10' src="/images/predictionsicon.png" alt="sessions icon" />
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link 
+                                                className={`flex px-2 py-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/reportcard" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/reportcard"
+                                                onClick={() => props.toggleSideBar()}
+                                            >
+                                                <img className='w-10' src="/images/reportcard.png" alt="sessions icon" />
+                                            </Link>
+                                        </li>
+                                    </>
                                 )}
                                 
                             </ul>
