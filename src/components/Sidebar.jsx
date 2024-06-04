@@ -24,7 +24,7 @@ const Sidebar = (props) => {
                                         />
                                     </Link>
                                 </li>
-                                { is_staff === "true" || is_superuser === "true" && (
+                                { (is_staff === "true" || is_superuser === "true") && (
                                     <li>
                                         <Link 
                                             className={`flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname === "/dashboard/maindash" ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/maindash"
@@ -171,7 +171,7 @@ const Sidebar = (props) => {
                                         />
                                     </Link>
                                 </li>
-                                { is_staff === "true" || is_superuser === "true" && (
+                                { (is_staff === "true" || is_superuser === "true") && (
                                     <>
                                         <li>
                                             <Link 

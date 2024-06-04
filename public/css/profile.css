@@ -43,6 +43,8 @@ body {
 }
 
 .profile-card {
+    display: flex;
+    flex-direction: column;
     background-color: #c4e0fc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(187, 215, 223);
@@ -81,7 +83,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     position: absolute;
-    right: 480px; 
     width: 140px; 
     height: 30px; 
 }
