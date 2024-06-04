@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuizReport from './QuizReports';
+import Predictions from './Predictions';
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
     const [selectedSemester, setSelectedSemester] = useState(null);
     const [selectedCourse, setSelectedCourse] = useState(null);
-
+    const [selectedType, setSelectedType] = useState(null);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -31,10 +32,27 @@ const Courses = () => {
     return (
         <div className="container mx-auto h-[90dvh] flex flex-col gap-5">
             {selectedCourse ? (
-                <>
-                    <button className='bg-c_1 dark:text-white text-white hover:text-black border-2 border-c_1 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>
-                    <QuizReport courseName={selectedCourse} />
-                </>
+                    <>
+                        <h1 className="text-2xl dark:text-white self-center font-bold mb-4">{selectedCourse}</h1>
+                        <div className='flex justify-center gap-5 items-center'>
+                            <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('Predictions')}>Predictions</button>
+                            <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('quiz')}>Quiz Grades Report</button>
+                        </div>
+                        {selectedType === 'Predictions' && (
+                            <>
+                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>                                
+                                <div className='h-[80vh] flex justify-center items-start overflow-auto'>
+                                    <Predictions courseName={selectedCourse} />
+                                </div>
+                            </>
+                        )} {selectedType === 'quiz' && (
+
+                            <>
+                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>
+                                <QuizReport courseName={selectedCourse} />
+                            </>
+                        )}
+                    </>
             ) : (
                 <>
                     <div className='bg-c_5  dark:bg-black dark:bg-opacity-25 p-5 flex flex-col shadow-md'>
