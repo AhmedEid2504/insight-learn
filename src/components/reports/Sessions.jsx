@@ -60,12 +60,12 @@ const SessionTable = () => {
                         placeholder="Filter by email" 
                         value={filterEmail} 
                         onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-c_4 rounded"
                     />
                     <select 
                         value={filterSessionType} 
                         onChange={e => setFilterSessionType(e.target.value)} 
-                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                        className="mb-4 p-2  dark:bg-black dark:bg-opacity-25 dark:text-white border border-c_4 rounded"
                     >
                         <option value="">All session types</option>
                         <option value="assignment">Assignment</option>
@@ -75,7 +75,7 @@ const SessionTable = () => {
                     <select 
                         value={filterDuration} 
                         onChange={e => setFilterDuration(e.target.value)} 
-                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white border border-c_4 rounded"
                     >
                         <option value="">All durations</option>
                         <option value="10">10+ minutes</option>
@@ -87,22 +87,22 @@ const SessionTable = () => {
                     <table className="min-w-full divide-y divide-gray-200 ">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User Email</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session For</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Started</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Ended</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration Text</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">User Email</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session For</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Started</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Ended</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Duration Text</th>
                                 {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration (minutes)</th> */}
                             </tr>
                         </thead>
                         <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
                             {filteredSessions.map((session, index) => (
                                 <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.userEmail}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.session_for}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Started}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Ended}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.userEmail}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.session_for}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Started}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Ended}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
                                     {/* <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration}</td> */}
                                 </tr>
                             ))}

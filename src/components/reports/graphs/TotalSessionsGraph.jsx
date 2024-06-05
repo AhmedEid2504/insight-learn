@@ -71,12 +71,12 @@ const TotalSessionsGraph = () => {
                     placeholder="Filter by email" 
                     value={filterEmail} 
                     onChange={e => setFilterEmail(e.target.value)} 
-                    className="mb-4 p-2 w-[60%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                    className="mb-4 p-2 w-[60%] border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                 />
                 <select 
                     value={filterSessionType} 
                     onChange={e => setFilterSessionType(e.target.value)} 
-                    className="mb-4 p-2 border dark:bg-black dark:bg-opacity-25 dark:text-white border-gray-300 rounded"
+                    className="mb-4 p-2 border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border-gray-300 rounded"
                 >
                     <option value="">All session types</option>
                     <option value="assignment">Assignment</option>
@@ -86,7 +86,7 @@ const TotalSessionsGraph = () => {
                 <select 
                     value={filterDuration} 
                     onChange={e => setFilterDuration(e.target.value)} 
-                    className="mb-4 p-2 border dark:bg-black dark:bg-opacity-25 dark:text-white border-gray-300 rounded"
+                    className="mb-4 p-2 border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border-gray-300 rounded"
                 >
                     <option value="">All durations</option>
                     <option value="10">10+ minutes</option>

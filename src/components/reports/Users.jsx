@@ -137,12 +137,12 @@ const Users = () => {
                     type="text"
                     placeholder="Search..."
                     onChange={event => setSearchTerm(event.target.value)}
-                    className="p-2 mb-4 dark:bg-black dark:bg-opacity-25 border-2 border-black rounded-md"
+                    className="p-2 mb-4 dark:bg-black dark:bg-opacity-25 border border-c_4  rounded-md"
                 />
                 <select 
                     value={filterBy} 
                     onChange={e => setFilterBy(e.target.value)} 
-                    className="p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
+                    className="p-2 mb-4 border border-c_4 dark:bg-black dark:bg-opacity-25  rounded-md"
                 >
                     <option value="username">Username</option>
                     <option value="email">Email</option>
@@ -150,7 +150,7 @@ const Users = () => {
                 <select
                     value={filterType}
                     onChange={event => setFilterType(event.target.value)}
-                    className="p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
+                    className="p-2 mb-4 border border-c_4 dark:bg-black dark:bg-opacity-25  rounded-md"
                 >
                     <option value="contains">Contains</option>
                     <option value="startsWith">Starts with</option>
@@ -159,7 +159,7 @@ const Users = () => {
                 <select 
                     value={filterActive} 
                     onChange={e => setFilterActive(e.target.value)} 
-                    className="form-select block w-full p-2 mb-4 border-2 dark:bg-black dark:bg-opacity-25 border-black rounded-md"
+                    className="form-select block w-full p-2 mb-4 border border-c_4 dark:bg-black dark:bg-opacity-25  rounded-md"
                 >
                     <option value="all">All</option>
                     <option value="active">Active</option>
@@ -174,7 +174,7 @@ const Users = () => {
                 : 
                 <>
                     {currentUsers.map(user => (
-                        <div key={user.id} className="flex max-sm:flex-col gap-5 justify-between items-center border-2 max-sm:w-[70%] w-full border-c_2 p-4 m-2 rounded-md ">
+                        <div key={user.id} className="flex max-sm:flex-col gap-5 justify-between items-center border border-c_4 max-sm:w-[70%] w-full  p-4 m-2 rounded-md ">
                             <div>
                                 <h2 className="text-xl max-sm:text-[100%] font-bold mb-2">{user.username}</h2>
                                 <p className="text-gray-700 max-sm:text-[75%]">{user.email}</p>
@@ -219,7 +219,7 @@ const Users = () => {
                     <button 
                         key={idx} 
                         onClick={() => paginate(idx + 1)}
-                        className={`px-3 py-1 border-2 hover:bg-c_2 hover:text-white border-c_2 rounded-md ${currentPage === idx+1 ? 'bg-c_2 text-white' : ''}`}
+                        className={`px-3 py-1 border border-c_4 hover:bg-opacity-30 hover:bg-c_5 hover:text-white rounded-md ${currentPage === idx+1 ? 'bg-c_4 text-white' : ''}`}
                     >
                         {idx + 1}
                     </button>

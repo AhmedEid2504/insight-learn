@@ -112,10 +112,10 @@ const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgra
                         <select 
                             value={course} 
                             onChange={e => setCourse(e.target.value)} 
-                            className="mb-4 p-2 w-[100%] dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                            className="mb-4 p-2 w-[100%] border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                         >
                             {courseNames.map((courseName, index) => (
-                                <option className='dark:text-black' key={index} value={courseName}>{courseName}</option>
+                                <option className='dark:text-black ' key={index} value={courseName}>{courseName}</option>
                             ))}
                         </select>
                     </div>
@@ -126,15 +126,15 @@ const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgra
                             <div className='overflow-auto h-[40dvh]'>
                         <thead>
                             <tr>
-                                <th className="px-4 py-2">Username</th>
-                                <th className="px-4 py-2">Grade</th>
+                                <th className="px-4 border border-c_4 py-2">Username</th>
+                                <th className="px-4 border border-c_4 py-2">Grade</th>
                             </tr>
                         </thead>
                         <tbody>
                                 {fullMarkQuizzes.map((quiz, index) => (
                                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
-                                        <td className="border px-4 py-2">{quiz.username}</td>
-                                        <td className="border px-4 py-2">{quiz.sumgrades}</td>
+                                        <td className="border border-c_4 px-4 py-2">{quiz.username}</td>
+                                        <td className="border border-c_4 px-4 py-2">{quiz.sumgrades}</td>
                                     </tr>
                                 ))}
                         </tbody>

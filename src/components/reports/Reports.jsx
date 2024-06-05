@@ -147,10 +147,10 @@ const Reports = () => {
     };
 
     return (
-        <div className="flex  flex-wrap gap-5 overflow-y-scroll h-[80dvh]">
+        <div className="flex  flex-wrap gap-5 overflow-auto h-[80dvh]">
             <div className='flex flex-col'>
             {/* {imageSrc ? <img src={imageSrc} alt="Graph" /> : <p>Loading...</p>} */}
-            <div className='flex flex-col overflow-scroll'>
+            <div className='flex flex-col overflow-auto'>
                     <div className='w-[80vw] flex self-center mb-8'>
                         <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                     </div>
@@ -165,12 +165,12 @@ const Reports = () => {
                         placeholder="Filter by email" 
                         value={filterEmail} 
                         onChange={e => setFilterEmail(e.target.value)} 
-                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-gray-300 rounded"
+                        className="mb-4 p-2 dark:bg-black dark:bg-opacity-25 dark:text-white w-[60%] border border-c_4 rounded"
                     />
                     <select 
                         value={filterSessionType} 
                         onChange={e => setFilterSessionType(e.target.value)} 
-                        className="mb-4 dark:bg-black dark:bg-opacity-25 dark:text-white p-2 border border-gray-300 rounded"
+                        className="mb-4 dark:bg-black dark:bg-opacity-25  dark:text-white p-2 border border-c_4 rounded"
                     >
                         <option value="">All session types</option>
                         <option value="assignment">Assignment</option>
@@ -204,31 +204,31 @@ const Reports = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex self-center shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll border-b border-gray-200 sm:rounded-lg">
+                <div className="flex self-center shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-auto border-b border-gray-200 sm:rounded-lg">
                     <table className="divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User Email</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session For</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Started</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Ended</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration Text</th>
-                                {showAttention && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Attention</th>}
-                                {showArousal && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Arousal</th>}
-                                {showValence && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Valence</th>}
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">User Email</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session For</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Started</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Ended</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Duration Text</th>
+                                {showAttention && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Average Attention</th>}
+                                {showArousal && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Average Arousal</th>}
+                                {showValence && <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Average Valence</th>}
                             </tr>
                         </thead>
                         <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
                             {filteredSessions.map((session, index) => (
                                 <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.userEmail}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.session_for}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Started}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Ended}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
-                                    {showAttention && <td className="px-6 py-4 whitespace-nowrap">{session.average_attention}</td>}
-                                    {showArousal && <td className="px-6 py-4 whitespace-nowrap">{session.average_arousal}</td>}
-                                    {showValence && <td className="px-6 py-4 whitespace-nowrap">{session.average_valence}</td>}
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.userEmail}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.session_for}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Started}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Ended}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
+                                    {showAttention && <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.average_attention}</td>}
+                                    {showArousal && <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.average_arousal}</td>}
+                                    {showValence && <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.average_valence}</td>}
                                 </tr>
                             ))}
                         </tbody>

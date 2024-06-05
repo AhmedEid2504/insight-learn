@@ -11,6 +11,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const MainDash = () => {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [predictions, setPredictions] = useState([]);
+    const [course, setCourse] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +35,24 @@ const MainDash = () => {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        // Fetch the predictions data from the API
+        fetch('https://dj-render-ldb1.onrender.com/prediction')
+            .then((response) => response.json())
+            .then((data) => {
+                setPredictions(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }, []);
+    // get only failed predictions
+    const filteredPredictions = predictions.filter(prediction => prediction.Course === course);
+    console.log(filteredPredictions);
+    const failedPredictions = filteredPredictions.filter(prediction => prediction.predictions === 0); 
+    const uniqueCourses = Array.from(new Set(predictions.map(pred => pred.Course)));
+
 
     const maleUsers = users.filter(user => user.Gender === 'Male').length;
     const femaleUsers = users.filter(user => user.Gender === 'Female').length;
@@ -88,40 +108,39 @@ const MainDash = () => {
         ]
     };
 
+    const handleCourseChange = (e) => {
+        setCourse(e.target.value);
+    };
+
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
-            <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
                 <div className="flex flex-wrap gap-5">
-                    <div className="flex flex-col justify-center items-center gap-5">
-                        <div className="flex justify-center items-center gap-5">
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
+                    <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
+                        <h2 className="text-xl font-bold mb-2">Total Users</h2>
+                        <p>{isLoading ? "Loading..." : users.length}</p>
+                    </div>
+                </div>
+            <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
+                <div className="flex flex-col justify-center bg-c_4 bg-opacity-25  dark:bg-black dark:bg-opacity-25 p-5 items-center">
+                    <h2 className="text-xl dark:text-white font-bold mb-2">Notifications</h2>
+                    <div className="flex flex-col gap-3">
+                        <h2 className="text-xl dark:text-white font-bold mb-2">Students Predicted To Fail</h2>
+                        <div className="flex flex-col">
+                            <label htmlFor="course" className="text-lg dark:text-white font-medium">Course Name:</label>
+                            <select id="course" value={course} onChange={handleCourseChange} className="border border-c_4 rounded-md px-3 py-2 dark:text-white dark:bg-black dark:bg-opacity-25 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Select a course</option>
+                                {uniqueCourses.map((courseName, index) => (
+                                    <option key={index} value={courseName}>{courseName}</option>
+                                ))}
+                            </select>
                         </div>
-                        <div className="flex justify-center items-center gap-5">
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
-                        </div>
-                        <div className="flex justify-center items-center gap-5">
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
+                        <div className="flex flex-col overflow-auto h-[15vh]">
+                            {failedPredictions === 0 ? <p>No failed predictions</p> : null}
+                                {failedPredictions && failedPredictions.map((prediction, index) => (
+                                    <div key={index} className="flex flex-col gap-2 dark:text-white dark:bg-black bg-white  dark:bg-opacity-15 p-2 rounded shadow">
+                                        <p>{prediction.email}</p>
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </div>
