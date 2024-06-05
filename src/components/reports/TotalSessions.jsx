@@ -31,7 +31,6 @@ const SessionTable = () => {
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
 
-
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]  ">
             <div className='flex flex-col justify-start items-start overflow-x-scroll'>
