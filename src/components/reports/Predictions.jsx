@@ -43,7 +43,7 @@ const PredictionChecker = () => {
     const uniqueCourses = Array.from(new Set(predictions.map(pred => pred.Course)));
 
     return (
-        <div className="container flex flex-col gap-5 dark:text-white bg-c_5 dark:bg-black dark:bg-opacity-25 p-5  mx-auto mt-8">
+        <div className="max-md:container flex flex-col border-2 border-c_4 gap-5 dark:text-white bg-c_5 dark:bg-black dark:bg-opacity-25 p-5  mx-auto mt-8">
             <h1 className="text-3xl font-semibold mb-4">Student Course Prediction Checker</h1>
             {error && <p className="text-red-500 mb-4">Error: {error}</p>}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
