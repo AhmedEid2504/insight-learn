@@ -20,7 +20,7 @@ body {
     display: flex;
     height: 50%;
     width: 40vh;
-    background-color: var(--secondary-color);
+    background-color: rgb(6 11 125);
     clip-path: polygon(0px 75%, 56% 74%, 40% 100%, 0px 100%);
     justify-content: center;
 }
