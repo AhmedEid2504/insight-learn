@@ -12,7 +12,7 @@ const Reports = () => {
     const [showAttention, setShowAttention] = useState(true);
     const [showArousal, setShowArousal] = useState(true);
     const [showValence, setShowValence] = useState(true);
-    // const [imageSrc, setImageSrc] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
@@ -29,6 +29,7 @@ const Reports = () => {
                     };
                 });
                 setSessions(normalizedData);
+                setIsLoading(false);
             })
             .catch(error => console.error('Error:', error));
     }, []);
@@ -145,6 +146,12 @@ const Reports = () => {
             },
         },
     };
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="flex  flex-wrap gap-5 overflow-auto h-[80dvh]">

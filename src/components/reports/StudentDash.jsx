@@ -22,36 +22,25 @@ const MainDash = () => {
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error:', error);
-                setIsLoading(false);
             }
         };
 
         fetchData();
     }, []);
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
     
     
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
-            <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
-                <div className="flex flex-wrap gap-5">
-                    <div className="flex flex-col justify-center items-center gap-5">
-                        <div className="flex justify-center items-center gap-5">
-                            <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                                <h2 className="text-xl font-bold mb-2">Total Users</h2>
-                                <p>{isLoading ? "Loading..." : users.length}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="flex justify-center items-center flex-wrap">
-            </div>
             <div className=" basis-[100%] overflow-x-auto p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
-                <h2 className="text-xl font-bold mb-2">Total Session Duration Graph</h2>
+                <h2 className="text-xl font-bold mb-2">Personal Report</h2>
                 <PersonalReport />
             </div>
-
-
         </div>
     )
 }

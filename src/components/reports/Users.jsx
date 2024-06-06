@@ -118,7 +118,9 @@ const Users = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>; // Replace this with your skeleton loading screen
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
     }
 
     // Get current users

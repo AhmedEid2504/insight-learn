@@ -8,6 +8,7 @@ const QuizReportGraph = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [gradeRange, setGradeRange] = useState('');
     const [course, setCourse] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
@@ -21,6 +22,7 @@ const QuizReportGraph = () => {
                     }));
             setQuizzes(mappedData);
             setCourse(data[0].Course);
+            setIsLoading(false);
         })
         .catch(error => console.error('Error:', error));
     }, []);
@@ -94,11 +96,18 @@ const QuizReportGraph = () => {
 
     const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
    // Check if sortedQuizzes is not null and has at least one element before accessing the first element
-const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
+    const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
 
-// Check if sortedQuizzes is not null before calling filter
-const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
-    
+    // Check if sortedQuizzes is not null before calling filter
+    const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
+        
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
+
     return (
         <div>
             <div className='flex flex-wrap justify-center items-center'>

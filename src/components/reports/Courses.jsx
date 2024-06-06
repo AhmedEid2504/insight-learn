@@ -8,6 +8,8 @@ const Courses = () => {
     const [selectedSemester, setSelectedSemester] = useState(null);
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -19,6 +21,7 @@ const Courses = () => {
                     semester: course.Semester
                 }));
                 setCourses(mappedData);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching courses:', error);
             }
@@ -26,6 +29,12 @@ const Courses = () => {
 
         fetchCourses();
     }, []);
+
+    if (isLoading) {
+        return <div>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     const semesters = [...new Set(courses.map(course => course.semester))];
 

@@ -15,6 +15,7 @@ const UserReports = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [showNoDataPopup, setShowNoDataPopup] = useState(false);
     const currentUserEmail = localStorage.getItem('email');
+    
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/')
             .then(response => response.json())
@@ -34,7 +35,6 @@ const UserReports = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                setIsLoading(false);
             });
     }, [currentUserEmail]);
 
@@ -62,6 +62,12 @@ const UserReports = () => {
             },
         },
     };
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="h-screen dark:text-white overflow-auto">

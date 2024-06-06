@@ -9,6 +9,7 @@ const Reports = () => {
     const [sessions, setSessions] = useState([]);
     const [filterEmail, setFilterEmail] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
@@ -25,6 +26,7 @@ const Reports = () => {
                     };
                 });
                 setSessions(normalizedData);
+                setIsLoading(false);
             })
             .catch(error => console.error('Error:', error));
     }, []);
@@ -87,7 +89,7 @@ const Reports = () => {
             {
                 label: 'Average Attention',
                 data: avgAttentionData,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: 'rgb(75, 192, 192, 0.8)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }
@@ -141,6 +143,12 @@ const Reports = () => {
             },
         },
     };
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="flex flex-wrap gap-5">

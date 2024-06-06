@@ -3,6 +3,7 @@ import  { useEffect, useState } from 'react';
 const ReportCard = () => {
     const [grades, setGrades] = useState([]);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Fetch the grades data from the API
@@ -20,6 +21,7 @@ const ReportCard = () => {
             const filteredData = data.filter((item) => item.email === email);
 
             setGrades(filteredData);
+            setIsLoading(false);
         })
         .catch((err) => {
             setError(err.message);
@@ -32,6 +34,12 @@ const ReportCard = () => {
 
     if (grades.length === 0) {
         return <div className='dark:text-white'>Loading...</div>;
+    }
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
     }
 
     return (

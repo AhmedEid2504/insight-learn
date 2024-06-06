@@ -7,7 +7,9 @@ const DataTable = () => {
     const [itemsPerPage, setItemsPerPage] = useState(1000);
     const [filterEmail, setFilterEmail] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
+    
     const fetchData = () => {
         axios.get('https://dj-render-ldb1.onrender.com/view/') // Replace with your API URL
         .then(response => {
@@ -18,23 +20,29 @@ const DataTable = () => {
                 return session;
             });
             setSessions(modifiedData);
+            setIsLoading(false);
         })
         .catch(error => console.error('Error:', error));
     };
     
     useEffect(() => {
         const interval = setInterval(fetchData, 5000); // Fetches data every 5 seconds
-    
+        
         return () => clearInterval(interval); // This is important to clear the interval when the component unmounts
     }, []);
-
+    
     const refreshData = () => {
         // Fetch the data
         fetchData();
-
+        
         setCurrentPage(1);
     };
-
+    
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
     
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 

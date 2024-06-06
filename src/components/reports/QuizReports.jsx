@@ -9,6 +9,7 @@ Chart.register(CategoryScale);
 const QuizReport = (props) => {
     const [studentsgrades, setStudentsGrades] = useState([]);
     const [gradeRange, setGradeRange] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
@@ -25,7 +26,7 @@ const QuizReport = (props) => {
                 const courseGrades = mappedData.filter(quiz => quiz.Course === props.courseName);
                 setStudentsGrades(courseGrades);
                 console.log(`Total students in ${props.courseName}: ${courseGrades.length}`);
-                
+                setIsLoading(false);
             })
             .catch(error => console.error('Error:', error));
     
@@ -76,39 +77,44 @@ const QuizReport = (props) => {
     const chartData = {
     labels: Object.keys(gradeRanges),
     datasets: [
-        {
-            label: 'Students',
-            data: Object.values(gradeRanges),
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',  // Less than 10
-                'rgba(54, 162, 235, 0.2)',  // 10 to 15
-                'rgba(255, 206, 86, 0.2)',  // 15 to 20
-                'rgba(75, 192, 192, 0.2)',  // 20 to 25
-                'rgba(153, 102, 255, 0.2)', // 25 to 30
-                'rgba(255, 159, 64, 0.2)',  // 30 to 35
-                'rgba(0, 240, 0, 0.2)'  // 35 to 40
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',    // Less than 10
-                'rgba(54, 162, 235, 1)',    // 10 to 15
-                'rgba(255, 206, 86, 1)',    // 15 to 20
-                'rgba(75, 192, 192, 1)',    // 20 to 25
-                'rgba(153, 102, 255, 1)',   // 25 to 30
-                'rgba(255, 159, 64, 1)',    // 30 to 35
-                'rgba(0, 199, 199, 1)'    // 35 to 40
-            ],
-            borderWidth: 1,
-        },
-    ],
-};
+            {
+                label: 'Students',
+                data: Object.values(gradeRanges),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',  // Less than 10
+                    'rgba(54, 162, 235, 0.2)',  // 10 to 15
+                    'rgba(255, 206, 86, 0.2)',  // 15 to 20
+                    'rgba(75, 192, 192, 0.2)',  // 20 to 25
+                    'rgba(153, 102, 255, 0.2)', // 25 to 30
+                    'rgba(255, 159, 64, 0.2)',  // 30 to 35
+                    'rgba(0, 240, 0, 0.2)'  // 35 to 40
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',    // Less than 10
+                    'rgba(54, 162, 235, 1)',    // 10 to 15
+                    'rgba(255, 206, 86, 1)',    // 15 to 20
+                    'rgba(75, 192, 192, 1)',    // 20 to 25
+                    'rgba(153, 102, 255, 1)',   // 25 to 30
+                    'rgba(255, 159, 64, 1)',    // 30 to 35
+                    'rgba(0, 199, 199, 1)'    // 35 to 40
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
 
-const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
-// Check if sortedQuizzes is not null and has at least one element before accessing the first element
-const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
+    const sortedQuizzes = [...filteredQuizzes].sort((a, b) => b.sumgrades - a.sumgrades);
+    // Check if sortedQuizzes is not null and has at least one element before accessing the first element
+    const maxGrade = sortedQuizzes && sortedQuizzes.length > 0 ? sortedQuizzes[0].sumgrades : 0;
 
-// Check if sortedQuizzes is not null before calling filter
-const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
- 
+    // Check if sortedQuizzes is not null before calling filter
+    const fullMarkQuizzes = sortedQuizzes ? sortedQuizzes.filter(quiz => quiz.sumgrades === maxGrade) : [];
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]">

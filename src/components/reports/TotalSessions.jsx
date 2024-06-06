@@ -9,6 +9,8 @@ const SessionTable = () => {
     const [filterEmail, setFilterEmail] = useState('');
     const [filterDuration, setFilterDuration] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
@@ -21,6 +23,7 @@ const SessionTable = () => {
                     return session;
                 });
                 setSessions(modifiedData);
+                setIsLoading(false);
             })
             .catch(error => console.error('Error:', error));
     }, []);
@@ -30,6 +33,12 @@ const SessionTable = () => {
             && session.Session_Duration >= filterDuration
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]  ">

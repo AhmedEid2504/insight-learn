@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const PredictionChecker = () => {
     const [email, setEmail] = useState('');
@@ -6,6 +6,7 @@ const PredictionChecker = () => {
     const [predictions, setPredictions] = useState([]);
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Fetch the predictions data from the API
@@ -13,6 +14,7 @@ const PredictionChecker = () => {
             .then((response) => response.json())
             .then((data) => {
                 setPredictions(data);
+                setIsLoading(false);
             })
             .catch((err) => {
                 setError(err.message);
@@ -41,6 +43,14 @@ const PredictionChecker = () => {
         }
     };
     const uniqueCourses = Array.from(new Set(predictions.map(pred => pred.Course)));
+
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
+
 
     return (
         <div className="max-md:container flex flex-col border-2 border-c_4 gap-5 dark:text-white bg-c_5 dark:bg-black dark:bg-opacity-50 p-6  mx-auto mt-8">

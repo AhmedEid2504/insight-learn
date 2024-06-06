@@ -26,10 +26,8 @@ const MainDash = () => {
                 });
                 const usersData = await usersResponse.json();
                 setUsers(usersData);
-                setIsLoading(false);
             } catch (error) {
                 console.error('Error:', error);
-                setIsLoading(false);
             }
         };
 
@@ -42,6 +40,7 @@ const MainDash = () => {
             .then((response) => response.json())
             .then((data) => {
                 setPredictions(data);
+                setIsLoading(false);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -111,6 +110,12 @@ const MainDash = () => {
     const handleCourseChange = (e) => {
         setCourse(e.target.value);
     };
+
+    if (isLoading) {
+        return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
+            <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
+        </div>;
+    }
 
     return (
         <div className="flex flex-wrap overflow-auto gap-5 h-[90dvh] justify-around">
