@@ -68,8 +68,8 @@ const TotalSessionsGraph = () => {
     }
 
     return (
-        <div>
-            <div className='max-sm:h-fit  sm:h-fit'>
+        <div className='flex flex-col justify-start gap-5 items-start'>
+            <div className='max-sm:h-fit  sm:h-fit min-w-[800px] md:w-[70vw]'>
                 <Line data={chartData} options={chartOptions} />
             </div>
             <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
@@ -78,7 +78,7 @@ const TotalSessionsGraph = () => {
                     placeholder="Filter by email" 
                     value={filterEmail} 
                     onChange={e => setFilterEmail(e.target.value)} 
-                    className="mb-4 p-2 w-[60%] border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                    className="mb-4 p-2 w-[60%] border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
                 />
                 <select 
                     value={filterSessionType} 

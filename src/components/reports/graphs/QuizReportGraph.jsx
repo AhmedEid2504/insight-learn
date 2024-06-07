@@ -109,47 +109,43 @@ const QuizReportGraph = () => {
     }
 
     return (
-        <div>
-            <div className='flex flex-wrap justify-center items-center'>
+        <div className='flex flex-wrap justify-start items-start'>
             <div className="flex flex-col">
-                    <div className='flex flex-col justify-start items-start overflow-x-scroll'>
-                        <div className='max-sm:h-fit sm:h-fit'>
-                            <Pie data={chartData} />
-                        </div>
+                <div className='flex flex-col justify-start items-start overflow-x-scroll'>
+                    <div className='max-sm:h-fit sm:h-fit min-w-[300px]'>
+                        <Pie data={chartData} />
                     </div>
-                    <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
-                        <select 
-                            value={course} 
-                            onChange={e => setCourse(e.target.value)} 
-                            className="mb-4 p-2 w-[100%] border border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
-                        >
-                            {courseNames.map((courseName, index) => (
-                                <option className='dark:text-black ' key={index} value={courseName}>{courseName}</option>
+                </div>
+                <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
+                    <select 
+                        value={course} 
+                        onChange={e => setCourse(e.target.value)} 
+                        className="mb-4 p-2 w-[100%] border-c_4 dark:bg-black dark:bg-opacity-25 dark:text-white border border-gray-300 rounded"
+                    >
+                        {courseNames.map((courseName, index) => (
+                            <option className='dark:text-black ' key={index} value={courseName}>{courseName}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+            <div className='flex flex-col justify-start items-start h-[40vh] overflow-auto'>
+                <h1>Students With Full Mark: {fullMarkQuizzes.length}</h1>
+                <table className="table-auto">
+                    <thead>
+                        <tr>
+                            <th className="px-4 border border-c_4 py-2">Username</th>
+                            <th className="px-4 border border-c_4 py-2">Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {fullMarkQuizzes.map((quiz, index) => (
+                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                    <td className="border border-c_4 px-4 py-2">{quiz.username}</td>
+                                    <td className="border border-c_4 px-4 py-2">{quiz.sumgrades}</td>
+                                </tr>
                             ))}
-                        </select>
-                    </div>
-                </div>
-                <div className='flex flex-col justify-center items-center'>
-                    <h1>Students With Full Mark: {fullMarkQuizzes.length}</h1>
-                    <table className="table-auto">
-                            <div className='overflow-auto h-[40dvh]'>
-                        <thead>
-                            <tr>
-                                <th className="px-4 border border-c_4 py-2">Username</th>
-                                <th className="px-4 border border-c_4 py-2">Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                {fullMarkQuizzes.map((quiz, index) => (
-                                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
-                                        <td className="border border-c_4 px-4 py-2">{quiz.username}</td>
-                                        <td className="border border-c_4 px-4 py-2">{quiz.sumgrades}</td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                            </div>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     )

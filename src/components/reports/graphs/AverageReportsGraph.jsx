@@ -153,15 +153,15 @@ const Reports = () => {
     return (
         <div className="flex flex-wrap gap-5">
             <div className='flex flex-col'>
-                <div className='w-[80vw] flex self-center mb-8'>
+                <div className=' flex self-center sm:min-w-[400px] mb-8 min-w-[600px] md:w-[70vw] overflow-auto'>
                     <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                 </div>
 
-                <div className='w-[80vw] flex self-center'>
+                <div className=' flex self-center sm:min-w-[400px] min-w-[600px] md:w-[70vw] overflow-auto'>
                     <Bar data={valenceArousalChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Arousal and Valence by Session Duration' } } }} />
                 </div>
 
-                <div className='flex flex-wrap gap-1 justify-center items-center self-center'>
+                <div className='flex flex-wrap gap-1'>
                     <input 
                         type="text" 
                         placeholder="Filter by email" 
