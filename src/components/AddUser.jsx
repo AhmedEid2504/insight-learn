@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
 
 function AddUser() {
     const [username, setUsername] = useState('');
@@ -127,9 +126,7 @@ function AddUser() {
                         onClick={handleSubmit}
                         type="submit">
                             {isLoading ? (
-                                <Spinner animation="border" role="status">
                                     <span className="">Loading...</span>
-                                </Spinner>
                             ) : (
                                 'Add User'
                             )}

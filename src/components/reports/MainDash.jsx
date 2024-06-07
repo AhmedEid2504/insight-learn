@@ -124,7 +124,7 @@ const MainDash = () => {
                     <h2 className="text-xl dark:text-white font-bold mb-2">Students Predicted To Fail</h2>
                     <div className="flex flex-col overflow-auto w-[60vw] h-[25vh]">
                         {failedPredictions === 0 ? <p>No failed predictions</p> : null}
-                        <table className="table-auto border-collapse border border-c_4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
+                        <table className="table-auto border-collapse border border-c_4 dark:text-white dark:bg-black bg-white  dark:bg-opacity-15 rounded shadow">
                             <thead>
                                 <tr>
                                     <th className="border border-[red] px-4 py-2">Email</th>
