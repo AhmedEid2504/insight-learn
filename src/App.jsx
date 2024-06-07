@@ -24,7 +24,7 @@ import PersonalReport from './components/reports/PersonalReport';
 import AdminRoute from './AdminRoute'; // Adjust the path if needed
 import StaffRoute from './StaffRoute'; // Adjust the path if needed
 import AdminStaffRoute from './AdminStaffRoute'; // Adjust the path if needed
-
+import StudentRoute from './StudentRoute';
 function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -52,7 +52,7 @@ function App() {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} >
                         <Route path='maindash' element={<AdminStaffRoute element={<MainDash />} />} />
-                        <Route path='studentdash' element={<StudentDash />} />
+                        <Route path='studentdash' element={ <StudentRoute element={<StudentDash />}/> } />
                         <Route path='reports' element={<AdminStaffRoute element={<Reports />} />} />
                         <Route path='predictions' element={<AdminStaffRoute element={<Predictions />} />} />
                         <Route path='personal-predictions' element={<PersonalPredictions />} />

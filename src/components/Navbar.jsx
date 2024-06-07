@@ -9,9 +9,6 @@ const Navbar =(props) => {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const location = useLocation();
     const ulRef = useRef(null);
-    // const username = localStorage.getItem('username');
-    // const email = localStorage.getItem('email');
-    // const is_active = localStorage.getItem('is_active');
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
 
@@ -66,16 +63,24 @@ const Navbar =(props) => {
                                 <div className="flex gap-5">
                                     <div className="bg-c_1 text-center items-center justify-center w-[250px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                                     <li><Link className={location.pathname === "/login" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/login">Login</Link></li>
-                                    {/* <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li> */}
+                                    <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                 </div>
                             :
                                 <div className="flex gap-5">
-                                    {(is_superuser || is_staff ) && 
+                                    {(is_superuser || is_staff ) === 'true' && (
                                         <>
                                             <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
                                             <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
                                         </>                                    
-                                    }
+                                    )} 
+                                    {(is_superuser && is_staff) === 'false' && (
+                                        <>
+                                            <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
+                                            <li><Link className={location.pathname === "/dashboard/studentdash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/studentdash">Dashboard</Link></li>
+                                        </>
+                                    )}
+                                        
+                                    
                                 </div>
                             }
                             { props.isLoggedIn &&
@@ -104,15 +109,21 @@ const Navbar =(props) => {
                                             { !props.isLoggedIn ?
                                                 <div className="flex flex-col gap-3">
                                                     <li><Link className={location.pathname === "/login" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/login">Login</Link></li>
-                                                    {/* <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li> */}
+                                                    <li><Link className={location.pathname === "/signup" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/signup">Sign Up</Link></li>
                                                 </div>
                                             :
-                                            <div className="flex flex-col gap-3">
-                                                    {(is_superuser || is_staff ) && 
+                                                <div className="flex flex-col gap-3">
+                                                    {(is_superuser || is_staff ) === 'true' && (
                                                         <div>
                                                             <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
                                                         </div>
-                                                    }
+                                                    ) }
+                                                    {(is_superuser && is_staff) === 'false' && (
+                                                        <div>
+                                                            <li><Link className={location.pathname === "/dashboard/studentdash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/studentdash">Dashboard</Link></li>
+                                                        </div>
+                                                    )}
+                                                    
                                                 </div>
                                             }
                                         </> 
