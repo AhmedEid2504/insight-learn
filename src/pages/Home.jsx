@@ -1,89 +1,16 @@
 /* eslint-disable react/prop-types */
-import Session from "../components/Session"
-import Navbar from '../components/Navbar';
-
-// morphcast
 import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "../helpers/ai-sdk/externalScriptsLoader";
 import { getAiSdkControls } from "../helpers/ai-sdk/loader";
-import Volume from "../components/morphcomponents/Volume";
+import Session from "../components/Session"
+import Navbar from '../components/Navbar';
+import Volume from "../components/Volume";
 import DominantEmotionComponent from "../components/morphcomponents/DominantEmotionComponent";
 import EngagementComponent from "../components/morphcomponents/EngagementComponent";
 import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerComponent";
 
-// import { set, ref, push } from "firebase/database";
-// import {database} from "/src/firebase";
-
 const Home = () => {
-    const handleSessionStart = () => {
-        try {
-            setSessionStarted(true);
-            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
-            setUserData(prevUserData => ({
-                ...prevUserData,
-                SessionEndedAt: '',
-                CaptureTime: currentTime,
-                SessionStartedAt: currentTime
-            }));
-            window.open('http://insightlearn.me/', '_blank');
-        } catch (error) {
-            console.error("Error starting session:", error);
-        }
-    };
-
-    const handleSessionEnd = async () => {
-        const currentTime = new Date().toLocaleTimeString([], {hour12: false});
-        setSessionStarted(false);
-        setUserData(prevUserData => {
-            const updatedUserData = { ...prevUserData, SessionEndedAt: currentTime, CaptureTime: currentTime};
-            
-            // Save user data to api
-            (async () => {
-                try {
-                    const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedUserData)
-                    });
-            
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    // const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-                    // const newDataRef = push(dataRef);
-
-                    // set(newDataRef, updatedUserData)
-                    //     .then(() => {
-                    //         console.log("Final Data sent to firebase successfully");
-                    //     })
-                    //     .catch((error) => {
-                    //         console.error("Error saving:", error);
-                    //     })
-
-                    console.log("Final Data sent to API successfully");
-                    setUserDataChanged(false);
-
-                    // Reset SessionEndedAt field
-                    setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
-                    setSessionStarted(false);
-                } catch (error) {
-                    console.error('There was a problem with the fetch operation: ', error);
-                }
-            })();
-
-            return updatedUserData;
-        });
-    };
-
-    // morphcast
-    const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
-    const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
     const videoEl = useRef(undefined)
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const username = localStorage.getItem("username")
     const [userData, setUserData] = useState({
         userEmail:'',
         dominantEmotion: 'Neutral',
@@ -94,11 +21,18 @@ const Home = () => {
         SessionStartedAt: '',
         CaptureTime: '',
         Session_for:'MOT-lecture',
-    })
-
+        })
     const [userDataChanged, setUserDataChanged] = useState(false); // State variable to track changes in userData
     const [isSendingData, setIsSendingData] = useState(false); // State variable to track whether data is currently being sent
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const username = localStorage.getItem("username")
+    
+    // Load external scripts
+    const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
+    const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
+    
+    // Check login status on mount
     useEffect(() => {
         // Check if token exists in local storage
         const token = localStorage.getItem('token');
@@ -110,6 +44,7 @@ const Home = () => {
         }
     }, []);
 
+    // Logout handler
     const handleLogout = async () => {
         const token = localStorage.getItem('token');
     
@@ -138,35 +73,63 @@ const Home = () => {
             console.error('Logout failed');
         }
     };
+            
+            
+    // Session start handler
+    const handleSessionStart = () => {
+        try {
+            setSessionStarted(true);
+            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                SessionEndedAt: '',
+                CaptureTime: currentTime,
+                SessionStartedAt: currentTime
+                }));
+                window.open('http://insightlearn.me/', '_blank');
+        } catch (error) {
+            console.error("Error starting session:", error);
+            }
+            };
+    
+    // Session end handler
+    const handleSessionEnd = async () => {
+        try {
+            const currentTime = new Date().toLocaleTimeString([], { hour12: false });
+            
+            // Update session and user data
+            setSessionStarted(false);
+            const updatedUserData = { ...userData, SessionEndedAt: currentTime, CaptureTime: currentTime };
+            setUserData(updatedUserData);
+    
+            // Save user data to API
+            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedUserData)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            // Data sent successfully
+            console.log("Final Data sent to API successfully");
+            setUserDataChanged(false);
+        } catch (error) {
+            // Handle fetch errors
+            console.error('There was a problem with the fetch operation: ', error);
+        } finally {
+            // Reset session data and flags
+            setUserData(prevUserData => ({ ...prevUserData, SessionEndedAt: "" }));
+            setSessionStarted(false);
+        }
+    };
+    
 
-//     let fTimeoutId = null; // Declare a variable to hold the timeout ID
 
-//     async function saveToFirebase() {
-//     if ( userDataChanged && sessionStarted && !isSendingData) {
-//         const dataRef = ref(database, "data/" + username + "/" + userData.SessionStartedAt + "/");
-//         const newDataRef = push(dataRef);
-
-//         set(newDataRef, userData)
-//             .then(() => {
-//                 console.log("Data saved to Firebase");
-//             })
-//             .catch(() => {
-//                 console.error("Error saving:");
-//             })
-//             .finally(() => {
-//                 if (fTimeoutId) {
-//                     clearTimeout(fTimeoutId); // Clear the timeout if it exists
-//                 }
-//                 fTimeoutId = setTimeout(() => {
-//                 }, 15000); // 10-second delay
-//             });
-//     }
-// }
-
-// Use useEffect to trigger saveToFirebase when userData changes
-// useEffect(() => {
-//     {sessionStarted && saveToFirebase()}
-// }, [sessionStarted, userData, userDataChanged]);
 
 
     // sending data to django api
@@ -210,6 +173,7 @@ const Home = () => {
         {sessionStarted && sendDataToAPI()}
     }, [sessionStarted, userData, userDataChanged]);
 
+    // AI SDK setup effect
     useEffect(() => {
         videoEl.current = document.getElementById("videoEl");
         async function getAiSdk (){
