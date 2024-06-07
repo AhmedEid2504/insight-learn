@@ -65,37 +65,37 @@ const UserReports = () => {
     }
 
     return (
-            <div className="flex flex-col justify-center items-center gap-5 h-[80dvh] w-[70vw]">
-                <div className="flex flex-col overflow-auto w-[60vw] h-[40vh]">
-                    <table className="divide-y divide-c_4">
-                        <thead className="bg-gray-50 dark:text-white dark:bg-black dark:bg-opacity-25">
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session For</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Started</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Ended</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration Text</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Attention</th>
+        <div className="flex flex-col justify-center items-center gap-5 h-[80dvh] w-[70vw]">
+            <div className="flex flex-col overflow-auto w-[60vw] h-[40vh]">
+                <table className="divide-y divide-c_4">
+                    <thead className="bg-gray-50 dark:text-white dark:bg-black dark:bg-opacity-25">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session For</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Started</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Ended</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration Text</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Attention</th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white dark:text-white dark:bg-black dark:bg-opacity-25 divide-y divide-c_4">
+                        {sessions.map((session, index) => (
+                            <tr key={index}>
+                                <td className="px-6 py-4 whitespace-nowrap">{session.session_for}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{session.Session_Started}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{session.Session_Ended}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{session.average_attention}</td>
                             </tr>
-                        </thead>
-                        <tbody className="bg-white dark:text-white dark:bg-black dark:bg-opacity-25 divide-y divide-c_4">
-                            {sessions.map((session, index) => (
-                                <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.session_for}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Started}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Ended}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{session.average_attention}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="flex flex-col overflow-auto w-[60vw] h-[40vh]">
-                    <div className="flex min-w-[600px]">
-                        <Bar data={chartData} options={options} />
-                    </div>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="flex flex-col overflow-auto w-[60vw] h-[40vh]">
+                <div className="flex min-w-[600px]">
+                    <Bar data={chartData} options={options} />
                 </div>
             </div>
+        </div>
     );
 };
 
