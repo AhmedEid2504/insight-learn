@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateUI(user) {
-        console.log('Updating UI with user data:', user);
         document.getElementById('username').textContent = user.username || 'N/A';
         document.getElementById('email').textContent = user.email || 'N/A';
         document.getElementById('Age').textContent = user.Age || 'N/A';
@@ -27,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            console.log('Fetched data:', data);
-
             const user = data.find(user => user.email === email);
             if (user) {
                 updateUI(user);
