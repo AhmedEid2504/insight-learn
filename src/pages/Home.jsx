@@ -139,27 +139,6 @@ const Home = () => {
         }
     };
 
-    useEffect(() => {
-        const handleBeforeUnload =  (e) => {
-            setSessionStarted(false);
-            const confirmationMessage = 'Are you sure you want to leave, your session will end ?';
-            e.returnValue = confirmationMessage;
-            return confirmationMessage;
-        };
-    
-        const handleUnload = () => {
-            setSessionStarted(false);
-        }
-        
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        window.addEventListener("unload", handleUnload);
-
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-            window.removeEventListener("unload", handleUnload);
-        };
-    }, []);
-
 //     let fTimeoutId = null; // Declare a variable to hold the timeout ID
 
 //     async function saveToFirebase() {

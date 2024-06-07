@@ -1,64 +1,72 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const AgeComponent = (props) => {
+const VolumeComponent = (props) => {
   const [volume, setVolume] = useState(0);
+  const volumeData = useRef([]); // Ref to store volume data
+  const intervalId = useRef(null); // Ref to store interval id for clearing
 
   useEffect(() => {
-    function bindEvent() {
-      window.addEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
-    }
+    // Function to calculate average volume and update state
+    const updateVolumeAverage = () => {
+      const sum = volumeData.current.reduce((acc, val) => acc + val, 0);
+      const average = sum / volumeData.current.length;
+      setVolume(average);
 
-    function handleAgeEvent() {
-      // set userData from props to save dominantEmotion 
-      props.setUserData(prevUserData => ({
-        ...prevUserData,
-        // age: Math.floor(evt.detail.output.numericAge) || 0,
-        volume: volume
-      }));
-      props.setUserDataChanged(true)
-    }
-
-    bindEvent();
-
-    // Cleanup function to remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("CY_FACE_AGE_RESULT", handleAgeEvent);
+      // Clear the volume data array
+      volumeData.current = [];
     };
+
+    // Set interval to update volume average every 5 seconds
+    intervalId.current = setInterval(updateVolumeAverage, 5000);
+
+    // Cleanup function to clear interval when component unmounts
+    return () => {
+      clearInterval(intervalId.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Set volume in parent component whenever it changes
+    props.setUserData(prevUserData => ({
+      ...prevUserData,
+      volume: volume
+    }));
+    props.setUserDataChanged(true);
   }, [volume]);
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-      .then(stream => {
+    // Function to set up audio context and listen for volume data
+    const setupAudioContext = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Load the audio worklet processor from the public directory
+        await audioContext.audioWorklet.addModule('/volume-processor.js');
+
         const analyser = audioContext.createAnalyser();
         const microphone = audioContext.createMediaStreamSource(stream);
-        const javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+        const volumeNode = new AudioWorkletNode(audioContext, 'volume-processor');
 
         analyser.smoothingTimeConstant = 0.8;
         analyser.fftSize = 1024;
 
         microphone.connect(analyser);
-        analyser.connect(javascriptNode);
-        javascriptNode.connect(audioContext.destination);
+        analyser.connect(volumeNode);
+        volumeNode.connect(audioContext.destination);
 
-        javascriptNode.onaudioprocess = () => {
-          const array = new Uint8Array(analyser.frequencyBinCount);
-          analyser.getByteFrequencyData(array);
-          let values = 0;
-
-          const length = array.length;
-          for (let i = 0; i < length; i++) {
-            values += (array[i]);
-          }
-
-          const average = values / length;
-          setVolume(average);
+        // Listen for volume data from the audio worklet
+        volumeNode.port.onmessage = (event) => {
+          volumeData.current.push(event.data.volume);
         };
-      })
-      .catch(err => {
-        console.log("The following error occurred: " + err.name);
-      });
+      } catch (error) {
+        console.error("Error accessing microphone:", error);
+      }
+    };
+
+    // Call the setup function
+    setupAudioContext();
   }, []);
 
   return (
@@ -67,4 +75,4 @@ const AgeComponent = (props) => {
   );
 };
 
-export default AgeComponent;
+export default VolumeComponent;
