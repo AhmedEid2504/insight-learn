@@ -133,7 +133,7 @@ const Home = () => {
 
 
     // sending data to django api
-    let aTimeoutId = null; // Declare a variable to hold the timeout ID
+    let timeoutId = null; // Declare a variable to hold the timeout ID
     async function sendDataToAPI() {
         if ( userDataChanged && sessionStarted && !isSendingData) {
             setIsSendingData(true); // Set isSendingData to true to indicate that data sending is in progress
@@ -158,10 +158,10 @@ const Home = () => {
             } catch (error) {
                 console.error("Error sending data:", error);
             } finally {
-                if (aTimeoutId) {
-                    clearTimeout(aTimeoutId); 
+                if (timeoutId) {
+                    clearTimeout(timeoutId); 
                 }
-                aTimeoutId = setTimeout(() => {
+                timeoutId = setTimeout(() => {
                     setIsSendingData(false); 
                 }, 15000); // 15-second delay
             }
