@@ -37,15 +37,7 @@ const GradePredictions = ({courseName}) => {
     });
 
     const searchResults = filteredPredictions.filter(user => {
-        if (filterBy === 'username') {
-            if (filterType === 'contains') {
-                return user.email.toLowerCase().includes(searchTerm.toLowerCase());
-            } else if (filterType === 'startsWith') {
-                return user.email.toLowerCase().startsWith(searchTerm.toLowerCase());
-            } else if (filterType === 'endsWith') {
-                return user.email.toLowerCase().endsWith(searchTerm.toLowerCase());
-            }
-        } else if (filterBy === 'email') {
+        if (filterBy === 'email') {
             if (filterType === 'contains') {
                 return user.email.toLowerCase().includes(searchTerm.toLowerCase());
             } else if (filterType === 'startsWith') {
@@ -104,7 +96,7 @@ const GradePredictions = ({courseName}) => {
             <div className='w-[300px] bg-c_4 bg-opacity-25 dark:bg-black dark:bg-opacity-25 p-5'>
                 <Pie data={chartData} />
             </div>
-            <div className='flex flex-wrap justify-center items-center gap-5'>
+            <div className='flex flex-wrap justify-center items-center gap-3'>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -116,7 +108,6 @@ const GradePredictions = ({courseName}) => {
                     onChange={e => setFilterBy(e.target.value)} 
                     className="p-2 mb-4 border border-c_4 dark:bg-black dark:text-white dark:bg-opacity-25  rounded-md"
                 >
-                    <option value="username">Username</option>
                     <option value="email">Email</option>
                 </select>
                 <select
