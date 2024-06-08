@@ -55,7 +55,6 @@ const Navbar =(props) => {
             <div className="bg-c_1 text-center items-center justify-center p-7 absolute top-5 right-5 flex">
                 {windowWidth > 800 ? (
                     <div>
-
                         <div className="bg-c_1 text-center items-center justify-center w-[450px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-7 flex"></div>
                         <ul className="flex justify-between items-center list-none p-2 text-center gap-5">
                             <li><Link className={location.pathname === "/" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/">Home</Link></li>
@@ -67,7 +66,7 @@ const Navbar =(props) => {
                                 </div>
                             :
                                 <div className="flex gap-5">
-                                    {(is_superuser || is_staff ) === 'true' && (
+                                    {(is_superuser === 'true' || is_staff  === 'true') && (
                                         <>
                                             <div className="bg-c_1 text-center items-center justify-center w-[290px] -skew-x-[30deg] h-[96px] top-0 -z-50 absolute  right-8 flex"></div>
                                             <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
@@ -113,7 +112,7 @@ const Navbar =(props) => {
                                                 </div>
                                             :
                                                 <div className="flex flex-col gap-3">
-                                                    {(is_superuser || is_staff ) === 'true' && (
+                                                    {(is_superuser === 'true' || is_staff  === 'true') && (
                                                         <div>
                                                             <li><Link className={location.pathname === "/dashboard/maindash" ? "hover:text-c_4 transition-all ease-in duration-200 text-c_4" : "hover:text-c_4 transition-all ease-in duration-200" } to="/dashboard/maindash">Dashboard</Link></li>
                                                         </div>
