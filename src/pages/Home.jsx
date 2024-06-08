@@ -27,6 +27,8 @@ const Home = () => {
     const [sessionStarted, setSessionStarted] = useState(false); // State variable to track whether the session has started
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const username = localStorage.getItem("username")
+    const is_superuser = localStorage.getItem("is_superuser")
+    const is_staff = localStorage.getItem("is_staff")
     
     // Load external scripts
     const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
@@ -224,13 +226,23 @@ const Home = () => {
                     </div>
                 </div>
             
-            <Session 
-                handleSessionStart={handleSessionStart}
-                handleSessionEnd={handleSessionEnd}
-                sessionStarted={sessionStarted}
-                userEmail={userData.userEmail}
-                username={username}
-            />
+            { is_staff === 'true' || is_superuser === 'true' ? (
+                <div>
+                    <h1 className="text-center text-3xl text-c_1">Welcome {username}</h1>
+                    <h2 className="text-center text-xl text-c_1">Access Your Dashboard And Gain Insights About Your Students</h2>
+                    <div className="flex justify-center items-center">
+                        <a href="/dashboard/maindash" className="bg-c_1 text-white p-2 rounded-md m-2">Dashboard</a>
+                    </div>
+                </div>
+            ) : (
+                <Session 
+                    handleSessionStart={handleSessionStart}
+                    handleSessionEnd={handleSessionEnd}
+                    sessionStarted={sessionStarted}
+                    userEmail={userData.userEmail}
+                    username={username}
+                />
+            )}
             
             <div className="h-[260px] max-md:h-[360px] max-sm:h-[350px] w-full flex bg-c_1">
                 <iframe className=" w-full" src="/footer.html" title="Footer" />
