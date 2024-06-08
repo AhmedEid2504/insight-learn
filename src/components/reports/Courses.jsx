@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuizReport from './QuizReports';
-import Predictions from './Predictions';
+import GradePredictions from './GradePredictions';
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -51,7 +51,7 @@ const Courses = () => {
                             <>
                                 <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>                                
                                 <div className='h-[80vh] flex justify-center items-start overflow-auto'>
-                                    <Predictions courseName={selectedCourse} />
+                                    <GradePredictions courseName={selectedCourse} />
                                 </div>
                             </>
                         )} {selectedType === 'quiz' && (
