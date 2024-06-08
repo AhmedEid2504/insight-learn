@@ -118,7 +118,7 @@ const QuizReport = (props) => {
 
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]">
-            <div className='flex flex-wrap dark:bg-black dark:bg-opacity-25 p-5 dark:text-white justify-center items-center'>
+            <div className='flex flex-wrap w-[80vw] dark:bg-black dark:bg-opacity-25 p-5 dark:text-white justify-center items-center'>
                 <div className='flex flex-col justify-start items-start overflow-x-scroll'>
                     <div className='max-sm:h-fit sm:h-fit'>
                         <Pie data={chartData} />
@@ -126,49 +126,43 @@ const QuizReport = (props) => {
                 </div>
                 <div className='flex flex-col justify-center items-center'>
                     <h1>Students With Full Mark: {fullMarkQuizzes.length}</h1>
-                    <table className="table-auto">
-                            <div className='overflow-auto h-[40dvh]'>
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-2">Username</th>
-                                <th className="px-4 py-2">Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                {fullMarkQuizzes.map((quiz, index) => (
-                                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
-                                        <td className="border px-4 py-2">{quiz.username}</td>
-                                        <td className="border px-4 py-2">{quiz.sumgrades}</td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                            </div>
-                    </table>
+                    <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white overflow-scroll l border-b border-gray-200 ">
+                    <table className="min-w-full divide-y divide-c_4 ">
+                        <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-4 py-2 border border-c_4">Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {fullMarkQuizzes.map((quiz, index) => (
+                                        <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : ''}>
+                                            <td className="border border-c_4 px-4 py-2 ">{quiz.username}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             
             <div className='flex flex-col'>
-                <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 w-[80vw] overflow-scroll l border-b border-gray-200  sm:rounded-lg">
-                    <table className="min-w-full divide-y divide-gray-200">
+                <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll l border-b border-gray-200 ">
+                    <table className="min-w-full divide-y divide-c_4 ">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Username</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Quiz Name</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Course</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Semester</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Sum Grades</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Username</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Email</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Quiz Name</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Sum Grades</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
                             {filteredQuizzes.map((quiz, index) => (
                                 <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.username}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.email}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.Quiz_Name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.Course}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.Semester}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{quiz.sumgrades}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{quiz.username}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{quiz.email}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{quiz.Quiz_Name}</td>
+                                    <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{quiz.sumgrades}</td>
                                 </tr>
                             ))}
                         </tbody>
