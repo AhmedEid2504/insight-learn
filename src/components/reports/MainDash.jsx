@@ -35,7 +35,7 @@ const MainDash = () => {
 
     useEffect(() => {
         // Fetch the predictions data from the API
-        fetch('https://dj-render-ldb1.onrender.com/prediction')
+        fetch('https://dj-render-ldb1.onrender.com/successprediction')
             .then((response) => response.json())
             .then((data) => {
                 setPredictions(data);

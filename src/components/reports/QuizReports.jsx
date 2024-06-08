@@ -25,7 +25,6 @@ const QuizReport = (props) => {
                 // Filter the grades for the selected course
                 const courseGrades = mappedData.filter(quiz => quiz.Course === props.courseName);
                 setStudentsGrades(courseGrades);
-                console.log(`Total students in ${props.courseName}: ${courseGrades.length}`);
                 setIsLoading(false);
             })
             .catch(error => console.error('Error:', error));

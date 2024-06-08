@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
+import { Pie } from 'react-chartjs-2';
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
 
+Chart.register(CategoryScale);
 
 
 const GradePredictions = ({courseName}) => {
@@ -28,7 +32,6 @@ const GradePredictions = ({courseName}) => {
     }, []);
 
 
-
     const filteredPredictions = predictions.filter(prediction => {
         return prediction.Course === courseName;
     });
@@ -54,6 +57,41 @@ const GradePredictions = ({courseName}) => {
     });
 
 
+    const gradeCounts = searchResults.reduce((counts, { predictions }) => {
+        counts[predictions] = (counts[predictions] || 0) + 1;
+        return counts;
+    }, {});
+
+    const chartData = {
+        labels: ['A', 'B', 'C', 'D', 'F'],
+        datasets: [
+            {
+                data: [
+                    gradeCounts['A'] || 0,
+                    gradeCounts['B'] || 0,
+                    gradeCounts['C'] || 0,
+                    gradeCounts['D'] || 0,
+                    gradeCounts['F'] || 0,
+                ],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.4)',  
+                    'rgba(54, 162, 235, 0.2)',  
+                    'rgba(255, 206, 86, 0.2)',  
+                    'rgba(200, 99, 80, 0.2)',
+                    'rgba(255, 99, 132, 0.2)', 
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',     
+                    'rgba(54, 162, 235, 1)',    
+                    'rgba(255, 206, 86, 1)',    
+                    'rgba(200, 99, 132, 1)', 
+                    'rgba(255, 99, 132, 1)',  
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
 
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
@@ -62,7 +100,10 @@ const GradePredictions = ({courseName}) => {
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col justify-center items-center gap-5'>
+            <div className='w-[300px] bg-c_4 bg-opacity-25 dark:bg-black dark:bg-opacity-25 p-5'>
+                <Pie data={chartData} />
+            </div>
             <div className='flex justify-center items-center gap-5'>
                 <input
                     type="text"

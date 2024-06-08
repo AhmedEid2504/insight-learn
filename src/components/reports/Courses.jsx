@@ -43,13 +43,15 @@ const Courses = () => {
             {selectedCourse ? (
                     <>
                         <h1 className="text-2xl dark:text-white self-center font-bold mb-4">{selectedCourse}</h1>
-                        <div className='flex justify-center gap-5 items-center'>
-                            <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('Predictions')}>Predictions</button>
-                            <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('quiz')}>Quiz Grades Report</button>
+                        <div className='flex flex-col justify-center gap-5 items-center'>
+                            <div className='flex justify-center items-center gap-5'>
+                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('Predictions')}>Predictions</button>
+                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedType('quiz')}>Quiz Grades Report</button>
+                            </div>
+                            <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>                                
                         </div>
                         {selectedType === 'Predictions' && (
                             <>
-                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>                                
                                 <div className='h-[80vh] flex justify-center items-start overflow-auto'>
                                     <GradePredictions courseName={selectedCourse} />
                                 </div>
@@ -57,7 +59,6 @@ const Courses = () => {
                         )} {selectedType === 'quiz' && (
 
                             <>
-                                <button className='bg-c_4 dark:text-white text-white hover:text-black border-2 border-c_4 rounded-md hover:bg-opacity-15 hover:bg-black  transition-all duration-200 ease-in p-2 w-fit self-center' onClick={() => setSelectedCourse(null)}>Return to courses</button>
                                 <QuizReport courseName={selectedCourse} />
                             </>
                         )}
