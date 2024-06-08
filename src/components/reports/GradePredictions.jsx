@@ -74,18 +74,18 @@ const GradePredictions = ({courseName}) => {
                     gradeCounts['F'] || 0,
                 ],
                 backgroundColor: [
-                    'rgba(75, 192, 192, 0.4)',  
-                    'rgba(54, 162, 235, 0.2)',  
-                    'rgba(255, 206, 86, 0.2)',  
-                    'rgba(200, 99, 80, 0.2)',
-                    'rgba(255, 99, 132, 0.2)', 
+                    'rgba(54, 162, 235, 0.2)',  // 10 to 15
+                    'rgba(75, 192, 192, 0.2)',  // 20 to 25
+                    'rgba(255, 206, 86, 0.2)',  // 15 to 20
+                    'rgba(153, 102, 255, 0.2)', // 25 to 30
+                    'rgba(255, 99, 132, 0.2)',  // Less than 10
                 ],
                 borderColor: [
-                    'rgba(75, 192, 192, 1)',     
-                    'rgba(54, 162, 235, 1)',    
-                    'rgba(255, 206, 86, 1)',    
-                    'rgba(200, 99, 132, 1)', 
-                    'rgba(255, 99, 132, 1)',  
+                    'rgba(54, 162, 235, 1)',    // 10 to 15
+                    'rgba(75, 192, 192, 1)',    // 20 to 25
+                    'rgba(255, 206, 86, 1)',    // 15 to 20
+                    'rgba(153, 102, 255, 1)',   // 25 to 30 
+                    'rgba(255, 99, 132, 1)',    // Less than 10
                 ],
                 borderWidth: 1,
             },
@@ -104,7 +104,7 @@ const GradePredictions = ({courseName}) => {
             <div className='w-[300px] bg-c_4 bg-opacity-25 dark:bg-black dark:bg-opacity-25 p-5'>
                 <Pie data={chartData} />
             </div>
-            <div className='flex justify-center items-center gap-5'>
+            <div className='flex flex-wrap justify-center items-center gap-5'>
                 <input
                     type="text"
                     placeholder="Search..."
