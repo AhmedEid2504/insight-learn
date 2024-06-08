@@ -231,7 +231,7 @@ const Home = () => {
                     <h1 className="text-center text-3xl text-c_1">Welcome {username}</h1>
                     <div className="flex flex-col flex-wrap md:flex-nowrap gap-5 p-5">
                         <div className="flex ">
-                            <video src="/guide.mp4" autoPlay controls></video>
+                            <video src="/test3.mp4" autoPlay controls muted></video>
                         </div>
                         <div className="flex flex-col gap-5 bg-c_5 p-5 justify-center items-center">
                             <h2 className="text-center text-xl text-c_1">Access Your Dashboard And Gain Insights About Your Students</h2>
