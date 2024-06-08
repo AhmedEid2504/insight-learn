@@ -229,11 +229,11 @@ const Home = () => {
             { is_staff === 'true' || is_superuser === 'true' ? (
                 <div className="flex flex-col">
                     <h1 className="text-center text-3xl text-c_1">Welcome {username}</h1>
-                    <div className="flex flex-wrap md:flex-nowrap p-5">
-                        <div className="flex md:basis-[60%] ">
+                    <div className="flex flex-col flex-wrap md:flex-nowrap gap-5 p-5">
+                        <div className="flex ">
                             <video src="/guide.mp4" autoPlay controls></video>
                         </div>
-                        <div className="flex flex-col gap-5 bg-c_5 md:basis-1/2 justify-center items-center">
+                        <div className="flex flex-col gap-5 bg-c_5 p-5 justify-center items-center">
                             <h2 className="text-center text-xl text-c_1">Access Your Dashboard And Gain Insights About Your Students</h2>
                             <a href="/dashboard/maindash" className="bg-c_1 text-white p-2 rounded-md m-2">Dashboard</a>
                         </div>
