@@ -77,6 +77,26 @@ const Home = () => {
             console.error('Logout failed');
         }
     };
+
+    // hide overlay controls 
+    useEffect(() => {
+        const videoElement = videoRef.current;
+    
+        if (videoElement) {
+            const observer = new MutationObserver(() => {
+            const overlayControls = videoElement.shadowRoot.querySelector('::-webkit-media-controls-overlay-enclosure');
+            if (overlayControls) {
+                overlayControls.style.display = 'none';
+            }
+            });
+
+            observer.observe(videoElement, { childList: true, subtree: true });
+
+            return () => {
+            observer.disconnect();
+            };
+        }
+    }, []);
             
             
     // Session start handler
