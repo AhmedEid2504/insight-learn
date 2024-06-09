@@ -256,7 +256,7 @@ const Home = () => {
                             <video className="" ref={videoRef} src="/test3.mp4" muted loop preload="auto"></video>
                             {!isPlaying ? (
                                 <>
-                                    <div className="absolute px-[400px] py-[200px] opacity-0 hover:opacity-100 transition-all duration-200 ease-linear">
+                                    <div className="absolute px-[200px] py-[100px] opacity-0 hover:opacity-100 transition-all duration-200 ease-linear">
                                         <button onClick={handlePlayPause} className="bg-transparent w-10 text-white bg-[grey] bg-opacity-50 hover:bg-[grey] transition-all duration-200 ease-in"><img  src="/images/start.png" alt="start icon" /></button>
                                     </div>
                                     <div className="absolute bottom-0 right-2  transition-all duration-200 ease-linear">
