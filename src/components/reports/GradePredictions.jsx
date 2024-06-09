@@ -11,8 +11,9 @@ const GradePredictions = ({courseName}) => {
     const [predictions, setPredictions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterBy, setFilterBy] = useState('username');
+    const [filterBy, setFilterBy] = useState('email');
     const [filterType, setFilterType] = useState('contains');
+    const [gradeFilter, setGradeFilter] = useState('');
 
 
     
@@ -33,7 +34,11 @@ const GradePredictions = ({courseName}) => {
 
 
     const filteredPredictions = predictions.filter(prediction => {
-        return prediction.Course === courseName;
+        if (gradeFilter) {
+            return prediction.Course === courseName && prediction.predictions === gradeFilter;
+        } else {
+            return prediction.Course === courseName;
+        }
     });
 
     const searchResults = filteredPredictions.filter(user => {
@@ -45,7 +50,7 @@ const GradePredictions = ({courseName}) => {
             } else if (filterType === 'endsWith') {
                 return user.email.toLowerCase().endsWith(searchTerm.toLowerCase());
             }
-        }
+        } 
     });
 
 
@@ -118,6 +123,18 @@ const GradePredictions = ({courseName}) => {
                     <option value="contains">Contains</option>
                     <option value="startsWith">Starts with</option>
                     <option value="endsWith">Ends with</option>
+                </select>
+                <select 
+                    value={gradeFilter} 
+                    onChange={e => setGradeFilter(e.target.value)} 
+                    className="p-2 mb-4 border border-c_4 dark:bg-black dark:text-white dark:bg-opacity-25  rounded-md"
+                >
+                    <option value="">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
                 </select>
             </div>
             <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll l border-b border-gray-200 ">
