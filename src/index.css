@@ -15,6 +15,10 @@
     max-width: 50%;
 }
 
+video::-webkit-media-controls-overlay-enclosure {
+    display: none;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
