@@ -11,6 +11,8 @@ import FaceTrackerComponent from "../components/morphcomponents/FaceTrackerCompo
 
 const Home = () => {
     const videoEl = useRef(undefined)
+    const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [userData, setUserData] = useState({
         userEmail:'',
         dominantEmotion: 'Neutral',
@@ -192,6 +194,26 @@ const Home = () => {
         getAiSdk();
     }, [aiSdkState, mphToolsState]);
 
+    const handlePlayPause = () => {
+        if (videoRef.current.paused) {
+            videoRef.current.play();
+            setIsPlaying(true);
+        } else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    };
+    const handleFullscreen = () => {
+        if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+        } else if (videoRef.current.mozRequestFullScreen) { /* Firefox */
+        videoRef.current.mozRequestFullScreen();
+        } else if (videoRef.current.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        videoRef.current.webkitRequestFullscreen();
+        } else if (videoRef.current.msRequestFullscreen) { /* IE/Edge */
+        videoRef.current.msRequestFullscreen();
+        }
+    };
     return (
         <div className="flex flex-col w-full">
             <Navbar
@@ -227,15 +249,34 @@ const Home = () => {
                 </div>
             
             { is_staff === 'true' || is_superuser === 'true' ? (
-                <div className="flex flex-col">
+                <div className="flex flex-col p-5 gap-5">
                     <h1 className="text-center text-3xl text-c_1">Welcome {username}</h1>
-                    <div className="flex flex-col flex-wrap md:flex-nowrap gap-5 p-5">
-                        <div className="flex ">
-                            <video src="/test3.mp4" autoPlay controls muted></video>
+                    <div className="flex flex-col justify-center items-center flex-wrap md:flex-nowrap gap-5">
+                        <div className="flex flex-col relative justify-center items-center ">
+                            <video className="" ref={videoRef} src="/test3.mp4" muted loop preload="auto"></video>
+                            {!isPlaying ? (
+                                <>
+                                    <div className="absolute px-[400px] py-[200px] opacity-0 hover:opacity-100 transition-all duration-200 ease-linear">
+                                        <button onClick={handlePlayPause} className="bg-transparent w-10 text-white bg-[grey] bg-opacity-50 hover:bg-[grey] transition-all duration-200 ease-in"><img  src="/images/start.png" alt="start icon" /></button>
+                                    </div>
+                                    <div className="absolute bottom-0 right-2  transition-all duration-200 ease-linear">
+                                        <button onClick={handleFullscreen} className="bg-transparent  bg-opacity-50 hover:bg-[grey] transition-all duration-200 ease-in"><img className="w-8" src="/images/fullscreen.png" alt="fullscreen icon" /></button>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="absolute px-[400px] py-[200px] opacity-0 hover:opacity-50 transition-all duration-200 ease-linear">
+                                        <button onClick={handlePlayPause} className=" text-white w-10 hover:bg-[grey] opacity-5 hover:opacity-100 transition-all duration-200 ease-in"><img  src="/images/pause.png" alt="pause icon" /></button>
+                                    </div>
+                                    <div className="absolute bottom-0 right-2  transition-all duration-200 ease-linear">
+                                        <button onClick={handleFullscreen} className="bg-transparent  bg-opacity-50 hover:bg-[grey] transition-all duration-200 ease-in"><img className="w-8" src="/images/fullscreen.png" alt="fullscreen icon" /></button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                         <div className="flex flex-col gap-5 bg-c_5 p-5 justify-center items-center">
                             <h2 className="text-center text-xl text-c_1">Access Your Dashboard And Gain Insights About Your Students</h2>
-                            <a href="/dashboard/maindash" className="bg-c_1 text-white p-2 rounded-md m-2">Dashboard</a>
+                            <a href="/dashboard/maindash"  className="bg-transparent text-black border-2 hover:bg-black hover:text-white transition-all duration-200 ease-in px-3 py-1 rounded-3xl">Dashboard</a>
                         </div>
                     </div>
                 </div>
