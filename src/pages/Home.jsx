@@ -22,7 +22,7 @@ const Home = () => {
         volume: 0,
         SessionStartedAt: '',
         CaptureTime: '',
-        Session_for:'SA-quiz-2',
+        Session_for:'SA-quiz',
     });
     const [userDataChanged, setUserDataChanged] = useState(false);
     const [isSendingData, setIsSendingData] = useState(false);
