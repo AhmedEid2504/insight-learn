@@ -265,8 +265,8 @@ const Home = () => {
                                 </>
                             ) : (
                                 <>
-                                    <div className="absolute px-[400px] py-[200px] opacity-0 hover:opacity-50 transition-all duration-200 ease-linear">
-                                        <button onClick={handlePlayPause} className=" text-white w-10 hover:bg-[grey] opacity-5 hover:opacity-100 transition-all duration-200 ease-in"><img  src="/images/pause.png" alt="pause icon" /></button>
+                                    <div className="absolute px-[200px] py-[100px] opacity-0 hover:opacity-50 transition-all duration-200 ease-linear">
+                                        <button onClick={handlePlayPause} className=" text-white w-10 hover:bg-[grey]  hover:opacity-100 transition-all duration-200 ease-in"><img  src="/images/pause.png" alt="pause icon" /></button>
                                     </div>
                                     <div className="absolute bottom-0 right-2  transition-all duration-200 ease-linear">
                                         <button onClick={handleFullscreen} className="bg-transparent  bg-opacity-50 hover:bg-[grey] transition-all duration-200 ease-in"><img className="w-8" src="/images/fullscreen.png" alt="fullscreen icon" /></button>
