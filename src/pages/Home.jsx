@@ -258,7 +258,7 @@ const Home = () => {
                         <div className="flex flex-col relative justify-center items-center ">
                             <video  
                                 ref={videoRef} 
-                                src="/test3.mp4" 
+                                src="/dashboardguide.mp4" 
                                 muted 
                                 loop 
                                 preload="auto"

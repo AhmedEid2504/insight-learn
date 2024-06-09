@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation  } from 'react-router-dom';
 
 
@@ -9,6 +9,9 @@ const Sidebar = (props) => {
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
 
+    useEffect(() => {
+        {location.pathname.startsWith("/dashboard/add-user" || "/dashboard/users-data")  && setShowDropdown(true)}
+    }, [])
     return (
         <div className={props.showSideBar ? window.innerWidth > 768 ? "relative w-[250px]" : "relative w-[100%]" : "relative w-[50px]"}>
             <div className="bg-c_3 text-white h-[100dvh] flex flex-col items-center justify-between py-3">
@@ -60,7 +63,7 @@ const Sidebar = (props) => {
                                 { (is_superuser === "true") && (
                                     <li
                                         onMouseEnter={() => setShowDropdown(true)}
-                                        onMouseLeave={() => setShowDropdown(false)}
+                                        onClick={() => setShowDropdown(false)}
                                     >
                                         <Link 
                                             className={`flex gap-3 items-center justify-between p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname.startsWith("/dashboard/users") ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users"
@@ -76,16 +79,15 @@ const Sidebar = (props) => {
                                             <ul className="flex flex-col pl-5 gap-2">
                                                 <li>
                                                     <Link 
-                                                        className="flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in hover:bg-c_5 hover:bg-opacity-15" to="/dashboard/users-data"
+                                                        className={`flex gap-3 items-center justify-start p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname.startsWith("/dashboard/users-data") ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/users-data"
                                                         onClick={() => props.toggleSideBar()}
                                                     >
-                                                        <img className='w-8' src="/images/user-data.png" alt="users icon" />
-                                                        User Data
+                                                        <img className='w-8' src="/images/user-data.png" alt="users icon" />User Data
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link 
-                                                        className="flex gap-3 items-center p-2 cursor-pointer transition-all duration-150 ease-in hover:bg-c_5 hover:bg-opacity-15" to="/dashboard/add-user"
+                                                        className={`flex gap-3 items-center justify-start p-2 cursor-pointer transition-all duration-150 ease-in ${location.pathname.startsWith("/dashboard/add-user") ? 'bg-c_5 bg-opacity-15' : 'hover:bg-c_5 hover:bg-opacity-15'}`} to="/dashboard/add-user"
                                                         onClick={() => props.toggleSideBar()}
                                                     >
                                                         <img className='w-8' src="/images/add-user.png" alt="users icon" />
