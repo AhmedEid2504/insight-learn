@@ -147,15 +147,15 @@ const QuizReport = (props) => {
             <div className='flex flex-col'>
                 <div className="shadow h-[40dvh] dark:bg-black dark:bg-opacity-25 dark:text-white w-[80vw] overflow-scroll l border-b border-gray-200 ">
                     <table className="min-w-full divide-y divide-c_4 ">
-                        <thead className="bg-gray-50">
+                        <thead className="bg-gray-50 ">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Username</th>
-                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Email</th>
-                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Quiz Name</th>
-                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-white uppercase tracking-wider">Sum Grades</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-black dark:text-white uppercase tracking-wider">Username</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-black dark:text-white uppercase tracking-wider">Email</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-black dark:text-white uppercase tracking-wider">Quiz Name</th>
+                                <th className="px-6 py-3 text-left text-xs border border-c_4 font-medium text-black dark:text-white uppercase tracking-wider">Sum Grades</th>
                             </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
+                        <tbody className="bg-white dark:bg-black dark:bg-opacity-25 text-black dark:text-white divide-y divide-gray-200">
                             {filteredQuizzes.map((quiz, index) => (
                                 <tr key={index}>
                                     <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{quiz.username}</td>
