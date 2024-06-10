@@ -8,10 +8,38 @@ const Sidebar = (props) => {
     const location = useLocation();
     const is_staff = localStorage.getItem('is_staff');
     const is_superuser = localStorage.getItem('is_superuser');
+    const [ toggleNotifications, setToggleNotifications ] = useState(false);
+    const [predictions, setPredictions] = useState([]);
+
+    useEffect(() => {
+        // Fetch the predictions data from the API
+        fetch('https://dj-render-ldb1.onrender.com/successprediction')
+            .then((response) => response.json())
+            .then((data) => {
+                setPredictions(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }, []);
+    // get only failed predictions
+    const failedPredictions = predictions.filter(prediction => prediction.predictions === 0); 
+
+
 
     useEffect(() => {
         {location.pathname.startsWith("/dashboard/add-user" || "/dashboard/users-data")  && setShowDropdown(true)}
     }, [])
+
+    // Group failed predictions by course
+    const groupedPredictions = failedPredictions.reduce((groups, prediction) => {
+        if (!groups[prediction.Course]) {
+        groups[prediction.Course] = [];
+        }
+        groups[prediction.Course].push(prediction);
+        return groups;
+    }, {});
+
     return (
         <div className={props.showSideBar ? window.innerWidth > 768 ? "relative w-[250px]" : "relative w-[100%]" : "relative w-[50px]"}>
             <div className="bg-c_3 text-white h-[100dvh] flex flex-col items-center justify-between py-3">
@@ -329,7 +357,7 @@ const Sidebar = (props) => {
                         </div>
                     }
                     <button 
-                        onClick={() => props.toggleSideBar()} 
+                        onClick={() => props.toggleSideBar()}
                         className='pl-2 w-[40px] self-center  bg-opacity-10 hover:bg-opacity-25 hover:bg-white transition-all duration-200 rounded-2xl text-white'
                     >
                         {props.showSideBar ?
@@ -339,8 +367,19 @@ const Sidebar = (props) => {
                         }
                     </button>
                     <button 
+                        onClick={() => setToggleNotifications(!toggleNotifications)} 
+                        className='pl-2 w-[40px] self-center  bg-opacity-10 hover:bg-opacity-25 hover:bg-white transition-all duration-200 rounded-2xl text-white'
+                    >
+                        {toggleNotifications ?
+                            <img className='w-5 hover:animate-pulse' src="/images/bell-on.png" alt="bell" />
+                            :
+                            <img className='w-5 hover:animate-pulse' src="/images/bell.png" alt="bell-off" />
+                        }
+
+                    </button>
+                    <button 
                         onClick={() => props.setIsDarkMode(!props.isDarkMode)} 
-                        className='pl-2 w-[40px] self-center  dark bg-opacity-10 hover:bg-opacity-25 hover:bg-white transition-all duration-200 rounded-2xl text-white'
+                        className='pl-2 w-[40px] self-center dark bg-opacity-10 hover:bg-opacity-25 hover:bg-white transition-all duration-200 rounded-2xl text-white'
                     >
                         {props.isDarkMode ?
                             <img className='w-5' src="/images/moon.png" alt="leftarrow" />
@@ -348,7 +387,42 @@ const Sidebar = (props) => {
                             <img className='w-5' src="/images/sun.png" alt="rightarrow" />
                         }
                     </button>
+                    
                 </div>
+            </div>
+            <div>
+                {toggleNotifications && (
+                    <div  className={props.showSideBar  ? 'absolute bottom-0 left-0 translate-x-[64%] p-5 bg-c_5 dark:bg-black dark:bg-opacity-70 dark:text-white w-[400px] h-[40dvh] overflow-auto  transition-all ease-in-out duration-200' : 'absolute bottom-0 left-0 translate-x-[55px] bg-c_5 border dark:bg-black dark:bg-opacity-70 dark:text-white w-[400px] h-[40dvh] overflow-auto  transition-all ease-in-out duration-200' }>
+                        <div className='flex justify-between items-center p-3'>
+                            {failedPredictions.length > 0 ? (
+                                <h1 className='text-xl text-[red]'>Notifications</h1>
+                            ) : (
+                                <h1 className='text-xl'>Notifications</h1>
+                            )
+                            }
+                            <button onClick={() => setToggleNotifications(false)} className='text-xl'>X</button>
+                        </div>
+                        <div className="flex flex-col gap-3 p-5">
+                            <div className="d-flex flex-wrap justify-content-start">
+                                {failedPredictions.length === 0 && <p>No New Notifications</p>}
+                                {failedPredictions.length > 0 && <h2 className='text-lg'>{failedPredictions.length} Students Predicted To Fail</h2>}
+                                
+                                {Object.entries(groupedPredictions).map(([course, predictions], index) => (
+                                    <div key={index} className="card p-1">
+                                    <div className="flex flex-col border border-c_4 p-2">
+                                        <h5 className="p-3 self-center">{course}</h5>
+                                        <div className='flex flex-col justify-center items-start px-5 gap-2'>
+                                            {predictions.map((prediction, index) => (
+                                                <p key={index}>{prediction.email}</p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -118,34 +118,9 @@ const MainDash = () => {
                         <p>{isLoading ? "Loading..." : users.length}</p>
                     </div>
                 </div>
-            <div className="flex flex-col basis-[100%] justify-center bg-c_4 bg-opacity-25  dark:bg-black dark:bg-opacity-25 p-5 items-center">
-                <h2 className="text-xl self-start dark:text-white font-bold mb-2">Notifications</h2>
-                <div className="flex flex-col gap-3">
-                    <h2 className="text-xl dark:text-white font-bold mb-2">Students Predicted To Fail</h2>
-                    <div className="flex flex-col overflow-auto w-[60vw] h-[25vh]">
-                        {failedPredictions === 0 ? <p>No failed predictions</p> : null}
-                        <table className="table-auto border-collapse border border-c_4 dark:text-white dark:bg-black bg-white  dark:bg-opacity-15 rounded shadow">
-                            <thead>
-                                <tr>
-                                    <th className="border border-[red] px-4 py-2">Email</th>
-                                    <th className="border border-[red] px-4 py-2">Course</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {failedPredictions && failedPredictions.map((prediction, index) => (
-                                    <tr key={index}>
-                                        <td className="border border-[red] px-4 py-2">{prediction.email}</td>
-                                        <td className="border border-[red] px-4 py-2">{prediction.Course}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
             <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
-                <div className="flex flex-wrap justify-start items-start gap-5 max-w-[70vw] overflow-auto">
-                    <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[50vw] p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
+                <div className="flex flex-wrap justify-center items-center max-sm:justify-start max-sm:items-start gap-5 max-w-[70vw] overflow-auto">
+                    <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[40vw] p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                         <div className="flex justify-center items-center gap-5 w-auto">
                             <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                                 <h2 className="text-xl font-bold mb-2">Male</h2>
