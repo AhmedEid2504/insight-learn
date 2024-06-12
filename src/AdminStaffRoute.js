@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const ProtectedRoute = ({ element }) => {
+const AdminStaffRoute = ({ element }) => {
   const isStaff = localStorage.getItem('is_staff') === 'true';
   const isSuperuser = localStorage.getItem('is_superuser') === 'true';
 
@@ -11,4 +11,4 @@ const ProtectedRoute = ({ element }) => {
   }
 };
 
-export default ProtectedRoute;
+export default AdminStaffRoute;

@@ -1,25 +1,17 @@
 import  { useEffect, useState } from 'react';
-
 const ReportCard = () => {
     const [grades, setGrades] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
-        // Fetch the grades data from the API
         fetch('https://dj-render-ldb1.onrender.com/fetchquiz')
         .then((response) => response.json())
         .then((data) => {
-            // Get the email from local storage
             const email = localStorage.getItem('email');
-
             if (!email) {
             throw new Error('No email found in local storage');
             }
-
-            // Filter the data based on the email
             const filteredData = data.filter((item) => item.email === email);
-
             setGrades(filteredData);
             setIsLoading(false);
         })
@@ -27,17 +19,14 @@ const ReportCard = () => {
             setError(err.message);
         });
     }, []);
-
     if (error) {
         return <div className='text-[red]'>Error: {error}</div>;
     }
-
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
             <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
         </div>;
     }
-
     return (
         <div className="max-w-4xl mx-auto p-4 bg-c_5 dark:bg-black shadow-md rounded-lg">
             <h1 className="text-2xl font-bold dark:text-white mb-4">Report Card</h1>

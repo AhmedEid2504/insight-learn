@@ -16,16 +16,13 @@ const VolumeComponent = (props) => {
       // Clear the volume data array
       volumeData.current = [];
     };
-
     // Set interval to update volume average every 5 seconds
     intervalId.current = setInterval(updateVolumeAverage, 5000);
-
     // Cleanup function to clear interval when component unmounts
     return () => {
       clearInterval(intervalId.current);
     };
   }, []);
-
   useEffect(() => {
     // Set volume in parent component whenever it changes
     props.setUserData(prevUserData => ({
@@ -64,11 +61,9 @@ const VolumeComponent = (props) => {
         console.error("Error accessing microphone:", error);
       }
     };
-
     // Call the setup function
     setupAudioContext();
   }, []);
-
   return (
     <div>
     </div>

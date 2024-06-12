@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
 
 const Signup = () => {
 
@@ -158,23 +157,20 @@ const Signup = () => {
                         <div className='w-full'>
                             {errorMessage && <p className='bg-opacity-5 text-center font-bold text-[#930505] text-md'>{errorMessage}</p>}
                         </div>
-
                         <button 
                             className="bg-c_5 p-2 hover:bg-opacity-[30%] text-c_3 hover:text-c_5 border-2 border-c_3 transition-all duration-200 ease-in"
                             onClick={handleSubmit}
                             disabled={isLoading}
                             type="submit">
                                 {isLoading ? (
-                                    <Spinner animation="border" role="status">
-                                        <span className="">Loading...</span>
-                                    </Spinner>
+                                    <span className="">Loading...</span>
                                 ) : (
                                     'Sign Up'
                                 )}
                         </button>
                     </form>
                 </div>
-                        <a className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" href="https://auth-new.onrender.com/reset_password/">Forgot Password ?</a>
+                <a className="hover:text-c_3 text-c_4 transition-all ease-in duration-200" href="https://auth-new.onrender.com/reset_password/">Forgot Password ?</a>
             </div>
         </div>
     );

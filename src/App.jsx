@@ -27,13 +27,11 @@ import AdminStaffRoute from './AdminStaffRoute'; // Adjust the path if needed
 import StudentRoute from './StudentRoute';
 function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-
     useEffect(() => {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             setIsDarkMode(true);
         }
     }, []);
-
     useEffect(() => {
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
@@ -41,7 +39,6 @@ function App() {
             document.documentElement.classList.remove('dark');
         }
     }, [isDarkMode]);
-
     return (
         <div className="h-auto flex flex-col justify-between">
             <Router>
@@ -74,5 +71,4 @@ function App() {
         </div>
     );
 }
-
 export default App;

@@ -8,7 +8,6 @@ const TotalSessionsGraph = () => {
     const [filterDuration, setFilterDuration] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
         fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
         .then(response => response.json())
@@ -24,43 +23,29 @@ const TotalSessionsGraph = () => {
             })
             .catch(error => console.error('Error:', error));
     }, []);
-
     const filteredSessions = sessions.filter(session => {
         return session.userEmail.includes(filterEmail) 
             && session.Session_Duration >= filterDuration
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
-
     const chartData = {
         labels: filteredSessions.map((session, index) => `Session ${index + 1}`),
         datasets: [
-            {
-                label: 'Session Duration',
-                data: filteredSessions.map(session => session.Session_Duration),
-                fill: true,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+            {label: 'Session Duration',data: filteredSessions.map(session => session.Session_Duration),fill: true,
+                backgroundColor: 'rgb(75, 192, 192)',borderColor: 'rgba(75, 192, 192, 0.2)',
                 userEmail: filteredSessions.map(session => session.userEmail),
             },
         ],
     };
-    
     const chartOptions = {
-        plugins: {
-            tooltip: {
-                callbacks: {
+        plugins: {tooltip: {callbacks: {
                     label: function(context) {
                         const userEmail = context.dataset.userEmail[context.dataIndex];
                         return [
                             `Session ${context.dataIndex + 1}: ${context.parsed.y}`,
                             `Email: ${userEmail}`
                         ];
-                    }
-                }
-            }
-        }
-    };
-
+    }}}}};
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
             <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />

@@ -3,10 +3,7 @@ import { useEffect, useState } from 'react'
 import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
-
 Chart.register(CategoryScale);
-
-
 const GradePredictions = ({courseName}) => {
     const [predictions, setPredictions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -14,25 +11,17 @@ const GradePredictions = ({courseName}) => {
     const [filterBy, setFilterBy] = useState('email');
     const [filterType, setFilterType] = useState('contains');
     const [gradeFilter, setGradeFilter] = useState('');
-
-
-    
     useEffect(() => {
-        // Fetch the predictions data from the API
         fetch('https://dj-render-ldb1.onrender.com/gradeprediction')
             .then((response) => response.json())
             .then((data) => {
                 setPredictions(data);
                 setIsLoading(false);
-                console.log(data)
-                console.log(courseName)
             })
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
-
-
+    }, [courseName]);
     const filteredPredictions = predictions.filter(prediction => {
         if (gradeFilter) {
             return prediction.Course === courseName && prediction.predictions === gradeFilter;
@@ -40,7 +29,6 @@ const GradePredictions = ({courseName}) => {
             return prediction.Course === courseName;
         }
     });
-
     const searchResults = filteredPredictions.filter(user => {
         if (filterBy === 'email') {
             if (filterType === 'contains') {
@@ -52,23 +40,16 @@ const GradePredictions = ({courseName}) => {
             }
         } 
     });
-
-
     const gradeCounts = searchResults.reduce((counts, { predictions }) => {
         counts[predictions] = (counts[predictions] || 0) + 1;
         return counts;
     }, {});
-
     const chartData = {
         labels: ['A', 'B', 'C', 'D', 'F'],
         datasets: [
             {
-                data: [
-                    gradeCounts['A'] || 0,
-                    gradeCounts['B'] || 0,
-                    gradeCounts['C'] || 0,
-                    gradeCounts['D'] || 0,
-                    gradeCounts['F'] || 0,
+                data: [gradeCounts['A'] || 0,gradeCounts['B'] || 0,gradeCounts['C'] || 0,
+                    gradeCounts['D'] || 0,gradeCounts['F'] || 0,
                 ],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',  // 10 to 15
@@ -88,14 +69,11 @@ const GradePredictions = ({courseName}) => {
             },
         ],
     };
-
-
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
             <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
         </div>;
     }
-
     return (
         <div className='flex flex-col justify-center items-center gap-5'>
             <div className='w-[300px] bg-c_4 bg-opacity-25 dark:bg-black dark:bg-opacity-25 p-5'>

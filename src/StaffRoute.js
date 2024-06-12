@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const ProtectedRoute = ({ element }) => {
+const StaffRoute = ({ element }) => {
     const isStaff = localStorage.getItem('is_staff') === 'true';
 
     if (isStaff) {
@@ -10,4 +10,4 @@ const ProtectedRoute = ({ element }) => {
     }
 };
 
-export default ProtectedRoute;
+export default StaffRoute;

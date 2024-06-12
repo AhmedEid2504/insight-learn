@@ -4,14 +4,13 @@ import axios from 'axios';
 const DataTable = () => {
     const [sessions, setSessions] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
     const [itemsPerPage, setItemsPerPage] = useState(1000);
     const [filterEmail, setFilterEmail] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-
-    
     const fetchData = () => {
-        axios.get('https://dj-render-ldb1.onrender.com/view/') // Replace with your API URL
+        axios.get('https://dj-render-ldb1.onrender.com/view/')
         .then(response => {
             const modifiedData = response.data['users-data'].map(session => {
                 if (session.Session_for === '') {
@@ -26,36 +25,28 @@ const DataTable = () => {
     };
     
     useEffect(() => {
-        const interval = setInterval(fetchData, 5000); // Fetches data every 5 seconds
+        const interval = setInterval(fetchData, 5000);
         
-        return () => clearInterval(interval); // This is important to clear the interval when the component unmounts
+        return () => clearInterval(interval);
     }, []);
     
     const refreshData = () => {
-        // Fetch the data
         fetchData();
-        
         setCurrentPage(1);
     };
-    
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
             <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
         </div>;
     }
-    
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-
     const filteredSessions = sessions.filter(session => {
     return session.userEmail.includes(filterEmail) 
         && (filterSessionType === '' || session.Session_for === filterSessionType);
     });
-    
     const totalPages = Math.ceil(filteredSessions.length / itemsPerPage);
-    
     const paginatedData = filteredSessions
     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-    
     return (
     <div className="flex flex-col justify-around items-center gap-4 container mx-auto px-4">
         <div className='flex justify-center items-center gap-5'>

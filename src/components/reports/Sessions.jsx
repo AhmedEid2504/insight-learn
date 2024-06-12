@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
-
 Chart.register(CategoryScale);
 const SessionTable = () => {
     const [sessions, setSessions] = useState([]);
@@ -10,10 +9,8 @@ const SessionTable = () => {
     const [filterDuration, setFilterDuration] = useState('');
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-
-
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
+        fetch('https://dj-render-ldb1.onrender.com/unique/')
         .then(response => response.json())
         .then(data => {
             const modifiedData = data.map(session => {
@@ -27,33 +24,23 @@ const SessionTable = () => {
             })
             .catch(error => console.error('Error:', error));
     }, []);
-
     const filteredSessions = sessions.filter(session => {
-        return session.userEmail.includes(filterEmail) 
-            && session.Session_Duration >= filterDuration
+        return session.userEmail.includes(filterEmail) && session.Session_Duration >= filterDuration
             && (filterSessionType === '' || session.session_for === filterSessionType);
     });
-
     const chartData = {
         labels: filteredSessions.map((session, index) => `Session ${index + 1}`),
         datasets: [
-            {
-                label: 'Session Duration',
-                data: filteredSessions.map(session => session.Session_Duration),
-                fill: true,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+            {label: 'Session Duration',data: filteredSessions.map(session => session.Session_Duration),
+                fill: true,backgroundColor: 'rgb(75, 192, 192)',borderColor: 'rgba(75, 192, 192, 0.2)',
             },
         ],
     };
-
     if (isLoading) {
         return <div className='bg-c_3 dark:bg-dark-grey justify-center items-center rounded-lg flex p-5'>
             <img className="w-[20vw] animate-pulse" src="/images/logo.png" alt="" />
         </div>;
     }
-
-
     return (
         <div className="flex flex-wrap gap-5 overflow-y-scroll overflow-x-hidden items-start justify-center h-[90dvh]  ">
             <div className='flex flex-col justify-start items-start overflow-x-scroll'>
@@ -101,7 +88,6 @@ const SessionTable = () => {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Started</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Ended</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 border border-c_4 uppercase tracking-wider">Session Duration Text</th>
-                                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session Duration (minutes)</th> */}
                             </tr>
                         </thead>
                         <tbody className="bg-white dark:bg-black dark:bg-opacity-25 dark:text-white divide-y divide-gray-200">
@@ -112,18 +98,13 @@ const SessionTable = () => {
                                     <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Started}</td>
                                     <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Ended}</td>
                                     <td className="px-6 py-4 border border-c_4 whitespace-nowrap">{session.Session_Duration_Txt}</td>
-                                    {/* <td className="px-6 py-4 whitespace-nowrap">{session.Session_Duration}</td> */}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-
             </div>
-        
-            
         </div>
     );
 };
-
 export default SessionTable;
