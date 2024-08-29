@@ -59,7 +59,7 @@ const Home = () => {
             },
         };
 
-        const response = await fetch('https://dj-render-ldb1.onrender.com/logout/', requestOptions);
+        const response = await fetch('https://insightlearn.onrender.com/logout/', requestOptions);
 
         if (response.ok) {
             localStorage.clear();
@@ -117,7 +117,7 @@ const Home = () => {
             setUserData(updatedUserData);
 
             // Save user data to API
-            const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+            const response = await fetch('https://insightlearn.onrender.com/add/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ const Home = () => {
             setIsSendingData(true);
             setUserData(prevUserData => ({ ...prevUserData, CaptureTime: new Date().toLocaleTimeString([], { hour12: false }) }));
             try {
-                const response = await fetch('https://dj-render-ldb1.onrender.com/add/', {
+                const response = await fetch('https://insightlearn.onrender.com/add/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
