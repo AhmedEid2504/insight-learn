@@ -9,7 +9,7 @@ const TotalSessionsGraph = () => {
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
+        fetch('https://insightlearn.onrender.com/unique/') // Replace with your API URL
         .then(response => response.json())
         .then(data => {
             const modifiedData = data.map(session => {

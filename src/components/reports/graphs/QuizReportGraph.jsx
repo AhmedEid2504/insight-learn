@@ -11,7 +11,7 @@ const QuizReportGraph = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/fetchquiz') // Replace with your API URL
+        fetch('https://insightlearn.onrender.com/fetchquiz') // Replace with your API URL
         .then(response => response.json())
         .then(data => {
             const mappedData = data

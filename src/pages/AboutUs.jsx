@@ -25,7 +25,7 @@ const AboutUs = () => {
             },
         };
     
-        const response = await fetch('https://dj-render-ldb1.onrender.com/logout/', requestOptions);
+        const response = await fetch('https://insightlearn.onrender.com/logout/', requestOptions);
     
         if (response.ok) {
             localStorage.removeItem('token');

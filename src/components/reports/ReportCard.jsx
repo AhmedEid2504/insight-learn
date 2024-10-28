@@ -4,7 +4,7 @@ const ReportCard = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/fetchquiz')
+        fetch('https://insightlearn.onrender.com/fetchquiz')
         .then((response) => response.json())
         .then((data) => {
             const email = localStorage.getItem('email');

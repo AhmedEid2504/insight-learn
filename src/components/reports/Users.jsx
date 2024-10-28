@@ -15,7 +15,7 @@ const Users = () => {
         const fetchData = async () => {
             try {
                 // Fetch users
-                const usersResponse = await fetch('https://dj-render-ldb1.onrender.com/users/', {
+                const usersResponse = await fetch('https://insightlearn.onrender.com/users/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const Users = () => {
                 setUsers(usersData);
 
                 // Fetch session durations
-                fetch('https://dj-render-ldb1.onrender.com/total_sessions_duration/') // Replace with your API URL
+                fetch('https://insightlearn.onrender.com/total_sessions_duration/') // Replace with your API URL
                     .then(response => response.json())
                     .then(data => {
                         const mappedData = data.map(user => ({
@@ -106,15 +106,15 @@ const Users = () => {
     };
 
     const toggleIsActive = (user) => {
-        toggleUserStatus(user, 'is_active', 'https://dj-render-ldb1.onrender.com/suspend/');
+        toggleUserStatus(user, 'is_active', 'https://insightlearn.onrender.com/suspend/');
     };
     
     const toggleIsStaff = (user) => {
-        toggleUserStatus(user, 'is_staff', 'https://dj-render-ldb1.onrender.com/update_user_staff_status/');
+        toggleUserStatus(user, 'is_staff', 'https://insightlearn.onrender.com/update_user_staff_status/');
     };
     
     const toggleIsSuperuser = (user) => {
-        toggleUserStatus(user, 'is_superuser', 'https://dj-render-ldb1.onrender.com/update_user_superuser_status/');
+        toggleUserStatus(user, 'is_superuser', 'https://insightlearn.onrender.com/update_user_superuser_status/');
     };
 
     if (isLoading) {

@@ -12,7 +12,7 @@ const GradePredictions = ({courseName}) => {
     const [filterType, setFilterType] = useState('contains');
     const [gradeFilter, setGradeFilter] = useState('');
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/gradeprediction')
+        fetch('https://insightlearn.onrender.com/gradeprediction')
             .then((response) => response.json())
             .then((data) => {
                 setPredictions(data);

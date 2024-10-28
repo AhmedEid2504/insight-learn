@@ -7,7 +7,7 @@ function useUserDetails() {
     useEffect(() => {
         const userEmail = localStorage.getItem('email'); // Replace 'email' with the key you used to store the email
 
-        axios.get('https://dj-render-ldb1.onrender.com/users/')
+        axios.get('https://insightlearn.onrender.com/users/')
             .then(response => {
                 const currentUser = response.data.find(user => user.email === userEmail);
                 setUser(currentUser);

@@ -10,7 +10,7 @@ const DataTable = () => {
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const fetchData = () => {
-        axios.get('https://dj-render-ldb1.onrender.com/view/')
+        axios.get('https://insightlearn.onrender.com/view/')
         .then(response => {
             const modifiedData = response.data['users-data'].map(session => {
                 if (session.Session_for === '') {

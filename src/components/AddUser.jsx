@@ -39,7 +39,7 @@ function AddUser() {
 
         setIsLoading(true);
     
-        fetch('https://dj-render-ldb1.onrender.com/add_user/', {
+        fetch('https://insightlearn.onrender.com/add_user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

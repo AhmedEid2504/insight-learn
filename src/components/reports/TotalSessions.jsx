@@ -13,7 +13,7 @@ const SessionTable = () => {
 
 
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/unique/') // Replace with your API URL
+        fetch('https://insightlearn.onrender.com/unique/') // Replace with your API URL
         .then(response => response.json())
         .then(data => {
             const modifiedData = data.map(session => {

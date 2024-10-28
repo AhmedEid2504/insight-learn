@@ -45,7 +45,7 @@ const Signup = () => {
 
 
         try {
-            const response = await fetch('https://dj-render-ldb1.onrender.com/signup/', {
+            const response = await fetch('https://insightlearn.onrender.com/signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

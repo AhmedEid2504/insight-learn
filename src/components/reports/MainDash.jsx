@@ -13,7 +13,7 @@ const MainDash = () => {
         const fetchData = async () => {
             try {
                 // Fetch users
-                const usersResponse = await fetch('https://dj-render-ldb1.onrender.com/fetchuserdata', {
+                const usersResponse = await fetch('https://insightlearn.onrender.com/fetchuserdata', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

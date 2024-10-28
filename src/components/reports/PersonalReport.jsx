@@ -13,7 +13,7 @@ const UserReports = () => {
     const currentUserEmail = localStorage.getItem('email');
     
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/unique/')
+        fetch('https://insightlearn.onrender.com/unique/')
             .then(response => response.json())
             .then(data => {
                 const userSessions = data.filter(session => session.userEmail === currentUserEmail);

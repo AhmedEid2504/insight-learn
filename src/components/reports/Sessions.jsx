@@ -10,7 +10,7 @@ const SessionTable = () => {
     const [filterSessionType, setFilterSessionType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch('https://dj-render-ldb1.onrender.com/unique/')
+        fetch('https://insightlearn.onrender.com/unique/')
         .then(response => response.json())
         .then(data => {
             const modifiedData = data.map(session => {
