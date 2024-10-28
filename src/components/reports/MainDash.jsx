@@ -88,10 +88,6 @@ const MainDash = () => {
                         <h2 className="text-xl font-bold mb-2">Total Students</h2>
                         <p>{isLoading ? "Loading..." : users.length}</p>
                     </div>
-                </div>
-            <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
-                <div className="flex flex-wrap justify-center items-center max-sm:justify-start max-sm:items-start gap-5 max-w-[70vw] overflow-auto">
-                    <div className=" h-fit overflow-auto w-[30vw] max-sm:w-[40vw] p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                         <div className="flex justify-center items-center gap-5 w-auto">
                             <div className="w-auto h-fit overflow-auto p-3 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                                 <h2 className="text-xl font-bold mb-2">Male</h2>
@@ -102,11 +98,15 @@ const MainDash = () => {
                                 <p>{isLoading ? "Loading..." : femaleUsers}</p>
                             </div>
                         </div>
+                </div>
+            <div className="flex flex-wrap gap-5 h-auto justify-around basis-[100%]">
+                <div className="flex  justify-center items-center max-sm:justify-center max-sm:items-start gap-5 max-w-[80vw] overflow-auto">
+                    <div className="flex flex-col justify-center items-center gap-5 h-full overflow-auto w-[50%] max-sm:w-[40vw] p-4 dark:text-white dark:bg-black bg-c_4 bg-opacity-25 dark:bg-opacity-15 rounded shadow">
                         <div className="md:max-w-[250px]">
                             {isLoading ? "Loading..." : <Pie data={genderData} options={genderOptions} />}
                         </div>
                     </div>
-                    <div className=" h-fit min-w-[400px] overflow-auto dark:text-white p-4 dark:bg-black dark:bg-opacity-15 bg-c_4 bg-opacity-25 rounded shadow">
+                    <div className=" h-full min-w-[400px] overflow-auto dark:text-white p-4 dark:bg-black dark:bg-opacity-15 bg-c_4 bg-opacity-25 rounded shadow">
                         <h2 className="text-xl font-bold mb-2">CGPA Distribution</h2>
                         {isLoading ? "Loading..." : <Bar data={cgpaHistogramData} />}
                     </div>

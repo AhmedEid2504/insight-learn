@@ -151,8 +151,8 @@ const Reports = () => {
     }
 
     return (
-        <div className="flex flex-wrap gap-5">
-            <div className='flex flex-col'>
+        <div className="flex justify-center items-center flex-wrap gap-5">
+            <div className='flex flex-col justify-center items-center gap-5'>
                 <div className=' flex self-center sm:min-w-[400px] mb-8 min-w-[600px] md:w-[70vw] overflow-auto'>
                     <Bar data={attentionChartData} options={{ ...options, plugins: { ...options.plugins, title: { ...options.plugins.title, text: 'Average Attention by Session Duration' } } }} />
                 </div>

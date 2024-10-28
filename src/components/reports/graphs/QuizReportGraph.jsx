@@ -109,7 +109,7 @@ const QuizReportGraph = () => {
     }
 
     return (
-        <div className='flex flex-wrap justify-start items-start'>
+        <div className='flex flex-wrap justify-center items-start'>
             <div className="flex flex-col">
                 <div className='flex flex-col justify-start items-start overflow-x-scroll'>
                     <div className='max-sm:h-fit sm:h-fit min-w-[300px]'>

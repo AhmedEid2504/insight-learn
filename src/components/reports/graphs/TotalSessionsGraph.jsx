@@ -53,7 +53,7 @@ const TotalSessionsGraph = () => {
     }
 
     return (
-        <div className='flex flex-col justify-start gap-5 items-start'>
+        <div className='flex flex-col justify-start gap-5 items-center'>
             <div className='max-sm:h-fit  sm:h-fit min-w-[800px] md:w-[70vw]'>
                 <Line data={chartData} options={chartOptions} />
             </div>
